@@ -24,16 +24,16 @@ public class ProgressBarUI : MonoBehaviour
 	{
 		this.timer = timer;
 
-		//switch (destroyFlag)
-		//{
-		//	case 1:
-		//		if (target) timer.OnTimerReached += () => Ui.DestroyIcon(target, gameObject);
-		//		else throw new NullReferenceException();
-		//		break;
-		//	case 2:
-		//		timer.OnTimerReached += () => Destroy(gameObject);
-		//		break;
-		//}
+		switch (destroyFlag)
+		{
+			//case 1:
+			//	if (target) timer.OnTimerReached += () => Ui.DestroyIcon(target, gameObject);
+			//	else throw new NullReferenceException();
+			//	break;
+			case 2:
+				timer.OnTimerReached += () => Destroy(gameObject);
+				break;
+		}
 	}
 
 	public void Init(Timer timer, Action action)
