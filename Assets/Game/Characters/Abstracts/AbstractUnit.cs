@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public abstract class AbstractUnit : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public abstract class AbstractUnit : MonoBehaviour
 
     [SerializeField]
     private bool logUnitActionType;
-    protected UnitActionType unitActionType = UnitActionType.idler;
+
+    [Inject]
+    private readonly UnitActionPermissionHandler unitActionPermissionHandler;
+    protected UnitActionType unitActionType = UnitActionType.Idler;
     private AbstractUnitAction unitAction;
     protected Animator animator;
     protected NavMeshAgent agent;
@@ -62,7 +66,16 @@ public abstract class AbstractUnit : MonoBehaviour
         }
         if (!IsEnable)
             return;
-        if (UnitAction != null)
+
+		if (unitActionPermissionHandler.CanIAskPermission(this))
+		{
+			for (int i = 0; i < unitActionsList.Count; i++)
+			{
+				if (unitActionsList[i].CheckAction()) break;
+			}
+		}
+
+		if (UnitAction != null)
             UnitAction.Update();
     }
 
