@@ -1,4 +1,4 @@
 public enum CharacterType
 {
-	PirateBlackbeard
+	Player, SimpleEnemy
 }

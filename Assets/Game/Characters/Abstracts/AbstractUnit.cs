@@ -22,6 +22,7 @@ public abstract class AbstractUnit : MonoBehaviour
     protected Dictionary<AbilityType, AbstractUnitAbility> abilitiesPair =
         new Dictionary<AbilityType, AbstractUnitAbility>();
     private Guid id;
+    protected AbstractWeapon weapon;
 
     public NavMeshAgent Agent
     {

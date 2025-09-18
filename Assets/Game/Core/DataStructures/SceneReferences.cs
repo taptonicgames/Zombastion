@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class SceneReferences
 {
-	public Collider charactersSpawnArea;
-	public Transform charactersFolder;
+	public List<Collider> enemiesSpawnAreas;
+	public Transform charactersFolder, zombieTarget;
+
 }

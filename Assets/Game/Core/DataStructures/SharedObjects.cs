@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class SharedObjects
 {
-	private List<IDGameObjectData> idGameObjectDatasList;
+    [SerializeField]
+    private List<IDGameObjectData> idGameObjectDatasList;
 
-	public GameObject GetLootPrefab(CharacterType type)
-	{
-		var data = idGameObjectDatasList.FirstOrDefault(a => a.id == type.ToString());
+    public GameObject GetPrefab(string id)
+    {
+        var data = idGameObjectDatasList.FirstOrDefault(a => a.id == id);
 
-		if (data.gameObject == null)
-			throw new NullReferenceException($"{type} is not present in SharedObjects");
+        if (data.gameObject == null)
+            throw new NullReferenceException($"{id} is not present in SharedObjects");
 
-		return data.gameObject;
-	}
+        return data.gameObject;
+    }
 
-	public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) => idGameObjectDatasList = list;
+    public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
+        idGameObjectDatasList = list;
 }
