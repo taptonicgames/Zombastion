@@ -27,6 +27,7 @@ public abstract class AbstractUnit : MonoBehaviour
         new Dictionary<AbilityType, AbstractUnitAbility>();
     private Guid id;
     protected AbstractWeapon weapon;
+    protected int health;
 
     public NavMeshAgent Agent
     {
@@ -71,15 +72,16 @@ public abstract class AbstractUnit : MonoBehaviour
         if (!IsEnable)
             return;
 
-		if (unitActionPermissionHandler.CanIAskPermission(this))
-		{
-			for (int i = 0; i < unitActionsList.Count; i++)
-			{
-				if (unitActionsList[i].CheckAction()) break;
-			}
-		}
+        if (unitActionPermissionHandler.CanIAskPermission(this))
+        {
+            for (int i = 0; i < unitActionsList.Count; i++)
+            {
+                if (unitActionsList[i].CheckAction())
+                    break;
+            }
+        }
 
-		if (UnitAction != null)
+        if (UnitAction != null)
             UnitAction.Update();
     }
 
@@ -144,4 +146,14 @@ public abstract class AbstractUnit : MonoBehaviour
 
         return id;
     }
+
+    public virtual void SetDamage(int damage)
+    {
+        health = Mathf.Clamp(health - damage, 0, 100);
+
+        if (health == 0)
+            OnUnitDied();
+    }
+
+    public virtual void OnUnitDied() { }
 }

@@ -14,7 +14,7 @@ public class GamePreferencesSO : ScriptableObjectInstaller<GamePreferencesSO>
 }
 
 [Serializable]
-public class GamePreferences
+public struct GamePreferences
 {
     [Header("Enemies")]
     public int totalEnemiesAmount;

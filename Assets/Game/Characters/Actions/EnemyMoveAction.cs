@@ -24,4 +24,10 @@ public class EnemyMoveAction : AbstractUnitAction
 		base.StartAction();
         unit.Agent.SetDestination(sceneReferences.zombieTarget.position);
 	}
+
+	public override void OnFinish()
+	{
+		base.OnFinish();
+        unit.Agent.isStopped = true;
+	}
 }

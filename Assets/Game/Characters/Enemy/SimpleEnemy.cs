@@ -1,9 +1,5 @@
-using Zenject;
-
 public class SimpleEnemy : AbstractEnemy
 {
-    [Inject] private readonly DiContainer diContainer;
-
     private void Start()
     {
         unitActionsList.Add(new EnemyMoveAction(this));

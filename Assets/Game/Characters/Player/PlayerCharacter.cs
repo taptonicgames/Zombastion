@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerCharacter : AbstractUnit
 {
-    
+    [SerializeField] private List<AbstractWeapon> weapons;
 }

@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class AbstractWeapon : MonoBehaviour
+public abstract class AbstractWeapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Inject] protected ObjectPoolSystem objectPoolSystem;
+    [SerializeField] private WeaponSO weaponSO;
+    protected bool inFire;
+
+    public virtual void Fire()
     {
-        
+        inFire = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void StopFire()
     {
-        
+        inFire = false;
     }
+
+    public WeaponSO WeaponSOData => weaponSO;
 }

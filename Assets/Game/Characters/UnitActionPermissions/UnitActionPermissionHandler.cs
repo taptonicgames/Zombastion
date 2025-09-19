@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 [Serializable]
 public class UnitActionPermissionHandler : IInitializable, ITickable
 {
-    public List<UnitActionPermission> permissions = new();
-    public int unitsPerFrame = 10;
+    [SerializeField]
+    private List<UnitActionPermission> permissions = new();
+
+    [SerializeField]
+    private int unitsPerFrame = 10;
     private Dictionary<UnitActionType, UnitActionPermission> permissionsPairs = new();
     private int counter;
     private Dictionary<AbstractUnit, bool> unitsWhoAskedPair = new();
