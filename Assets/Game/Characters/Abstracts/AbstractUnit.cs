@@ -32,20 +32,24 @@ public abstract class AbstractUnit : MonoBehaviour
     {
         get => agent;
     }
+
     public Animator Animator
     {
         get => animator;
     }
+
     public UnitActionType UnitActionType
     {
         get => unitActionType;
         set => unitActionType = value;
     }
+
     public bool IsEnable
     {
         get => isEnable;
         set => isEnable = value;
     }
+
     public AbstractUnitAction UnitAction
     {
         get => unitAction;
@@ -85,8 +89,10 @@ public abstract class AbstractUnit : MonoBehaviour
         {
             item.Value.FixedUpdate();
         }
+
         if (!IsEnable)
             return;
+
         if (UnitAction != null)
             UnitAction.FixedUpdate();
     }
@@ -94,6 +100,7 @@ public abstract class AbstractUnit : MonoBehaviour
     public void SetActionTypeForced(UnitActionType type)
     {
         var needAction = unitActionsList.Find(a => a.GetActionType() == type);
+
         if (needAction != null)
             needAction.StartAction();
         else
@@ -134,6 +141,7 @@ public abstract class AbstractUnit : MonoBehaviour
     {
         if (id == Guid.Empty)
             id = Guid.NewGuid();
+
         return id;
     }
 }

@@ -1,20 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
 public class EnemyMoveAction : AbstractUnitAction
 {
-	public EnemyMoveAction(AbstractUnit unit) : base(unit)
-	{
-	}
+    [Inject] private readonly SceneReferences sceneReferences;
 
-	public override bool CheckAction()
-	{
-		throw new System.NotImplementedException();
-	}
+    public EnemyMoveAction(AbstractUnit unit)
+        : base(unit) { }
 
-	protected override void SetActionType()
+    public override bool CheckAction()
+    {
+        if (unit.UnitActionType == actionType)
+            return true;
+        return false;
+    }
+
+    protected override void SetActionType()
+    {
+        actionType = UnitActionType.Move;
+    }
+
+	public override void StartAction()
 	{
-		actionType = UnitActionType.Move;
+		base.StartAction();
+        unit.Agent.SetDestination(sceneReferences.zombieTarget.position);
 	}
 }
