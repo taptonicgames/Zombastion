@@ -2,7 +2,12 @@ public class SimpleEnemy : AbstractEnemy
 {
     private void Start()
     {
-        unitActionsList.Add(new EnemyMoveAction(this));
+        abilitiesPair = new()
+        {
+            { AbilityType.Movement, new EnemyMovementAbility(this) },
+        };
+
+        unitActionsList = new() { new UnitIdleAction(this), new EnemyMoveAction(this) };
 
         foreach (var item in unitActionsList)
         {

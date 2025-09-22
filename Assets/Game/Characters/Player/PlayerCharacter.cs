@@ -10,11 +10,6 @@ public class PlayerCharacter : AbstractUnit
     [SerializeField]
     private List<AbstractWeapon> weapons;
 
-    private void Awake()
-    {
-        diContainer.BindInstance(this).AsSingle();
-    }
-
     private void Start()
     {
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
@@ -27,6 +22,7 @@ public class PlayerCharacter : AbstractUnit
 
         unitActionsList = new()
         {
+            new UnitAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),
         };

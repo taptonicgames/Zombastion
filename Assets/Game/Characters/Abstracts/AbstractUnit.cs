@@ -1,4 +1,6 @@
+using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -173,4 +175,85 @@ public abstract class AbstractUnit : MonoBehaviour
     {
         return (T)abilitiesPair[type];
     }
+
+    public void ClearUnitActions()
+    {
+        foreach (var item in unitActionsList)
+        {
+            item.Dispose();
+        }
+
+        unitActionsList.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        ClearUnitActions();
+    }
+
+	public float ObjectFinishTurning(Vector3 targetPos, float clampMin = -10, float clampMax = 10, bool rotate = true)
+	{
+		var targetLocalPos = transform.InverseTransformPoint(targetPos);
+		var A = targetLocalPos.x;
+		var B = targetLocalPos.z;
+		var alpha = Mathf.Atan2(A, B) * Mathf.Rad2Deg;
+		var angle = alpha;
+		alpha = Mathf.Clamp(alpha, clampMin, clampMax);
+		if (rotate) transform.Rotate(0, alpha, 0);
+		return angle;
+	}
+
+	public void ObjectFinishTurning(Vector3 targetPos, float duration)
+	{
+		var targetLocalPos = transform.InverseTransformPoint(targetPos);
+		var A = targetLocalPos.x;
+		var B = targetLocalPos.z;
+		var alpha = Mathf.Atan2(A, B) * Mathf.Rad2Deg;
+		var angle = new Vector3(0, alpha, 0);
+		transform.DORotate(transform.eulerAngles + angle, duration);
+	}
+
+	public virtual IEnumerator MoveToTargetCoroutine(Vector3 pos, Action OnReachedDestination = null, float delayTime = 0)
+	{
+		yield return new WaitForSeconds(delayTime);
+		if (!agent.enabled) yield break;
+		agent.isStopped = false;
+		agent.SetDestination(pos);
+		yield return new WaitForSeconds(0.1f);
+		yield return new WaitUntil(() => !agent.pathPending);
+		yield return new WaitUntil(() => !agent.enabled || agent.remainingDistance <= agent.stoppingDistance + 0.1f);
+		if (agent.enabled)
+		{
+			agent.isStopped = true;
+			OnReachedDestination?.Invoke();
+		}
+	}
+
+	public virtual IEnumerator MoveToTargetCoroutine(Transform target, Action OnReachedDestination = null, float delayTime = 0)
+	{
+		yield return new WaitForSeconds(delayTime);
+		if (!agent.enabled) yield break;
+		agent.isStopped = false;
+		agent.SetDestination(target.position);
+		yield return new WaitForSeconds(0.1f);
+		yield return new WaitUntil(() => !agent.pathPending);
+		yield return new WaitUntil(() => !agent.enabled || agent.remainingDistance <= agent.stoppingDistance + 0.1f);
+		if (agent.enabled)
+		{
+			agent.isStopped = true;
+			OnReachedDestination?.Invoke();
+		}
+	}
+
+	public virtual Coroutine MoveToTarget(Vector3 pos, Action OnReachedDestination = null, float delayTime = 0)
+	{
+		var coroutine = StartCoroutine(MoveToTargetCoroutine(pos, OnReachedDestination, delayTime));
+		return coroutine;
+	}
+
+	public virtual Coroutine MoveToTarget(Transform target, Action OnReachedDestination = null, float delayTime = 0)
+	{
+		var coroutine = StartCoroutine(MoveToTargetCoroutine(target, OnReachedDestination, delayTime));
+		return coroutine;
+	}
 }

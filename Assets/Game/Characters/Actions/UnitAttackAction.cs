@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -62,4 +61,34 @@ public class UnitAttackAction : AbstractUnitAction
 
         return false;
     }
+
+    public override void StartAction()
+    {
+        base.StartAction();
+        RotateToTarget().Forget();
+    }
+
+    private async UniTask RotateToTarget()
+    {
+        await UniTask.WaitUntil(() => unit.ObjectFinishTurning(targetUnit.transform.position) < 1);
+        unit.Weapon.Fire();
+    }
+
+    public override void Update()
+    {
+        unit.ObjectFinishTurning(targetUnit.transform.position);
+
+		if (
+            Vector3.Distance(unit.transform.position, targetUnit.transform.position)
+            > unit.Weapon.WeaponSOData.AttackDistance
+        )
+        {
+            unit.SetActionTypeForced(UnitActionType.Idler);
+        }
+    }
+
+	public override void OnFinish()
+	{
+        unit.Weapon.StopFire();
+	}
 }
