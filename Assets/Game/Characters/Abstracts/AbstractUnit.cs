@@ -17,7 +17,7 @@ public abstract class AbstractUnit : MonoBehaviour
     private bool logUnitActionType;
 
     [Inject]
-    private readonly UnitActionPermissionHandler unitActionPermissionHandler;
+    protected readonly UnitActionPermissionHandler unitActionPermissionHandler;
     protected UnitActionType unitActionType = UnitActionType.Idler;
     private AbstractUnitAction unitAction;
     protected Animator animator;
