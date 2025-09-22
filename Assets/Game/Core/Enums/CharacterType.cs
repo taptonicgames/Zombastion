@@ -1,4 +1,4 @@
 public enum CharacterType
 {
-	Player, SimpleEnemy
+	Player, SimpleZombie
 }

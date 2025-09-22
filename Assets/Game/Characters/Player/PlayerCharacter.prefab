@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnable: 1
   isNeedSave: 0
-  logUnitActionType: 1
+  logUnitActionType: 0
   weapons: []
 --- !u!1 &4523139366846529165
 GameObject:

@@ -16,6 +16,9 @@ public abstract class AbstractUnit : MonoBehaviour
     [SerializeField]
     private bool logUnitActionType;
 
+    [SerializeField]
+    private CharacterType characterType;
+
     [Inject]
     protected readonly UnitActionPermissionHandler unitActionPermissionHandler;
     protected UnitActionType unitActionType = UnitActionType.Idler;
@@ -59,6 +62,14 @@ public abstract class AbstractUnit : MonoBehaviour
     public bool LogUnitActionType
     {
         get => logUnitActionType;
+    }
+    public AbstractWeapon Weapon
+    {
+        get => weapon;
+    }
+    public CharacterType CharacterType
+    {
+        get => characterType;
     }
 
     public virtual void Init() { }
@@ -156,4 +167,10 @@ public abstract class AbstractUnit : MonoBehaviour
     }
 
     public virtual void OnUnitDied() { }
+
+    public virtual T GetUnitAbility<T>(AbilityType type)
+        where T : AbstractUnitAbility
+    {
+        return (T)abilitiesPair[type];
+    }
 }

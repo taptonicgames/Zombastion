@@ -17,7 +17,15 @@ public class PlayerCharacter : AbstractUnit
 
     private void Start()
     {
-        unitActionsList = new List<AbstractUnitAction>
+        abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
+        {
+            {
+                AbilityType.Attack,
+                new UnitAttackAbility(this, new() { CharacterType.SimpleZombie })
+            },
+        };
+
+        unitActionsList = new()
         {
             new PlayerMoveAction(this),
             new UnitIdleAction(this),

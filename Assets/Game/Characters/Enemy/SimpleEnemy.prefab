@@ -71,6 +71,7 @@ MonoBehaviour:
   isEnable: 1
   isNeedSave: 0
   logUnitActionType: 0
+  characterType: 1
 --- !u!195 &4026735557907595350
 NavMeshAgent:
   m_ObjectHideFlags: 0

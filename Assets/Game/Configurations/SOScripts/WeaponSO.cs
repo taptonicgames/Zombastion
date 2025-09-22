@@ -15,6 +15,9 @@ public class WeaponSO : ScriptableObject
     [SerializeField]
     private float bulletSpeed;
 
+    [SerializeField]
+    private float attackDistance;
+
     public float ShootDelay
     {
         get => shootDelay;
@@ -33,5 +36,10 @@ public class WeaponSO : ScriptableObject
     public float BulletSpeed
     {
         get => bulletSpeed;
+    }
+
+    public float AttackDistance
+    {
+        get => attackDistance;
     }
 }

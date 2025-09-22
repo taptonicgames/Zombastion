@@ -19,7 +19,7 @@ public class PlayerMoveAction : AbstractUnitAction
         if (unit.UnitActionType == actionType)
             return true;
 
-        if (unitActionPermissionHandler.CheckPermission(UnitActionType.Move, unit.UnitActionType))
+        if (unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
         {
             if (CheckMoving())
                 StartAction();
