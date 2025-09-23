@@ -26,8 +26,8 @@ public class PlayerCharacter : AbstractUnit
 
         unitActionsList = new()
         {
+            new PlayerAttackAction(this),
             new PlayerMoveAction(this),
-            new UnitAttackAction(this),
             new UnitIdleAction(this),
         };
 

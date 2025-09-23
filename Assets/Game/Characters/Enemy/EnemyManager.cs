@@ -37,9 +37,7 @@ public class EnemyManager : IInitializable
             await UniTask.WaitForSeconds(gamePreferences.enemySpawnDelay);
         }
 
-        Debug.Log(enemies.Count);
         await UniTask.WaitUntil(() => enemies.Count < gamePreferences.totalEnemiesAmount);
-        Debug.Log(enemies.Count);
         FindEnemies().Forget();
     }
 

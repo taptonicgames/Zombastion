@@ -142,6 +142,9 @@ namespace StarterAssets
             set => _input = value;
         }
 
+        public bool EnablePersonRotation { get; set; } = true;
+        public bool EnablePersonAnimation { get; set; } = true;
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -316,7 +319,8 @@ namespace StarterAssets
                 );
 
                 // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if (EnablePersonRotation)
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
 
             Vector3 targetDirection =
@@ -329,7 +333,7 @@ namespace StarterAssets
             );
 
             // update animator if using character
-            if (_hasAnimator)
+            if (_hasAnimator && EnablePersonAnimation)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);

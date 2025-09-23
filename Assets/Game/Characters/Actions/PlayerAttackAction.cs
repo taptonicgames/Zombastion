@@ -1,23 +1,25 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using StarterAssets;
 using UnityEngine;
 using Zenject;
 
-public class UnitAttackAction : AbstractUnitAction
+public class PlayerAttackAction : AbstractUnitAction
 {
-	private const float ROTATION_SPEED = 2.5f;
-	private const float ATTACK_DISTANCE_INCREMENT = 3f;
-	[Inject]
+    private const float ROTATION_SPEED = 2f;
+    private const float ATTACK_DISTANCE_INCREMENT = 3f;
+
+    [Inject]
     UnitActionPermissionHandler unitActionPermissionHandler;
     private AbstractUnit targetUnit;
-    private UnitAttackAbility attackAbility;
+    private ThirdPersonController thirdPersonController;
+    private float angleToEnemy;
 
-    public UnitAttackAction(AbstractUnit unit)
+    public PlayerAttackAction(AbstractUnit unit)
         : base(unit)
     {
-        attackAbility = unit.GetUnitAbility<UnitAttackAbility>(AbilityType.Attack);
+        thirdPersonController = unit.GetComponent<ThirdPersonController>();
     }
 
     public override bool CheckAction()
@@ -77,6 +79,7 @@ public class UnitAttackAction : AbstractUnitAction
     public override void StartAction()
     {
         base.StartAction();
+        thirdPersonController.EnablePersonRotation = false;
         unit.Animator.SetBool(Constants.ATTACK, true);
         RotateToTarget().Forget();
     }
@@ -84,33 +87,57 @@ public class UnitAttackAction : AbstractUnitAction
     private async UniTask RotateToTarget()
     {
         await UniTask.WaitUntil(
-            () =>
-                StaticFunctions.ObjectFinishTurning(unit.transform, targetUnit.transform.position)
-                < Constants.ALMOST_ZERO,
+            () => angleToEnemy < Constants.ALMOST_ZERO,
             cancellationToken: targetUnit.destroyCancellationToken
         );
 
         unit.Weapon.Fire(targetUnit);
     }
 
+    private bool CheckMoving()
+    {
+        return thirdPersonController.Input.move != Vector2.zero;
+    }
+
     public override void Update()
     {
+        thirdPersonController.JumpAndGravity();
+        thirdPersonController.GroundedCheck();
+        thirdPersonController.Move();
+
+        if (targetUnit)
+        {
+            angleToEnemy = StaticFunctions.ObjectFinishTurning(
+                unit.transform,
+                targetUnit.transform.position,
+                -ROTATION_SPEED,
+                ROTATION_SPEED
+            );
+        }
+
+        if (targetUnit && !CheckMoving())
+        {
+            thirdPersonController.EnablePersonAnimation = false;
+
+            if (Mathf.Abs(angleToEnemy) > 1f)
+                unit.Animator.SetFloat(Constants.SPEED, 3);
+            else
+                unit.Animator.SetFloat(Constants.SPEED, 0);
+        }
+        else
+        {
+            thirdPersonController.EnablePersonAnimation = true;
+        }
+
         if (!unit.Weapon.InFire)
             return;
 
         if (targetUnit && targetUnit.Health > 0)
         {
-            StaticFunctions.ObjectFinishTurning(
-                unit.transform,
-                targetUnit.transform.position,
-                -ROTATION_SPEED,
-				ROTATION_SPEED
-			);
-
             if (
                 Vector3.Distance(unit.transform.position, targetUnit.transform.position)
                 > unit.Weapon.WeaponSOData.AttackDistance + ATTACK_DISTANCE_INCREMENT
-			)
+            )
             {
                 unit.SetActionTypeForced(UnitActionType.Idler);
             }
@@ -125,5 +152,7 @@ public class UnitAttackAction : AbstractUnitAction
     {
         unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
+        thirdPersonController.EnablePersonRotation = true;
+        thirdPersonController.EnablePersonAnimation = true;
     }
 }
