@@ -1,4 +1,9 @@
 public static class Constants
 {
+    // Animator
     public const string SPEED = "Speed";
+    public const string ATTACK = "Attack";
+
+    //Code
+    public const float ALMOST_ZERO = 0.1f;
 }

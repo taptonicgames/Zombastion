@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,9 @@ public class PlayerCharacter : AbstractUnit
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        weapon = weapons.First();
+
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
         {
             {
@@ -22,8 +26,8 @@ public class PlayerCharacter : AbstractUnit
 
         unitActionsList = new()
         {
-            new UnitAttackAction(this),
             new PlayerMoveAction(this),
+            new UnitAttackAction(this),
             new UnitIdleAction(this),
         };
 

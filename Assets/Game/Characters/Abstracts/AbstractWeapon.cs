@@ -3,13 +3,19 @@ using Zenject;
 
 public abstract class AbstractWeapon : MonoBehaviour
 {
-    [Inject] protected ObjectPoolSystem objectPoolSystem;
-    [SerializeField] private WeaponSO weaponSO;
-    protected bool inFire;
+    [Inject]
+    protected ObjectPoolSystem objectPoolSystem;
 
-    public virtual void Fire()
+    [SerializeField]
+    private WeaponSO weaponSO;
+    protected bool inFire, inReload;
+    protected AbstractUnit targetUnit;
+    protected float angleToTarget;
+
+    public virtual void Fire(AbstractUnit targetUnit)
     {
         inFire = true;
+        this.targetUnit = targetUnit;
     }
 
     public virtual void StopFire()
@@ -18,4 +24,17 @@ public abstract class AbstractWeapon : MonoBehaviour
     }
 
     public WeaponSO WeaponSOData => weaponSO;
+
+    public bool InFire
+    {
+        get => inFire;
+    }
+
+    private void Update()
+    {
+        if (targetUnit)
+        {
+            angleToTarget = StaticFunctions.ObjectFinishTurning(transform, targetUnit.transform.position);
+        }
+    }
 }

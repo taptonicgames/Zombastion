@@ -4,4 +4,5 @@ public enum UnitActionType
     Idler,
     Move,
 	Attack,
+	Die,
 }

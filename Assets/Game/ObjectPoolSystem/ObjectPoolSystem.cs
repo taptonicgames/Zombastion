@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -9,6 +10,8 @@ public class ObjectPoolSystem : IInitializable
     private readonly SharedObjects sharedObjects;
     private Dictionary<string, ObjectPool<GameObject>> pool = new();
     private Transform folder;
+    public Action<GameObject> OnGameObjectGet,
+        OnGameObjectRelease;
 
     public void Initialize()
     {
@@ -106,7 +109,8 @@ public class ObjectPoolSystem : IInitializable
 
         var objectPool = new ObjectPool<GameObject>(
             () => CreateGameObject(data),
-            actionOnRelease: DisableGameObject,
+            actionOnGet: GetGameObject,
+            actionOnRelease: ReleaseGameObject,
             defaultCapacity: count
         );
 
@@ -115,14 +119,24 @@ public class ObjectPoolSystem : IInitializable
 
     private GameObject CreateGameObject(IDGameObjectData data)
     {
-        var newGameObject = Object.Instantiate(data.gameObject, folder);
+        var newGameObject = UnityEngine.Object.Instantiate(data.gameObject, folder);
         newGameObject.name = data.id;
         return newGameObject;
     }
 
-    private void DisableGameObject(GameObject disableGameObject)
+    private void GetGameObject(GameObject gameObject)
     {
-        disableGameObject.gameObject.SetActive(false);
-        disableGameObject.transform.SetParent(folder);
+        if (OnGameObjectGet != null)
+            OnGameObjectGet(gameObject);
+        else
+            gameObject.SetActive(true);
+    }
+
+    private void ReleaseGameObject(GameObject gameObject)
+    {
+        if (OnGameObjectRelease != null)
+            OnGameObjectRelease(gameObject);
+        else
+            gameObject.gameObject.SetActive(false);
     }
 }
