@@ -5,7 +5,12 @@ public class AbstractPlayerUnit : AbstractUnit
     [SerializeField]
     protected PlayerSO SOData;
 
-    public virtual int GetPlayerDamage()
+	public override IGetAttackSOParameters GetAttackSOParameters()
+	{
+        return SOData;
+	}
+
+	public virtual int GetPlayerDamage()
     {
         var randomValue = Random.Range(0, 100);
         var damage = SOData.ShootDamage;
@@ -14,10 +19,5 @@ public class AbstractPlayerUnit : AbstractUnit
             damage *= SOData.CritDamage;
 
         return damage;
-    }
-
-    public virtual float GetPlayerShootDelay()
-    {
-        return SOData.ShootDelay;
     }
 }

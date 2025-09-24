@@ -73,6 +73,7 @@ MonoBehaviour:
   isNeedSave: 0
   logUnitActionType: 0
   characterType: 1
+  SOData: {fileID: 11400000, guid: 69b7c3eb5c6e44c45acf96d54c7beae2, type: 2}
 --- !u!195 &4026735557907595350
 NavMeshAgent:
   m_ObjectHideFlags: 0

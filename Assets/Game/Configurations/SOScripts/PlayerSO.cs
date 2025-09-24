@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "ScriptableObjects/PlayerSO")]
-public class PlayerSO : ScriptableObject
+public class PlayerSO : ScriptableObject, IGetAttackSOParameters
 {
     [SerializeField]
     private float speed;
@@ -21,28 +21,10 @@ public class PlayerSO : ScriptableObject
     [SerializeField]
     private float critProbability;
 
-    public float Speed
-    {
-        get => speed;
-    }
-    public int ShootDamage
-    {
-        get => shootDamage;
-    }
-    public float ShootDelay
-    {
-        get => shootDelay;
-    }
-    public int Health
-    {
-        get => health;
-    }
-    public int CritDamage
-    {
-        get => critDamage;
-    }
-    public float CritProbability
-    {
-        get => critProbability;
-    }
+    public float Speed => speed;
+    public int ShootDamage => shootDamage;
+    public float ShootDelay => shootDelay;
+    public int Health => health;
+    public int CritDamage => critDamage;
+    public float CritProbability => critProbability;
 }

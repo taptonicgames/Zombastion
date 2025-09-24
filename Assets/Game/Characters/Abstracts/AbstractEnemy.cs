@@ -10,10 +10,18 @@ public class AbstractEnemy : AbstractUnit
     [Inject]
     protected readonly EnemyManager enemyManager;
 
+    [SerializeField]
+    private EnemySO SOData;
+
     public override void Init()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+    }
+
+    public override IGetAttackSOParameters GetAttackSOParameters()
+    {
+        return SOData;
     }
 
     public override void OnUnitDied()

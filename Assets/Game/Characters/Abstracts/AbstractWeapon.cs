@@ -49,18 +49,14 @@ public abstract class AbstractWeapon : MonoBehaviour
         var damage =
             shootingUnit is AbstractPlayerUnit
                 ? WeaponSOData.ShootDamage * ((AbstractPlayerUnit)shootingUnit).GetPlayerDamage()
-                : WeaponSOData.ShootDamage;
+                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().ShootDamage;
 
         return damage;
     }
 
     public float CalculateReloadTime()
     {
-        var time =
-            shootingUnit is AbstractPlayerUnit
-                ? weaponSO.ShootDelay * ((AbstractPlayerUnit)shootingUnit).GetPlayerShootDelay()
-                : weaponSO.ShootDelay;
-
+        var time = weaponSO.ShootDelay * shootingUnit.GetAttackSOParameters().ShootDelay;
         return time;
     }
 }

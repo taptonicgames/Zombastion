@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
@@ -262,4 +261,6 @@ public abstract class AbstractUnit : MonoBehaviour
         );
         return coroutine;
     }
+
+    public abstract IGetAttackSOParameters GetAttackSOParameters();
 }
