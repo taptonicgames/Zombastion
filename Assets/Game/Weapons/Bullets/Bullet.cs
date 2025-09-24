@@ -7,13 +7,15 @@ public class Bullet : MonoBehaviour
     private AbstractWeapon weapon;
     private WeaponSO SOData;
     private ObjectPoolSystem objectPoolSystem;
-    private bool isActive;
+	private int damage;
+	private bool isActive;
 
-    public void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem)
+    public void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
     {
         this.weapon = weapon;
         SOData = weapon.WeaponSOData;
         this.objectPoolSystem = objectPoolSystem;
+        this.damage = damage;
         StartCoroutine(DestroyDelay());
         isActive = true;
     }
@@ -43,7 +45,7 @@ public class Bullet : MonoBehaviour
 
         if (unit != null)
         {
-            unit.SetDamage(SOData.ShootDamage);
+            unit.SetDamage(damage);
         }
 
         Reset();

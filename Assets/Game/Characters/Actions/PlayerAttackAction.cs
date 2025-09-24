@@ -91,7 +91,7 @@ public class PlayerAttackAction : AbstractUnitAction
             cancellationToken: targetUnit.destroyCancellationToken
         );
 
-        unit.Weapon.Fire(targetUnit);
+        unit.Weapon.Fire(unit, targetUnit);
     }
 
     private bool CheckMoving()

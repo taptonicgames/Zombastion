@@ -8,14 +8,17 @@ public abstract class AbstractWeapon : MonoBehaviour
 
     [SerializeField]
     private WeaponSO weaponSO;
-    protected bool inFire, inReload;
-    protected AbstractUnit targetUnit;
+    protected bool inFire,
+        inReload;
+    protected AbstractUnit shootingUnit,
+        targetUnit;
     protected float angleToTarget;
 
-    public virtual void Fire(AbstractUnit targetUnit)
+    public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
         inFire = true;
         this.targetUnit = targetUnit;
+        this.shootingUnit = shootingUnit;
     }
 
     public virtual void StopFire()
@@ -34,7 +37,30 @@ public abstract class AbstractWeapon : MonoBehaviour
     {
         if (targetUnit)
         {
-            angleToTarget = StaticFunctions.ObjectFinishTurning(transform, targetUnit.transform.position);
+            angleToTarget = StaticFunctions.ObjectFinishTurning(
+                transform,
+                targetUnit.transform.position
+            );
         }
+    }
+
+    public int CalculateDamage()
+    {
+        var damage =
+            shootingUnit is AbstractPlayerUnit
+                ? WeaponSOData.ShootDamage * ((AbstractPlayerUnit)shootingUnit).GetPlayerDamage()
+                : WeaponSOData.ShootDamage;
+
+        return damage;
+    }
+
+    public float CalculateReloadTime()
+    {
+        var time =
+            shootingUnit is AbstractPlayerUnit
+                ? weaponSO.ShootDelay * ((AbstractPlayerUnit)shootingUnit).GetPlayerShootDelay()
+                : weaponSO.ShootDelay;
+
+        return time;
     }
 }

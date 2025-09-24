@@ -2,12 +2,12 @@ using Cysharp.Threading.Tasks;
 
 public class Bow : AbstractWeapon
 {
-    public override void Fire(AbstractUnit targetUnit)
+    public override void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
         if (inFire)
             return;
 
-        base.Fire(targetUnit);
+        base.Fire(shootingUnit, targetUnit);
         Shoot().Forget();
     }
 
@@ -28,11 +28,11 @@ public class Bow : AbstractWeapon
 
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
-            bullet.Init(this, objectPoolSystem);
+            bullet.Init(this, objectPoolSystem, CalculateDamage());
             inReload = true;
 
             await UniTask.WaitForSeconds(
-                WeaponSOData.ShootDelay,
+                CalculateReloadTime(),
                 cancellationToken: destroyCancellationToken
             );
 
