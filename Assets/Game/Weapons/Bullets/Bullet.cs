@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,8 +6,8 @@ public class Bullet : MonoBehaviour
     private AbstractWeapon weapon;
     private WeaponSO SOData;
     private ObjectPoolSystem objectPoolSystem;
-	private int damage;
-	private bool isActive;
+    private int damage;
+    private bool isActive;
 
     public void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
     {
@@ -28,6 +27,8 @@ public class Bullet : MonoBehaviour
 
     private void Reset()
     {
+        if (!isActive)
+            return;
         isActive = false;
         objectPoolSystem.ReleasePoolableObject(SOData.BulletType.ToString(), gameObject);
         StopAllCoroutines();
@@ -43,11 +44,17 @@ public class Bullet : MonoBehaviour
     {
         var unit = other.GetComponentInParent<AbstractUnit>();
 
-        if (unit != null)
+        if (unit != null && unit.GetType() == weapon.TargetUnit.GetType())
         {
             unit.SetDamage(damage);
         }
 
-        Reset();
+        //if (unit is PlayerCharacter && unit.Health == 0)
+        //{
+        //    isActive = false;
+        //    transform.SetParent(other.transform);
+        //}
+        //else
+            Reset();
     }
 }

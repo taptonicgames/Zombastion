@@ -1,5 +1,5 @@
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +22,7 @@ public class EnemyManager : IInitializable
 
     private async UniTask FindEnemies()
     {
-        CharacterType[] enemyTypes = { CharacterType.SimpleZombie };
+        CharacterType[] enemyTypes = { CharacterType.SimpleZombie, CharacterType.ArcherZombie };
 
         while (enemies.Count < gamePreferences.totalEnemiesAmount)
         {

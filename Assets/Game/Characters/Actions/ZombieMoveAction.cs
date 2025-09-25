@@ -1,10 +1,10 @@
 using Zenject;
 
-public class EnemyMoveAction : AbstractUnitAction
+public class ZombieMoveAction : AbstractUnitAction
 {
     [Inject] private readonly SceneReferences sceneReferences;
 
-    public EnemyMoveAction(AbstractUnit unit)
+    public ZombieMoveAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()
@@ -22,6 +22,7 @@ public class EnemyMoveAction : AbstractUnitAction
 	public override void StartAction()
 	{
 		base.StartAction();
+        unit.Agent.isStopped = false;
         unit.Agent.SetDestination(sceneReferences.zombieTarget.position);
 	}
 

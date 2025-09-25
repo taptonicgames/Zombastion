@@ -1,13 +1,22 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 
 public class Bow : AbstractWeapon
 {
+    private CancellationTokenSource cancellationToken;
+
     public override void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
         if (inFire)
             return;
 
         base.Fire(shootingUnit, targetUnit);
+
+        cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(
+            shootingUnit.destroyCancellationToken,
+            targetUnit.destroyCancellationToken
+        );
+
         Shoot().Forget();
     }
 
@@ -15,10 +24,10 @@ public class Bow : AbstractWeapon
     {
         await UniTask.WaitUntil(
             () => angleToTarget < Constants.ALMOST_ZERO,
-            cancellationToken: targetUnit.destroyCancellationToken
+            cancellationToken: cancellationToken.Token
         );
 
-        await UniTask.WaitWhile(() => inReload, cancellationToken: destroyCancellationToken);
+        await UniTask.WaitWhile(() => inReload, cancellationToken: cancellationToken.Token);
 
         while (inFire)
         {

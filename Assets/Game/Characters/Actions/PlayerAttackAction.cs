@@ -7,14 +7,11 @@ using Zenject;
 
 public class PlayerAttackAction : AbstractUnitAction
 {
-    private const float ROTATION_SPEED = 2f;
-    private const float ATTACK_DISTANCE_INCREMENT = 3f;
-
     [Inject]
     UnitActionPermissionHandler unitActionPermissionHandler;
     private AbstractUnit targetUnit;
     private ThirdPersonController thirdPersonController;
-    private float angleToEnemy;
+    private float angleToEnemy = 360f;
 
     public PlayerAttackAction(AbstractUnit unit)
         : base(unit)
@@ -91,6 +88,11 @@ public class PlayerAttackAction : AbstractUnitAction
             cancellationToken: targetUnit.destroyCancellationToken
         );
 
+        await UniTask.WaitForSeconds(0.2f);
+
+        if (unit.Health == 0)
+            return;
+
         unit.Weapon.Fire(unit, targetUnit);
     }
 
@@ -110,8 +112,8 @@ public class PlayerAttackAction : AbstractUnitAction
             angleToEnemy = StaticFunctions.ObjectFinishTurning(
                 unit.transform,
                 targetUnit.transform.position,
-                -ROTATION_SPEED,
-                ROTATION_SPEED
+                -Constants.UNIT_ROTATION_SPEED,
+                Constants.UNIT_ROTATION_SPEED
             );
         }
 
@@ -136,7 +138,7 @@ public class PlayerAttackAction : AbstractUnitAction
         {
             if (
                 Vector3.Distance(unit.transform.position, targetUnit.transform.position)
-                > unit.Weapon.WeaponSOData.AttackDistance + ATTACK_DISTANCE_INCREMENT
+                > unit.Weapon.WeaponSOData.AttackDistance + Constants.ATTACK_DISTANCE_INCREMENT
             )
             {
                 unit.SetActionTypeForced(UnitActionType.Idler);
@@ -154,5 +156,7 @@ public class PlayerAttackAction : AbstractUnitAction
         unit.Animator.SetBool(Constants.ATTACK, false);
         thirdPersonController.EnablePersonRotation = true;
         thirdPersonController.EnablePersonAnimation = true;
+        angleToEnemy = 360f;
+        targetUnit = null;
     }
 }

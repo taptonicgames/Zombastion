@@ -1,28 +1,38 @@
-using Zenject;
-
 public class UnitDieAction : AbstractUnitAction
 {
-	[Inject] private readonly UnitActionPermissionHandler unitActionPermissionHandler;
+    private RagdollHandler ragdollHandler;
 
-	public UnitDieAction(AbstractUnit unit) : base(unit)
-	{
-	}
+    public UnitDieAction(AbstractUnit unit)
+        : base(unit)
+    {
+        ragdollHandler = unit.GetComponent<RagdollHandler>();
+    }
 
-	public override bool CheckAction()
-	{
-		if (unit.UnitActionType != actionType && CheckCondition()) StartAction();
-		if (unit.UnitActionType == actionType) return true;
-		return false;
-	}
+    public override bool CheckAction()
+    {
+        if (unit.UnitActionType != actionType && CheckCondition())
+            StartAction();
+        if (unit.UnitActionType == actionType)
+            return true;
+        return false;
+    }
 
-	protected override void SetActionType()
-	{
-		actionType = UnitActionType.Die;
-	}
+    protected override void SetActionType()
+    {
+        actionType = UnitActionType.Die;
+    }
 
-	private bool CheckCondition()
-	{
-		if (!unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType)) return false;
-		return false;
-	}
+    public override void StartAction()
+    {
+        base.StartAction();
+        ragdollHandler.EnableRagdoll(true);
+    }
+
+    private bool CheckCondition()
+    {
+        if (unit.Health == 0)
+            return true;
+
+        return false;
+    }
 }

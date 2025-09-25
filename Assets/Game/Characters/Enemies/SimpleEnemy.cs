@@ -7,7 +7,7 @@ public class SimpleEnemy : AbstractEnemy
             { AbilityType.Movement, new EnemyMovementAbility(this) },
         };
 
-        unitActionsList = new() { new UnitIdleAction(this), new EnemyMoveAction(this) };
+        unitActionsList = new() { new UnitIdleAction(this), new ZombieMoveAction(this) };
 
         foreach (var item in unitActionsList)
         {

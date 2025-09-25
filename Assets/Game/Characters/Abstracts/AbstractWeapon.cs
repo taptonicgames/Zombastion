@@ -10,9 +10,9 @@ public abstract class AbstractWeapon : MonoBehaviour
     private WeaponSO weaponSO;
     protected bool inFire,
         inReload;
-    protected AbstractUnit shootingUnit,
-        targetUnit;
+    protected AbstractUnit shootingUnit;
     protected float angleToTarget;
+    protected AbstractUnit targetUnit;
 
     public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
@@ -32,6 +32,7 @@ public abstract class AbstractWeapon : MonoBehaviour
     {
         get => inFire;
     }
+    public AbstractUnit TargetUnit => targetUnit;
 
     private void Update()
     {
@@ -39,7 +40,9 @@ public abstract class AbstractWeapon : MonoBehaviour
         {
             angleToTarget = StaticFunctions.ObjectFinishTurning(
                 transform,
-                targetUnit.transform.position
+                targetUnit.transform.position,
+                -360,
+                360
             );
         }
     }
