@@ -48,13 +48,13 @@ public class Bullet : MonoBehaviour
         {
             unit.SetDamage(damage);
         }
-
         //if (unit is PlayerCharacter && unit.Health == 0)
         //{
         //    isActive = false;
         //    transform.SetParent(other.transform);
         //}
         //else
+        //else if (unit != weapon.ShootingUnit)
             Reset();
     }
 }

@@ -10,8 +10,8 @@ public abstract class AbstractWeapon : MonoBehaviour
     private WeaponSO weaponSO;
     protected bool inFire,
         inReload;
-    protected AbstractUnit shootingUnit;
-    protected float angleToTarget;
+	protected AbstractUnit shootingUnit;
+	protected float angleToTarget;
     protected AbstractUnit targetUnit;
 
     public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
@@ -34,7 +34,9 @@ public abstract class AbstractWeapon : MonoBehaviour
     }
     public AbstractUnit TargetUnit => targetUnit;
 
-    private void Update()
+	public AbstractUnit ShootingUnit { get => shootingUnit;}
+
+	private void Update()
     {
         if (targetUnit)
         {

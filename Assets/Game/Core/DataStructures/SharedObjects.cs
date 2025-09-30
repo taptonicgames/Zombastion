@@ -8,8 +8,9 @@ public struct SharedObjects
 {
     [SerializeField]
     private List<IDGameObjectData> idGameObjectDatasList;
+    [SerializeField] private List<IDSpriteData> idSpriteDatasList;
 
-    public GameObject GetPrefab(string id)
+	public GameObject GetPrefab(string id)
     {
         var data = idGameObjectDatasList.FirstOrDefault(a => a.id == id);
 
@@ -29,6 +30,16 @@ public struct SharedObjects
         return data;
     }
 
-    public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
+	public Sprite GetSprite(string id)
+	{
+		var data = idSpriteDatasList.FirstOrDefault(a => a.id == id);
+
+		if (data.sprite == null)
+			throw new NullReferenceException($"{id} is not present in SharedObjects");
+
+		return data.sprite;
+	}
+
+	public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
         idGameObjectDatasList = list;
 }
