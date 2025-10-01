@@ -54,7 +54,7 @@ public abstract class AbstractWeapon : MonoBehaviour
         var damage =
             shootingUnit is AbstractPlayerUnit
                 ? WeaponSOData.ShootDamage * ((AbstractPlayerUnit)shootingUnit).GetPlayerDamage()
-                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().ShootDamage;
+                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().Damage;
 
         return damage;
     }

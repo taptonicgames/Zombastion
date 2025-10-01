@@ -22,7 +22,7 @@ public class PlayerSO : ScriptableObject, IGetAttackSOParameters
     private float critProbability;
 
     public float Speed => speed;
-    public int ShootDamage => shootDamage;
+    public int Damage => shootDamage;
     public float ShootDelay => shootDelay;
     public int Health => health;
     public int CritDamage => critDamage;

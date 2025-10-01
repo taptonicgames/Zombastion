@@ -11,7 +11,7 @@ public class AbstractEnemy : AbstractUnit
     protected readonly EnemyManager enemyManager;
 
     [SerializeField]
-    private EnemySO SOData;
+    protected EnemySO SOData;
 
     public override void Init()
     {

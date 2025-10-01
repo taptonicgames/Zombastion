@@ -72,9 +72,11 @@ public abstract class AbstractUnit : MonoBehaviour
     {
         get => characterType;
     }
-    public int Health
+
+    public virtual int Health
     {
         get => health;
+        protected set => health = Mathf.Clamp(health + value, 0, 100);
     }
 
     public virtual void Init() { }

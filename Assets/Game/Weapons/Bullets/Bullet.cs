@@ -54,7 +54,9 @@ public class Bullet : MonoBehaviour
         //    transform.SetParent(other.transform);
         //}
         //else
-        //else if (unit != weapon.ShootingUnit)
-            Reset();
+
+        if (unit == weapon.ShootingUnit)
+            return;
+        Reset();
     }
 }

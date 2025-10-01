@@ -22,7 +22,7 @@ public class EnemyManager : IInitializable
 
     private async UniTask FindEnemies()
     {
-        CharacterType[] enemyTypes = { CharacterType.SimpleZombie, CharacterType.ArcherZombie };
+        CharacterType[] enemyTypes = { CharacterType.SimpleZombie/*, CharacterType.ArcherZombie*/ };
 
         while (enemies.Count < gamePreferences.totalEnemiesAmount)
         {

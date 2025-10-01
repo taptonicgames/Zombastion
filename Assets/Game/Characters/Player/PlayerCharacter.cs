@@ -24,15 +24,13 @@ public class PlayerCharacter : AbstractPlayerUnit
 
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
         {
-            {
-                AbilityType.Attack,
-                new UnitAttackAbility(this, new() { CharacterType.SimpleZombie })
-            },
+            { AbilityType.Heal, new PlayerHealAbility(this) },
         };
 
         unitActionsList = new()
         {
             new UnitDieAction(this),
+            new PlayerHealAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),

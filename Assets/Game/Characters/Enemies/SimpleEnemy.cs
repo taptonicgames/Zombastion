@@ -1,5 +1,10 @@
+using UnityEngine;
+using Zenject;
+
 public class SimpleEnemy : AbstractEnemy
 {
+    [Inject] private readonly SceneReferences sceneReferences;
+
     private void Start()
     {
         abilitiesPair = new()
@@ -16,4 +21,13 @@ public class SimpleEnemy : AbstractEnemy
 
         SetActionTypeForced(UnitActionType.Move);
     }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.layer == Constants.GATES_LAYER)
+		{
+			sceneReferences.castle.SetDamage(SOData.Damage);
+            OnUnitDied();
+		}
+	}
 }
