@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MetaUIManager : UIManager
+public class MetaUIManager : AbstractUIManager
 {
     //TODO: implement init logic
     public void Start()
