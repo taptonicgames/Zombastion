@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class AbstractEnemy : AbstractUnit
+public abstract class AbstractEnemy : AbstractUnit
 {
     [Inject]
     protected readonly DiContainer diContainer;

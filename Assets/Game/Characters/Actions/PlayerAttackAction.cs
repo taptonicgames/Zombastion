@@ -11,20 +11,33 @@ public class PlayerAttackAction : AbstractUnitAction
     UnitActionPermissionHandler unitActionPermissionHandler;
     private AbstractUnit targetUnit;
     private ThirdPersonController thirdPersonController;
+    private PlayerHealAbility healAbility;
     private float angleToEnemy = 360f;
 
     public PlayerAttackAction(AbstractUnit unit)
         : base(unit)
     {
         thirdPersonController = unit.GetComponent<ThirdPersonController>();
+        healAbility = unit.GetUnitAbility<PlayerHealAbility>(AbilityType.Heal);
     }
 
     public override bool CheckAction()
     {
         if (unit.UnitActionType == actionType)
-            return true;
+        {
+            if (healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left)
+                return true;
+            else
+            {
+                unit.SetActionTypeForced(UnitActionType.Idler);
+                return false;
+            }
+        }
 
-        if (unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
+        if (
+            healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left
+            && unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType)
+        )
         {
             if (FindEnemy())
             {

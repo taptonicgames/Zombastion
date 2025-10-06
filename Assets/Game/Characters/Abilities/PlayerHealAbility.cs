@@ -1,25 +1,38 @@
+using UnityEngine;
+
 public class PlayerHealAbility : AbstractUnitAbility
 {
-	private PlayerFindingCastleType playerFindingCastleType;
+    public PlayerFindingCastleType PlayerFindingCastleType { get; private set; } =
+        PlayerFindingCastleType.Left;
+    private AbstractPlayerUnit abstractPlayerUnit;
+    private float ressurectHealth;
 
-	public PlayerHealAbility(AbstractUnit unit) : base(unit)
-	{
-		EventBus<PlayerFindingCastleEvnt>.Subscribe(OnPlayerFindingCastleEvnt);
-	}
+    public PlayerHealAbility(AbstractUnit unit)
+        : base(unit)
+    {
+        EventBus<PlayerFindingCastleEvnt>.Subscribe(OnPlayerFindingCastleEvnt);
+        abstractPlayerUnit = (AbstractPlayerUnit)unit;
+    }
 
-	private void OnPlayerFindingCastleEvnt(PlayerFindingCastleEvnt evnt)
-	{
-		playerFindingCastleType = evnt.type;
-	}
+    private void OnPlayerFindingCastleEvnt(PlayerFindingCastleEvnt evnt)
+    {
+        PlayerFindingCastleType = evnt.type;
+        ressurectHealth = unit.Health;
+    }
 
-	protected override void SetAbilityType()
-	{
-		abilityType = AbilityType.Heal;
-	}
+    protected override void SetAbilityType()
+    {
+        abilityType = AbilityType.Heal;
+    }
 
-	public override void FixedUpdate()
-	{
-		base.FixedUpdate();
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
 
-	}
+        if (PlayerFindingCastleType == PlayerFindingCastleType.Entered)
+        {
+            ressurectHealth += abstractPlayerUnit.HealthResurectionOnBase / 50f;
+            unit.Health = Mathf.FloorToInt(ressurectHealth);
+        }
+    }
 }

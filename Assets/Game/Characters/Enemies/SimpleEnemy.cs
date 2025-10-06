@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -29,5 +30,10 @@ public class SimpleEnemy : AbstractEnemy
 			sceneReferences.castle.SetDamage(SOData.Damage);
             OnUnitDied();
 		}
+	}
+
+	public override Type GetDamageRecieverType()
+	{
+        return typeof(SimpleEnemy);
 	}
 }

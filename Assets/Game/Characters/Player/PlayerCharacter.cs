@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
@@ -30,7 +31,6 @@ public class PlayerCharacter : AbstractPlayerUnit
         unitActionsList = new()
         {
             new UnitDieAction(this),
-            new PlayerHealAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),
@@ -60,4 +60,9 @@ public class PlayerCharacter : AbstractPlayerUnit
         if (UnitAction != null)
             UnitAction.Update();
     }
+
+	public override Type GetDamageRecieverType()
+	{
+		return typeof(PlayerCharacter);
+	}
 }

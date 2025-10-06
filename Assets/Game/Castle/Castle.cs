@@ -13,6 +13,9 @@ public class Castle : MonoBehaviour, IColliderHelper
 
     private Vector3 defaultGatesPos;
     private const float GATES_OPEN_DURATION = 0.5f;
+    private const string OUTER_COLLIDER = "OuterCollider";
+    private const string INNER_COLLIDER = "InnerCollider";
+    private Transform inCollisionTr;
 
     private void Awake()
     {
@@ -41,15 +44,32 @@ public class Castle : MonoBehaviour, IColliderHelper
         {
             Gates.DOMoveY(defaultGatesPos.y + 3, GATES_OPEN_DURATION);
         }
+
+        inCollisionTr = sender;
     }
 
     public void StayCollider(Collider collider, Transform sender, Collision collision = null) { }
 
     public void ExitCollider(Collider collider, Transform sender, Collision collision = null)
     {
-        if (collider.gameObject.layer == Constants.PLAYER_LAYER)
+        if (inCollisionTr == sender)
         {
-            Gates.DOMoveY(defaultGatesPos.y, GATES_OPEN_DURATION);
+            if (collider.gameObject.layer == Constants.PLAYER_LAYER)
+            {
+                Gates.DOMoveY(defaultGatesPos.y, GATES_OPEN_DURATION);
+
+                if (sender.name == INNER_COLLIDER)
+                    EventBus<PlayerFindingCastleEvnt>.Publish(
+                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Entered }
+                    );
+
+                if (sender.name == OUTER_COLLIDER)
+                    EventBus<PlayerFindingCastleEvnt>.Publish(
+                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Left }
+                    );
+
+                inCollisionTr = null;
+            }
         }
     }
 }
