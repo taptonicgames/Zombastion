@@ -12,6 +12,7 @@ public abstract class AbstractEnemy : AbstractUnit
 
     [SerializeField]
     protected EnemySO SOData;
+    public int ExperienceForDestroy => SOData.ExperienceForDestroy;
 
     public override void Init()
     {
@@ -28,6 +29,6 @@ public abstract class AbstractEnemy : AbstractUnit
     {
         base.OnUnitDied();
         enemyManager.RemoveEnemyFromList(this);
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 }

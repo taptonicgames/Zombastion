@@ -9,6 +9,9 @@ public class PlayerAttackAction : AbstractUnitAction
 {
     [Inject]
     UnitActionPermissionHandler unitActionPermissionHandler;
+
+    [Inject]
+    private readonly PlayerCharacterModel playerCharacterModel;
     private AbstractUnit targetUnit;
     private ThirdPersonController thirdPersonController;
     private PlayerHealAbility healAbility;
@@ -70,7 +73,7 @@ public class PlayerAttackAction : AbstractUnitAction
         {
             var enemy = arr[i].GetComponent<AbstractUnit>();
 
-            if (enemy)
+            if (enemy && enemy.IsEnable)
             {
                 enemies.Add(enemy);
             }
@@ -159,6 +162,7 @@ public class PlayerAttackAction : AbstractUnitAction
         }
         else
         {
+            playerCharacterModel.Experience += ((AbstractEnemy)targetUnit).ExperienceForDestroy;
             unit.SetActionTypeForced(UnitActionType.Idler);
         }
     }
