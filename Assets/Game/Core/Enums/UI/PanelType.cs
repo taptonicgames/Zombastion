@@ -11,4 +11,7 @@
     MetaDebugPanel = 6,
     ShopPanel = 7,
     CastleUpgrades = 8,
+
+    //Gameloop
+    BattleUpgrade = 20,
 }
