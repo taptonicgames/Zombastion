@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AttackingEnemy : AbstractEnemy
@@ -24,9 +23,4 @@ public class AttackingEnemy : AbstractEnemy
 
         SetActionTypeForced(UnitActionType.Move);
     }
-
-	public override Type GetDamageRecieverType()
-	{
-		return typeof(AttackingEnemy);
-	}
 }

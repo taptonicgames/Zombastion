@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
+public abstract class AbstractUnit : MonoBehaviour
 {
     [SerializeField]
     protected bool isEnable;
@@ -72,11 +72,9 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     {
         get => characterType;
     }
-
-    public virtual int Health
+    public int Health
     {
         get => health;
-        set => health = Mathf.Clamp(health + value, 0, 100);
     }
 
     public virtual void Init() { }
@@ -173,7 +171,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
             OnUnitDied();
     }
 
-    public virtual void OnUnitDied() { isEnable = false; }
+    public virtual void OnUnitDied() { }
 
     public virtual T GetUnitAbility<T>(AbilityType type)
         where T : AbstractUnitAbility
@@ -265,5 +263,4 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     }
 
     public abstract IGetAttackSOParameters GetAttackSOParameters();
-    public abstract Type GetDamageRecieverType();
 }

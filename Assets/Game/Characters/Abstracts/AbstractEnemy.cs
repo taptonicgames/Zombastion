@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public abstract class AbstractEnemy : AbstractUnit
+public class AbstractEnemy : AbstractUnit
 {
     [Inject]
     protected readonly DiContainer diContainer;
@@ -11,8 +11,7 @@ public abstract class AbstractEnemy : AbstractUnit
     protected readonly EnemyManager enemyManager;
 
     [SerializeField]
-    protected EnemySO SOData;
-    public int ExperienceForDestroy => SOData.ExperienceForDestroy;
+    private EnemySO SOData;
 
     public override void Init()
     {
@@ -29,6 +28,6 @@ public abstract class AbstractEnemy : AbstractUnit
     {
         base.OnUnitDied();
         enemyManager.RemoveEnemyFromList(this);
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject);
     }
 }

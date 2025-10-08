@@ -42,28 +42,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var damageReciever = other.GetComponentInParent<IDamageReciever>();
+        var unit = other.GetComponentInParent<AbstractUnit>();
 
-        if (damageReciever != null)
+        if (unit != null && unit.GetType() == weapon.TargetUnit.GetType())
         {
-            if (damageReciever is AbstractUnit)
-            {
-                if (
-                    weapon.TargetUnit
-                    && damageReciever.GetDamageRecieverType() == weapon.TargetUnit.GetType()
-                )
-                    damageReciever.SetDamage(damage);
-            }
-            else
-                damageReciever.SetDamage(damage);
-
-            if (
-                damageReciever is AbstractUnit
-                && (AbstractUnit)damageReciever == weapon.ShootingUnit
-            )
-                return;
+            unit.SetDamage(damage);
         }
-
-        Reset();
+        //if (unit is PlayerCharacter && unit.Health == 0)
+        //{
+        //    isActive = false;
+        //    transform.SetParent(other.transform);
+        //}
+        //else
+        //else if (unit != weapon.ShootingUnit)
+            Reset();
     }
 }
