@@ -1,23 +1,32 @@
 using UnityEngine;
+using Rnd = UnityEngine.Random;
 
-public class AbstractPlayerUnit : AbstractUnit
+public abstract class AbstractPlayerUnit : AbstractUnit
 {
     [SerializeField]
     protected PlayerSO SOData;
 
-	public override IGetAttackSOParameters GetAttackSOParameters()
-	{
-        return SOData;
-	}
-
-	public virtual int GetPlayerDamage()
+    public override int Health
     {
-        var randomValue = Random.Range(0, 100);
-        var damage = SOData.ShootDamage;
+        get => base.Health;
+        set => health = Mathf.Clamp(health + value, 0, SOData.Health);
+    }
+
+    public override IGetAttackSOParameters GetAttackSOParameters()
+    {
+        return SOData;
+    }
+
+    public virtual int GetPlayerDamage()
+    {
+        var randomValue = Rnd.Range(0, 100);
+        var damage = SOData.Damage;
 
         if (randomValue <= SOData.CritProbability)
             damage *= SOData.CritDamage;
 
         return damage;
     }
+
+    public virtual int HealthResurectionOnBase => SOData.HealthResurectionPerSecond;
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
@@ -24,15 +25,12 @@ public class PlayerCharacter : AbstractPlayerUnit
 
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
         {
-            {
-                AbilityType.Attack,
-                new UnitAttackAbility(this, new() { CharacterType.SimpleZombie })
-            },
+            { AbilityType.Heal, new PlayerHealAbility(this) },
         };
 
         unitActionsList = new()
         {
-            new UnitDieAction(this),
+            new PlayerDieAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),
@@ -62,4 +60,9 @@ public class PlayerCharacter : AbstractPlayerUnit
         if (UnitAction != null)
             UnitAction.Update();
     }
+
+	public override Type GetDamageRecieverType()
+	{
+		return typeof(PlayerCharacter);
+	}
 }

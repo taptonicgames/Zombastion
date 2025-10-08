@@ -1,5 +1,5 @@
 public interface IGetAttackSOParameters
 {
-	int ShootDamage { get; }
+	int Damage { get; }
 	float ShootDelay { get; }
 }

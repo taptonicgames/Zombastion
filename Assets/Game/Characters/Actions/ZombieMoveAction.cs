@@ -2,7 +2,8 @@ using Zenject;
 
 public class ZombieMoveAction : AbstractUnitAction
 {
-    [Inject] private readonly SceneReferences sceneReferences;
+    [Inject]
+    private readonly SceneReferences sceneReferences;
 
     public ZombieMoveAction(AbstractUnit unit)
         : base(unit) { }
@@ -19,16 +20,37 @@ public class ZombieMoveAction : AbstractUnitAction
         actionType = UnitActionType.Move;
     }
 
-	public override void StartAction()
-	{
-		base.StartAction();
+    public override void StartAction()
+    {
+        base.StartAction();
         unit.Agent.isStopped = false;
-        unit.Agent.SetDestination(sceneReferences.zombieTarget.position);
+        FindTargetAndMove();
+        EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
+    }
+
+	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
+	{
+        FindTargetAndMove();
 	}
 
-	public override void OnFinish()
-	{
-		base.OnFinish();
+	private void FindTargetAndMove()
+    {
+        var target = sceneReferences.castle.Gates.gameObject.activeSelf
+            ? sceneReferences.castle.Gates
+            : sceneReferences.zombieTarget;
+
+        unit.Agent.SetDestination(target.position);
+    }
+
+    public override void OnFinish()
+    {
+        base.OnFinish();
         unit.Agent.isStopped = true;
+        Dispose();
+    }
+
+	public override void Dispose()
+	{
+		EventBus<GatesFallenEvnt>.Unsubscribe(OnGatesFallenEvnt);
 	}
 }

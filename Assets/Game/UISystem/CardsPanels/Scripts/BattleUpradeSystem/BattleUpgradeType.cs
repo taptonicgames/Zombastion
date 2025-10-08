@@ -1,0 +1,21 @@
+﻿public enum BattleUpgradeType
+{
+    None = -1,
+    PlayerSpeed = 0,
+    PlayerDamage = 1,
+    ChainsawSize = 2,
+    AddTime = 3,
+    MeteoriteRain = 4,
+    FlyindSpheres = 5,
+    CoinsModifier = 6,
+    EnemiesSlowDown = 7,
+    ShieldWall = 8,
+    DoublePistols = 9,
+    BulletRicochet = 10,
+    Grenades = 11,
+    LightningStrike = 12,
+    AddChainsaw = 13,
+    Axes = 14,
+    HealPlayer = 15,
+    IncreaseBag = 16,
+}
