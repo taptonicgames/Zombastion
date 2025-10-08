@@ -21,11 +21,8 @@ public class PlayerSO : ScriptableObject, IGetAttackSOParameters
     [SerializeField]
     private float critProbability;
 
-    [field: SerializeField]
-    public int HealthResurectionPerSecond { get; private set; }
-
     public float Speed => speed;
-    public int Damage => shootDamage;
+    public int ShootDamage => shootDamage;
     public float ShootDelay => shootDelay;
     public int Health => health;
     public int CritDamage => critDamage;

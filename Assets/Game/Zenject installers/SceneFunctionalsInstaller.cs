@@ -6,7 +6,5 @@ public class SceneFunctionalsInstaller : MonoInstaller
     {
 		Container.BindInterfacesAndSelfTo<EnemyManager>().AsSingle();
 		Container.Bind<CharacterFactory>().AsTransient();
-		Container.Bind<PlayerCharacterModel>().AsSingle();
-		Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
 	}
 }

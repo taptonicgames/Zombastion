@@ -9,38 +9,22 @@ public class PlayerAttackAction : AbstractUnitAction
 {
     [Inject]
     UnitActionPermissionHandler unitActionPermissionHandler;
-
-    [Inject]
-    private readonly PlayerCharacterModel playerCharacterModel;
     private AbstractUnit targetUnit;
     private ThirdPersonController thirdPersonController;
-    private PlayerHealAbility healAbility;
     private float angleToEnemy = 360f;
 
     public PlayerAttackAction(AbstractUnit unit)
         : base(unit)
     {
         thirdPersonController = unit.GetComponent<ThirdPersonController>();
-        healAbility = unit.GetUnitAbility<PlayerHealAbility>(AbilityType.Heal);
     }
 
     public override bool CheckAction()
     {
         if (unit.UnitActionType == actionType)
-        {
-            if (healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left)
-                return true;
-            else
-            {
-                unit.SetActionTypeForced(UnitActionType.Idler);
-                return false;
-            }
-        }
+            return true;
 
-        if (
-            healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left
-            && unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType)
-        )
+        if (unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
         {
             if (FindEnemy())
             {
@@ -73,7 +57,7 @@ public class PlayerAttackAction : AbstractUnitAction
         {
             var enemy = arr[i].GetComponent<AbstractUnit>();
 
-            if (enemy && enemy.IsEnable)
+            if (enemy)
             {
                 enemies.Add(enemy);
             }
@@ -162,7 +146,6 @@ public class PlayerAttackAction : AbstractUnitAction
         }
         else
         {
-            playerCharacterModel.Experience.Value += ((AbstractEnemy)targetUnit).ExperienceForDestroy;
             unit.SetActionTypeForced(UnitActionType.Idler);
         }
     }

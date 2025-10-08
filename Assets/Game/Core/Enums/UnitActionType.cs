@@ -5,5 +5,4 @@ public enum UnitActionType
     Move,
 	Attack,
 	Die,
-	Heal,
 }
