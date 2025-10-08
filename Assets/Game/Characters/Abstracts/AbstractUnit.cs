@@ -173,7 +173,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
             OnUnitDied();
     }
 
-    public virtual void OnUnitDied() { }
+    public virtual void OnUnitDied() { isEnable = false; }
 
     public virtual T GetUnitAbility<T>(AbilityType type)
         where T : AbstractUnitAbility

@@ -30,7 +30,7 @@ public class PlayerCharacter : AbstractPlayerUnit
 
         unitActionsList = new()
         {
-            new UnitDieAction(this),
+            new PlayerDieAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),

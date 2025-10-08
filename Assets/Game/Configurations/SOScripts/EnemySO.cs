@@ -14,4 +14,7 @@ public class EnemySO : ScriptableObject, IGetAttackSOParameters
 
     [field: SerializeField]
     public int Health { get; private set; }
+
+    [field: SerializeField]
+    public int ExperienceForDestroy { get; private set; }
 }
