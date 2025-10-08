@@ -15,4 +15,7 @@ public static class Constants
 
     //Tags
     public const string PLAYER_TAG = "Player";
+
+    //SharedObjects Ids
+    public const string CARDS_PANEL_BATTLE = "CardsPanelBattle";
 }
