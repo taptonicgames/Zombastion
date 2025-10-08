@@ -287,7 +287,7 @@ PrefabInstance:
     - target: {fileID: 199336177700244042, guid: a0993e73f2ad2d446ae7c1811bf48f94,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 199336177700244042, guid: a0993e73f2ad2d446ae7c1811bf48f94,
         type: 3}
@@ -312,12 +312,12 @@ PrefabInstance:
     - target: {fileID: 3040287132971716803, guid: a0993e73f2ad2d446ae7c1811bf48f94,
         type: 3}
       propertyPath: m_ReferenceResolution.x
-      value: 720
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 3040287132971716803, guid: a0993e73f2ad2d446ae7c1811bf48f94,
         type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 1600
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7602376501212355107, guid: a0993e73f2ad2d446ae7c1811bf48f94,
         type: 3}
@@ -577,7 +577,18 @@ PrefabInstance:
     - target: {fileID: 3114226571064447654, guid: 7525a0282ad3001409c91c76cdd14151,
         type: 3}
       propertyPath: m_Name
-      value: SwitchButton_None_1
+      value: SwitchButton_Shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999080364468773871, guid: 7525a0282ad3001409c91c76cdd14151,
+        type: 3}
+      propertyPath: unlockSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3dc5b362e43834045852c2d4711dc6d2,
+        type: 3}
+    - target: {fileID: 5776251264716093779, guid: 7525a0282ad3001409c91c76cdd14151,
+        type: 3}
+      propertyPath: m_text
+      value: shop
       objectReference: {fileID: 0}
     - target: {fileID: 6736717641614859501, guid: 7525a0282ad3001409c91c76cdd14151,
         type: 3}
@@ -719,12 +730,23 @@ PrefabInstance:
     - target: {fileID: 3114226571064447654, guid: 7525a0282ad3001409c91c76cdd14151,
         type: 3}
       propertyPath: m_Name
-      value: SwitchButton_None_2
+      value: SwitchButton_CastleUpgrade
       objectReference: {fileID: 0}
+    - target: {fileID: 4999080364468773871, guid: 7525a0282ad3001409c91c76cdd14151,
+        type: 3}
+      propertyPath: unlockSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a78170c5ec8074756801245da7154b55,
+        type: 3}
     - target: {fileID: 4999080364468773871, guid: 7525a0282ad3001409c91c76cdd14151,
         type: 3}
       propertyPath: <Type>k__BackingField
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776251264716093779, guid: 7525a0282ad3001409c91c76cdd14151,
+        type: 3}
+      propertyPath: m_text
+      value: castle
       objectReference: {fileID: 0}
     - target: {fileID: 6736717641614859501, guid: 7525a0282ad3001409c91c76cdd14151,
         type: 3}

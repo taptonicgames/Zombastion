@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ClothItemsContainer : MonoBehaviour
@@ -6,26 +8,33 @@ public class ClothItemsContainer : MonoBehaviour
     [SerializeField] private Vector2 portretOrientationResolution;
     [SerializeField] private Vector2 albomOrientationResolution;
 
-    private ClothItem[] items;
+    private ClothItemView[] items;
     private GridLayoutGroup gridLayoutGroup;
 
-    public void Init()
+    public event Action<ClothItemView> ClothItemClicked;
+
+    public void Init(List<EquipmentData> equipmentDatas)
     {
         gridLayoutGroup = GetComponent<GridLayoutGroup>();
-        items = GetComponentsInChildren<ClothItem>();
+        items = GetComponentsInChildren<ClothItemView>();
 
         gridLayoutGroup.cellSize = ScreenExtension.IsPortretOrientation ? portretOrientationResolution : albomOrientationResolution;
 
         for (int i = 0; i < items.Length; i++)
         {
-            items[i].Init();
-            items[i].ItemClicked += OnItemClicked;
+            items[i].gameObject.SetActive(i < equipmentDatas.Count);
+
+            if (items[i].gameObject.activeSelf)
+            {
+                items[i].Init(equipmentDatas[i]);
+                items[i].ItemClicked += OnItemClicked;
+            }
         }
     }
 
-    private void OnItemClicked(ClothItem item)
+    private void OnItemClicked(ClothItemView item)
     {
-        //TODO: open item popup
+        ClothItemClicked?.Invoke(item);
     }
 
     private void OnDestroy()

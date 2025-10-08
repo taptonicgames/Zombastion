@@ -1,9 +1,12 @@
 ﻿using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class SwitcherPanel : AbstractPanel
 {
     [SerializeField] private SwitcherPanelButton[] panelButtons;
+
+    [Inject] private GamePreferences gamePreferences;
 
     private SwitcherPanelButton currentPanelButton;
     private float duration = 0.1f;
@@ -16,8 +19,7 @@ public class SwitcherPanel : AbstractPanel
         {
             button.Init();
 
-            // TODO: implement UnlockPanelsSO
-            if (button.Type != SwitcherButtonType.Battle && button.Type != SwitcherButtonType.Upgrade)
+            if (button.Type != SwitcherButtonType.Battle)
             {
                 button.Deactivate();
                 button.Lock();
@@ -29,6 +31,8 @@ public class SwitcherPanel : AbstractPanel
         currentPanelButton.Deactivate();
 
         Subscribe();
+
+        TryOpenUpgradeButton();
     }
 
     private void UpdatePanelState(SwitcherPanelButton panelButton)
@@ -43,6 +47,42 @@ public class SwitcherPanel : AbstractPanel
 
         currentPanelButton.ChangeSize(duration, true);
         currentPanelButton.Deactivate();
+    }
+
+    private void TryOpenUpgradeButton()
+    {
+        // TODO: implement save current level info
+        var lvl = 1;
+
+        foreach (var button in panelButtons)
+        {
+            if (button.IsLocked)
+            {
+                switch (button.Type)
+                {
+                    case SwitcherButtonType.Shop:
+                        TryUnlockButton(lvl >= gamePreferences.OpenShopPanelAtLevel, button);
+                        break;
+                    case SwitcherButtonType.PlayerUpgrade:
+                        TryUnlockButton(lvl >= gamePreferences.OpenPlayerUpgradePanelAtLevel, button);
+                        break;
+                    case SwitcherButtonType.CastleUpgrade:
+                        TryUnlockButton(lvl >= gamePreferences.OpenCastleUpgradePanelAtLevel, button);
+                        break;
+                    case SwitcherButtonType.UnknowThree:
+                        break;
+                }
+            }
+        }
+    }
+
+    public void TryUnlockButton(bool canOpen, SwitcherPanelButton button)
+    {
+        if (canOpen == false)
+            return;
+
+        button.Unlock();
+        button.Activate();
     }
 
     #region Events

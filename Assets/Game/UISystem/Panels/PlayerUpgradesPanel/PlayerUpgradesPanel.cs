@@ -1,45 +1,68 @@
 using Cysharp.Threading.Tasks;
-using log4net.Core;
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class PlayerUpgradesPanel : AbstractPanel
 {
     [SerializeField] private ClothItemsContainer equipedClothItemsContainer;
-    [SerializeField] private SwitchButtonsController switchButtonsController;
+    [SerializeField] private PlayerItemsBag playerItemsBag;
     [SerializeField] private RawPlayerView rawPlayerView;
 
-    [Space(10), Header("Items containers")]
-    [SerializeField] private ClothItem itemPrefab;
+    [Space(10), Header("Popups")]
+    [SerializeField] private ClothItemPopup clothItemPopup;
+    [SerializeField] private PlayerSkillsTreePopup skillsTreePopup;
+    [SerializeField] private LevelSkillPopup levelSkillPopup;
 
-    [SerializeField] private Transform clothItemsBagScrollView;
-    [SerializeField] private Transform clothItemsBagContainer;
-
-    [SerializeField] private Transform insertsScrollView;
-    [SerializeField] private Transform insertsContainer;
+    [Space(10), Header("Buttons")]
+    [SerializeField] private Button skillsTreeButton;
+    [SerializeField] private Button changeCharacterButton;
 
     [Space(10), Header("RawImage")]
     [SerializeField] private RectTransform rawImage;
     [SerializeField] private Vector2 portretOrientationRawPosition;
-    [SerializeField] private Vector2 albomOrientationRawPosition;
+    [SerializeField] private Vector2 albumOrientationRawPosition;
+
+    [Inject] private EquipmentPackSO equipmentPackSO;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
     public override void Init()
     {
-        equipedClothItemsContainer.Init();
-        switchButtonsController.Init();
+        List<EquipmentData> datas = GetDatas();
 
-        rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albomOrientationRawPosition;
+        equipedClothItemsContainer.Init(datas);
+        playerItemsBag.Init();
+        skillsTreePopup.Init(null);
+
+        clothItemPopup.ForceHide();
+        skillsTreePopup.ForceHide();
+        rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
 
         Subscribe();
+    }
+
+    private List<EquipmentData> GetDatas()
+    {
+        //TODO: Load saving equipment datas
+        List<EquipmentData> datas = new List<EquipmentData>();
+        for (int i = 0; i < equipmentPackSO.StartEquipments.Length; i++)
+        {
+            EquipmentData data = new EquipmentData(equipmentPackSO.StartEquipments[i]);
+            datas.Add(data);
+        }
+
+        return datas;
     }
 
     public override async UniTask OnShow()
     {
         await UniTask.Yield();
 
-        switchButtonsController.Show();
+        playerItemsBag.Show();
     }
 
     public override async UniTask OnHide()
@@ -47,31 +70,58 @@ public class PlayerUpgradesPanel : AbstractPanel
         await UniTask.Yield();
 
         rawPlayerView.Restart();
+
+        if (clothItemPopup.IsShowed)
+            clothItemPopup.ForceHide();
+        if (skillsTreePopup.IsShowed)
+            skillsTreePopup.ForceHide();
+        if (levelSkillPopup.IsShowed)
+            levelSkillPopup.ForceHide();
     }
 
     #region Events
     private void Subscribe()
     {
-        switchButtonsController.FirstButtonClicked += OnClothItemsBagButtonClicked;
-        switchButtonsController.SecondButtonClicked += OnInsertItemsBagButtonClicked;
+        equipedClothItemsContainer.ClothItemClicked += OnClothItemClicked;
+        clothItemPopup.CloseButtonClicked += OnCloseButtonClicked;
+        skillsTreeButton.onClick.AddListener(OnSkillsTreeButtonClicked);
+        changeCharacterButton.onClick.AddListener(OnChangeCharacterButtonClicked);
+        skillsTreePopup.CloseButtonClicked += OnCloseButtonClicked;
     }
 
-    private void OnClothItemsBagButtonClicked()
+    private void OnSkillsTreeButtonClicked()
     {
-        insertsScrollView.gameObject.SetActive(false);
-        clothItemsBagScrollView.gameObject.SetActive(true);
+        skillsTreePopup.Show();
     }
 
-    private void OnInsertItemsBagButtonClicked()
+    private void OnChangeCharacterButtonClicked()
     {
-        clothItemsBagScrollView.gameObject.SetActive(false);
-        insertsScrollView.gameObject.SetActive(true);
+        //TODO: open change character popup logic
+    }
+
+    private void OnClothItemClicked(ClothItemView item)
+    {
+        object[] objects = new object[1];
+        objects[0] = item;
+        clothItemPopup.Init(objects);
+        clothItemPopup.Show();
+    }
+
+    private void OnCloseButtonClicked()
+    {
+        if (skillsTreePopup.IsShowed)
+            skillsTreePopup.Hide();
+        if (clothItemPopup.IsShowed)
+            clothItemPopup.Hide();
     }
 
     private void Unsubscribe()
     {
-        switchButtonsController.FirstButtonClicked -= OnClothItemsBagButtonClicked;
-        switchButtonsController.SecondButtonClicked -= OnInsertItemsBagButtonClicked;
+        equipedClothItemsContainer.ClothItemClicked -= OnClothItemClicked;
+        clothItemPopup.CloseButtonClicked -= OnCloseButtonClicked;
+        skillsTreeButton.onClick.RemoveListener(OnSkillsTreeButtonClicked);
+        changeCharacterButton.onClick.RemoveListener(OnChangeCharacterButtonClicked);
+        skillsTreePopup.CloseButtonClicked -= OnCloseButtonClicked;
     }
     #endregion
 
@@ -89,7 +139,7 @@ public class PlayerUpgradesPanel : AbstractPanel
         if (isPortretOrientation != ScreenExtension.IsPortretOrientation)
         {
             isPortretOrientation = ScreenExtension.IsPortretOrientation;
-            rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albomOrientationRawPosition;
+            rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
         }
     }
 #endif

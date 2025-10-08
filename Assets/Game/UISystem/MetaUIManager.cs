@@ -1,13 +1,5 @@
-﻿using UnityEngine;
-
-public class MetaUIManager : AbstractUIManager
+﻿public class MetaUIManager : AbstractUIManager
 {
-    //TODO: implement init logic
-    public void Start()
-    {
-        Init();
-    }
-
     public override void Init()
     {
         base.Init();
@@ -25,10 +17,24 @@ public class MetaUIManager : AbstractUIManager
         GetPanel(PanelType.Switcher).Show();
     }
 
-    public void EnterUpgradePanel()
+    public void EnterPlayerUpgradePanel()
     {
         HideAllPanels();
         GetPanel(PanelType.PlayerUpgrades).Show();
+        GetPanel(PanelType.Switcher).Show();
+    }
+
+    public void EnterShopPanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.ShopPanel).Show();
+        GetPanel(PanelType.Switcher).Show();
+    }
+
+    public void EnterCastleUpgradePanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.CastleUpgrades).Show();
         GetPanel(PanelType.Switcher).Show();
     }
     #endregion
@@ -48,15 +54,17 @@ public class MetaUIManager : AbstractUIManager
     {
         switch (invoke.SwitcherButtonType)
         {
-            case SwitcherButtonType.UnknowOne:
+            case SwitcherButtonType.Shop:
+                EnterShopPanel();
                 break;
-            case SwitcherButtonType.Upgrade:
-                EnterUpgradePanel();
+            case SwitcherButtonType.PlayerUpgrade:
+                EnterPlayerUpgradePanel();
                 break;
             case SwitcherButtonType.Battle:
                 EnterStartBattlePanel();
                 break;
-            case SwitcherButtonType.UnknowTwo:
+            case SwitcherButtonType.CastleUpgrade:
+                EnterCastleUpgradePanel();
                 break;
             case SwitcherButtonType.UnknowThree:
                 break;
@@ -67,5 +75,5 @@ public class MetaUIManager : AbstractUIManager
     private void OnDestroy()
     {
         Unsubscribe();
-    }
+    }    
 }
