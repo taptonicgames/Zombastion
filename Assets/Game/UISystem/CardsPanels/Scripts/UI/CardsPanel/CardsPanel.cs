@@ -20,7 +20,7 @@ public class CardsPanel : BasePanel
     private Sequence _sequence;
     private float _duration = 0.25f;
 
-    public override PanelType PanelType => PanelType.Upgrade;
+    public override PanelType PanelType => PanelType.BattleUpgrade;
 
     public event Action PickCardsCompleted;
 
