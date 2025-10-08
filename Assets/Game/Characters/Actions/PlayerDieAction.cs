@@ -1,8 +1,8 @@
-public class UnitDieAction : AbstractUnitAction
+public class PlayerDieAction : AbstractUnitAction
 {
     private RagdollHandler ragdollHandler;
 
-    public UnitDieAction(AbstractUnit unit)
+    public PlayerDieAction(AbstractUnit unit)
         : base(unit)
     {
         ragdollHandler = unit.GetComponent<RagdollHandler>();

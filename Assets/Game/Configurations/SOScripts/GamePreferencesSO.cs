@@ -19,4 +19,6 @@ public struct GamePreferences
     [Header("Enemies")]
     public int totalEnemiesAmount;
     public float enemySpawnDelay;
+    [Header("Round")]
+    public int pointsAmountToCompleteRound;
 }

@@ -162,7 +162,7 @@ public class PlayerAttackAction : AbstractUnitAction
         }
         else
         {
-            playerCharacterModel.Experience += ((AbstractEnemy)targetUnit).ExperienceForDestroy;
+            playerCharacterModel.Experience.Value += ((AbstractEnemy)targetUnit).ExperienceForDestroy;
             unit.SetActionTypeForced(UnitActionType.Idler);
         }
     }
