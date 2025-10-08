@@ -12,10 +12,17 @@ public class Bow : AbstractWeapon
 
         base.Fire(shootingUnit, targetUnit);
 
-        cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(
-            shootingUnit.destroyCancellationToken,
-            targetUnit.destroyCancellationToken
-        );
+        if (targetUnit)
+        {
+            cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(
+                shootingUnit.destroyCancellationToken,
+                targetUnit.destroyCancellationToken
+            );
+        }
+        else
+            cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(
+                shootingUnit.destroyCancellationToken
+            );
 
         Shoot().Forget();
     }

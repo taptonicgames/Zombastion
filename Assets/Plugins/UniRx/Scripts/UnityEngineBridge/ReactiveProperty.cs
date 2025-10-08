@@ -245,7 +245,12 @@ namespace UniRx
         {
             return false;
         }
-    }
+
+		public void Subscribe(object onPlayerExpChanged)
+		{
+			throw new NotImplementedException();
+		}
+	}
 
     /// <summary>
     /// Lightweight property broker.

@@ -3,20 +3,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySO", menuName = "ScriptableObjects/EnemySO")]
 public class EnemySO : ScriptableObject, IGetAttackSOParameters
 {
-    [SerializeField]
-    private float speed;
+    [field: SerializeField]
+    public int Damage { get; private set; }
 
-    [SerializeField]
-    private int shootDamage;
+    [field: SerializeField]
+    public float ShootDelay { get; private set; }
 
-    [SerializeField]
-    private float shootDelay;
+    [field: SerializeField]
+    public float Speed { get; private set; }
 
-    [SerializeField]
-    private int health;
+    [field: SerializeField]
+    public int Health { get; private set; }
 
-    public int ShootDamage => shootDamage;
-    public float ShootDelay => shootDelay;
-    public float Speed => speed;
-    public int Health => health;
+    [field: SerializeField]
+    public int ExperienceForDestroy { get; private set; }
 }

@@ -19,9 +19,6 @@ public struct GamePreferences
     [Header("Enemies")]
     public int totalEnemiesAmount;
     public float enemySpawnDelay;
-
-    [Space(10), Header("Opening the panel at the level")]
-    public int OpenPlayerUpgradePanelAtLevel;
-    public int OpenShopPanelAtLevel;
-    public int OpenCastleUpgradePanelAtLevel;
+    [Header("Round")]
+    public int pointsAmountToCompleteRound;
 }
