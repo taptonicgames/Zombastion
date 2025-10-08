@@ -12,14 +12,22 @@ public abstract class AbstractWeapon : MonoBehaviour
         inReload;
 	protected AbstractUnit shootingUnit;
 	protected float angleToTarget;
-    protected AbstractUnit targetUnit;
+	protected AbstractUnit targetUnit;
+	protected Transform targetTr;
 
-    public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
+	public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
         inFire = true;
         this.targetUnit = targetUnit;
         this.shootingUnit = shootingUnit;
     }
+
+    public virtual void Fire(AbstractUnit shootingUnit, Transform targetTr)
+    {
+		inFire = true;
+		this.targetTr = targetTr;
+		this.shootingUnit = shootingUnit;
+	}
 
     public virtual void StopFire()
     {
@@ -47,14 +55,14 @@ public abstract class AbstractWeapon : MonoBehaviour
                 360
             );
         }
-    }
+	}
 
     public int CalculateDamage()
     {
         var damage =
             shootingUnit is AbstractPlayerUnit
                 ? WeaponSOData.ShootDamage * ((AbstractPlayerUnit)shootingUnit).GetPlayerDamage()
-                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().ShootDamage;
+                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().Damage;
 
         return damage;
     }
