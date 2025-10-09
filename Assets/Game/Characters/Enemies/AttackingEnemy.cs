@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class AttackingEnemy : AbstractEnemy
 {
-    [SerializeField] private AbstractWeapon zombieWeapon;
+    [SerializeField]
+    private AbstractWeapon zombieWeapon;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class AttackingEnemy : AbstractEnemy
             new ZombieAttackAction(this),
             new ZombieMoveAction(this),
             new UnitIdleAction(this),
+            new UnitPauseAction(this),
         };
 
         foreach (var item in unitActionsList)
@@ -25,8 +27,8 @@ public class AttackingEnemy : AbstractEnemy
         SetActionTypeForced(UnitActionType.Move);
     }
 
-	public override Type GetDamageRecieverType()
-	{
-		return typeof(AttackingEnemy);
-	}
+    public override Type GetDamageRecieverType()
+    {
+        return typeof(AttackingEnemy);
+    }
 }

@@ -1,18 +1,27 @@
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardsPanel : BasePanel
+public class CardsPanel : AbstractPanel
 {
-    [SerializeField] private Transform _tittle;
-    [SerializeField] private Card[] _cards;
-    [SerializeField] private Image _fadeImage;
+    [SerializeField]
+    private Transform _tittle;
+
+    [SerializeField]
+    private Card[] _cards;
+
+    [SerializeField]
+    private Image _fadeImage;
 
     [Space(20)]
-    [SerializeField] private GridLayoutGroup _gridLayoutGroup;
-    [SerializeField] private ContentSizeFitter _contentSizeFitter;
+    [SerializeField]
+    private GridLayoutGroup _gridLayoutGroup;
+
+    [SerializeField]
+    private ContentSizeFitter _contentSizeFitter;
 
     private BattleUpgradeStorage _battleUpgradeStorage;
     private BattleUpgradeConfigsPack _upgradeConfigsPack;
@@ -20,12 +29,24 @@ public class CardsPanel : BasePanel
     private Sequence _sequence;
     private float _duration = 0.25f;
 
-    public override PanelType PanelType => PanelType.BattleUpgrade;
+    public override PanelType Type => PanelType.BattleUpgrade;
 
     public event Action PickCardsCompleted;
 
-    public void Init(BattleUpgradeConfigsPack upgradeConfigsPack, BattleUpgradeHandler battleUpgradeHandler,
-        BattleUpgradeStorage battleUpgradeStorage)
+    public override void Init(object[] arr)
+    {
+        Init(
+            (BattleUpgradeConfigsPack)arr[0],
+            (BattleUpgradeHandler)arr[1],
+            (BattleUpgradeStorage)arr[2]
+        );
+    }
+
+    public void Init(
+        BattleUpgradeConfigsPack upgradeConfigsPack,
+        BattleUpgradeHandler battleUpgradeHandler,
+        BattleUpgradeStorage battleUpgradeStorage
+    )
     {
         _upgradeConfigsPack = upgradeConfigsPack;
         _battleUpgradeStorage = battleUpgradeStorage;
@@ -62,10 +83,14 @@ public class CardsPanel : BasePanel
         {
             if (i == cards.Count - 1)
             {
-                cards[i].OnCardPicked(() =>
-                {
-                    EndAnimation();
-                }, delay * (i + 1));
+                cards[i]
+                    .OnCardPicked(
+                        () =>
+                        {
+                            EndAnimation();
+                        },
+                        delay * (i + 1)
+                    );
             }
             else
             {
@@ -78,7 +103,6 @@ public class CardsPanel : BasePanel
     {
         PickCardsCompleted?.Invoke();
 
-
         for (int i = 0; i < _cards.Length; i++)
             _cards[i].gameObject.SetActive(false);
 
@@ -87,32 +111,32 @@ public class CardsPanel : BasePanel
     }
     #endregion
 
-    public override void Show()
-    {
-        base.Show();
+    //public void Show()
+    //{
+    //    base.Show();
 
-        if (_fadeImage != null)
-        {
-            Color fadeColor = _fadeImage.color;
-            fadeColor.a = 0f;
-            _fadeImage.color = fadeColor;
-        }
+    //    if (_fadeImage != null)
+    //    {
+    //        Color fadeColor = _fadeImage.color;
+    //        fadeColor.a = 0f;
+    //        _fadeImage.color = fadeColor;
+    //    }
 
-        for (int i = 0; i < _cards.Length; i++)
-        {
-            var upgrade = _battleUpgradeStorage.GetBattleUpgrade();
-            _cards[i].gameObject.SetActive(true);
-            _cards[i].Show(upgrade, _battleUpgradeStorage, _upgradeConfigsPack);
-        }
+    //    for (int i = 0; i < _cards.Length; i++)
+    //    {
+    //        var upgrade = _battleUpgradeStorage.GetBattleUpgrade();
+    //        _cards[i].gameObject.SetActive(true);
+    //        _cards[i].Show(upgrade, _battleUpgradeStorage, _upgradeConfigsPack);
+    //    }
 
-        AnimateShow();
-    }
+    //    AnimateShow();
+    //}
 
-    public override void Hide()
-    {
-        base.Hide();
-        _battleUpgradeStorage.ResetList();
-    }
+    //public void Hide()
+    //{
+    //    base.Hide();
+    //    _battleUpgradeStorage.ResetList();
+    //}
 
     public void ResetUpgrades()
     {
@@ -122,6 +146,19 @@ public class CardsPanel : BasePanel
     public List<BattleUpgradeConfig> GetUpgrades()
     {
         return _upgrades;
+    }
+
+    public override UniTask OnShow()
+    {
+        AnimateShow();
+        return base.OnShow();
+    }
+
+    public override UniTask OnHide()
+    {
+        _battleUpgradeStorage.ResetList();
+        ResetUpgrades();
+        return base.OnHide();
     }
 
     private void AnimateShow()
@@ -152,12 +189,18 @@ public class CardsPanel : BasePanel
 
             int cardIndex = i;
 
-            _sequence.InsertCallback(_duration + startDelay, () =>
-            {
-                _cards[cardIndex].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
-            });
+            _sequence.InsertCallback(
+                _duration + startDelay,
+                () =>
+                {
+                    _cards[cardIndex].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                }
+            );
 
-            _sequence.Insert(_duration + startDelay, _cards[i].transform.DOScale(Vector3.one, _duration).SetEase(Ease.OutBack));
+            _sequence.Insert(
+                _duration + startDelay,
+                _cards[i].transform.DOScale(Vector3.one, _duration).SetEase(Ease.OutBack)
+            );
         }
 
         float totalDuration = _duration + (_cards.Length - 1) * cardDelay + _duration;

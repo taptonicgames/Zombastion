@@ -14,7 +14,12 @@ public class PlayerCharacter : AbstractPlayerUnit
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
 
-    private void Start()
+	private void Awake()
+	{
+        Init();
+	}
+
+	private void Start()
     {
         animator = GetComponent<Animator>();
         weapon = weapons.First();
@@ -30,6 +35,7 @@ public class PlayerCharacter : AbstractPlayerUnit
 
         unitActionsList = new()
         {
+            new UnitPauseAction(this),
             new PlayerDieAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
@@ -61,8 +67,8 @@ public class PlayerCharacter : AbstractPlayerUnit
             UnitAction.Update();
     }
 
-	public override Type GetDamageRecieverType()
-	{
-		return typeof(PlayerCharacter);
-	}
+    public override Type GetDamageRecieverType()
+    {
+        return typeof(PlayerCharacter);
+    }
 }

@@ -79,7 +79,22 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
         set => health = Mathf.Clamp(health + value, 0, 100);
     }
 
-    public virtual void Init() { }
+    public virtual void Init()
+    {
+        EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+    }
+
+    private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
+    {
+        StartCoroutine(SetPauseCoroutine());
+    }
+
+    private IEnumerator SetPauseCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (unitActionType != UnitActionType.Die)
+            SetActionTypeForced(UnitActionType.Pause);
+    }
 
     protected virtual void Update()
     {
@@ -173,7 +188,10 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
             OnUnitDied();
     }
 
-    public virtual void OnUnitDied() { isEnable = false; }
+    public virtual void OnUnitDied()
+    {
+        isEnable = false;
+    }
 
     public virtual T GetUnitAbility<T>(AbilityType type)
         where T : AbstractUnitAbility

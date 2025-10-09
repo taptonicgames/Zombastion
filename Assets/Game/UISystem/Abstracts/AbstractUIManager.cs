@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AbstractUIManager : MonoBehaviour
 {
-    [SerializeField] private List<AbstractPanel> Panels;
+    [SerializeField] protected List<AbstractPanel> Panels;
 
     public virtual void Init()
     {

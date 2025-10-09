@@ -16,6 +16,7 @@ public abstract class AbstractEnemy : AbstractUnit
 
     public override void Init()
     {
+        base.Init();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }

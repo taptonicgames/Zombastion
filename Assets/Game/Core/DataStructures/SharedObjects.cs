@@ -9,6 +9,7 @@ public struct SharedObjects
     [SerializeField]
     private List<IDGameObjectData> idGameObjectDatasList;
     [SerializeField] private List<IDSpriteData> idSpriteDatasList;
+    [field: SerializeField] public BattleUpgradeConfigsPack BattleUpgradeConfigsPack { get; set; }
 
 	public GameObject GetPrefab(string id)
     {
