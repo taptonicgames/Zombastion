@@ -9,23 +9,7 @@ public class BattleUpgradeStorage
 
     public Dictionary<BattleUpgradeType, int> Upgrades = new Dictionary<BattleUpgradeType, int>()
     {
-        {BattleUpgradeType.PlayerSpeed, 0},
-        {BattleUpgradeType.PlayerDamage, 0},
-        {BattleUpgradeType.ChainsawSize, 0},
-        {BattleUpgradeType.AddTime, 0},
-        {BattleUpgradeType.MeteoriteRain, 0},
-        {BattleUpgradeType.FlyindSpheres, 0},
-        {BattleUpgradeType.CoinsModifier, 0},
-        {BattleUpgradeType.EnemiesSlowDown, 0},
-        {BattleUpgradeType.ShieldWall, 0},
-        {BattleUpgradeType.DoublePistols, 0},
-        {BattleUpgradeType.BulletRicochet, 0},
-        {BattleUpgradeType.Grenades, 0},
-        {BattleUpgradeType.LightningStrike, 0},
-        {BattleUpgradeType.AddChainsaw, 0},
-        {BattleUpgradeType.Axes, 0},
-        {BattleUpgradeType.HealPlayer, 0},
-        {BattleUpgradeType.IncreaseBag, 0},
+        {BattleUpgradeType.TowerBuild, 0},
     };
 
     public BattleUpgradeStorage(BattleUpgradeConfigsPack upgradesPack)

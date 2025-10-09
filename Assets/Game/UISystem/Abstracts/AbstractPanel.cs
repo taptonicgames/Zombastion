@@ -10,7 +10,8 @@ public abstract class AbstractPanel : MonoBehaviour
 
     public bool IsShown { get; protected set; } = true;
 
-	public abstract void Init();
+	public virtual void Init() { }
+    public virtual void Init(object[] arr) { }
 
     public async void Show(Action callback = null)
     {

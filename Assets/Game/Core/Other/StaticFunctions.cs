@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -42,5 +45,13 @@ public static class StaticFunctions
         transform.DORotate(transform.eulerAngles + angle, duration);
     }
 
-	
+    public static async void InvokeActionDelay(
+        Action action,
+        float delay,
+        CancellationToken cancellationToken
+    )
+    {
+        await UniTask.WaitForSeconds(delay, cancellationToken: cancellationToken);
+        action?.Invoke();
+    }
 }

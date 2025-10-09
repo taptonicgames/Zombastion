@@ -6,6 +6,7 @@ using UnityEngine;
 public class BattleUpgradeHandler
 {
     private BattleUpgradeStorage _battleUpgradeStorage;
+
     //private Player _player;
     //private LevelTimer _levelTimer;
     //private LevelEnvironment _levelEnvironment;
@@ -14,10 +15,10 @@ public class BattleUpgradeHandler
     public event Action<BattleUpgradeConfig> UpgradeGeted;
 
     public BattleUpgradeHandler(BattleUpgradeStorage battleUpgradeStorage)
-        //Player player,
-        //LevelTimer levelTimer,
-        //LevelEnvironment levelEnvironment, 
-        //UIHandler uIHandler)
+    //Player player,
+    //LevelTimer levelTimer,
+    //LevelEnvironment levelEnvironment,
+    //UIHandler uIHandler)
     {
         _battleUpgradeStorage = battleUpgradeStorage;
         //_player = player;
@@ -46,24 +47,9 @@ public class BattleUpgradeHandler
     {
         return upgrade.UpgradeType switch
         {
-            BattleUpgradeType.PlayerSpeed => SetSpeedUpgrade,
-            BattleUpgradeType.PlayerDamage => SetDamageUpgrade,
-            BattleUpgradeType.ChainsawSize => SetWeaponSizeUpgrade,
-            BattleUpgradeType.AddTime => SetAddTimeUpgrade,
-            BattleUpgradeType.MeteoriteRain => SetMeteoriteRain,
-            BattleUpgradeType.FlyindSpheres => SetFlyingSpheres,
-            BattleUpgradeType.CoinsModifier => SetBonusRewardUpgrade,
-            BattleUpgradeType.EnemiesSlowDown => SetSlowDawnEnemies,
-            BattleUpgradeType.ShieldWall => SetShieldUpgrade,
-            BattleUpgradeType.DoublePistols => SetDoubleWeaponUpgrade,
-            BattleUpgradeType.BulletRicochet => SetRicochetUpgrade,
-            BattleUpgradeType.Grenades => SetGrenadesUpgrade,
-            BattleUpgradeType.LightningStrike => SetLightningStrikes,
-            BattleUpgradeType.AddChainsaw => SetAddChainsaw,
-            BattleUpgradeType.Axes => SetAxesUpgrade,
-            BattleUpgradeType.HealPlayer => SetHealPlayer,
-            BattleUpgradeType.IncreaseBag => SetIncreaseBag,
-            _ => Exception
+            BattleUpgradeType.TowerBuild => SetSpeedUpgrade,
+
+            _ => Exception,
         };
     }
 
@@ -142,7 +128,7 @@ public class BattleUpgradeHandler
     {
         //_player.ActivateAxes(upgrade.Value);
     }
-    
+
     private void SetHealPlayer(BattleUpgradeConfig upgrade)
     {
         //_player.Heal(upgrade.Value);

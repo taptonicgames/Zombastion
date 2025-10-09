@@ -6,4 +6,5 @@ public enum UnitActionType
 	Attack,
 	Die,
 	Heal,
+	Pause,
 }
