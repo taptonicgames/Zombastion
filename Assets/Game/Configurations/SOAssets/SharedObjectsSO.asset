@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f51b4acf87900a6661f519e0c1ddd344dbb90ddff1dc0c13ee1c173dd71a1a15
-size 1363
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccddac04ce5ea1d48b448d378390f111, type: 3}
+  m_Name: SharedObjectsSO
+  m_EditorClassIdentifier: 
+  sharedObjects:
+    idGameObjectDatasList:
+    - id: Bullet
+      gameObject: {fileID: 1077143465587837135, guid: 58ecc8c3ce7ae8d40bb9777badd51ebe,
+        type: 3}
+    - id: SimpleZombie
+      gameObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
+        type: 3}
+    - id: ArcherZombie
+      gameObject: {fileID: 3653259963446982085, guid: 11c347651585b26439074912c598bc22,
+        type: 3}
+    - id: MetaUIManager
+      gameObject: {fileID: 586827116499440533, guid: d8ce749cf6d1d3141a4405613956f796,
+        type: 3}
+    - id: CardsPanelBattle
+      gameObject: {fileID: 1301493995764169750, guid: bc85e901243917c40b08387312f3dcd5,
+        type: 3}
+    - id: RawPlayerView
+      gameObject: {fileID: 4517678756419641942, guid: b85e09c93f8c7e44cac7dda6898cb8be,
+        type: 3}
+    idSpriteDatasList: []
+    <BattleUpgradeConfigsPack>k__BackingField: {fileID: 11400000, guid: f6eb19e054acbdb47b66705ee770444d,
+      type: 2}
