@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class RawPlayerView : MonoBehaviour
 {
     [SerializeField] private Transform viewer;
     [SerializeField] private float speed;
+    [SerializeField] private Transform[] models; // test
 
     private bool isRotateActive;
     private Vector3 defaultRotate;
@@ -18,12 +20,18 @@ public class RawPlayerView : MonoBehaviour
         viewer.transform.localEulerAngles = defaultRotate;
     }
 
-    #region event trigger
+    public void ChangePlayerModel(int indexPlayerModel)
+    {
+        foreach (var model in models)
+            model.gameObject.SetActive(false);
+
+        models[indexPlayerModel].gameObject.SetActive(true);
+    }
+
     public void ChangeRotateActiveState(bool isActive)
     {
         isRotateActive = isActive;
     }
-    #endregion
 
     private void Update()
     {
@@ -33,4 +41,5 @@ public class RawPlayerView : MonoBehaviour
         float axisRotationX = Input.GetAxis("Mouse X");
         viewer.transform.Rotate(Vector3.up * -axisRotationX * speed * Time.deltaTime);
     }
+
 }

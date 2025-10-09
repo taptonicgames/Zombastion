@@ -2334,7 +2334,7 @@ GameObject:
   - component: {fileID: 2716906744927588118}
   - component: {fileID: 559403167080914157}
   m_Layer: 0
-  m_Name: EquipItemPopup
+  m_Name: ClothItemPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

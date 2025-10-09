@@ -32,6 +32,8 @@ public class PlayerSkillsTreePopup : AbstractPopup
                 counter++;
             }
         }
+
+        ForceHide();
     }
 
     public override void Show(Action callback = null)

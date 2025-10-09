@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7102773509220870096}
   - component: {fileID: 3524986175518316997}
   m_Layer: 5
-  m_Name: SwitchButtons
+  m_Name: SwitchInsertsButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

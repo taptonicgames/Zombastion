@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4695654880745910915}
   - component: {fileID: 496335952792189592}
   m_Layer: 0
-  m_Name: SkillsButtonPopup
+  m_Name: LevelSkillPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,7 +10,6 @@ public class PlayerUpgradesPanel : AbstractPanel
 {
     [SerializeField] private ClothItemsContainer equipedClothItemsContainer;
     [SerializeField] private PlayerItemsBag playerItemsBag;
-    [SerializeField] private RawPlayerView rawPlayerView;
 
     [Space(10), Header("Popups")]
     [SerializeField] private ClothItemPopup clothItemPopup;
@@ -26,20 +25,24 @@ public class PlayerUpgradesPanel : AbstractPanel
     [SerializeField] private Vector2 portretOrientationRawPosition;
     [SerializeField] private Vector2 albumOrientationRawPosition;
 
+    private RawPlayerView rawPlayerView;
+    
     [Inject] private EquipmentPackSO equipmentPackSO;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
     public override void Init()
     {
+        rawPlayerView = GetComponentInParent<MetaUIManager>().GetComponentInChildren<RawPlayerView>();
+
         List<EquipmentData> datas = GetDatas();
 
         equipedClothItemsContainer.Init(datas);
         playerItemsBag.Init();
-        skillsTreePopup.Init(null);
 
-        clothItemPopup.ForceHide();
-        skillsTreePopup.ForceHide();
+        skillsTreePopup.Init(null);
+        levelSkillPopup.Init(null);
+
         rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
 
         Subscribe();
@@ -75,9 +78,14 @@ public class PlayerUpgradesPanel : AbstractPanel
             clothItemPopup.ForceHide();
         if (skillsTreePopup.IsShowed)
             skillsTreePopup.ForceHide();
-        if (levelSkillPopup.IsShowed)
-            levelSkillPopup.ForceHide();
     }
+
+    #region event trigger
+    public void ChangeRotateActiveState(bool isActive)
+    {
+        rawPlayerView.ChangeRotateActiveState(isActive);
+    }
+    #endregion
 
     #region Events
     private void Subscribe()
@@ -96,7 +104,8 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private void OnChangeCharacterButtonClicked()
     {
-        //TODO: open change character popup logic
+        EventBus<OpenPanelEvnt>.Publish(
+            new OpenPanelEvnt() { type = PanelType.ChangePlayerCharacter });
     }
 
     private void OnClothItemClicked(ClothItemView item)

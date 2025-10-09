@@ -1,4 +1,7 @@
-﻿public class MetaUIManager : AbstractUIManager
+﻿using System;
+using Zenject;
+
+public class MetaUIManager : AbstractUIManager
 {
     public override void Init()
     {
@@ -6,7 +9,7 @@
 
         EnterStartBattlePanel();
 
-        Subscribe();
+        Subscribe();    
     }
 
     #region Enters
@@ -37,36 +40,45 @@
         GetPanel(PanelType.CastleUpgrades).Show();
         GetPanel(PanelType.Switcher).Show();
     }
+
+    private void EnterChangePlayerPanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.ChangePlayerCharacter).Show();
+    }
     #endregion
 
     #region Events
     private void Subscribe()
     {
-        EventBus<SwitcherPanelEventInvoker>.Subscribe(SwitchInvoke);
+        EventBus<OpenPanelEvnt>.Subscribe(SwitchInvoke);
     }
 
     private void Unsubscribe()
     {
-        EventBus<SwitcherPanelEventInvoker>.Unsubscribe(SwitchInvoke);
+        EventBus<OpenPanelEvnt>.Unsubscribe(SwitchInvoke);
     }
 
-    private void SwitchInvoke(SwitcherPanelEventInvoker invoke)
+    private void SwitchInvoke(OpenPanelEvnt evnt)
     {
-        switch (invoke.SwitcherButtonType)
+        switch (evnt.type)
         {
-            case SwitcherButtonType.Shop:
+            case PanelType.ShopPanel:
                 EnterShopPanel();
                 break;
-            case SwitcherButtonType.PlayerUpgrade:
+            case PanelType.PlayerUpgrades:
                 EnterPlayerUpgradePanel();
                 break;
-            case SwitcherButtonType.Battle:
+            case PanelType.Start:
                 EnterStartBattlePanel();
                 break;
-            case SwitcherButtonType.CastleUpgrade:
+            case PanelType.CastleUpgrades:
                 EnterCastleUpgradePanel();
                 break;
-            case SwitcherButtonType.UnknowThree:
+            case PanelType.None:
+                break;
+            case PanelType.ChangePlayerCharacter:
+                EnterChangePlayerPanel();
                 break;
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4695654880745910915}
   - component: {fileID: 6957528921240234889}
   m_Layer: 0
-  m_Name: SkillsTreePopup
+  m_Name: PlayerSkillsTreePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
