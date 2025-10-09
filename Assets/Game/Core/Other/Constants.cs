@@ -19,4 +19,6 @@ public static class Constants
     //SharedObjects Ids
     public const string CARDS_PANEL_BATTLE = "CardsPanelBattle";
     public const string BATTLE_UI_MANAGER = "BattleUIManager";
+    public const string META_UI_MANAGER = "MetaUIManager";
+    public const string RAW_PLAYER_VIEW = "RawPlayerView";
 }
