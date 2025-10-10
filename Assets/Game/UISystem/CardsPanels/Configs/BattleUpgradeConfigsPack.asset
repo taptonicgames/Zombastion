@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:28b52ec4637e830be27c20d767a2f5684375b647fb7608abce39ba0e1e11386c
-size 1213
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb7f53671701644d9d97aa725d15ea6, type: 3}
+  m_Name: BattleUpgradeConfigsPack
+  m_EditorClassIdentifier: 
+  <Configs>k__BackingField:
+  - {fileID: 11400000, guid: e59d3e0610ab27b4aaf2136493d37389, type: 2}
+  <CommonGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <CommonGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <RareGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <RareGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <EpicGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <EpicGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <LegendGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <LegendGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}

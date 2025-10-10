@@ -171,7 +171,7 @@ public class PlayerAttackAction : AbstractUnitAction
     {
         unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
-        thirdPersonController.EnablePersonRotation = true;
+		thirdPersonController.EnablePersonRotation = true;
         thirdPersonController.EnablePersonAnimation = true;
         angleToEnemy = 360f;
         targetUnit = null;

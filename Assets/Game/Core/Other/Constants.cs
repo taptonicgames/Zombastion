@@ -21,4 +21,5 @@ public static class Constants
     public const string BATTLE_UI_MANAGER = "BattleUIManager";
     public const string META_UI_MANAGER = "MetaUIManager";
     public const string RAW_PLAYER_VIEW = "RawPlayerView";
+    public const string BATTLE_UPGRADE_CONFIG_PACK = "BattleUpgradeConfigsPack";
 }
