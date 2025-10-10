@@ -4,14 +4,23 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class CardsPanel : AbstractPanel
 {
+    [Inject]
+    private readonly SharedObjects sharedObjects;
+
+    [Inject]
+    private BattleUIManager battleUIManager;
+
     [SerializeField]
     private Transform _tittle;
 
     [SerializeField]
-    private Card[] _cards;
+    private Transform container;
+    private BattleUpgradeConfig[] upgradeConfigs;
+    private List<Card> cards = new();
 
     [SerializeField]
     private Image _fadeImage;
@@ -23,11 +32,11 @@ public class CardsPanel : AbstractPanel
     [SerializeField]
     private ContentSizeFitter _contentSizeFitter;
 
-    private BattleUpgradeStorage _battleUpgradeStorage;
-    private BattleUpgradeConfigsPack _upgradeConfigsPack;
-    private List<BattleUpgradeConfig> _upgrades = new List<BattleUpgradeConfig>();
-    private Sequence _sequence;
-    private float _duration = 0.25f;
+    private BattleUpgradeStorage battleUpgradeStorage;
+    private BattleUpgradeConfigsPack upgradeConfigsPack;
+    private List<BattleUpgradeConfig> upgrades = new List<BattleUpgradeConfig>();
+    private Sequence sequence;
+    private float duration = 0.25f;
 
     public override PanelType Type => PanelType.BattleUpgrade;
 
@@ -35,11 +44,30 @@ public class CardsPanel : AbstractPanel
 
     public override void Init(object[] arr)
     {
-        Init(
-            (BattleUpgradeConfigsPack)arr[0],
-            (BattleUpgradeHandler)arr[1],
-            (BattleUpgradeStorage)arr[2]
-        );
+        upgradeConfigsPack = (BattleUpgradeConfigsPack)arr[0];
+        battleUpgradeStorage = (BattleUpgradeStorage)arr[1];
+        upgradeConfigs = (BattleUpgradeConfig[])arr[2];
+        CreateCard();
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].Init();
+            cards[i].ButtonClicked += OnCardPicked;
+        }
+    }
+
+    private void CreateCard()
+    {
+        foreach (var config in upgradeConfigs)
+        {
+            var card = sharedObjects.InstantiateAndGetObject<Card>(
+                Constants.UPGRADE_CARD,
+                container
+            );
+
+            card.Show(config, battleUpgradeStorage, upgradeConfigsPack);
+            cards.Add(card);
+        }
     }
 
     public void Init(
@@ -48,25 +76,19 @@ public class CardsPanel : AbstractPanel
         BattleUpgradeStorage battleUpgradeStorage
     )
     {
-        _upgradeConfigsPack = upgradeConfigsPack;
-        _battleUpgradeStorage = battleUpgradeStorage;
-
-        for (int i = 0; i < _cards.Length; i++)
-        {
-            _cards[i].Init();
-            _cards[i].ButtonClicked += OnCardPicked;
-        }
+        this.upgradeConfigsPack = upgradeConfigsPack;
+        this.battleUpgradeStorage = battleUpgradeStorage;
     }
 
     #region Card picked
     private void OnCardPicked(Card card)
     {
-        foreach (var item in _cards)
+        foreach (var item in this.cards)
         {
             item.SetInteractable(false);
 
             if (item == card)
-                _upgrades.Add(card.CurrentUpgrade);
+                upgrades.Add(card.CurrentUpgrade);
         }
 
         List<Card> cards = new List<Card>();
@@ -103,8 +125,8 @@ public class CardsPanel : AbstractPanel
     {
         PickCardsCompleted?.Invoke();
 
-        for (int i = 0; i < _cards.Length; i++)
-            _cards[i].gameObject.SetActive(false);
+        for (int i = 0; i < cards.Count; i++)
+            cards[i].gameObject.SetActive(false);
 
         _gridLayoutGroup.enabled = true;
         _contentSizeFitter.enabled = true;
@@ -140,12 +162,14 @@ public class CardsPanel : AbstractPanel
 
     public void ResetUpgrades()
     {
-        _upgrades.Clear();
+        upgrades.Clear();
+        battleUIManager.ClearContainer(container);
+        cards.Clear();
     }
 
     public List<BattleUpgradeConfig> GetUpgrades()
     {
-        return _upgrades;
+        return upgrades;
     }
 
     public override UniTask OnShow()
@@ -156,7 +180,9 @@ public class CardsPanel : AbstractPanel
 
     public override UniTask OnHide()
     {
-        _battleUpgradeStorage.ResetList();
+        if (battleUpgradeStorage != null)
+            battleUpgradeStorage.ResetList();
+
         ResetUpgrades();
         return base.OnHide();
     }
@@ -165,56 +191,56 @@ public class CardsPanel : AbstractPanel
     {
         _tittle.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
-        for (int i = 0; i < _cards.Length; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
-            _cards[i].transform.localScale = Vector3.zero;
+            cards[i].transform.localScale = Vector3.zero;
         }
 
-        _sequence.Kill();
-        _sequence = DOTween.Sequence();
-        _sequence.SetUpdate(true);
+        sequence.Kill();
+        sequence = DOTween.Sequence();
+        sequence.SetUpdate(true);
 
         if (_fadeImage != null)
         {
-            _sequence.Join(_fadeImage.DOFade(0.5f, _duration).SetEase(Ease.InOutQuad));
+            sequence.Join(_fadeImage.DOFade(0.5f, duration).SetEase(Ease.InOutQuad));
         }
 
-        _sequence.Append(_tittle.transform.DOScale(Vector3.one, _duration).SetEase(Ease.OutBack));
+        sequence.Append(_tittle.transform.DOScale(Vector3.one, duration).SetEase(Ease.OutBack));
 
         float cardDelay = 0.1f;
 
-        for (int i = 0; i < _cards.Length; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
             float startDelay = cardDelay * i;
 
             int cardIndex = i;
 
-            _sequence.InsertCallback(
-                _duration + startDelay,
+            sequence.InsertCallback(
+                duration + startDelay,
                 () =>
                 {
-                    _cards[cardIndex].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    cards[cardIndex].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 }
             );
 
-            _sequence.Insert(
-                _duration + startDelay,
-                _cards[i].transform.DOScale(Vector3.one, _duration).SetEase(Ease.OutBack)
+            sequence.Insert(
+                duration + startDelay,
+                cards[i].transform.DOScale(Vector3.one, duration).SetEase(Ease.OutBack)
             );
         }
 
-        float totalDuration = _duration + (_cards.Length - 1) * cardDelay + _duration;
+        float totalDuration = duration + (cards.Count - 1) * cardDelay + duration;
 
-        _sequence.OnComplete(() =>
+        sequence.OnComplete(() =>
         {
-            for (int i = 0; i < _cards.Length; i++)
-                _cards[i].SetInteractable(true);
+            for (int i = 0; i < cards.Count; i++)
+                cards[i].SetInteractable(true);
         });
     }
 
     private void OnDestroy()
     {
-        for (int i = 0; i < _cards.Length; i++)
-            _cards[i].ButtonClicked -= OnCardPicked;
+        for (int i = 0; i < cards.Count; i++)
+            cards[i].ButtonClicked -= OnCardPicked;
     }
 }

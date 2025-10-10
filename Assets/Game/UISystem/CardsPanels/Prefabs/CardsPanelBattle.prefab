@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Panel: {fileID: 6216899322981005771}
   _tittle: {fileID: 5599022011283658167}
-  _cards: []
+  container: {fileID: 1890962334791375716}
   _fadeImage: {fileID: 4612460295985559006}
   _gridLayoutGroup: {fileID: 889108378013313939}
   _contentSizeFitter: {fileID: 322901994053975927}

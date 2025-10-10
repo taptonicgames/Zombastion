@@ -35,6 +35,9 @@ MonoBehaviour:
     - id: RawPlayerView
       gameObject: {fileID: 4517678756419641942, guid: b85e09c93f8c7e44cac7dda6898cb8be,
         type: 3}
+    - id: UpgradeCard
+      gameObject: {fileID: 8572638089914189796, guid: 25356c5d01d0db14a82398e496303022,
+        type: 3}
     idSpriteDatasList: []
     idScriptableObjectDatasList:
     - id: BattleUpgradeConfigsPack

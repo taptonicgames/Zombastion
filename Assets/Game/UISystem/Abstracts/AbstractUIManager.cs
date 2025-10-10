@@ -22,4 +22,12 @@ public abstract class AbstractUIManager : MonoBehaviour
         foreach (var panel in Panels)
             panel.Hide();
     }
+
+    public void ClearContainer(Transform container)
+    {
+        foreach (Transform item in container)
+        {
+            Destroy(item.gameObject);
+        }
+    }
 }
