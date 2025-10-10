@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -125,6 +126,10 @@ public class CardsPanel : AbstractPanel
     private void EndAnimation()
     {
         PickCardsCompleted?.Invoke();
+
+        EventBus<UpgradeChoosenEvnt>.Publish(
+            new() { type = upgradeConfigs.First().UpgradeType, config = upgradeConfigs.First() }
+        );
 
         for (int i = 0; i < cards.Count; i++)
             cards[i].gameObject.SetActive(false);

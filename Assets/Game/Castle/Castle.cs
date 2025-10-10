@@ -6,6 +6,9 @@ public class Castle : MonoBehaviour, IColliderHelper
     [SerializeField]
     private CastleSO SOData;
 
+    [SerializeField]
+    private Transform towersFolder;
+
     [field: SerializeField]
     public Transform Gates { get; private set; }
 
@@ -21,6 +24,13 @@ public class Castle : MonoBehaviour, IColliderHelper
     {
         Health = SOData.Health;
         defaultGatesPos = Gates.position;
+        EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+    }
+
+    private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
+    {
+        if (evnt.type == BattleUpgradeType.TowerBuild)
+            towersFolder.gameObject.SetActive(true);
     }
 
     public void SetDamage(int damage)
@@ -34,7 +44,7 @@ public class Castle : MonoBehaviour, IColliderHelper
         if (Health == 0)
         {
             Gates.gameObject.SetActive(false);
-            EventBus<GatesFallenEvnt>.Publish(new GatesFallenEvnt());
+            EventBus<GatesFallenEvnt>.Publish(new());
         }
     }
 
@@ -60,12 +70,12 @@ public class Castle : MonoBehaviour, IColliderHelper
 
                 if (sender.name == INNER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
-                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Entered }
+                        new() { type = PlayerFindingCastleType.Entered }
                     );
 
                 if (sender.name == OUTER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
-                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Left }
+                        new() { type = PlayerFindingCastleType.Left }
                     );
 
                 inCollisionTr = null;

@@ -24,6 +24,7 @@ public class GameManager : IInitializable, IDisposable
     {
         CreateUIManager();
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
+        EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
     }
 
     private void CreateUIManager()
@@ -43,8 +44,14 @@ public class GameManager : IInitializable, IDisposable
     {
         if (value >= gamePreferences.pointsAmountToCompleteRound)
         {
-            EventBus<ExperienceReachedEvnt>.Publish(new ExperienceReachedEvnt());
+            EventBus<SetGamePauseEvnt>.Publish(new() { paused = true });
+            EventBus<ExperienceReachedEvnt>.Publish(new());
         }
+    }
+
+    private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
+    {
+        EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
     }
 
     public void Dispose()

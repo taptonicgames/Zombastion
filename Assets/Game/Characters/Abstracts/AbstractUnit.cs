@@ -81,12 +81,15 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     public virtual void Init()
     {
-        EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+        EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-    private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
+    private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
     {
-        StartCoroutine(SetPauseCoroutine());
+        if (evnt.paused)
+            StartCoroutine(SetPauseCoroutine());
+        else
+            SetActionTypeForced(UnitActionType.Idler);
     }
 
     private IEnumerator SetPauseCoroutine()
@@ -212,6 +215,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     private void OnDestroy()
     {
         ClearUnitActions();
+        EventBus<SetGamePauseEvnt>.Unsubscribe(OnSetGamePauseEvnt);
     }
 
     public virtual IEnumerator MoveToTargetCoroutine(

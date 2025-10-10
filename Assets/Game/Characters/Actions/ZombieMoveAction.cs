@@ -4,13 +4,17 @@ public class ZombieMoveAction : AbstractUnitAction
 {
     [Inject]
     private readonly SceneReferences sceneReferences;
+	[Inject]
+	private readonly UnitActionPermissionHandler unitActionPermissionHandler;
 
-    public ZombieMoveAction(AbstractUnit unit)
+	public ZombieMoveAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()
     {
-        if (unit.UnitActionType == actionType)
+		if (unit.UnitActionType != actionType && CheckCondition())
+			StartAction();
+		if (unit.UnitActionType == actionType)
             return true;
         return false;
     }
@@ -20,7 +24,15 @@ public class ZombieMoveAction : AbstractUnitAction
         actionType = UnitActionType.Move;
     }
 
-    public override void StartAction()
+    private bool CheckCondition()
+    {
+        if (!unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
+            return false;
+        return true;
+    }
+
+
+	public override void StartAction()
     {
         base.StartAction();
         unit.Agent.isStopped = false;

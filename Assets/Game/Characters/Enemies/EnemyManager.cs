@@ -19,12 +19,12 @@ public class EnemyManager : IInitializable
     public void Initialize()
     {
         FindEnemies().Forget();
-        EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+        EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-	private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
+	private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
 	{
-        pause = true;
+        pause = evnt.paused;
 	}
 
 	private async UniTask FindEnemies()

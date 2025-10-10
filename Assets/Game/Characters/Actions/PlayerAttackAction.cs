@@ -8,7 +8,7 @@ using Zenject;
 public class PlayerAttackAction : AbstractUnitAction
 {
     [Inject]
-    UnitActionPermissionHandler unitActionPermissionHandler;
+    private readonly UnitActionPermissionHandler unitActionPermissionHandler;
 
     [Inject]
     private readonly PlayerCharacterModel playerCharacterModel;
