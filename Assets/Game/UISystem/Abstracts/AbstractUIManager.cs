@@ -17,7 +17,7 @@ public abstract class AbstractUIManager : MonoBehaviour
         return Panels.First(p => p.Type == type);
     }
 
-    protected void HideAllPanels()
+    public void HideAllPanels()
     {
         foreach (var panel in Panels)
             panel.Hide();

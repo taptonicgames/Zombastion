@@ -29,9 +29,6 @@ MonoBehaviour:
     - id: BattleUIManager
       gameObject: {fileID: 586827116499440533, guid: dc54a1f6ff37abb4e917db30f7d916e8,
         type: 3}
-    - id: CardsPanelBattle
-      gameObject: {fileID: 1301493995764169750, guid: bc85e901243917c40b08387312f3dcd5,
-        type: 3}
     - id: RawPlayerView
       gameObject: {fileID: 4517678756419641942, guid: b85e09c93f8c7e44cac7dda6898cb8be,
         type: 3}

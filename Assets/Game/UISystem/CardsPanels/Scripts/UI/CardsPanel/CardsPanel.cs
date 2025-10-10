@@ -65,6 +65,7 @@ public class CardsPanel : AbstractPanel
                 container
             );
 
+            card.Init();
             card.Show(config, battleUpgradeStorage, upgradeConfigsPack);
             cards.Add(card);
         }
@@ -130,6 +131,7 @@ public class CardsPanel : AbstractPanel
 
         _gridLayoutGroup.enabled = true;
         _contentSizeFitter.enabled = true;
+        battleUIManager.HideAllPanels();
     }
     #endregion
 

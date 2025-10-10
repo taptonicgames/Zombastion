@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,9 @@ public class BattleUIManager : AbstractUIManager
 
     [Inject]
     private readonly DiContainer diContainer;
+
+    [Inject]
+    private readonly SceneReferences sceneReferences;
 
     [SerializeField]
     private GameObject[] panelPrefabs;
@@ -47,7 +51,6 @@ public class BattleUIManager : AbstractUIManager
         };
 
         panel.Init(new object[] { BattleUpgradeConfigsPack, BattleUpgradeStorage, upgradeConfigs });
-
         panel.Show();
     }
 }
