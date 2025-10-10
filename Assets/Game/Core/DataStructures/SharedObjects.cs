@@ -8,10 +8,14 @@ public struct SharedObjects
 {
     [SerializeField]
     private List<IDGameObjectData> idGameObjectDatasList;
-    [SerializeField] private List<IDSpriteData> idSpriteDatasList;
-    [field: SerializeField] public BattleUpgradeConfigsPack BattleUpgradeConfigsPack { get; set; }
 
-	public GameObject GetPrefab(string id)
+    [SerializeField]
+    private List<IDSpriteData> idSpriteDatasList;
+
+    [SerializeField]
+    private List<IDScriptableObjectData> idScriptableObjectDatasList;
+
+    public GameObject GetPrefab(string id)
     {
         var data = idGameObjectDatasList.FirstOrDefault(a => a.id == id);
 
@@ -31,16 +35,27 @@ public struct SharedObjects
         return data;
     }
 
-	public Sprite GetSprite(string id)
-	{
-		var data = idSpriteDatasList.FirstOrDefault(a => a.id == id);
+    public Sprite GetSprite(string id)
+    {
+        var data = idSpriteDatasList.FirstOrDefault(a => a.id == id);
 
-		if (data.sprite == null)
-			throw new NullReferenceException($"{id} is not present in SharedObjects");
+        if (data.sprite == null)
+            throw new NullReferenceException($"{id} is not present in SharedObjects");
 
-		return data.sprite;
-	}
+        return data.sprite;
+    }
 
-	public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
+    public T GetScriptableObject<T>(string id)
+        where T : ScriptableObject
+    {
+        var data = idScriptableObjectDatasList.FirstOrDefault(a => a.id == id);
+
+        if (data.scriptableObject == null)
+            throw new NullReferenceException($"{id} is not present in SharedObjects");
+
+        return (T)data.scriptableObject;
+    }
+
+    public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
         idGameObjectDatasList = list;
 }

@@ -8,5 +8,6 @@ public class SceneFunctionalsInstaller : MonoInstaller
 		Container.Bind<CharacterFactory>().AsTransient();
 		Container.Bind<PlayerCharacterModel>().AsSingle();
 		Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
+		Container.BindInterfacesAndSelfTo<ObjectPoolSystem>().AsSingle();
 	}
 }

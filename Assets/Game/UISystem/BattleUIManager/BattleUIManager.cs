@@ -10,10 +10,14 @@ public class BattleUIManager : AbstractUIManager
 
     public BattleUpgradeStorage BattleUpgradeStorage { get; private set; }
     public BattleUpgradeHandler BattleUpgradeHandler { get; private set; }
+    public BattleUpgradeConfigsPack BattleUpgradeConfigsPack =>
+        sharedObjects.GetScriptableObject<BattleUpgradeConfigsPack>(
+            Constants.BATTLE_UPGRADE_CONFIG_PACK
+        );
 
     public override void Init()
     {
-        BattleUpgradeStorage = new BattleUpgradeStorage(sharedObjects.BattleUpgradeConfigsPack);
+        BattleUpgradeStorage = new BattleUpgradeStorage(BattleUpgradeConfigsPack);
         BattleUpgradeHandler = new BattleUpgradeHandler(BattleUpgradeStorage);
         InitPanels();
         HideAllPanels();
@@ -29,7 +33,7 @@ public class BattleUIManager : AbstractUIManager
             panel.Init(
                 new object[]
                 {
-                    sharedObjects.BattleUpgradeConfigsPack,
+                    BattleUpgradeConfigsPack,
                     BattleUpgradeHandler,
                     BattleUpgradeStorage,
                 }
