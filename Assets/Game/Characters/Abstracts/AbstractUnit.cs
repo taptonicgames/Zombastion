@@ -84,8 +84,9 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
         EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-    private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
+    protected virtual void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
     {
+        if (!gameObject.activeSelf) return;
         if (evnt.paused)
             StartCoroutine(SetPauseCoroutine());
         else

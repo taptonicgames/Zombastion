@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,9 @@ public class BattleUIManager : AbstractUIManager
 
     [Inject]
     private readonly SceneReferences sceneReferences;
+
+    [Inject]
+    private readonly CardsUpgradeManager cardsUpgradeManager;
 
     [SerializeField]
     private GameObject[] panelPrefabs;
@@ -45,12 +49,15 @@ public class BattleUIManager : AbstractUIManager
     {
         var panel = GetPanel(PanelType.BattleUpgrade);
 
-        BattleUpgradeConfig[] upgradeConfigs = new BattleUpgradeConfig[]
-        {
-            BattleUpgradeConfigsPack.GetConfig(BattleUpgradeType.TowerBuild),
-        };
+        panel.Init(
+            new object[]
+            {
+                BattleUpgradeConfigsPack,
+                BattleUpgradeStorage,
+                cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
+            }
+        );
 
-        panel.Init(new object[] { BattleUpgradeConfigsPack, BattleUpgradeStorage, upgradeConfigs });
         panel.Show();
     }
 }

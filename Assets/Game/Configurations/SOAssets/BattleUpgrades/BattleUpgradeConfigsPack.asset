@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Configs>k__BackingField:
   - {fileID: 11400000, guid: e59d3e0610ab27b4aaf2136493d37389, type: 2}
+  - {fileID: 11400000, guid: 9e6ff7af04c2f14428e49b7959b0d7ba, type: 2}
+  - {fileID: 11400000, guid: f0dcc2ad200ba8d43aac3a7fad1b43f9, type: 2}
+  - {fileID: 11400000, guid: 686b40a0c14446f418c209cbd4eb90cc, type: 2}
   <CommonGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   <CommonGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   <RareGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}

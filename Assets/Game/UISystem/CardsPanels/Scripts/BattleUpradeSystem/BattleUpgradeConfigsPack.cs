@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(
@@ -42,9 +43,9 @@ public class BattleUpgradeConfigsPack : ScriptableObject
     [field: SerializeField]
     public Color LegendGradientEndColor { get; private set; } = Color.white;
 
-    public BattleUpgradeConfig GetConfig(BattleUpgradeType type)
+    public IEnumerable<BattleUpgradeConfig> GetConfigs(BattleUpgradeType type)
     {
-        var config = Configs.FirstOrDefault(a => a.UpgradeType == type);
+        var config = Configs.Where(a => a.UpgradeType == type);
 
         if (config == null)
             Debug.LogError($"{type} is not present in Configs");

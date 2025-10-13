@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponSO", menuName = "ScriptableObjects/WeaponSO")]
 public class WeaponSO : ScriptableObject
 {
+    [field: SerializeField]
+    public WeaponType WeaponType { get; private set; }
+
     [SerializeField]
     private float shootDelay;
 

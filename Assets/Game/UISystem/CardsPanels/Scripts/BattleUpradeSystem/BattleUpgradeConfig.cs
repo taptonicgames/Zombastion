@@ -5,10 +5,9 @@ public class BattleUpgradeConfig : ScriptableObject
 {
     [field: Header("General")]
     [field: SerializeField] public BattleUpgradeType UpgradeType { get; private set; }
-    [field: SerializeField] public BattleUpgradeRareType RareType { get; private set; }
-    [field: SerializeField] public WeaponUpgradeType WeaponType { get; private set; }
-
-    [field: Space(10)]
+	[field: SerializeField] public WeaponType WeaponType { get; private set; }
+	[field: SerializeField] public BattleUpgradeRareType RareType { get; private set; }
+	[field: Space(10)]
     [field: Header("Card view option")]
     [field: SerializeField] public Sprite UpgradeIcon { get; private set; }
     [field: SerializeField] public string Tittle { get; private set; }

@@ -52,6 +52,7 @@ public class GameManager : IInitializable, IDisposable
     private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
     {
         EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
+        playerCharacterModel.ResetParameters();
     }
 
     public void Dispose()

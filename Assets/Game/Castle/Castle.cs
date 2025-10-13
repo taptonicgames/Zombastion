@@ -1,13 +1,11 @@
 using DG.Tweening;
+using System.Linq;
 using UnityEngine;
 
 public class Castle : MonoBehaviour, IColliderHelper
 {
     [SerializeField]
     private CastleSO SOData;
-
-    [SerializeField]
-    private Transform towersFolder;
 
     [field: SerializeField]
     public Transform Gates { get; private set; }
@@ -25,12 +23,12 @@ public class Castle : MonoBehaviour, IColliderHelper
         Health = SOData.Health;
         defaultGatesPos = Gates.position;
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+        GetComponentsInChildren<AbstractPlayerUnit>(true).ToList().ForEach(a => a.Init());
     }
 
     private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
     {
-        if (evnt.type == BattleUpgradeType.TowerBuild)
-            towersFolder.gameObject.SetActive(true);
+
     }
 
     public void SetDamage(int damage)
