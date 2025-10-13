@@ -12,6 +12,7 @@
     ShopPanel = 7,
     CastleUpgrades = 8,
     ChangePlayerCharacter = 9,
+    SkillsTree = 10,
 
     //Gameloop
     BattleUpgrade = 20,

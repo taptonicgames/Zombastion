@@ -13,8 +13,6 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     [Space(10), Header("Popups")]
     [SerializeField] private ClothItemPopup clothItemPopup;
-    [SerializeField] private PlayerSkillsTreePopup skillsTreePopup;
-    [SerializeField] private LevelSkillPopup levelSkillPopup;
 
     [Space(10), Header("Buttons")]
     [SerializeField] private Button skillsTreeButton;
@@ -27,7 +25,7 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private RawPlayerView rawPlayerView;
     
-    [Inject] private EquipmentPackSO equipmentPackSO;
+    [Inject] private EquipmentManager equipmentManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
@@ -35,30 +33,12 @@ public class PlayerUpgradesPanel : AbstractPanel
     {
         rawPlayerView = GetComponentInParent<MetaUIManager>().GetComponentInChildren<RawPlayerView>();
 
-        List<EquipmentData> datas = GetDatas();
-
-        equipedClothItemsContainer.Init(datas);
+        equipedClothItemsContainer.Init(equipmentManager);
         playerItemsBag.Init();
-
-        skillsTreePopup.Init(null);
-        levelSkillPopup.Init(null);
 
         rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
 
         Subscribe();
-    }
-
-    private List<EquipmentData> GetDatas()
-    {
-        //TODO: Load saving equipment datas
-        List<EquipmentData> datas = new List<EquipmentData>();
-        for (int i = 0; i < equipmentPackSO.StartEquipments.Length; i++)
-        {
-            EquipmentData data = new EquipmentData(equipmentPackSO.StartEquipments[i]);
-            datas.Add(data);
-        }
-
-        return datas;
     }
 
     public override async UniTask OnShow()
@@ -76,8 +56,6 @@ public class PlayerUpgradesPanel : AbstractPanel
 
         if (clothItemPopup.IsShowed)
             clothItemPopup.ForceHide();
-        if (skillsTreePopup.IsShowed)
-            skillsTreePopup.ForceHide();
     }
 
     #region event trigger
@@ -94,12 +72,12 @@ public class PlayerUpgradesPanel : AbstractPanel
         clothItemPopup.CloseButtonClicked += OnCloseButtonClicked;
         skillsTreeButton.onClick.AddListener(OnSkillsTreeButtonClicked);
         changeCharacterButton.onClick.AddListener(OnChangeCharacterButtonClicked);
-        skillsTreePopup.CloseButtonClicked += OnCloseButtonClicked;
     }
 
     private void OnSkillsTreeButtonClicked()
     {
-        skillsTreePopup.Show();
+        EventBus<OpenPanelEvnt>.Publish(
+            new OpenPanelEvnt() { type = PanelType.SkillsTree });
     }
 
     private void OnChangeCharacterButtonClicked()
@@ -110,16 +88,13 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private void OnClothItemClicked(ClothItemView item)
     {
-        object[] objects = new object[1];
-        objects[0] = item;
+        object[] objects = new object[] {item};
         clothItemPopup.Init(objects);
         clothItemPopup.Show();
     }
 
     private void OnCloseButtonClicked()
     {
-        if (skillsTreePopup.IsShowed)
-            skillsTreePopup.Hide();
         if (clothItemPopup.IsShowed)
             clothItemPopup.Hide();
     }
@@ -130,7 +105,6 @@ public class PlayerUpgradesPanel : AbstractPanel
         clothItemPopup.CloseButtonClicked -= OnCloseButtonClicked;
         skillsTreeButton.onClick.RemoveListener(OnSkillsTreeButtonClicked);
         changeCharacterButton.onClick.RemoveListener(OnChangeCharacterButtonClicked);
-        skillsTreePopup.CloseButtonClicked -= OnCloseButtonClicked;
     }
     #endregion
 

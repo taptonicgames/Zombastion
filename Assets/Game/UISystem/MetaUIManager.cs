@@ -1,5 +1,4 @@
 ﻿using System;
-using Zenject;
 
 public class MetaUIManager : AbstractUIManager
 {
@@ -9,7 +8,7 @@ public class MetaUIManager : AbstractUIManager
 
         EnterStartBattlePanel();
 
-        Subscribe();    
+        Subscribe();
     }
 
     #region Enters
@@ -46,6 +45,12 @@ public class MetaUIManager : AbstractUIManager
         HideAllPanels();
         GetPanel(PanelType.ChangePlayerCharacter).Show();
     }
+
+    private void EnterSkillsTreePanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.SkillsTree).Show();
+    }
     #endregion
 
     #region Events
@@ -61,31 +66,27 @@ public class MetaUIManager : AbstractUIManager
 
     private void SwitchInvoke(OpenPanelEvnt evnt)
     {
-        switch (evnt.type)
+        var action = GetAction(evnt.type);
+        action?.Invoke();
+    }
+
+    private Action GetAction(PanelType type)
+    {
+        return type switch
         {
-            case PanelType.ShopPanel:
-                EnterShopPanel();
-                break;
-            case PanelType.PlayerUpgrades:
-                EnterPlayerUpgradePanel();
-                break;
-            case PanelType.Start:
-                EnterStartBattlePanel();
-                break;
-            case PanelType.CastleUpgrades:
-                EnterCastleUpgradePanel();
-                break;
-            case PanelType.None:
-                break;
-            case PanelType.ChangePlayerCharacter:
-                EnterChangePlayerPanel();
-                break;
-        }
+            PanelType.ShopPanel => EnterShopPanel,
+            PanelType.PlayerUpgrades => EnterPlayerUpgradePanel,
+            PanelType.Start => EnterStartBattlePanel,
+            PanelType.CastleUpgrades => EnterCastleUpgradePanel,
+            PanelType.ChangePlayerCharacter => EnterChangePlayerPanel,
+            PanelType.SkillsTree => EnterSkillsTreePanel,
+            _ => null
+        };
     }
     #endregion
 
     private void OnDestroy()
     {
         Unsubscribe();
-    }    
+    }
 }

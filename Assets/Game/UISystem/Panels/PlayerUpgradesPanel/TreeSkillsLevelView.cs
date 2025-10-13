@@ -11,10 +11,12 @@ public class TreeSkillsLevelView : MonoBehaviour
     [SerializeField] private LevelSkillButton levelSkillButtonPrefab;
 
     private int level;
-    private List<LevelSkillBaseSO> skillBaseSOs = new List<LevelSkillBaseSO>();
-    private List<LevelSkillButton> buttons = new List<LevelSkillButton>();
+    private List<SkillTreeData> datas = new List<SkillTreeData>();
+    public List<LevelSkillButton> Buttons { get; private set; } = new List<LevelSkillButton>();
 
     public RectTransform RectTransform => transform.GetComponent<RectTransform>();
+
+    public event Action<LevelSkillButton> ButtonClicked; 
 
     public void Init(int level)
     {
@@ -32,23 +34,29 @@ public class TreeSkillsLevelView : MonoBehaviour
         lockObject.gameObject.SetActive(false);
     }
 
-    public void AddSkill(LevelSkillBaseSO levelSkillBaseSO)
+    public void AddSkill(SkillTreeData data)
     {
-        skillBaseSOs.Add(levelSkillBaseSO);
+        datas.Add(data);
         LevelSkillButton button = Instantiate(levelSkillButtonPrefab, buttonsContainer);
-        button.Init(levelSkillBaseSO);
+        button.Init(data);
         button.ButtonClicked += OnButtonClicked;
-        buttons.Add(button);
+        Buttons.Add(button);
+    }
+
+    public void ChangeReceivedState(bool isReceived)
+    {
+        foreach (var button in Buttons)
+            button.ChangeReceivedState(isReceived);
     }
 
     private void OnButtonClicked(LevelSkillButton button)
     {
-        object[] args = new object[] { button };
+        ButtonClicked?.Invoke(button);
     }
 
     private void OnDestroy()
     {
-        foreach (var button in buttons)
+        foreach (var button in Buttons)
             button.ButtonClicked -= OnButtonClicked;
     }
 }

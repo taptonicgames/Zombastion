@@ -5,9 +5,12 @@ using UnityEngine.UI;
 public class LevelSkillButton : MonoBehaviour
 {
     [SerializeField] private Button button;
+    [SerializeField] private Image background;
     [SerializeField] private Image icon;
+    [SerializeField] private Sprite receivedSprite;
+    [SerializeField] private Sprite notReceivedSprite;
 
-    public LevelSkillBaseSO SkillSO { get; private set; }
+    public SkillTreeData Data { get; private set; }
 
     public event Action<LevelSkillButton> ButtonClicked;
 
@@ -16,11 +19,16 @@ public class LevelSkillButton : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    public void Init(LevelSkillBaseSO levelSkillBaseSO)
+    public void Init(SkillTreeData data)
     {
-        SkillSO = levelSkillBaseSO;
+        Data = data;
 
-        icon.sprite = SkillSO.Icon;
+        icon.sprite = Data.Icon;
+    }
+
+    public void ChangeReceivedState(bool isReceived)
+    {
+        background.sprite = isReceived ? receivedSprite : notReceivedSprite;
     }
 
     private void OnButtonClicked()
