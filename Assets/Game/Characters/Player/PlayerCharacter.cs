@@ -10,16 +10,32 @@ public class PlayerCharacter : AbstractPlayerUnit
     [Inject]
     private readonly DiContainer diContainer;
 
+    [Inject]
+    private readonly PlayerCharacterModel playerCharacterModel;
+
     [SerializeField]
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
 
-	private void Awake()
-	{
-        Init();
-	}
+    public override int Health
+    {
+        get => playerCharacterModel.Health.Value;
+        set
+        {
+            playerCharacterModel.Health.Value = Mathf.Clamp(value, 0, SOData.Health);
+            health = playerCharacterModel.Health.Value;
+        }
+    }
 
-	private void Start()
+    private void Awake()
+    {
+        Init();
+
+        if (playerCharacterModel.Health.Value == 0)
+            playerCharacterModel.Health.Value = SOData.Health;
+    }
+
+    private void Start()
     {
         animator = GetComponent<Animator>();
         weapon = weapons.First();

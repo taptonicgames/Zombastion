@@ -76,7 +76,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     public virtual int Health
     {
         get => health;
-        set => health = Mathf.Clamp(health + value, 0, 100);
+        set => health = Mathf.Clamp(value, 0, 100);
     }
 
     public virtual void Init()
@@ -185,9 +185,9 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     public virtual void SetDamage(int damage)
     {
-        health = Mathf.Clamp(health - damage, 0, 100);
+        Health = Mathf.Clamp(Health - damage, 0, 100);
 
-        if (health == 0)
+        if (Health == 0)
             OnUnitDied();
     }
 
