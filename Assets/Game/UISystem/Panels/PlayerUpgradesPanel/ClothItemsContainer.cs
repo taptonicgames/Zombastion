@@ -13,8 +13,10 @@ public class ClothItemsContainer : MonoBehaviour
 
     public event Action<ClothItemView> ClothItemClicked;
 
-    public void Init(List<EquipmentData> equipmentDatas)
+    public void Init(EquipmentManager equipmentManager)
     {
+        List<EquipmentData> datas = equipmentManager.GetDatas();
+
         gridLayoutGroup = GetComponent<GridLayoutGroup>();
         items = GetComponentsInChildren<ClothItemView>();
 
@@ -22,11 +24,11 @@ public class ClothItemsContainer : MonoBehaviour
 
         for (int i = 0; i < items.Length; i++)
         {
-            items[i].gameObject.SetActive(i < equipmentDatas.Count);
+            items[i].gameObject.SetActive(i < datas.Count);
 
             if (items[i].gameObject.activeSelf)
             {
-                items[i].Init(equipmentDatas[i]);
+                items[i].Init(datas[i]);
                 items[i].ItemClicked += OnItemClicked;
             }
         }

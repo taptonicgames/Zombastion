@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ClothItemPopup : AbstractPopup
 {
+    [SerializeField] private EnhancePopup enhancePopup;
+
     [Header("General")]
     [SerializeField] private TMP_Text tittle;
     [SerializeField] private TMP_Text levelText;
@@ -13,6 +15,7 @@ public class ClothItemPopup : AbstractPopup
 
     [Space(10), Header("Buttons")]
     [SerializeField] private SwitchButtonsController switchButtonsController;
+    [SerializeField] private Button enhanceButton;
 
     [Space(10), Header("Inserts")]
     [SerializeField] private RectTransform insertsContainer;
@@ -23,16 +26,12 @@ public class ClothItemPopup : AbstractPopup
     [SerializeField] private TMP_Text baseAttackText;
     [SerializeField] private TMP_Text enchanceAttackText;
 
-    [Space(10), Header("Adaptive orientation")]
-    [SerializeField] private RectTransform statsView;
-    [SerializeField] private Vector2 portretOrientationSize;
-    [SerializeField] private Vector2 albumOrientationSize;
+    private ClothItemView itemView;
 
     protected override void Awake()
     {
         base.Awake();
 
-        statsView.sizeDelta = ScreenExtension.IsPortretOrientation ? portretOrientationSize : albumOrientationSize;
         switchButtonsController.Init();
 
         Subscribe();
@@ -40,13 +39,13 @@ public class ClothItemPopup : AbstractPopup
 
     public override void Init(object[] args)
     {
-        ClothItemView clothItem = (ClothItemView)args[0];
-        tittle.SetText($"{clothItem.EquipmentData.Id}");
-        rareText.SetText($"{clothItem.EquipmentData.Rarity}");
-        icon.sprite = clothItem.EquipmentData.UIData.Icon;
+        itemView = (ClothItemView)args[0];
+        tittle.SetText($"{itemView.EquipmentData.Id}");
+        rareText.SetText($"{itemView.EquipmentData.Rarity}");
+        icon.sprite = itemView.EquipmentData.UIData.Icon;
 
-        baseAttackText.SetText($"{clothItem.EquipmentData.AttackValue}");
-        enchanceAttackText.SetText($"{clothItem.EquipmentData.EnchanceLevels[clothItem.EquipmentData.Level]}");
+        baseAttackText.SetText($"{itemView.EquipmentData.AttackValue}");
+        enchanceAttackText.SetText($"{itemView.EquipmentData.EnchanceLevels[itemView.EquipmentData.Level]}");
     }
 
     public override void Show(Action callback = null)
@@ -61,12 +60,16 @@ public class ClothItemPopup : AbstractPopup
     {
         switchButtonsController.FirstButtonClicked += OnInsertsButtonClicked;
         switchButtonsController.SecondButtonClicked += OnStatsButtonClicked;
+        enhanceButton.onClick.AddListener(OnEnhanceButtonClicked);
+        enhancePopup.CloseButtonClicked += OnPopupCloseButtonClicked;
     }
 
     private void Unsubscribe()
     {
         switchButtonsController.FirstButtonClicked -= OnInsertsButtonClicked;
         switchButtonsController.SecondButtonClicked -= OnStatsButtonClicked;
+        enhanceButton.onClick.RemoveListener(OnEnhanceButtonClicked);
+        enhancePopup.CloseButtonClicked -= OnPopupCloseButtonClicked;
     }
 
     private void OnInsertsButtonClicked()
@@ -80,25 +83,22 @@ public class ClothItemPopup : AbstractPopup
         insertsContainer.gameObject.SetActive(false);
         statsContainer.gameObject.SetActive(true);
     }
+
+    private void OnEnhanceButtonClicked()
+    {
+        object[] args = new object[] {itemView};
+        enhancePopup.Init(args);
+        enhancePopup.ForceShow();
+    }
+
+    private void OnPopupCloseButtonClicked()
+    {
+        enhancePopup.ForceHide();
+    }
     #endregion
 
     private void OnDestroy()
     {
         Unsubscribe();
     }
-
-    #region Debug
-#if UNITY_EDITOR
-    private bool isPortretOrientation;
-
-    private void Update()
-    {
-        if (isPortretOrientation != ScreenExtension.IsPortretOrientation)
-        {
-            isPortretOrientation = ScreenExtension.IsPortretOrientation;
-            statsView.sizeDelta = ScreenExtension.IsPortretOrientation ? portretOrientationSize : albumOrientationSize;
-        }
-    }
-#endif
-    #endregion
 }

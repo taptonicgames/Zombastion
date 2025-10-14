@@ -1,4 +1,6 @@
-﻿public class MetaUIManager : AbstractUIManager
+﻿using System;
+
+public class MetaUIManager : AbstractUIManager
 {
     public override void Init()
     {
@@ -37,43 +39,54 @@
         GetPanel(PanelType.CastleUpgrades).Show();
         GetPanel(PanelType.Switcher).Show();
     }
+
+    private void EnterChangePlayerPanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.ChangePlayerCharacter).Show();
+    }
+
+    private void EnterSkillsTreePanel()
+    {
+        HideAllPanels();
+        GetPanel(PanelType.SkillsTree).Show();
+    }
     #endregion
 
     #region Events
     private void Subscribe()
     {
-        EventBus<SwitcherPanelEventInvoker>.Subscribe(SwitchInvoke);
+        EventBus<OpenPanelEvnt>.Subscribe(SwitchInvoke);
     }
 
     private void Unsubscribe()
     {
-        EventBus<SwitcherPanelEventInvoker>.Unsubscribe(SwitchInvoke);
+        EventBus<OpenPanelEvnt>.Unsubscribe(SwitchInvoke);
     }
 
-    private void SwitchInvoke(SwitcherPanelEventInvoker invoke)
+    private void SwitchInvoke(OpenPanelEvnt evnt)
     {
-        switch (invoke.SwitcherButtonType)
+        var action = GetAction(evnt.type);
+        action?.Invoke();
+    }
+
+    private Action GetAction(PanelType type)
+    {
+        return type switch
         {
-            case SwitcherButtonType.Shop:
-                EnterShopPanel();
-                break;
-            case SwitcherButtonType.PlayerUpgrade:
-                EnterPlayerUpgradePanel();
-                break;
-            case SwitcherButtonType.Battle:
-                EnterStartBattlePanel();
-                break;
-            case SwitcherButtonType.CastleUpgrade:
-                EnterCastleUpgradePanel();
-                break;
-            case SwitcherButtonType.UnknowThree:
-                break;
-        }
+            PanelType.ShopPanel => EnterShopPanel,
+            PanelType.PlayerUpgrades => EnterPlayerUpgradePanel,
+            PanelType.Start => EnterStartBattlePanel,
+            PanelType.CastleUpgrades => EnterCastleUpgradePanel,
+            PanelType.ChangePlayerCharacter => EnterChangePlayerPanel,
+            PanelType.SkillsTree => EnterSkillsTreePanel,
+            _ => null
+        };
     }
     #endregion
 
     private void OnDestroy()
     {
         Unsubscribe();
-    }    
+    }
 }

@@ -10,12 +10,9 @@ public class PlayerUpgradesPanel : AbstractPanel
 {
     [SerializeField] private ClothItemsContainer equipedClothItemsContainer;
     [SerializeField] private PlayerItemsBag playerItemsBag;
-    [SerializeField] private RawPlayerView rawPlayerView;
 
     [Space(10), Header("Popups")]
     [SerializeField] private ClothItemPopup clothItemPopup;
-    [SerializeField] private PlayerSkillsTreePopup skillsTreePopup;
-    [SerializeField] private LevelSkillPopup levelSkillPopup;
 
     [Space(10), Header("Buttons")]
     [SerializeField] private Button skillsTreeButton;
@@ -26,36 +23,22 @@ public class PlayerUpgradesPanel : AbstractPanel
     [SerializeField] private Vector2 portretOrientationRawPosition;
     [SerializeField] private Vector2 albumOrientationRawPosition;
 
-    [Inject] private EquipmentPackSO equipmentPackSO;
+    private RawPlayerView rawPlayerView;
+    
+    [Inject] private EquipmentManager equipmentManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
     public override void Init()
     {
-        List<EquipmentData> datas = GetDatas();
+        rawPlayerView = GetComponentInParent<MetaUIManager>().GetComponentInChildren<RawPlayerView>();
 
-        equipedClothItemsContainer.Init(datas);
+        equipedClothItemsContainer.Init(equipmentManager);
         playerItemsBag.Init();
-        skillsTreePopup.Init(null);
 
-        clothItemPopup.ForceHide();
-        skillsTreePopup.ForceHide();
         rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
 
         Subscribe();
-    }
-
-    private List<EquipmentData> GetDatas()
-    {
-        //TODO: Load saving equipment datas
-        List<EquipmentData> datas = new List<EquipmentData>();
-        for (int i = 0; i < equipmentPackSO.StartEquipments.Length; i++)
-        {
-            EquipmentData data = new EquipmentData(equipmentPackSO.StartEquipments[i]);
-            datas.Add(data);
-        }
-
-        return datas;
     }
 
     public override async UniTask OnShow()
@@ -73,11 +56,14 @@ public class PlayerUpgradesPanel : AbstractPanel
 
         if (clothItemPopup.IsShowed)
             clothItemPopup.ForceHide();
-        if (skillsTreePopup.IsShowed)
-            skillsTreePopup.ForceHide();
-        if (levelSkillPopup.IsShowed)
-            levelSkillPopup.ForceHide();
     }
+
+    #region event trigger
+    public void ChangeRotateActiveState(bool isActive)
+    {
+        rawPlayerView.ChangeRotateActiveState(isActive);
+    }
+    #endregion
 
     #region Events
     private void Subscribe()
@@ -86,31 +72,29 @@ public class PlayerUpgradesPanel : AbstractPanel
         clothItemPopup.CloseButtonClicked += OnCloseButtonClicked;
         skillsTreeButton.onClick.AddListener(OnSkillsTreeButtonClicked);
         changeCharacterButton.onClick.AddListener(OnChangeCharacterButtonClicked);
-        skillsTreePopup.CloseButtonClicked += OnCloseButtonClicked;
     }
 
     private void OnSkillsTreeButtonClicked()
     {
-        skillsTreePopup.Show();
+        EventBus<OpenPanelEvnt>.Publish(
+            new OpenPanelEvnt() { type = PanelType.SkillsTree });
     }
 
     private void OnChangeCharacterButtonClicked()
     {
-        //TODO: open change character popup logic
+        EventBus<OpenPanelEvnt>.Publish(
+            new OpenPanelEvnt() { type = PanelType.ChangePlayerCharacter });
     }
 
     private void OnClothItemClicked(ClothItemView item)
     {
-        object[] objects = new object[1];
-        objects[0] = item;
+        object[] objects = new object[] {item};
         clothItemPopup.Init(objects);
         clothItemPopup.Show();
     }
 
     private void OnCloseButtonClicked()
     {
-        if (skillsTreePopup.IsShowed)
-            skillsTreePopup.Hide();
         if (clothItemPopup.IsShowed)
             clothItemPopup.Hide();
     }
@@ -121,7 +105,6 @@ public class PlayerUpgradesPanel : AbstractPanel
         clothItemPopup.CloseButtonClicked -= OnCloseButtonClicked;
         skillsTreeButton.onClick.RemoveListener(OnSkillsTreeButtonClicked);
         changeCharacterButton.onClick.RemoveListener(OnChangeCharacterButtonClicked);
-        skillsTreePopup.CloseButtonClicked -= OnCloseButtonClicked;
     }
     #endregion
 

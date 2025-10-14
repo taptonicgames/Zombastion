@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -42,11 +43,23 @@ public class SwitcherPanel : AbstractPanel
 
         currentPanelButton = panelButton;
 
-        SwitcherPanelEventInvoker switcherPanelEventInvoker = new SwitcherPanelEventInvoker(currentPanelButton.Type);
-        EventBus<SwitcherPanelEventInvoker>.Publish(switcherPanelEventInvoker);
+        EventBus<OpenPanelEvnt>.Publish(
+                        new OpenPanelEvnt() { type = GetPanelType() });
 
         currentPanelButton.ChangeSize(duration, true);
         currentPanelButton.Deactivate();
+    }
+
+    private PanelType GetPanelType()
+    {
+        return currentPanelButton.Type switch
+        {
+            SwitcherButtonType.Shop => PanelType.ShopPanel,
+            SwitcherButtonType.PlayerUpgrade => PanelType.PlayerUpgrades,
+            SwitcherButtonType.Battle => PanelType.Start,
+            SwitcherButtonType.CastleUpgrade => PanelType.CastleUpgrades,
+            _ => PanelType.None,
+        };
     }
 
     private void TryOpenUpgradeButton()
@@ -107,15 +120,5 @@ public class SwitcherPanel : AbstractPanel
     private void OnDestroy()
     {
         Unsubscribe();
-    }
-}
-
-public struct SwitcherPanelEventInvoker
-{
-    public SwitcherButtonType SwitcherButtonType { get; private set; }
-
-    public SwitcherPanelEventInvoker(SwitcherButtonType switcherButtonType)
-    {
-        SwitcherButtonType = switcherButtonType;
     }
 }
