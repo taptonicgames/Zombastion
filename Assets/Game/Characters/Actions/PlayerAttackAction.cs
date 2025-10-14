@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using StarterAssets;
 using UnityEngine;
@@ -59,7 +60,7 @@ public class PlayerAttackAction : AbstractUnitAction
 
     private bool FindEnemy()
     {
-        int mask = ~(1 << 3);
+        int mask = 1 << 8;
 
         var arr = Physics.OverlapSphere(
             unit.transform.position,
@@ -104,9 +105,9 @@ public class PlayerAttackAction : AbstractUnitAction
             cancellationToken: targetUnit.destroyCancellationToken
         );
 
-        await UniTask.WaitForSeconds(0.2f);
+        await UniTask.WaitForSeconds(0.2f, cancellationToken: targetUnit.destroyCancellationToken);
 
-        if (unit.Health == 0)
+        if (unit.Health == 0 || !targetUnit || actionType != unit.UnitActionType)
             return;
 
         unit.Weapon.Fire(unit, targetUnit);
@@ -162,7 +163,9 @@ public class PlayerAttackAction : AbstractUnitAction
         }
         else
         {
-            playerCharacterModel.Experience.Value += ((AbstractEnemy)targetUnit).ExperienceForDestroy;
+            playerCharacterModel.Experience.Value += (
+                (AbstractEnemy)targetUnit
+            ).ExperienceForDestroy;
             unit.SetActionTypeForced(UnitActionType.Idler);
         }
     }
@@ -171,7 +174,7 @@ public class PlayerAttackAction : AbstractUnitAction
     {
         unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
-		thirdPersonController.EnablePersonRotation = true;
+        thirdPersonController.EnablePersonRotation = true;
         thirdPersonController.EnablePersonAnimation = true;
         angleToEnemy = 360f;
         targetUnit = null;
