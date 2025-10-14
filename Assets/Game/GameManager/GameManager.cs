@@ -42,7 +42,7 @@ public class GameManager : IInitializable, IDisposable
 
     private void OnPlayerExpChanged(int value)
     {
-        if (value >= gamePreferences.pointsAmountToCompleteRound)
+        if (value >= gamePreferences.pointsAmountToCompleteRoundLevel)
         {
             EventBus<SetGamePauseEvnt>.Publish(new() { paused = true });
             EventBus<ExperienceReachedEvnt>.Publish(new());

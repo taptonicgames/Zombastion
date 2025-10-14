@@ -12,9 +12,6 @@ public class BattleUIManager : AbstractUIManager
     private readonly DiContainer diContainer;
 
     [Inject]
-    private readonly SceneReferences sceneReferences;
-
-    [Inject]
     private readonly CardsUpgradeManager cardsUpgradeManager;
 
     [SerializeField]
@@ -33,6 +30,7 @@ public class BattleUIManager : AbstractUIManager
         BattleUpgradeStorage = new BattleUpgradeStorage(BattleUpgradeConfigsPack);
         InitPanels();
         HideAllPanels();
+        ShowGamePanels();
         EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
     }
 
@@ -42,7 +40,13 @@ public class BattleUIManager : AbstractUIManager
         {
             var panel = diContainer.InstantiatePrefabForComponent<AbstractPanel>(item, transform);
             Panels.Add(panel);
+            panel.Init();
         }
+    }
+
+    private void ShowGamePanels()
+    {
+        GetPanel(PanelType.PlayerExperience).Show();
     }
 
     private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)

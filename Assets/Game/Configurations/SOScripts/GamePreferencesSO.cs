@@ -20,7 +20,7 @@ public struct GamePreferences
     public int totalEnemiesAmount;
     public float enemySpawnDelay;
     [Header("Round")]
-    public int pointsAmountToCompleteRound;
+    public int pointsAmountToCompleteRoundLevel;
 
     [Space(10), Header("Opening the panel at level")]
     public int OpenShopPanelAtLevel;

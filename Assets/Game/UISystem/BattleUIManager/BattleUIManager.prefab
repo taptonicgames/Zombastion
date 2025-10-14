@@ -47,3 +47,4 @@ MonoBehaviour:
   Panels: []
   panelPrefabs:
   - {fileID: 440991817972826698, guid: e4ae6dbe6f1ae794ca633961a2eee49b, type: 3}
+  - {fileID: 3225344398744652723, guid: 4aba8531df27d9b4cb7b7efc87bbeffb, type: 3}

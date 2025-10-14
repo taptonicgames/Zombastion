@@ -45,6 +45,7 @@ public class CardsPanel : AbstractPanel
 
     public override void Init(object[] arr)
     {
+        if (arr == null) return;
         upgradeConfigsPack = (BattleUpgradeConfigsPack)arr[0];
         battleUpgradeStorage = (BattleUpgradeStorage)arr[1];
         upgradeConfigs = (BattleUpgradeConfig[])arr[2];
@@ -136,7 +137,7 @@ public class CardsPanel : AbstractPanel
 
         _gridLayoutGroup.enabled = true;
         _contentSizeFitter.enabled = true;
-        battleUIManager.HideAllPanels();
+        Hide();
     }
     #endregion
 
