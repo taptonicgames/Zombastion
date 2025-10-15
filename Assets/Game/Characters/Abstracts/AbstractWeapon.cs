@@ -49,7 +49,7 @@ public abstract class AbstractWeapon : MonoBehaviour
 
 	private void Update()
     {
-        if (targetUnit)
+        if (targetUnit && !(shootingUnit is Tower))
         {
             angleToTarget = StaticFunctions.ObjectFinishTurning(
                 transform,
@@ -58,7 +58,11 @@ public abstract class AbstractWeapon : MonoBehaviour
                 360
             );
         }
-	}
+
+        var angles = transform.localEulerAngles;
+        angles.z = 0;
+        transform.localEulerAngles = angles;
+    }
 
     public int CalculateDamage()
     {

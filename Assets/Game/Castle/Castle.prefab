@@ -552,7 +552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SOData: {fileID: 11400000, guid: 70ccc5629ca898847a7c01e03b58d8d7, type: 2}
-  towersFolder: {fileID: 6279509729117708467}
   <Gates>k__BackingField: {fileID: 1791083459622954218}
 --- !u!1 &6044637794040328114
 GameObject:
@@ -745,7 +744,7 @@ PrefabInstance:
     - target: {fileID: 4164398515285092468, guid: fb1239c5b20f3204d9203598ed55401d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.52
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 4164398515285092468, guid: fb1239c5b20f3204d9203598ed55401d,
         type: 3}
@@ -824,7 +823,7 @@ PrefabInstance:
     - target: {fileID: 4164398515285092468, guid: c9a0b229fd7153144a22f721bc314293,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.52
+      value: -2.48
       objectReference: {fileID: 0}
     - target: {fileID: 4164398515285092468, guid: c9a0b229fd7153144a22f721bc314293,
         type: 3}
