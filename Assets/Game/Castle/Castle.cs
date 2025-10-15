@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Linq;
 using UnityEngine;
 
 public class Castle : MonoBehaviour, IColliderHelper
@@ -21,6 +22,13 @@ public class Castle : MonoBehaviour, IColliderHelper
     {
         Health = SOData.Health;
         defaultGatesPos = Gates.position;
+        EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+        GetComponentsInChildren<AbstractPlayerUnit>(true).ToList().ForEach(a => a.Init());
+    }
+
+    private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
+    {
+
     }
 
     public void SetDamage(int damage)
@@ -34,7 +42,7 @@ public class Castle : MonoBehaviour, IColliderHelper
         if (Health == 0)
         {
             Gates.gameObject.SetActive(false);
-            EventBus<GatesFallenEvnt>.Publish(new GatesFallenEvnt());
+            EventBus<GatesFallenEvnt>.Publish(new());
         }
     }
 
@@ -60,12 +68,12 @@ public class Castle : MonoBehaviour, IColliderHelper
 
                 if (sender.name == INNER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
-                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Entered }
+                        new() { type = PlayerFindingCastleType.Entered }
                     );
 
                 if (sender.name == OUTER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
-                        new PlayerFindingCastleEvnt() { type = PlayerFindingCastleType.Left }
+                        new() { type = PlayerFindingCastleType.Left }
                     );
 
                 inCollisionTr = null;

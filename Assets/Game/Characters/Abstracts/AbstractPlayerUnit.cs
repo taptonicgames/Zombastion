@@ -9,7 +9,7 @@ public abstract class AbstractPlayerUnit : AbstractUnit
     public override int Health
     {
         get => base.Health;
-        set => health = Mathf.Clamp(health + value, 0, SOData.Health);
+        set => health = Mathf.Clamp(value, 0, SOData.Health);
     }
 
     public override IGetAttackSOParameters GetAttackSOParameters()

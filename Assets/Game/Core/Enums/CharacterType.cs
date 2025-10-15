@@ -1,4 +1,4 @@
 public enum CharacterType
 {
-	Player, SimpleZombie, ArcherZombie
+	Player, SimpleZombie, ArcherZombie, Tower
 }

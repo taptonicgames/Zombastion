@@ -16,4 +16,5 @@
 
     //Gameloop
     BattleUpgrade = 20,
+	PlayerExperience = 21,
 }

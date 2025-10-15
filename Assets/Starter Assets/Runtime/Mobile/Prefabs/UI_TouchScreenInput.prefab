@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7140694399045626294}
   - component: {fileID: 3004629566080465027}
   - component: {fileID: 7921911991004155457}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI_TouchScreenInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,4 +152,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901182334643ba1438a25accc6bd0c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}

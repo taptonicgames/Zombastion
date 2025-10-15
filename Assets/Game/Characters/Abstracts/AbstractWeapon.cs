@@ -32,6 +32,9 @@ public abstract class AbstractWeapon : MonoBehaviour
     public virtual void StopFire()
     {
         inFire = false;
+        targetUnit = null;
+        targetTr = null;
+        shootingUnit = null;
     }
 
     public WeaponSO WeaponSOData => weaponSO;

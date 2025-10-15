@@ -76,17 +76,21 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     public virtual int Health
     {
         get => health;
-        set => health = Mathf.Clamp(health + value, 0, 100);
+        set => health = Mathf.Clamp(value, 0, 100);
     }
 
     public virtual void Init()
     {
-        EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+        EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-    private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
+    protected virtual void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
     {
-        StartCoroutine(SetPauseCoroutine());
+        if (!gameObject.activeSelf) return;
+        if (evnt.paused)
+            StartCoroutine(SetPauseCoroutine());
+        else
+            SetActionTypeForced(UnitActionType.Idler);
     }
 
     private IEnumerator SetPauseCoroutine()
@@ -182,9 +186,9 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     public virtual void SetDamage(int damage)
     {
-        health = Mathf.Clamp(health - damage, 0, 100);
+        Health = Mathf.Clamp(Health - damage, 0, 100);
 
-        if (health == 0)
+        if (Health == 0)
             OnUnitDied();
     }
 
@@ -212,6 +216,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
     private void OnDestroy()
     {
         ClearUnitActions();
+        EventBus<SetGamePauseEvnt>.Unsubscribe(OnSetGamePauseEvnt);
     }
 
     public virtual IEnumerator MoveToTargetCoroutine(

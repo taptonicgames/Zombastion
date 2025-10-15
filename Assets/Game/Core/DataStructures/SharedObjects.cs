@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Obj = UnityEngine.Object;
 
 [Serializable]
 public struct SharedObjects
@@ -56,6 +57,8 @@ public struct SharedObjects
         return (T)data.scriptableObject;
     }
 
-    public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
-        idGameObjectDatasList = list;
+    public T InstantiateAndGetObject<T>(string id, Transform parent)
+    {
+        return Obj.Instantiate(GetPrefab(id), parent).GetComponentInChildren<T>();
+    }
 }

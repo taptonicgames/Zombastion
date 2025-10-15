@@ -15,7 +15,7 @@ MonoBehaviour:
   gamePreferences:
     totalEnemiesAmount: 50
     enemySpawnDelay: 1
-    pointsAmountToCompleteRound: 1
+    pointsAmountToCompleteRoundLevel: 5
     OpenShopPanelAtLevel: 0
     OpenPlayerUpgradePanelAtLevel: 0
     OpenCastleUpgradePanelAtLevel: 0
