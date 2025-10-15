@@ -21,18 +21,37 @@ public static class StaticFunctions
         Vector3 targetPos,
         float clampMin = -10,
         float clampMax = 10,
-        bool rotate = true
+        bool rotate = true,
+        RectTransform.Axis axis = RectTransform.Axis.Horizontal
     )
     {
         var targetLocalPos = transform.InverseTransformPoint(targetPos);
         var A = targetLocalPos.x;
         var B = targetLocalPos.z;
+
+        if (axis == RectTransform.Axis.Vertical)
+            A = targetLocalPos.y;
+
         var alpha = Mathf.Atan2(A, B) * Mathf.Rad2Deg;
         var angle = alpha;
         alpha = Mathf.Clamp(alpha, clampMin, clampMax);
+
         if (rotate)
-            transform.Rotate(0, alpha, 0);
-        return angle;
+		{
+			switch (axis)
+            {
+                case RectTransform.Axis.Horizontal:
+                    transform.Rotate(0, alpha, 0);
+                    break;
+                case RectTransform.Axis.Vertical:
+                    transform.Rotate(-alpha, 0, 0, Space.Self);
+                    break;
+                default:
+                    break;
+            }
+		}
+
+		return angle;
     }
 
     public static void ObjectFinishTurning(Transform transform, Vector3 targetPos, float duration)

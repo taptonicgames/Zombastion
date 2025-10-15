@@ -1,10 +1,15 @@
 using UnityEngine;
+using Zenject;
 using Rnd = UnityEngine.Random;
 
 public abstract class AbstractPlayerUnit : AbstractUnit
 {
     [SerializeField]
     protected PlayerSO SOData;
+    [Inject]
+    protected readonly DiContainer diContainer;
+	[Inject]
+    protected readonly PlayerCharacterModel playerCharacterModel;
 
     public override int Health
     {

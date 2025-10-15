@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24576a0f55fa65047b62f9348eded33f, type: 3}
   m_Name: CrossbowWeaponZombieSO
   m_EditorClassIdentifier: 
+  <WeaponType>k__BackingField: 0
   shootDelay: 1
   shootDamage: 1
   bulletType: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerCatapultSO
   m_EditorClassIdentifier: 
   speed: 0
-  shootDamage: 10
+  shootDamage: 50
   shootDelay: 1
   health: 100
   critDamage: 0

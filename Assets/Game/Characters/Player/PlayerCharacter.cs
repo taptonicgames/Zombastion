@@ -7,13 +7,7 @@ using Zenject;
 
 public class PlayerCharacter : AbstractPlayerUnit
 {
-    [Inject]
-    private readonly DiContainer diContainer;
-
-    [Inject]
-    private readonly PlayerCharacterModel playerCharacterModel;
-
-    [SerializeField]
+	[SerializeField]
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
 
