@@ -28,6 +28,8 @@ public class ClothItemPopup : AbstractPopup
 
     private ClothItemView itemView;
 
+    public event Action<InsertData> InsertDataRemoved;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,12 +42,7 @@ public class ClothItemPopup : AbstractPopup
     public override void Init(object[] args)
     {
         itemView = (ClothItemView)args[0];
-        tittle.SetText($"{itemView.EquipmentData.Id}");
-        rareText.SetText($"{itemView.EquipmentData.Rarity}");
-        icon.sprite = itemView.EquipmentData.UIData.Icon;
-
-        baseAttackText.SetText($"{itemView.EquipmentData.AttackValue}");
-        enchanceAttackText.SetText($"{itemView.EquipmentData.EnchanceLevels[itemView.EquipmentData.Level]}");
+        UpdateInfo();
     }
 
     public override void Show(Action callback = null)
@@ -55,6 +52,22 @@ public class ClothItemPopup : AbstractPopup
         switchButtonsController.Show();
     }
 
+    private void UpdateInfo()
+    {
+        tittle.SetText($"{itemView.EquipmentData.Id}");
+        rareText.SetText($"{itemView.EquipmentData.Rarity}");
+        icon.sprite = itemView.EquipmentData.UIData.Icon;
+
+        baseAttackText.SetText($"{itemView.EquipmentData.AttackValue}");
+        enchanceAttackText.SetText($"{itemView.EquipmentData.EnchanceLevels[itemView.EquipmentData.Level]}");
+
+        if (insertStatsItems.Length != itemView.EquipmentData.InsertDatas.Length)
+            throw new ArgumentException($"popup items not equal cloth stat items!");
+
+        for (int i = 0; i < insertStatsItems.Length; i++)
+            insertStatsItems[i].Init(itemView.EquipmentData.InsertDatas[i]);
+    }
+
     #region Events
     private void Subscribe()
     {
@@ -62,6 +75,9 @@ public class ClothItemPopup : AbstractPopup
         switchButtonsController.SecondButtonClicked += OnStatsButtonClicked;
         enhanceButton.onClick.AddListener(OnEnhanceButtonClicked);
         enhancePopup.CloseButtonClicked += OnPopupCloseButtonClicked;
+
+        for (int i = 0; i < insertStatsItems.Length; i++)
+            insertStatsItems[i].ButtonClicked += OnInsertRemoved;
     }
 
     private void Unsubscribe()
@@ -70,6 +86,9 @@ public class ClothItemPopup : AbstractPopup
         switchButtonsController.SecondButtonClicked -= OnStatsButtonClicked;
         enhanceButton.onClick.RemoveListener(OnEnhanceButtonClicked);
         enhancePopup.CloseButtonClicked -= OnPopupCloseButtonClicked;
+
+        for (int i = 0; i < insertStatsItems.Length; i++)
+            insertStatsItems[i].ButtonClicked -= OnInsertRemoved;
     }
 
     private void OnInsertsButtonClicked()
@@ -94,6 +113,15 @@ public class ClothItemPopup : AbstractPopup
     private void OnPopupCloseButtonClicked()
     {
         enhancePopup.ForceHide();
+        UpdateInfo();
+    }
+
+    private void OnInsertRemoved(InsertStatsItem item)
+    {
+        InsertData insertData = item.InsertData;
+        itemView.EquipmentData.RemoveInsert(insertData);
+        item.ChangeActiveState(false);
+        InsertDataRemoved?.Invoke(insertData);
     }
     #endregion
 

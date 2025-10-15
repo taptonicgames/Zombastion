@@ -20,7 +20,15 @@ MonoBehaviour:
     - id: RawPlayerView
       gameObject: {fileID: 4517678756419641942, guid: b85e09c93f8c7e44cac7dda6898cb8be,
         type: 3}
-    idSpriteDatasList: []
+    idSpriteDatasList:
+    - id: 
+      sprite: {fileID: 0}
+    - id: 
+      sprite: {fileID: 0}
+    - id: 
+      sprite: {fileID: 0}
+    - id: 
+      sprite: {fileID: 0}
     idScriptableObjectDatasList:
     - id: BattleUpgradeConfigsPack
       scriptableObject: {fileID: 11400000, guid: f6eb19e054acbdb47b66705ee770444d,

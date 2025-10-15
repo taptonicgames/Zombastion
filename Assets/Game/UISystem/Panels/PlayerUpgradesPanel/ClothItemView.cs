@@ -30,6 +30,26 @@ public class ClothItemView : MonoBehaviour
             insertItems[i].Deactivate();
     }
 
+    public InsertItemView GetEmptyInsertSlot()
+    {
+        for (int i = 0; i < EquipmentData.InsertDatas.Length; i++)
+            if (insertItems[i].InsertData == null)
+                return insertItems[i];
+
+        return null;
+    }
+
+    public void UpdateDatas()
+    {
+        for (int i = 0; i < EquipmentData.InsertDatas.Length; i++)
+        {
+            insertItems[i].ClearData();
+            
+            if (EquipmentData.InsertDatas[i] != null)
+                insertItems[i].SetInsertData(EquipmentData.InsertDatas[i]);
+        }
+    }
+
     private void OnButtonClicked()
     {
         ItemClicked?.Invoke(this);

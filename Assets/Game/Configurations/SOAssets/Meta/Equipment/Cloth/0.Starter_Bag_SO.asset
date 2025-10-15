@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 225ed199f435f7346bc554bc69c8cce7, type: 3}
-  m_Name: 1.Common_Weapon_SO
+  m_Name: 0.Starter_Bag_SO
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Common-Weapon
-  <Type>k__BackingField: 3
+  <Id>k__BackingField: Common-Core
+  <Type>k__BackingField: 6
   <Rarity>k__BackingField: 1
   <Damage>k__BackingField: 5
   <EnchanceLevels>k__BackingField: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   <UIData>k__BackingField:
-    <Tittle>k__BackingField: Weapon
-    <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+    <Tittle>k__BackingField: Ring
+    <Icon>k__BackingField: {fileID: 21300000, guid: 7945862b5cfa3466ab7f68a85cb0d772,
       type: 3}

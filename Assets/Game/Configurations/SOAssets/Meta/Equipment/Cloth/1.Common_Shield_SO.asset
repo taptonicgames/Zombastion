@@ -15,7 +15,7 @@ MonoBehaviour:
   <Id>k__BackingField: Common-Shield
   <Type>k__BackingField: 2
   <Rarity>k__BackingField: 1
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 10
   <EnchanceLevels>k__BackingField: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   <UIData>k__BackingField:
     <Tittle>k__BackingField: Shield
