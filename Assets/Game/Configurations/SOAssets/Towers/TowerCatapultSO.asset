@@ -19,3 +19,4 @@ MonoBehaviour:
   critDamage: 0
   critProbability: 0
   <HealthResurectionPerSecond>k__BackingField: 0
+  <additionalParameters>k__BackingField: []

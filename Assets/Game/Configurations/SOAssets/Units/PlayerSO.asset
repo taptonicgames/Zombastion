@@ -19,3 +19,4 @@ MonoBehaviour:
   critDamage: 2
   critProbability: 50
   <HealthResurectionPerSecond>k__BackingField: 2
+  <additionalParameters>k__BackingField: []

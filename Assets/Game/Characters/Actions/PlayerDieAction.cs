@@ -25,6 +25,7 @@ public class PlayerDieAction : AbstractUnitAction
     public override void StartAction()
     {
         base.StartAction();
+        unit.IsEnable = false;
         ragdollHandler.EnableRagdoll(true);
     }
 
