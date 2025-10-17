@@ -45,7 +45,7 @@ public class CardsPanel : AbstractPanel
 
     public override void Init(object[] arr)
     {
-        if (arr == null) return;
+        if (arr == null || cards.Any()) return;
         upgradeConfigsPack = (BattleUpgradeConfigsPack)arr[0];
         battleUpgradeStorage = (BattleUpgradeStorage)arr[1];
         upgradeConfigs = (BattleUpgradeConfig[])arr[2];
