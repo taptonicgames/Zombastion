@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public abstract class AbstractUnit : MonoBehaviour
+public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 {
     [SerializeField]
-    protected bool isEnable;
+    private bool isEnable;
 
-    [SerializeField]
-    protected bool isNeedSave;
+    [field: SerializeField]
+    public bool IsNeedSave { get; private set; }
 
     [SerializeField]
     private bool logUnitActionType;
@@ -72,12 +72,33 @@ public abstract class AbstractUnit : MonoBehaviour
     {
         get => characterType;
     }
-    public int Health
+
+    public virtual int Health
     {
         get => health;
+        set => health = Mathf.Clamp(value, 0, 100);
     }
 
-    public virtual void Init() { }
+    public virtual void Init()
+    {
+        EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
+    }
+
+    protected virtual void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
+    {
+        if (!gameObject.activeSelf) return;
+        if (evnt.paused)
+            StartCoroutine(SetPauseCoroutine());
+        else
+            SetActionTypeForced(UnitActionType.Idler);
+    }
+
+    private IEnumerator SetPauseCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (unitActionType != UnitActionType.Die)
+            SetActionTypeForced(UnitActionType.Pause);
+    }
 
     protected virtual void Update()
     {
@@ -165,13 +186,16 @@ public abstract class AbstractUnit : MonoBehaviour
 
     public virtual void SetDamage(int damage)
     {
-        health = Mathf.Clamp(health - damage, 0, 100);
+        Health = Mathf.Clamp(Health - damage, 0, 100);
 
-        if (health == 0)
+        if (Health == 0)
             OnUnitDied();
     }
 
-    public virtual void OnUnitDied() { }
+    public virtual void OnUnitDied()
+    {
+        IsEnable = false;
+    }
 
     public virtual T GetUnitAbility<T>(AbilityType type)
         where T : AbstractUnitAbility
@@ -192,6 +216,7 @@ public abstract class AbstractUnit : MonoBehaviour
     private void OnDestroy()
     {
         ClearUnitActions();
+        EventBus<SetGamePauseEvnt>.Unsubscribe(OnSetGamePauseEvnt);
     }
 
     public virtual IEnumerator MoveToTargetCoroutine(
@@ -263,4 +288,5 @@ public abstract class AbstractUnit : MonoBehaviour
     }
 
     public abstract IGetAttackSOParameters GetAttackSOParameters();
+    public abstract Type GetDamageRecieverType();
 }

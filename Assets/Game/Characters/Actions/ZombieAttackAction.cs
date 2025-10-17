@@ -8,8 +8,12 @@ public class ZombieAttackAction : AbstractUnitAction
 {
     [Inject]
     private readonly UnitActionPermissionHandler unitActionPermissionHandler;
+
+    [Inject]
+    private readonly SceneReferences sceneReferences;
     private AbstractUnit targetUnit;
-    private float angleToEnemy = 360f;
+    private Transform targetTr;
+    private float angleToTarget = 360f;
 
     public ZombieAttackAction(AbstractUnit unit)
         : base(unit) { }
@@ -33,9 +37,28 @@ public class ZombieAttackAction : AbstractUnitAction
         if (!unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
             return false;
 
-        if (FindPlayer())
+        if (FindTargetTr() || FindPlayer())
         {
             StartAction();
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool FindTargetTr()
+    {
+        int mask = 1 << 9;
+
+        var arr = Physics.OverlapSphere(
+            unit.transform.position,
+            unit.Weapon.WeaponSOData.AttackDistance,
+            mask
+        );
+
+        if (arr.Length > 0 && sceneReferences.castle.Health > 0)
+        {
+            targetTr = arr[0].transform;
             return true;
         }
 
@@ -88,27 +111,48 @@ public class ZombieAttackAction : AbstractUnitAction
 
     private async UniTask RotateToTarget()
     {
-        await UniTask.WaitUntil(
-            () => angleToEnemy < Constants.ALMOST_ZERO,
-            cancellationToken: targetUnit.destroyCancellationToken
-        );
+        if (targetUnit)
+        {
+            await UniTask.WaitUntil(
+                () => angleToTarget < Constants.ALMOST_ZERO,
+                cancellationToken: targetUnit.destroyCancellationToken
+            );
+        }
+
+        if (targetTr)
+        {
+            await UniTask.WaitUntil(
+                () => angleToTarget < Constants.ALMOST_ZERO,
+                cancellationToken: unit.destroyCancellationToken
+            );
+        }
 
         unit.Weapon.Fire(unit, targetUnit);
     }
 
     public override void Update()
     {
-		if (targetUnit)
-		{
-			angleToEnemy = StaticFunctions.ObjectFinishTurning(
-				unit.transform,
-				targetUnit.transform.position,
-				-Constants.UNIT_ROTATION_SPEED,
-				Constants.UNIT_ROTATION_SPEED
-			);
-		}
+        if (targetUnit)
+        {
+            angleToTarget = StaticFunctions.ObjectFinishTurning(
+                unit.transform,
+                targetUnit.transform.position,
+                -Constants.UNIT_ROTATION_SPEED,
+                Constants.UNIT_ROTATION_SPEED
+            );
+        }
 
-		if (!unit.Weapon.InFire)
+        if (targetTr)
+        {
+            angleToTarget = StaticFunctions.ObjectFinishTurning(
+                unit.transform,
+                targetTr.position,
+                -Constants.UNIT_ROTATION_SPEED,
+                Constants.UNIT_ROTATION_SPEED
+            );
+        }
+
+        if (!unit.Weapon.InFire)
             return;
 
         if (targetUnit && targetUnit.Health > 0)
@@ -121,9 +165,14 @@ public class ZombieAttackAction : AbstractUnitAction
                 unit.SetActionTypeForced(UnitActionType.Move);
             }
         }
-        else
+        else if (!targetTr)
         {
             unit.SetActionTypeForced(UnitActionType.Move);
+        }
+        else if (targetTr)
+        {
+            if (sceneReferences.castle.Health == 0)
+                unit.SetActionTypeForced(UnitActionType.Move);
         }
     }
 
@@ -131,7 +180,7 @@ public class ZombieAttackAction : AbstractUnitAction
     {
         unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
-        angleToEnemy = 360f;
+        angleToTarget = 360f;
         targetUnit = null;
     }
 }

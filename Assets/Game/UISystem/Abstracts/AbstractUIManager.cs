@@ -1,0 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public abstract class AbstractUIManager : MonoBehaviour
+{
+    [SerializeField] protected List<AbstractPanel> Panels;
+
+    public virtual void Init()
+    {
+        foreach (var panel in Panels)
+            panel.Init();
+    }
+
+    protected AbstractPanel GetPanel(PanelType type)
+    {
+        return Panels.First(p => p.Type == type);
+    }
+
+    public void HideAllPanels()
+    {
+        foreach (var panel in Panels)
+            panel.Hide();
+    }
+
+    public void ClearContainer(Transform container)
+    {
+        foreach (Transform item in container)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+}

@@ -10,9 +10,10 @@ public abstract class AbstractWeapon : MonoBehaviour
     private WeaponSO weaponSO;
     protected bool inFire,
         inReload;
-	protected AbstractUnit shootingUnit;
-	protected float angleToTarget;
+    protected AbstractUnit shootingUnit;
+    protected float angleToTarget;
     protected AbstractUnit targetUnit;
+    protected Transform targetTr;
 
     public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
@@ -21,9 +22,19 @@ public abstract class AbstractWeapon : MonoBehaviour
         this.shootingUnit = shootingUnit;
     }
 
+    public virtual void Fire(AbstractUnit shootingUnit, Transform targetTr)
+    {
+        inFire = true;
+        this.targetTr = targetTr;
+        this.shootingUnit = shootingUnit;
+    }
+
     public virtual void StopFire()
     {
         inFire = false;
+        targetUnit = null;
+        targetTr = null;
+        shootingUnit = null;
     }
 
     public WeaponSO WeaponSOData => weaponSO;
@@ -34,18 +45,30 @@ public abstract class AbstractWeapon : MonoBehaviour
     }
     public AbstractUnit TargetUnit => targetUnit;
 
-	public AbstractUnit ShootingUnit { get => shootingUnit;}
+    public AbstractUnit ShootingUnit
+    {
+        get => shootingUnit;
+    }
 
-	private void Update()
+    private void Update()
     {
         if (targetUnit)
         {
-            angleToTarget = StaticFunctions.ObjectFinishTurning(
-                transform,
-                targetUnit.transform.position,
-                -360,
-                360
-            );
+            if (!(shootingUnit is Tower))
+            {
+                angleToTarget = StaticFunctions.ObjectFinishTurning(
+                    transform,
+                    targetUnit.transform.position,
+                    -360,
+                    360
+                );
+            }
+            else
+            {
+                var angles = transform.localEulerAngles;
+                angles.z = 0;
+                transform.localEulerAngles = angles;
+            }
         }
     }
 
@@ -54,7 +77,7 @@ public abstract class AbstractWeapon : MonoBehaviour
         var damage =
             shootingUnit is AbstractPlayerUnit
                 ? WeaponSOData.ShootDamage * ((AbstractPlayerUnit)shootingUnit).GetPlayerDamage()
-                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().ShootDamage;
+                : WeaponSOData.ShootDamage * shootingUnit.GetAttackSOParameters().Damage;
 
         return damage;
     }

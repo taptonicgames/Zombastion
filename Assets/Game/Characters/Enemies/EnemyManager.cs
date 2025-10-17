@@ -14,13 +14,20 @@ public class EnemyManager : IInitializable
     [Inject]
     private readonly GamePreferences gamePreferences;
     private List<AbstractUnit> enemies = new();
+    private bool pause;
 
     public void Initialize()
     {
         FindEnemies().Forget();
+        EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-    private async UniTask FindEnemies()
+	private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
+	{
+        pause = evnt.paused;
+	}
+
+	private async UniTask FindEnemies()
     {
         CharacterType[] enemyTypes = { CharacterType.SimpleZombie, CharacterType.ArcherZombie };
 
@@ -35,9 +42,11 @@ public class EnemyManager : IInitializable
             var enemies = characterFactory.Spawn(enemyType, 1, spawnArea);
             this.enemies.AddRange(enemies);
             await UniTask.WaitForSeconds(gamePreferences.enemySpawnDelay);
-        }
+			await UniTask.WaitUntil(() => !pause);
+		}
 
         await UniTask.WaitUntil(() => enemies.Count < gamePreferences.totalEnemiesAmount);
+        await UniTask.WaitUntil(() => !pause);
         FindEnemies().Forget();
     }
 

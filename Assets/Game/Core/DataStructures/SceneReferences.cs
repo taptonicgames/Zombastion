@@ -7,5 +7,8 @@ public class SceneReferences
 {
 	public List<Collider> enemiesSpawnAreas;
 	public Transform charactersFolder, zombieTarget;
+	public Castle castle;
+	public Transform gameComponents;
+	public TouchscreenInput touchscreenInput;
 
 }

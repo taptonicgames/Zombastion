@@ -1,17 +1,32 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
 using UnityEngine;
-using Zenject;
 
 public class PlayerCharacter : AbstractPlayerUnit
 {
-    [Inject]
-    private readonly DiContainer diContainer;
-
     [SerializeField]
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
+
+    public override int Health
+    {
+        get => playerCharacterModel.Health.Value;
+        set
+        {
+            playerCharacterModel.Health.Value = Mathf.Clamp(value, 0, SOData.Health);
+            health = playerCharacterModel.Health.Value;
+        }
+    }
+
+    private void Awake()
+    {
+        Init();
+
+        if (playerCharacterModel.Health.Value == 0)
+            playerCharacterModel.Health.Value = SOData.Health;
+    }
 
     private void Start()
     {
@@ -24,15 +39,13 @@ public class PlayerCharacter : AbstractPlayerUnit
 
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
         {
-            {
-                AbilityType.Attack,
-                new UnitAttackAbility(this, new() { CharacterType.SimpleZombie })
-            },
+            { AbilityType.Heal, new PlayerHealAbility(this) },
         };
 
         unitActionsList = new()
         {
-            new UnitDieAction(this),
+            new UnitPauseAction(this),
+            new PlayerDieAction(this),
             new PlayerAttackAction(this),
             new PlayerMoveAction(this),
             new UnitIdleAction(this),
@@ -62,4 +75,11 @@ public class PlayerCharacter : AbstractPlayerUnit
         if (UnitAction != null)
             UnitAction.Update();
     }
+
+    public override Type GetDamageRecieverType()
+    {
+        return typeof(PlayerCharacter);
+    }
+
+    public override void OnUnitDied() { }
 }

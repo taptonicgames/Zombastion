@@ -2,15 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Obj = UnityEngine.Object;
 
 [Serializable]
 public struct SharedObjects
 {
     [SerializeField]
     private List<IDGameObjectData> idGameObjectDatasList;
-    [SerializeField] private List<IDSpriteData> idSpriteDatasList;
 
-	public GameObject GetPrefab(string id)
+    [SerializeField]
+    private List<IDSpriteData> idSpriteDatasList;
+
+    [SerializeField]
+    private List<IDScriptableObjectData> idScriptableObjectDatasList;
+
+    public GameObject GetPrefab(string id)
     {
         var data = idGameObjectDatasList.FirstOrDefault(a => a.id == id);
 
@@ -30,16 +36,29 @@ public struct SharedObjects
         return data;
     }
 
-	public Sprite GetSprite(string id)
-	{
-		var data = idSpriteDatasList.FirstOrDefault(a => a.id == id);
+    public Sprite GetSprite(string id)
+    {
+        var data = idSpriteDatasList.FirstOrDefault(a => a.id == id);
 
-		if (data.sprite == null)
-			throw new NullReferenceException($"{id} is not present in SharedObjects");
+        if (data.sprite == null)
+            throw new NullReferenceException($"{id} is not present in SharedObjects");
 
-		return data.sprite;
-	}
+        return data.sprite;
+    }
 
-	public void SetTypeGameObjectDatasList(List<IDGameObjectData> list) =>
-        idGameObjectDatasList = list;
+    public T GetScriptableObject<T>(string id)
+        where T : ScriptableObject
+    {
+        var data = idScriptableObjectDatasList.FirstOrDefault(a => a.id == id);
+
+        if (data.scriptableObject == null)
+            throw new NullReferenceException($"{id} is not present in SharedObjects");
+
+        return (T)data.scriptableObject;
+    }
+
+    public T InstantiateAndGetObject<T>(string id, Transform parent)
+    {
+        return Obj.Instantiate(GetPrefab(id), parent).GetComponentInChildren<T>();
+    }
 }

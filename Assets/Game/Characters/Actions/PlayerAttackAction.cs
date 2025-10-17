@@ -1,72 +1,34 @@
-using System.Collections.Generic;
-using System.Linq;
-using Cysharp.Threading.Tasks;
 using StarterAssets;
 using UnityEngine;
-using Zenject;
 
-public class PlayerAttackAction : AbstractUnitAction
+public class PlayerAttackAction : BasePlayerAttackAction
 {
-    [Inject]
-    UnitActionPermissionHandler unitActionPermissionHandler;
-    private AbstractUnit targetUnit;
     private ThirdPersonController thirdPersonController;
-    private float angleToEnemy = 360f;
+    private PlayerHealAbility healAbility;
 
     public PlayerAttackAction(AbstractUnit unit)
         : base(unit)
     {
         thirdPersonController = unit.GetComponent<ThirdPersonController>();
+        healAbility = unit.GetUnitAbility<PlayerHealAbility>(AbilityType.Heal);
     }
 
     public override bool CheckAction()
     {
         if (unit.UnitActionType == actionType)
-            return true;
-
-        if (unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
         {
-            if (FindEnemy())
-            {
-                StartAction();
+            if (healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left)
                 return true;
-            }
-        }
-
-        return false;
-    }
-
-    protected override void SetActionType()
-    {
-        actionType = UnitActionType.Attack;
-    }
-
-    private bool FindEnemy()
-    {
-        int mask = ~(1 << 3);
-
-        var arr = Physics.OverlapSphere(
-            unit.transform.position,
-            unit.Weapon.WeaponSOData.AttackDistance,
-            mask
-        );
-
-        List<AbstractUnit> enemies = new();
-
-        for (int i = 0; i < arr.Length; i++)
-        {
-            var enemy = arr[i].GetComponent<AbstractUnit>();
-
-            if (enemy)
+            else
             {
-                enemies.Add(enemy);
+                unit.SetActionTypeForced(UnitActionType.Idler);
+                return false;
             }
         }
 
-        if (enemies.Count > 0)
+        if (healAbility.PlayerFindingCastleType == PlayerFindingCastleType.Left && CheckCondition())
         {
-            enemies.OrderBy(a => Vector3.Distance(unit.transform.position, a.transform.position));
-            targetUnit = enemies.First();
+            StartAction();
             return true;
         }
 
@@ -78,22 +40,6 @@ public class PlayerAttackAction : AbstractUnitAction
         base.StartAction();
         thirdPersonController.EnablePersonRotation = false;
         unit.Animator.SetBool(Constants.ATTACK, true);
-        RotateToTarget().Forget();
-    }
-
-    private async UniTask RotateToTarget()
-    {
-        await UniTask.WaitUntil(
-            () => angleToEnemy < Constants.ALMOST_ZERO,
-            cancellationToken: targetUnit.destroyCancellationToken
-        );
-
-        await UniTask.WaitForSeconds(0.2f);
-
-        if (unit.Health == 0)
-            return;
-
-        unit.Weapon.Fire(unit, targetUnit);
     }
 
     private bool CheckMoving()
@@ -106,16 +52,7 @@ public class PlayerAttackAction : AbstractUnitAction
         thirdPersonController.JumpAndGravity();
         thirdPersonController.GroundedCheck();
         thirdPersonController.Move();
-
-        if (targetUnit)
-        {
-            angleToEnemy = StaticFunctions.ObjectFinishTurning(
-                unit.transform,
-                targetUnit.transform.position,
-                -Constants.UNIT_ROTATION_SPEED,
-                Constants.UNIT_ROTATION_SPEED
-            );
-        }
+        base.Update();
 
         if (targetUnit && !CheckMoving())
         {
@@ -131,32 +68,14 @@ public class PlayerAttackAction : AbstractUnitAction
             thirdPersonController.EnablePersonAnimation = true;
         }
 
-        if (!unit.Weapon.InFire)
-            return;
-
-        if (targetUnit && targetUnit.Health > 0)
-        {
-            if (
-                Vector3.Distance(unit.transform.position, targetUnit.transform.position)
-                > unit.Weapon.WeaponSOData.AttackDistance + Constants.ATTACK_DISTANCE_INCREMENT
-            )
-            {
-                unit.SetActionTypeForced(UnitActionType.Idler);
-            }
-        }
-        else
-        {
-            unit.SetActionTypeForced(UnitActionType.Idler);
-        }
+        CheckTargetUnit();
     }
 
     public override void OnFinish()
     {
-        unit.Weapon.StopFire();
+        base.OnFinish();
         unit.Animator.SetBool(Constants.ATTACK, false);
         thirdPersonController.EnablePersonRotation = true;
         thirdPersonController.EnablePersonAnimation = true;
-        angleToEnemy = 360f;
-        targetUnit = null;
     }
 }
