@@ -17,7 +17,32 @@ public class EquipmentData : AbstractEquipment
         EnchanceLevels = equipmentSO.EnchanceLevels;
         UIData = equipmentSO.UIData;
         AttackValue = equipmentSO.Damage;
-        Id = $"{Rarity}-{Type}";
+        Id = $"{Rarity}-{Type}-{equipmentSO.UIData.Tittle}";
+    }
+
+    public void SetInsert(InsertData insertData)
+    {
+        for (int i = 0; i < InsertDatas.Length; i++)
+        {
+            if (InsertDatas[i] == null)
+            {
+                InsertDatas[i] = insertData;
+                return;
+            }
+        }
+
+    }
+
+    public void RemoveInsert(InsertData insertData)
+    {
+        for (int i = 0; i < InsertDatas.Length; i++)
+        {
+            if (InsertDatas[i] != null && InsertDatas[i].Id == insertData.Id)
+            {
+                InsertDatas[i] = null;
+                return;
+            }
+        }
     }
 
     public void UpgradeLevel()

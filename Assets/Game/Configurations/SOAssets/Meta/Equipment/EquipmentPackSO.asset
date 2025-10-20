@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92907776d5db3724692f48bd7ea314b4, type: 3}
+  m_Name: EquipmentPackSO
+  m_EditorClassIdentifier: 
+  <StartEquipments>k__BackingField:
+  - {fileID: 11400000, guid: 55be6594227434b4694390f2c33029ee, type: 2}
+  - {fileID: 11400000, guid: 6728ed88aa84b0745b8fbeb5be2caea6, type: 2}
+  - {fileID: 11400000, guid: d76938bef763e8a4f8d5edc7082c829a, type: 2}
+  - {fileID: 11400000, guid: b35d9dc98a148c94e93c636c81bb1cb0, type: 2}
+  - {fileID: 11400000, guid: 3473bc778c659b34e88bd98fc0ea1764, type: 2}
+  - {fileID: 11400000, guid: 2ca685a90ae9a9945b8d515a2ac2628f, type: 2}
+  <Equipments>k__BackingField:
+  - {fileID: 11400000, guid: c680de5be9e95fb45beabe483cd4b5c3, type: 2}
+  - {fileID: 11400000, guid: b19c2d3a41a1c1e49ac13fb707b04019, type: 2}
+  - {fileID: 11400000, guid: f5663d494d208fd4fa90d28cfcc5db65, type: 2}
+  - {fileID: 11400000, guid: 898b6082c7b08114a92db5b736e058d2, type: 2}
+  - {fileID: 11400000, guid: 53b5aceb3f6cbac42a1098e3ce5bdeae, type: 2}
+  - {fileID: 11400000, guid: 70931ddd79d47ae4faa7aa089f24d5dc, type: 2}
+  <Inserts>k__BackingField:
+  - {fileID: 11400000, guid: 6e9f289ff5333614d8b57e2ab9cc5f5b, type: 2}
+  - {fileID: 11400000, guid: 7053f53b5264b2a4e8b5b8ae95a17074, type: 2}
+  - {fileID: 11400000, guid: 398909d524748844d9f3fadc6e845f99, type: 2}
+  - {fileID: 11400000, guid: 1b07f219c2c849b4a8f3da5c1acc2508, type: 2}
+  - {fileID: 11400000, guid: 6e843dc67a02ca64c8c9debe1a927567, type: 2}
+  - {fileID: 11400000, guid: 2a8f42ba71e81d940bfb4800e9af2933, type: 2}
+  - {fileID: 11400000, guid: 4ece0848695155f459076ffef5b28afd, type: 2}
+  - {fileID: 11400000, guid: 8336f3ec161af21479076a952dcda6a8, type: 2}
+  - {fileID: 11400000, guid: 78eccc4eff90ae346a7167bd66474931, type: 2}
+  - {fileID: 11400000, guid: 03d1f8e2fbe15f84682f116046d1a96c, type: 2}
+  <InsertRarityUIDatas>k__BackingField:
+  - <Rarity>k__BackingField: 1
+    <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+      type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: d3beca48c961344479dcd2a2fde23f97,
+      type: 3}
+  - <Rarity>k__BackingField: 2
+    <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+      type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: 48b90a73311a04f60b93404ccdc142fb,
+      type: 3}
+  - <Rarity>k__BackingField: 3
+    <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+      type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: 22a0ba2f4a4e34f52926c784c2ec238f,
+      type: 3}
+  - <Rarity>k__BackingField: 4
+    <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+      type: 3}
+    <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
+      type: 3}
+  <InsertEquipUIDatas>k__BackingField:
+  - <Type>k__BackingField: 1
+    <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+      type: 3}
+  - <Type>k__BackingField: 2
+    <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+      type: 3}
+  - <Type>k__BackingField: 3
+    <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+      type: 3}
+  - <Type>k__BackingField: 4
+    <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+      type: 3}
+  - <Type>k__BackingField: 5
+    <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+      type: 3}
+  - <Type>k__BackingField: 6
+    <Icon>k__BackingField: {fileID: 21300000, guid: 9892840d79b2740259c8d35bdbee793d,
+      type: 3}

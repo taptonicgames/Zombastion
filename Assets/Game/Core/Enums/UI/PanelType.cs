@@ -17,4 +17,6 @@
     //Gameloop
     BattleUpgrade = 20,
 	PlayerExperience = 21,
+	WinRound = 22,
+	LoseRound = 23,
 }

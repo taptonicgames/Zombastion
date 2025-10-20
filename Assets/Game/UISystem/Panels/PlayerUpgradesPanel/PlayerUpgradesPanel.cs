@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,6 +9,7 @@ public class PlayerUpgradesPanel : AbstractPanel
 {
     [SerializeField] private ClothItemsContainer equipedClothItemsContainer;
     [SerializeField] private PlayerItemsBag playerItemsBag;
+    [SerializeField] private Image insertIcon;
 
     [Space(10), Header("Popups")]
     [SerializeField] private ClothItemPopup clothItemPopup;
@@ -24,7 +24,8 @@ public class PlayerUpgradesPanel : AbstractPanel
     [SerializeField] private Vector2 albumOrientationRawPosition;
 
     private RawPlayerView rawPlayerView;
-    
+    private Sequence sequence;
+
     [Inject] private EquipmentManager equipmentManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
@@ -34,11 +35,13 @@ public class PlayerUpgradesPanel : AbstractPanel
         rawPlayerView = GetComponentInParent<MetaUIManager>().GetComponentInChildren<RawPlayerView>();
 
         equipedClothItemsContainer.Init(equipmentManager);
-        playerItemsBag.Init();
+        playerItemsBag.Init(equipmentManager);
 
         rawImage.anchoredPosition = ScreenExtension.IsPortretOrientation ? portretOrientationRawPosition : albumOrientationRawPosition;
 
         Subscribe();
+
+        insertIcon.gameObject.SetActive(false);
     }
 
     public override async UniTask OnShow()
@@ -72,6 +75,20 @@ public class PlayerUpgradesPanel : AbstractPanel
         clothItemPopup.CloseButtonClicked += OnCloseButtonClicked;
         skillsTreeButton.onClick.AddListener(OnSkillsTreeButtonClicked);
         changeCharacterButton.onClick.AddListener(OnChangeCharacterButtonClicked);
+        playerItemsBag.InsertEmbed += OnInsertEmbed;
+        playerItemsBag.ClothReplaced += OnClothReplaced;
+        clothItemPopup.InsertDataRemoved += OnInsertDataRemoved;
+    }
+
+    private void Unsubscribe()
+    {
+        equipedClothItemsContainer.ClothItemClicked -= OnClothItemClicked;
+        clothItemPopup.CloseButtonClicked -= OnCloseButtonClicked;
+        skillsTreeButton.onClick.RemoveListener(OnSkillsTreeButtonClicked);
+        changeCharacterButton.onClick.RemoveListener(OnChangeCharacterButtonClicked);
+        playerItemsBag.InsertEmbed -= OnInsertEmbed;
+        playerItemsBag.ClothReplaced -= OnClothReplaced;
+        clothItemPopup.InsertDataRemoved -= OnInsertDataRemoved;
     }
 
     private void OnSkillsTreeButtonClicked()
@@ -88,7 +105,7 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private void OnClothItemClicked(ClothItemView item)
     {
-        object[] objects = new object[] {item};
+        object[] objects = new object[] { item };
         clothItemPopup.Init(objects);
         clothItemPopup.Show();
     }
@@ -99,12 +116,56 @@ public class PlayerUpgradesPanel : AbstractPanel
             clothItemPopup.Hide();
     }
 
-    private void Unsubscribe()
+    private void OnInsertEmbed(BagInsertButton button)
     {
-        equipedClothItemsContainer.ClothItemClicked -= OnClothItemClicked;
-        clothItemPopup.CloseButtonClicked -= OnCloseButtonClicked;
-        skillsTreeButton.onClick.RemoveListener(OnSkillsTreeButtonClicked);
-        changeCharacterButton.onClick.RemoveListener(OnChangeCharacterButtonClicked);
+        InsertItemView insertItemView = equipedClothItemsContainer.GetEmptyInsertSlot(button.InsertData.Type);
+
+        insertIcon.gameObject.SetActive(true);
+        insertIcon.sprite = button.InsertData.RarityUIData.Icon;
+        insertIcon.transform.SetParent(insertItemView.transform, false);
+        insertIcon.transform.position = button.transform.position;
+        AnimateMoving(insertIcon, () =>
+        {
+            insertIcon.transform.SetParent(transform);
+            insertItemView.SetInsertData(button.InsertData);
+            equipmentManager.GetEquipmentDataByType(button.InsertData.Type).SetInsert(button.InsertData);
+            insertIcon.gameObject.SetActive(false);
+        });
+    }
+
+    private void OnClothReplaced(BagEquipmentButton button)
+    {
+        ClothItemView clothItem = equipedClothItemsContainer.GetClothItem(button.EquipmentData.Type);
+
+        insertIcon.gameObject.SetActive(true);
+        insertIcon.sprite = button.EquipmentData.UIData.Icon;
+        insertIcon.transform.SetParent(clothItem.transform, false);
+        insertIcon.transform.position = button.transform.position;
+        AnimateMoving(insertIcon, () =>
+        {
+            EquipmentData equipmentData = clothItem.EquipmentData;
+            insertIcon.transform.SetParent(transform);
+            equipmentManager.UpdateEquipmentData(equipmentData, button.EquipmentData);
+            clothItem.Init(equipmentManager.GetEquipmentDataByType(button.EquipmentData.Type));
+            clothItem.UpdateDatas();
+            insertIcon.gameObject.SetActive(false);
+        });
+    }
+
+    private void AnimateMoving(Image insertIcon, Action callback)
+    {
+        sequence.Kill();
+        sequence = DOTween.Sequence();
+        sequence.Append(insertIcon.transform.DOScale(Vector3.one, 0.25f).From(Vector3.zero).SetEase(Ease.OutBack));
+        sequence.Append(insertIcon.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.InBack));
+        sequence.Join(insertIcon.transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.Linear));
+        sequence.OnComplete(() => callback());
+    }
+
+    private void OnInsertDataRemoved(InsertData data)
+    {
+        playerItemsBag.ShowInsert(data);
+        equipedClothItemsContainer.ClearInsertSlot(data);
     }
     #endregion
 

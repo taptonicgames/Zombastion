@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f912e93840afae44891d215cf8763b3, type: 3}
   m_Name: ZombieSimpleSO
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 1
   <ShootDelay>k__BackingField: 0
   <Speed>k__BackingField: 1
   <Health>k__BackingField: 100
   <ExperienceForDestroy>k__BackingField: 1
+  <additionalParameters>k__BackingField: []

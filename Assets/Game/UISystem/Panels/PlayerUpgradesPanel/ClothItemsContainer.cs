@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class ClothItemsContainer : MonoBehaviour
 
     public void Init(EquipmentManager equipmentManager)
     {
-        List<EquipmentData> datas = equipmentManager.GetDatas();
+        List<EquipmentData> datas = equipmentManager.GetEquipmentDatas();
 
         gridLayoutGroup = GetComponent<GridLayoutGroup>();
         items = GetComponentsInChildren<ClothItemView>();
@@ -32,6 +33,23 @@ public class ClothItemsContainer : MonoBehaviour
                 items[i].ItemClicked += OnItemClicked;
             }
         }
+    }
+
+    public ClothItemView GetClothItem(EquipmentType type)
+    {
+        return items.First(i => i.EquipmentData.Type == type);
+    }
+
+    public InsertItemView GetEmptyInsertSlot(EquipmentType type)
+    {
+        ClothItemView clothItemView = items.First(i => i.EquipmentData.Type == type);
+        return clothItemView.GetEmptyInsertSlot();
+    }
+
+    public void ClearInsertSlot(InsertData data)
+    {
+        ClothItemView clothItemView = items.First(i => i.EquipmentData.Type == data.Type);
+        clothItemView.UpdateDatas();
     }
 
     private void OnItemClicked(ClothItemView item)

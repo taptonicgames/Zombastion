@@ -59,7 +59,7 @@ public class EnhancePopup : AbstractPopup
 
     private void CreateButtonsList()
     {
-        List<EquipmentData> datas = equipmentManager.GetDatas();
+        List<EquipmentData> datas = equipmentManager.GetEquipmentDatas();
 
         foreach (var data in datas)
         {
@@ -105,7 +105,7 @@ public class EnhancePopup : AbstractPopup
 
     private void OnEnhanceAllButtonClicked()
     {
-        List<EquipmentData> datas = equipmentManager.GetDatas();
+        List<EquipmentData> datas = equipmentManager.GetEquipmentDatas();
 
         foreach (var data in datas)
             data.UpgradeLevel();
