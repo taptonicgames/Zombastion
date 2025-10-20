@@ -1,7 +1,7 @@
 public class EnemyMovementAbility : AbstractUnitAbility
 {
     private AbstractEnemy enemy;
-    private const float MAGNITUDE_ANIMATION_INCREMENT = 1.7f;
+    private const float MAGNITUDE_ANIMATION_INCREMENT = 1f;
 
     public EnemyMovementAbility(AbstractUnit unit)
         : base(unit)

@@ -4,17 +4,18 @@ public class ZombieMoveAction : AbstractUnitAction
 {
     [Inject]
     private readonly SceneReferences sceneReferences;
-	[Inject]
-	private readonly UnitActionPermissionHandler unitActionPermissionHandler;
 
-	public ZombieMoveAction(AbstractUnit unit)
+    [Inject]
+    private readonly UnitActionPermissionHandler unitActionPermissionHandler;
+
+    public ZombieMoveAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()
     {
-		if (unit.UnitActionType != actionType && CheckCondition())
-			StartAction();
-		if (unit.UnitActionType == actionType)
+        if (unit.UnitActionType != actionType && CheckCondition())
+            StartAction();
+        if (unit.UnitActionType == actionType)
             return true;
         return false;
     }
@@ -31,8 +32,7 @@ public class ZombieMoveAction : AbstractUnitAction
         return true;
     }
 
-
-	public override void StartAction()
+    public override void StartAction()
     {
         base.StartAction();
         unit.Agent.isStopped = false;
@@ -40,12 +40,12 @@ public class ZombieMoveAction : AbstractUnitAction
         EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
     }
 
-	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
-	{
+    private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
+    {
         FindTargetAndMove();
-	}
+    }
 
-	private void FindTargetAndMove()
+    private void FindTargetAndMove()
     {
         var target = sceneReferences.castle.Gates.gameObject.activeSelf
             ? sceneReferences.castle.Gates
@@ -61,8 +61,8 @@ public class ZombieMoveAction : AbstractUnitAction
         Dispose();
     }
 
-	public override void Dispose()
-	{
-		EventBus<GatesFallenEvnt>.Unsubscribe(OnGatesFallenEvnt);
-	}
+    public override void Dispose()
+    {
+        EventBus<GatesFallenEvnt>.Unsubscribe(OnGatesFallenEvnt);
+    }
 }

@@ -19,6 +19,7 @@ public abstract class AbstractEnemy : AbstractUnit
         base.Init();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        agent.speed = SOData.Speed;
     }
 
     public override IGetAttackSOParameters GetAttackSOParameters()

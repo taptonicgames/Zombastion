@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
 using UnityEngine;
-using Zenject;
 
 public class PlayerCharacter : AbstractPlayerUnit
 {
-	[SerializeField]
+    [SerializeField]
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
 
@@ -81,4 +80,6 @@ public class PlayerCharacter : AbstractPlayerUnit
     {
         return typeof(PlayerCharacter);
     }
+
+    public override void OnUnitDied() { }
 }

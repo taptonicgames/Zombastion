@@ -66,7 +66,10 @@ public class BasePlayerAttackAction : AbstractUnitAction
 
         if (enemies.Count > 0)
         {
-            enemies.OrderBy(a => Vector3.Distance(unit.transform.position, a.transform.position));
+            enemies = enemies
+                .OrderBy(a => Vector3.Distance(unit.transform.position, a.transform.position))
+                .ToList();
+
             targetUnit = enemies.First();
             return true;
         }
@@ -74,11 +77,11 @@ public class BasePlayerAttackAction : AbstractUnitAction
         return false;
     }
 
-	public override void StartAction()
-	{
-		base.StartAction();
-		WaitRotatingToTarget().Forget();
-	}
+    public override void StartAction()
+    {
+        base.StartAction();
+        WaitRotatingToTarget().Forget();
+    }
 
     protected virtual async UniTask WaitRotatingToTarget()
     {
@@ -95,10 +98,10 @@ public class BasePlayerAttackAction : AbstractUnitAction
         unit.Weapon.Fire(unit, targetUnit);
     }
 
-	public override void Update()
-	{
-		RotateToTarget();
-	}
+    public override void Update()
+    {
+        RotateToTarget();
+    }
 
     protected virtual void RotateToTarget()
     {
@@ -138,10 +141,10 @@ public class BasePlayerAttackAction : AbstractUnitAction
         }
     }
 
-	public override void OnFinish()
-	{
-		unit.Weapon.StopFire();
-		angleToEnemy = 360f;
-		targetUnit = null;
-	}
+    public override void OnFinish()
+    {
+        unit.Weapon.StopFire();
+        angleToEnemy = 360f;
+        targetUnit = null;
+    }
 }

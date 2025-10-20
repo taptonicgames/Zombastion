@@ -9,10 +9,10 @@ using Zenject;
 public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 {
     [SerializeField]
-    protected bool isEnable;
+    private bool isEnable;
 
-    [SerializeField]
-    protected bool isNeedSave;
+    [field: SerializeField]
+    public bool IsNeedSave { get; private set; }
 
     [SerializeField]
     private bool logUnitActionType;
@@ -194,7 +194,7 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     public virtual void OnUnitDied()
     {
-        isEnable = false;
+        IsEnable = false;
     }
 
     public virtual T GetUnitAbility<T>(AbilityType type)

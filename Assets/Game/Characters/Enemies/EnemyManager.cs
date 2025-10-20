@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using Rnd = UnityEngine.Random;
 
 public class EnemyManager : IInitializable
 {
@@ -13,7 +16,7 @@ public class EnemyManager : IInitializable
 
     [Inject]
     private readonly GamePreferences gamePreferences;
-    private List<AbstractUnit> enemies = new();
+    private List<AbstractUnit> enemiesList = new();
     private bool pause;
 
     public void Initialize()
@@ -22,36 +25,46 @@ public class EnemyManager : IInitializable
         EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
     }
 
-	private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
-	{
-        pause = evnt.paused;
-	}
-
-	private async UniTask FindEnemies()
+    private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
     {
-        CharacterType[] enemyTypes = { CharacterType.SimpleZombie, CharacterType.ArcherZombie };
+        pause = evnt.paused;
+    }
 
-        while (enemies.Count < gamePreferences.totalEnemiesAmount)
+    private async UniTask FindEnemies()
+    {
+        CharacterType[] enemyTypes =
         {
-            var enemyType = enemyTypes[Random.Range(0, enemyTypes.Length)];
+            CharacterType.SimpleZombie,
+            CharacterType.ZombieFat, /*, CharacterType.ArcherZombie*/
+        };
+
+        while (enemiesList.Count < gamePreferences.totalEnemiesAmount)
+        {
+            var enemyType = enemyTypes[Rnd.Range(0, enemyTypes.Length)];
 
             var spawnArea = sceneReferences.enemiesSpawnAreas[
-                Random.Range(0, sceneReferences.enemiesSpawnAreas.Count)
+                Rnd.Range(0, sceneReferences.enemiesSpawnAreas.Count)
             ];
 
-            var enemies = characterFactory.Spawn(enemyType, 1, spawnArea);
-            this.enemies.AddRange(enemies);
-            await UniTask.WaitForSeconds(gamePreferences.enemySpawnDelay);
-			await UniTask.WaitUntil(() => !pause);
-		}
+            var enemies = characterFactory.Spawn(enemyType, 1, spawnArea).ToArray();
+            enemiesList.AddRange(enemies);
 
-        await UniTask.WaitUntil(() => enemies.Count < gamePreferences.totalEnemiesAmount);
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i].name += $"_{enemies[i].GetID()}";
+            }
+
+            await UniTask.WaitForSeconds(gamePreferences.enemySpawnDelay);
+            await UniTask.WaitUntil(() => !pause);
+        }
+
+        await UniTask.WaitUntil(() => enemiesList.Count < gamePreferences.totalEnemiesAmount);
         await UniTask.WaitUntil(() => !pause);
         FindEnemies().Forget();
     }
 
     public void RemoveEnemyFromList(AbstractUnit enemy)
     {
-        enemies.Remove(enemy);
+        enemiesList.Remove(enemy);
     }
 }
