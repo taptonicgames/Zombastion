@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using Zenject;
 
-public class GameManager : IInitializable, IDisposable
+public class GameManager : IInitializable, IDisposable, IFixedTickable
 {
     [Inject]
     private readonly PlayerCharacterModel playerCharacterModel;
@@ -19,12 +19,33 @@ public class GameManager : IInitializable, IDisposable
     [Inject]
     private readonly DiContainer diContainer;
     private CompositeDisposable disposables = new();
+    private Timer timer = new Timer(TimerMode.counterFixedUpdate);
 
     public void Initialize()
     {
         CreateUIManager();
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
+        playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+
+        timer.OnTimerReached += () =>
+            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Win });
+
+        timer.StartTimer(gamePreferences.roundDuration);
+    }
+
+    private void OnPlayerHealthChanged(int value)
+    {
+        if (value == 0)
+		{
+            timer.StopTimer();
+			EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+		}
+	}
+
+    public void FixedTick()
+    {
+        timer.TimerUpdate();
     }
 
     private void CreateUIManager()
