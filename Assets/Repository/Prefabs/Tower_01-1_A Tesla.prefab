@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4522795690532465581
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2037983821308086411}
+    m_Modifications:
+    - target: {fileID: 6954531198704961830, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_Name
+      value: Weapon_Tesla_01-1_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.892
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+--- !u!4 &6128439616103315505 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7766639989703447452, guid: 5b37a84ab6e824df9828c8cd5c646479, type: 3}
+  m_PrefabInstance: {fileID: 4522795690532465581}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7853182736769608374
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935022668917143687, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      propertyPath: m_Name
+      value: Tower_01-1_A Tesla
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6128439616103315505}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+--- !u!4 &2037983821308086411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8121190157218882109, guid: 856af7ce145bd4dc2aaf1e32818a1826, type: 3}
+  m_PrefabInstance: {fileID: 7853182736769608374}
+  m_PrefabAsset: {fileID: 0}
