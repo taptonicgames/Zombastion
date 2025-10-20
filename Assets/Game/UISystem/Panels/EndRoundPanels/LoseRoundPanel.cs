@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class LoseRoundPanel : AbstractPanel
 {
@@ -18,6 +19,8 @@ public class LoseRoundPanel : AbstractPanel
     [SerializeField] private Transform statItemsView;
     [SerializeField] private float animateDurationPerElement = 0.25f;
 
+    [Inject] private RewardsManager rewardsManager;
+
     public override PanelType Type => PanelType.LoseRound;
 
     private void Awake()
@@ -30,11 +33,8 @@ public class LoseRoundPanel : AbstractPanel
     {
         base.Init(arr);
 
-        rewardCellsContainer.Init();
+        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(0).LoseDatas);
         statItemsContainer.Init();
-
-        //TODO: implement monetization
-        doubleRewardButton.gameObject.SetActive(false);
     }
 
     public async override UniTask OnShow()
@@ -46,6 +46,7 @@ public class LoseRoundPanel : AbstractPanel
         rewardsView.transform.localScale = Vector3.zero;
         statItemsView.transform.localScale = Vector3.zero;
         continueButton.transform.localScale = Vector3.zero;
+        doubleRewardButton.transform.localScale = Vector3.zero;
 
         await AnimateElement(tittleView.transform);
         await AnimateElement(levelView.transform);
@@ -54,6 +55,7 @@ public class LoseRoundPanel : AbstractPanel
         await AnimateElement(statItemsView.transform);
         await statItemsContainer.AnimateStatItems();
         await AnimateElement(continueButton.transform);
+        await AnimateElement(doubleRewardButton.transform);
     }
 
     private async UniTask AnimateElement(Transform transform)
@@ -67,11 +69,14 @@ public class LoseRoundPanel : AbstractPanel
     private void OnContinueButtonClicked()
     {
         //TODO: exit the round
+        EventBus<OpenPanelEvnt>.Publish(
+                        new OpenPanelEvnt() { type = PanelType.Start });
     }
 
     private void OnDoubleRewardButtonClicked()
     {
-        //TODO: show reward video
+        doubleRewardButton.interactable = false;
+        rewardCellsContainer.IncreaseReward(Constants.REWARD_MODIFIER);
     }
 
     private void OnDestroy()

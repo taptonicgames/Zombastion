@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,13 +10,20 @@ public class EndRoundRewadCell : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text text;
 
-    public void Show(Sprite sprite)
+    private int rewardValue;
+
+    public void Init(Sprite icon, Sprite bg, int reward)
     {
-        icon.sprite = sprite;
+        this.icon.sprite = icon;
+        background.sprite = bg;
+
+        rewardValue = reward;
+        this.text.SetText($"{rewardValue}");
     }
 
-    public void SetTextValue(int targetValue, int queue, string prefix = "", int startValue = 0)
+    public void IncreaseReward(float modifier)
     {
-        text.SetText($"{targetValue}");
+        rewardValue = Mathf.RoundToInt(rewardValue * modifier);
+        text.SetText($"{rewardValue}");
     }
 }

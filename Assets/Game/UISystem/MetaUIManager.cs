@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using Zenject;
 
 public class MetaUIManager : AbstractUIManager
 {
@@ -17,6 +19,7 @@ public class MetaUIManager : AbstractUIManager
         HideAllPanels();
         GetPanel(PanelType.Start).Show();
         GetPanel(PanelType.Switcher).Show();
+        GetPanel(PanelType.Wallets).Show();
     }
 
     public void EnterPlayerUpgradePanel()
@@ -24,6 +27,7 @@ public class MetaUIManager : AbstractUIManager
         HideAllPanels();
         GetPanel(PanelType.PlayerUpgrades).Show();
         GetPanel(PanelType.Switcher).Show();
+        GetPanel(PanelType.Wallets).Show();
     }
 
     public void EnterShopPanel()
@@ -31,6 +35,7 @@ public class MetaUIManager : AbstractUIManager
         HideAllPanels();
         GetPanel(PanelType.ShopPanel).Show();
         GetPanel(PanelType.Switcher).Show();
+        GetPanel(PanelType.Wallets).Show();
     }
 
     public void EnterCastleUpgradePanel()
@@ -38,6 +43,7 @@ public class MetaUIManager : AbstractUIManager
         HideAllPanels();
         GetPanel(PanelType.CastleUpgrades).Show();
         GetPanel(PanelType.Switcher).Show();
+        GetPanel(PanelType.Wallets).Show();
     }
 
     private void EnterChangePlayerPanel()
@@ -82,6 +88,26 @@ public class MetaUIManager : AbstractUIManager
             PanelType.SkillsTree => EnterSkillsTreePanel,
             _ => null
         };
+    }
+    #endregion
+
+    #region Test
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetPanel(PanelType.Switcher).Hide();
+            LoseRoundPanel loseRoundPanel = GetPanel(PanelType.LoseRound) as LoseRoundPanel;
+            loseRoundPanel.Init(null);
+            GetPanel(PanelType.LoseRound).Show();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            GetPanel(PanelType.Switcher).Hide();
+            WinRoundPanel loseRoundPanel = GetPanel(PanelType.WinRound) as WinRoundPanel;
+            loseRoundPanel.Init(null);
+            GetPanel(PanelType.WinRound).Show();
+        }
     }
     #endregion
 

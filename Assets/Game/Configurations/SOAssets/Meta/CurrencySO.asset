@@ -41,6 +41,13 @@ MonoBehaviour:
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
         type: 3}
+  - Id: Energy
+    <Type>k__BackingField: 4
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 80a0fc9c93913457ca01a208704d2adc,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
   - Id: Torso
     <Type>k__BackingField: 102
     <UIData>k__BackingField:
@@ -104,3 +111,4 @@ MonoBehaviour:
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
         type: 3}
+  <StartMaxEnergy>k__BackingField: 30

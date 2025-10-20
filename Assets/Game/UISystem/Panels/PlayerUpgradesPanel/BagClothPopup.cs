@@ -55,7 +55,6 @@ public class BagClothPopup : AbstractPopup
         targetEquipClothTypeText.SetText($"{targetData.Type}");
         targetEquipStatText.SetText($"{targetData.AttackValue}");
 
-        Debug.LogWarning($"{currentData.Id} == {targetData.Id}");
         buttonsView.gameObject.SetActive(currentData.Id != targetData.Id);
     }
 

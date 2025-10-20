@@ -23,4 +23,9 @@ public static class Constants
     public const string RAW_PLAYER_VIEW = "RawPlayerView";
     public const string BATTLE_UPGRADE_CONFIG_PACK = "BattleUpgradeConfigsPack";
     public const string UPGRADE_CARD = "UpgradeCard";
+
+    public const string LEVEL_REWARDS_SO = "LevelRewardsSO";
+    public const string CURRENCY_SO = "CurrencySO";
+
+    public const float REWARD_MODIFIER = 2f;
 }

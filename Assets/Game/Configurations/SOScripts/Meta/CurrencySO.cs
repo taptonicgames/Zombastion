@@ -4,6 +4,7 @@
 public class CurrencySO : ScriptableObject
 {
     [field: SerializeField] public CurrencyData[] Datas { get; private set; }
+    [field: SerializeField] public int StartMaxEnergy { get; private set; }
 
     private void OnValidate()
     {

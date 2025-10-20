@@ -6,6 +6,7 @@
     Exp = 1,
     Money = 2,
     Gems = 3,
+    Energy = 4,
     #endregion
 
     #region Cloth
