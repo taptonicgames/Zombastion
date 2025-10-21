@@ -15,7 +15,7 @@ MonoBehaviour:
   gamePreferences:
     totalEnemiesAmount: 50
     enemySpawnDelay: 1
-    roundDuration: 30
+    roundDuration: 5
     pointsAmountToCompleteRoundLevel: 30
     OpenShopPanelAtLevel: 0
     OpenPlayerUpgradePanelAtLevel: 0

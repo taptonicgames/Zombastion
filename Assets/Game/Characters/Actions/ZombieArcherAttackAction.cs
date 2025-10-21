@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ZombieAttackAction : AbstractUnitAction
+public class ZombieArcherAttackAction : AbstractUnitAction
 {
     [Inject]
     private readonly UnitActionPermissionHandler unitActionPermissionHandler;
@@ -15,7 +15,7 @@ public class ZombieAttackAction : AbstractUnitAction
     private Transform targetTr;
     private float angleToTarget = 360f;
 
-    public ZombieAttackAction(AbstractUnit unit)
+    public ZombieArcherAttackAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()

@@ -13,7 +13,7 @@ public class AttackingEnemy : AbstractEnemy
 
         unitActionsList = new()
         {
-            new ZombieAttackAction(this),
+            new ZombieArcherAttackAction(this),
             new ZombieMoveAction(this),
             new UnitIdleAction(this),
             new UnitPauseAction(this),

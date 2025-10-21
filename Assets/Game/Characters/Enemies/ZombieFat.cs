@@ -1,8 +1,7 @@
 using System;
-using UnityEngine;
 using Zenject;
 
-public class SimpleEnemy : AbstractEnemy
+public class ZombieFat : AbstractEnemy
 {
     [Inject]
     private readonly SceneReferences sceneReferences;
@@ -13,6 +12,7 @@ public class SimpleEnemy : AbstractEnemy
 
         unitActionsList = new()
         {
+            new ZombieFatAttackAction(this),
             new ZombieMoveAction(this),
             new UnitIdleAction(this),
             new UnitPauseAction(this),
@@ -26,17 +26,15 @@ public class SimpleEnemy : AbstractEnemy
         SetActionTypeForced(UnitActionType.Move);
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    public override void SetAnimationPhase(int value)
     {
-        if (other.gameObject.layer == Constants.GATES_LAYER)
-        {
-            sceneReferences.castle.SetDamage(SOData.Damage);
-            OnUnitDied();
-        }
+        base.SetAnimationPhase(value);
+        sceneReferences.castle.SetDamage(SOData.Damage);
+        OnUnitDied();
     }
 
     public override Type GetDamageRecieverType()
     {
-        return typeof(SimpleEnemy);
+        return typeof(ZombieFat);
     }
 }
