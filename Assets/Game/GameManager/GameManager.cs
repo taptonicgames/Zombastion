@@ -1,8 +1,9 @@
 using System;
 using UniRx;
+using UnityEngine.SceneManagement;
 using Zenject;
 
-public class GameManager : IInitializable, IDisposable, IFixedTickable
+public class GameManager : IInitializable, IDisposable
 {
     [Inject]
     private readonly PlayerCharacterModel playerCharacterModel;
@@ -19,7 +20,6 @@ public class GameManager : IInitializable, IDisposable, IFixedTickable
     [Inject]
     private readonly DiContainer diContainer;
     private CompositeDisposable disposables = new();
-    private Timer timer = new Timer(TimerMode.counterFixedUpdate);
 
     public void Initialize()
     {
@@ -27,25 +27,7 @@ public class GameManager : IInitializable, IDisposable, IFixedTickable
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
         playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
-
-        timer.OnTimerReached += () =>
-            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Win });
-
-        timer.StartTimer(gamePreferences.roundDuration);
-    }
-
-    private void OnPlayerHealthChanged(int value)
-    {
-        if (value == 0)
-		{
-            timer.StopTimer();
-			EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
-		}
-	}
-
-    public void FixedTick()
-    {
-        timer.TimerUpdate();
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
     }
 
     private void CreateUIManager()
@@ -70,10 +52,23 @@ public class GameManager : IInitializable, IDisposable, IFixedTickable
         }
     }
 
+    private void OnPlayerHealthChanged(int value)
+    {
+        if (value == 0)
+        {
+            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+        }
+    }
+
     private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
     {
         EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
         playerCharacterModel.ResetParameters();
+    }
+
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void Dispose()
