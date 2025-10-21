@@ -1,5 +1,6 @@
 using System;
 using UniRx;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class GameManager : IInitializable, IDisposable
@@ -24,7 +25,9 @@ public class GameManager : IInitializable, IDisposable
     {
         CreateUIManager();
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
+        playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
     }
 
     private void CreateUIManager()
@@ -49,10 +52,23 @@ public class GameManager : IInitializable, IDisposable
         }
     }
 
+    private void OnPlayerHealthChanged(int value)
+    {
+        if (value == 0)
+        {
+            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+        }
+    }
+
     private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
     {
         EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
         playerCharacterModel.ResetParameters();
+    }
+
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void Dispose()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -6,7 +5,7 @@ using UnityEngine;
 using Zenject;
 using Rnd = UnityEngine.Random;
 
-public class EnemyManager : IInitializable
+public class EnemyManager : IInitializable, IFixedTickable
 {
     [Inject]
     private readonly SceneReferences sceneReferences;
@@ -17,12 +16,28 @@ public class EnemyManager : IInitializable
     [Inject]
     private readonly GamePreferences gamePreferences;
     private List<AbstractUnit> enemiesList = new();
-    private bool pause;
+    private bool pause,
+        stopCreateEnemy;
+    private Timer timer = new Timer(TimerMode.counterFixedUpdate);
 
     public void Initialize()
     {
-        FindEnemies().Forget();
+        CreateEnemies().Forget();
         EventBus<SetGamePauseEvnt>.Subscribe(OnSetGamePauseEvnt);
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
+        timer.OnTimerReached += () => stopCreateEnemy = true;
+        timer.StartTimer(gamePreferences.roundDuration);
+    }
+
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
+    {
+        timer.StopTimer();
+        pause = true;
+    }
+
+    public void FixedTick()
+    {
+        timer.TimerUpdate();
     }
 
     private void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
@@ -30,7 +45,7 @@ public class EnemyManager : IInitializable
         pause = evnt.paused;
     }
 
-    private async UniTask FindEnemies()
+    private async UniTask CreateEnemies()
     {
         CharacterType[] enemyTypes =
         {
@@ -54,17 +69,27 @@ public class EnemyManager : IInitializable
                 enemies[i].name += $"_{enemies[i].GetID()}";
             }
 
+            if (stopCreateEnemy)
+                break;
+
             await UniTask.WaitForSeconds(gamePreferences.enemySpawnDelay);
             await UniTask.WaitUntil(() => !pause);
         }
 
         await UniTask.WaitUntil(() => enemiesList.Count < gamePreferences.totalEnemiesAmount);
         await UniTask.WaitUntil(() => !pause);
-        FindEnemies().Forget();
+
+        if (!stopCreateEnemy)
+            CreateEnemies().Forget();
     }
 
     public void RemoveEnemyFromList(AbstractUnit enemy)
     {
         enemiesList.Remove(enemy);
+
+        if (enemiesList.Count == 0 && stopCreateEnemy)
+        {
+            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Win });
+        }
     }
 }

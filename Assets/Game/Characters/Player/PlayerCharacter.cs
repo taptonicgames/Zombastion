@@ -23,9 +23,7 @@ public class PlayerCharacter : AbstractPlayerUnit
     private void Awake()
     {
         Init();
-
-        if (playerCharacterModel.Health.Value == 0)
-            playerCharacterModel.Health.Value = SOData.Health;
+        playerCharacterModel.Health.Value = SOData.Health;
     }
 
     private void Start()
