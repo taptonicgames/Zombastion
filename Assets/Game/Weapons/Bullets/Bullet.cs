@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     private int damage;
     private bool isActive;
 
-    public void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
+    public virtual void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
     {
         this.weapon = weapon;
         SOData = weapon.WeaponSOData;
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isActive)
             transform.Translate(Vector3.forward * Time.deltaTime * SOData.BulletSpeed);

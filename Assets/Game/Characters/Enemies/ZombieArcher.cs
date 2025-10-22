@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class AttackingEnemy : AbstractEnemy
+public class ZombieArcher : AbstractEnemy
 {
     [SerializeField]
     private AbstractWeapon zombieWeapon;
@@ -13,7 +13,7 @@ public class AttackingEnemy : AbstractEnemy
 
         unitActionsList = new()
         {
-            new ZombieAttackAction(this),
+            new ZombieArcherAttackAction(this),
             new ZombieMoveAction(this),
             new UnitIdleAction(this),
             new UnitPauseAction(this),
@@ -29,6 +29,6 @@ public class AttackingEnemy : AbstractEnemy
 
     public override Type GetDamageRecieverType()
     {
-        return typeof(AttackingEnemy);
+        return typeof(ZombieArcher);
     }
 }

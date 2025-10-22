@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ZombieAttackAction : AbstractUnitAction
+public class ZombieArcherAttackAction : AbstractUnitAction
 {
     [Inject]
     private readonly UnitActionPermissionHandler unitActionPermissionHandler;
@@ -15,7 +15,7 @@ public class ZombieAttackAction : AbstractUnitAction
     private Transform targetTr;
     private float angleToTarget = 360f;
 
-    public ZombieAttackAction(AbstractUnit unit)
+    public ZombieArcherAttackAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()
@@ -106,7 +106,7 @@ public class ZombieAttackAction : AbstractUnitAction
     {
         base.StartAction();
         unit.Animator.SetBool(Constants.ATTACK, true);
-        RotateToTarget().Forget();
+        //RotateToTarget().Forget();
     }
 
     private async UniTask RotateToTarget()
@@ -127,7 +127,7 @@ public class ZombieAttackAction : AbstractUnitAction
             );
         }
 
-        unit.Weapon.Fire(unit, targetUnit);
+        //unit.Weapon.Fire(unit, targetUnit);
     }
 
     public override void Update()
@@ -152,8 +152,8 @@ public class ZombieAttackAction : AbstractUnitAction
             );
         }
 
-        if (!unit.Weapon.InFire)
-            return;
+        //if (!unit.Weapon.InFire)
+        //    return;
 
         if (targetUnit && targetUnit.Health > 0)
         {
@@ -176,9 +176,15 @@ public class ZombieAttackAction : AbstractUnitAction
         }
     }
 
+	public override void SetAnimationPhase(int value)
+	{
+		base.SetAnimationPhase(value);
+		unit.Weapon.Fire(unit, targetUnit);
+	}
+
     public override void OnFinish()
     {
-        unit.Weapon.StopFire();
+        //unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
         angleToTarget = 360f;
         targetUnit = null;
