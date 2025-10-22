@@ -49,8 +49,9 @@ public class EnemyManager : IInitializable, IFixedTickable
     {
         CharacterType[] enemyTypes =
         {
-            CharacterType.SimpleZombie,
-            CharacterType.ZombieFat, /*, CharacterType.ArcherZombie*/
+            //CharacterType.SimpleZombie,
+            //CharacterType.ZombieFat,
+            CharacterType.ArcherZombie,
         };
 
         while (enemiesList.Count < gamePreferences.totalEnemiesAmount)

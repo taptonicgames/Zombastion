@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24576a0f55fa65047b62f9348eded33f, type: 3}
-  m_Name: CrossbowWeaponZombieSO
+  m_Name: HandThrowingWeaponSO
   m_EditorClassIdentifier: 
-  <WeaponType>k__BackingField: 0
+  <WeaponType>k__BackingField: 4
   shootDelay: 1
   shootDamage: 1
-  bulletType: 0
-  bulletSpeed: 50
-  attackDistance: 8
+  bulletType: 1
+  bulletSpeed: 20
+  attackDistance: 12
+  <additionalParameters>k__BackingField: []

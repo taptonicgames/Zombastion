@@ -106,7 +106,7 @@ public class ZombieArcherAttackAction : AbstractUnitAction
     {
         base.StartAction();
         unit.Animator.SetBool(Constants.ATTACK, true);
-        RotateToTarget().Forget();
+        //RotateToTarget().Forget();
     }
 
     private async UniTask RotateToTarget()
@@ -127,7 +127,7 @@ public class ZombieArcherAttackAction : AbstractUnitAction
             );
         }
 
-        unit.Weapon.Fire(unit, targetUnit);
+        //unit.Weapon.Fire(unit, targetUnit);
     }
 
     public override void Update()
@@ -152,8 +152,8 @@ public class ZombieArcherAttackAction : AbstractUnitAction
             );
         }
 
-        if (!unit.Weapon.InFire)
-            return;
+        //if (!unit.Weapon.InFire)
+        //    return;
 
         if (targetUnit && targetUnit.Health > 0)
         {
@@ -176,9 +176,15 @@ public class ZombieArcherAttackAction : AbstractUnitAction
         }
     }
 
+	public override void SetAnimationPhase(int value)
+	{
+		base.SetAnimationPhase(value);
+		unit.Weapon.Fire(unit, targetUnit);
+	}
+
     public override void OnFinish()
     {
-        unit.Weapon.StopFire();
+        //unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
         angleToTarget = 360f;
         targetUnit = null;

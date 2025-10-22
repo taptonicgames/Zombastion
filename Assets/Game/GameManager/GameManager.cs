@@ -56,7 +56,10 @@ public class GameManager : IInitializable, IDisposable
     {
         if (value == 0)
         {
-            EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+            StaticFunctions.InvokeActionDelay(
+                () => EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail }),
+                2
+            );
         }
     }
 

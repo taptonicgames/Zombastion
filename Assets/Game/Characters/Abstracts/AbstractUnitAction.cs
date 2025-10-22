@@ -57,6 +57,7 @@ public abstract class AbstractUnitAction : IDisposable
 	public virtual void Update() { }
 	public virtual void FixedUpdate() { }
 	protected abstract void SetActionType();
+	public virtual void SetAnimationPhase(int value) { }
 	public virtual void SetTarget(Vector3 targetPos) { }
 	public virtual void SetTarget(Transform targetTr) { }
 	public virtual void OnFinish() { }

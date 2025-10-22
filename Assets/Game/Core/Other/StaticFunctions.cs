@@ -37,8 +37,8 @@ public static class StaticFunctions
         alpha = Mathf.Clamp(alpha, clampMin, clampMax);
 
         if (rotate)
-		{
-			switch (axis)
+        {
+            switch (axis)
             {
                 case RectTransform.Axis.Horizontal:
                     transform.Rotate(0, alpha, 0);
@@ -49,9 +49,9 @@ public static class StaticFunctions
                 default:
                     break;
             }
-		}
+        }
 
-		return angle;
+        return angle;
     }
 
     public static void ObjectFinishTurning(Transform transform, Vector3 targetPos, float duration)
@@ -67,7 +67,7 @@ public static class StaticFunctions
     public static async void InvokeActionDelay(
         Action action,
         float delay,
-        CancellationToken cancellationToken
+        CancellationToken cancellationToken = default
     )
     {
         await UniTask.WaitForSeconds(delay, cancellationToken: cancellationToken);
