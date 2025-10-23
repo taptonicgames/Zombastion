@@ -19,6 +19,9 @@ public class GameManager : IInitializable, IDisposable
 
     [Inject]
     private readonly DiContainer diContainer;
+
+    [Inject]
+    private readonly CoroutineManager coroutineManager;
     private CompositeDisposable disposables = new();
 
     public void Initialize()
@@ -56,7 +59,7 @@ public class GameManager : IInitializable, IDisposable
     {
         if (value == 0)
         {
-            StaticFunctions.InvokeActionDelay(
+            coroutineManager.InvokeActionDelay(
                 () => EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail }),
                 2
             );

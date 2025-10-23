@@ -63,14 +63,4 @@ public static class StaticFunctions
         var angle = new Vector3(0, alpha, 0);
         transform.DORotate(transform.eulerAngles + angle, duration);
     }
-
-    public static async void InvokeActionDelay(
-        Action action,
-        float delay,
-        CancellationToken cancellationToken = default
-    )
-    {
-        await UniTask.WaitForSeconds(delay, cancellationToken: cancellationToken);
-        action?.Invoke();
-    }
 }

@@ -1,10 +1,10 @@
-using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ZombieArcherAttackAction : AbstractUnitAction
+public class ZombieAxeAttackAction : AbstractUnitAction
 {
     [Inject]
     private readonly UnitActionPermissionHandler unitActionPermissionHandler;
@@ -13,9 +13,10 @@ public class ZombieArcherAttackAction : AbstractUnitAction
     private readonly SceneReferences sceneReferences;
     private AbstractUnit targetUnit;
     private Transform targetTr;
-    private float angleToTarget = 360f;
+    private Coroutine coroutine;
+    private const float AXE_ATTACK_DISTANCE = 2f;
 
-    public ZombieArcherAttackAction(AbstractUnit unit)
+    public ZombieAxeAttackAction(AbstractUnit unit)
         : base(unit) { }
 
     public override bool CheckAction()
@@ -94,6 +95,7 @@ public class ZombieArcherAttackAction : AbstractUnitAction
             playerCharacters.OrderBy(a =>
                 Vector3.Distance(unit.transform.position, a.transform.position)
             );
+
             targetUnit = playerCharacters.First();
             return true;
         }
@@ -104,58 +106,55 @@ public class ZombieArcherAttackAction : AbstractUnitAction
     public override void StartAction()
     {
         base.StartAction();
-        unit.Animator.SetBool(Constants.ATTACK, true);
-        //RotateToTarget().Forget();
+        coroutine = unit.StartCoroutine(WaitTargetReached());
     }
 
-    private async UniTask RotateToTarget()
+    private IEnumerator WaitTargetReached()
     {
         if (targetUnit)
         {
-            await UniTask.WaitUntil(
-                () => angleToTarget < Constants.ALMOST_ZERO,
-                cancellationToken: targetUnit.destroyCancellationToken
+            yield return new WaitUntil(() =>
+                Vector3.Distance(unit.transform.position, targetUnit.transform.position)
+                < AXE_ATTACK_DISTANCE
             );
         }
 
         if (targetTr)
         {
-            await UniTask.WaitUntil(
-                () => angleToTarget < Constants.ALMOST_ZERO,
-                cancellationToken: unit.destroyCancellationToken
+            yield return new WaitUntil(() =>
+                Vector3.Distance(unit.transform.position, targetTr.position) < AXE_ATTACK_DISTANCE
             );
         }
 
-        //unit.Weapon.Fire(unit, targetUnit);
+        unit.Agent.isStopped = true;
+        unit.Animator.SetBool(Constants.ATTACK, true);
     }
 
     public override void Update()
     {
         if (targetUnit)
         {
-            angleToTarget = StaticFunctions.ObjectFinishTurning(
-                unit.transform,
-                targetUnit.transform.position,
-                -Constants.UNIT_ROTATION_SPEED,
-                Constants.UNIT_ROTATION_SPEED
-            );
+            unit.Agent.SetDestination(targetUnit.transform.position);
         }
 
         if (targetTr)
         {
-            angleToTarget = StaticFunctions.ObjectFinishTurning(
-                unit.transform,
-                targetTr.position,
-                -Constants.UNIT_ROTATION_SPEED,
-                Constants.UNIT_ROTATION_SPEED
-            );
+            unit.Agent.SetDestination(targetTr.position);
         }
-
-        //if (!unit.Weapon.InFire)
-        //    return;
 
         if (targetUnit && targetUnit.Health > 0)
         {
+            if (
+                Vector3.Distance(unit.transform.position, targetUnit.transform.position)
+                > AXE_ATTACK_DISTANCE
+            )
+            {
+                unit.Animator.SetBool(Constants.ATTACK, false);
+                unit.Agent.isStopped = false;
+                unit.StopCoroutine(coroutine);
+                coroutine = unit.StartCoroutine(WaitTargetReached());
+            }
+
             if (
                 Vector3.Distance(unit.transform.position, targetUnit.transform.position)
                 > unit.Weapon.WeaponSOData.AttackDistance + Constants.ATTACK_DISTANCE_INCREMENT
@@ -175,17 +174,32 @@ public class ZombieArcherAttackAction : AbstractUnitAction
         }
     }
 
-	public override void SetAnimationPhase(int value)
-	{
-		base.SetAnimationPhase(value);
-		unit.Weapon.Fire(unit, targetUnit);
-	}
+    public override void SetAnimationPhase(int value)
+    {
+        base.SetAnimationPhase(value);
+        var axe = (HandWeapon)unit.Weapon;
+
+        if (value == 0)
+        {
+            if (targetUnit)
+            {
+                if (
+                    Vector3.Distance(unit.transform.position, targetUnit.transform.position)
+                    <= AXE_ATTACK_DISTANCE
+                )
+                    unit.Weapon.Fire(unit, targetUnit);
+            }
+            else if (targetTr)
+            {
+                unit.Weapon.Fire(unit, targetTr);
+            }
+        }
+    }
 
     public override void OnFinish()
     {
-        //unit.Weapon.StopFire();
         unit.Animator.SetBool(Constants.ATTACK, false);
-        angleToTarget = 360f;
         targetUnit = null;
+        unit.StopCoroutine(coroutine);
     }
 }
