@@ -31,9 +31,9 @@ public class GameManager : IInitializable, IDisposable
         playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
         EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
+        EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
     }
-
-    private void CreateUIManager()
+	private void CreateUIManager()
     {
         var prefab = sharedObjects.GetPrefab(Constants.BATTLE_UI_MANAGER);
 
@@ -75,7 +75,12 @@ public class GameManager : IInitializable, IDisposable
     private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
     {
         SceneManager.LoadSceneAsync(0);
-    }
+	}
+
+	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
+	{
+        EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+	}
 
     public void Dispose()
     {

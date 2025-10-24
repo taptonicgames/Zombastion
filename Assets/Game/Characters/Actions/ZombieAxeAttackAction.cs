@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,15 @@ public class ZombieAxeAttackAction : AbstractUnitAction
 
     [Inject]
     private readonly SceneReferences sceneReferences;
+
+    [Inject]
+    private readonly CoroutineManager coroutineManager;
     private AbstractUnit targetUnit;
     private Transform targetTr;
-    private Coroutine coroutine;
+    private Coroutine coroutine,
+        cmCoroutine;
     private const float AXE_ATTACK_DISTANCE = 2f;
+    private bool canSwitchToMove = true;
 
     public ZombieAxeAttackAction(AbstractUnit unit)
         : base(unit) { }
@@ -106,6 +112,7 @@ public class ZombieAxeAttackAction : AbstractUnitAction
     public override void StartAction()
     {
         base.StartAction();
+        unit.Agent.isStopped = false;
         coroutine = unit.StartCoroutine(WaitTargetReached());
     }
 
@@ -127,6 +134,7 @@ public class ZombieAxeAttackAction : AbstractUnitAction
         }
 
         unit.Agent.isStopped = true;
+        canSwitchToMove = false;
         unit.Animator.SetBool(Constants.ATTACK, true);
     }
 
@@ -146,13 +154,20 @@ public class ZombieAxeAttackAction : AbstractUnitAction
         {
             if (
                 Vector3.Distance(unit.transform.position, targetUnit.transform.position)
-                > AXE_ATTACK_DISTANCE
+                    > AXE_ATTACK_DISTANCE
+                && unit.Animator.GetBool(Constants.ATTACK)
             )
             {
                 unit.Animator.SetBool(Constants.ATTACK, false);
-                unit.Agent.isStopped = false;
-                unit.StopCoroutine(coroutine);
-                coroutine = unit.StartCoroutine(WaitTargetReached());
+
+                Action action = () =>
+                {
+                    unit.Agent.isStopped = false;
+                    unit.StopCoroutine(coroutine);
+                    coroutine = unit.StartCoroutine(WaitTargetReached());
+                };
+
+                cmCoroutine = coroutineManager.InvokeWaitUntil(action, () => canSwitchToMove);
             }
 
             if (
@@ -194,6 +209,16 @@ public class ZombieAxeAttackAction : AbstractUnitAction
                 unit.Weapon.Fire(unit, targetTr);
             }
         }
+        else
+        {
+            canSwitchToMove = true;
+        }
+    }
+
+    private void StopCMCoroutine()
+    {
+        if (coroutineManager && cmCoroutine != null)
+            coroutineManager.StopCoroutine(cmCoroutine);
     }
 
     public override void OnFinish()
@@ -201,5 +226,12 @@ public class ZombieAxeAttackAction : AbstractUnitAction
         unit.Animator.SetBool(Constants.ATTACK, false);
         targetUnit = null;
         unit.StopCoroutine(coroutine);
+        StopCMCoroutine();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        StopCMCoroutine();
     }
 }
