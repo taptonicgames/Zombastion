@@ -1,8 +1,11 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
-public class Bow : AbstractWeapon
+public class Gun : AbstractWeapon
 {
+    [field: SerializeField]
+    public Transform ShootPoint { get; set; }
     private CancellationTokenSource cancellationToken;
 
     public override void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
@@ -42,10 +45,11 @@ public class Bow : AbstractWeapon
                 WeaponSOData.BulletType.ToString()
             );
 
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
+            bullet.transform.position = ShootPoint.position;
+            bullet.transform.rotation = ShootPoint.rotation;
             bullet.Init(this, objectPoolSystem, CalculateDamage());
             inReload = true;
+            shootingUnit.Animator.SetTrigger(Constants.SHOOT);
 
             await UniTask.WaitForSeconds(
                 CalculateReloadTime(),

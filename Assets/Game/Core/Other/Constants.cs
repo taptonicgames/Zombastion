@@ -3,9 +3,10 @@ public static class Constants
     // Animator
     public const string SPEED = "Speed";
     public const string ATTACK = "Attack";
+    public const string SHOOT = "Shoot";
 
-    //Code
-    public const float ALMOST_ZERO = 0.1f;
+	//Code
+	public const float ALMOST_ZERO = 0.1f;
     public const float ATTACK_DISTANCE_INCREMENT = 3f;
     public const float UNIT_ROTATION_SPEED = 2f;
 

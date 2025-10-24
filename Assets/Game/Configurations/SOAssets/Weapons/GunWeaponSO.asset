@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fdc3ef7dcc1ee42bbccc6bf1e6cecb, type: 3}
-  m_Name: UnitActionsPermissionsSO
+  m_Script: {fileID: 11500000, guid: 24576a0f55fa65047b62f9348eded33f, type: 3}
+  m_Name: GunWeaponSO
   m_EditorClassIdentifier: 
-  unitActionPermissionHandler:
-    permissions:
-    - type: 2
-      permissionsList: 0100000003000000
-    - type: 3
-      permissionsList: 0100000002000000
-    unitsPerFrame: 10
+  <WeaponType>k__BackingField: 6
+  shootDelay: 1
+  shootDamage: 1
+  bulletType: 0
+  bulletSpeed: 50
+  attackDistance: 10
+  <additionalParameters>k__BackingField: []

@@ -49,9 +49,9 @@ public class EnemyManager : IInitializable, IFixedTickable
     {
         CharacterType[] enemyTypes =
         {
-            //CharacterType.SimpleZombie,
-            //CharacterType.ZombieFat,
-            //CharacterType.ArcherZombie,
+            CharacterType.SimpleZombie,
+            CharacterType.ZombieFat,
+            CharacterType.ArcherZombie,
             CharacterType.ZombieAxe,
         };
 
@@ -70,7 +70,7 @@ public class EnemyManager : IInitializable, IFixedTickable
             {
                 enemies[i].name += $"_{enemies[i].GetID()}";
             }
-            //stopCreateEnemy = true;
+            
             if (stopCreateEnemy)
                 break;
 
