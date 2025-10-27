@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private AbstractWeapon weapon;
-    private WeaponSO SOData;
-    private ObjectPoolSystem objectPoolSystem;
-    private int damage;
-    private bool isActive;
+    protected AbstractWeapon weapon;
+    protected WeaponSO SOData;
+    protected ObjectPoolSystem objectPoolSystem;
+    protected int damage;
+    protected bool isActive;
 
     public virtual void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
     {

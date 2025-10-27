@@ -33,5 +33,8 @@ public abstract class AbstractPlayerUnit : AbstractUnit
         return damage;
     }
 
-    public virtual int HealthResurectionOnBase => SOData.HealthResurectionPerSecond;
+	public override IScriptableObjectData GetScriptableObjectData()
+	{
+        return SOData;
+	}
 }

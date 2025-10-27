@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerSO", menuName = "ScriptableObjects/PlayerSO")]
-public class PlayerSO : ScriptableObject, IGetAttackSOParameters
+public class PlayerSO : ScriptableObject, IGetAttackSOParameters, IScriptableObjectData
 {
     [SerializeField]
     private float speed;

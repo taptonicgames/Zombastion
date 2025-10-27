@@ -74,7 +74,9 @@ public class PlayerCharacter : AbstractPlayerUnit
             UnitAction.Update();
     }
 
-    public override Type GetDamageRecieverType()
+	public virtual int HealthResurectionOnBase => SOData.HealthResurectionPerSecond;
+
+	public override Type GetDamageRecieverType()
     {
         return typeof(PlayerCharacter);
     }
