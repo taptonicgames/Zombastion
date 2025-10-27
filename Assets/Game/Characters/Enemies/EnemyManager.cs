@@ -52,6 +52,7 @@ public class EnemyManager : IInitializable, IFixedTickable
             CharacterType.SimpleZombie,
             CharacterType.ZombieFat,
             CharacterType.ArcherZombie,
+            CharacterType.ZombieAxe,
         };
 
         while (enemiesList.Count < gamePreferences.totalEnemiesAmount)
@@ -69,7 +70,7 @@ public class EnemyManager : IInitializable, IFixedTickable
             {
                 enemies[i].name += $"_{enemies[i].GetID()}";
             }
-
+            
             if (stopCreateEnemy)
                 break;
 

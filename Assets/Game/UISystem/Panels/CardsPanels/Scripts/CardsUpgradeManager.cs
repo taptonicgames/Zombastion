@@ -16,4 +16,10 @@ public class CardsUpgradeManager
         var upgradeConfigs = BattleUpgradeConfigsPack.GetConfigs(BattleUpgradeType.TowerBuild);
         return upgradeConfigs;
     }
+
+    public IEnumerable<BattleUpgradeConfig> GetUpgradeConfigsByType(BattleUpgradeType type)
+    {
+        var configs = BattleUpgradeConfigsPack.GetConfigs(type);
+        return configs;
+    }
 }

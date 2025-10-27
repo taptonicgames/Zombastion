@@ -1,8 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class CastleUpgradesPanel : AbstractPanel
 {
@@ -12,15 +12,26 @@ public class CastleUpgradesPanel : AbstractPanel
     [SerializeField] private TowerUpgradePopup towerUpgradePopup;
 
     private List<UpgradeTowerButton> upgradeTowerButtons = new List<UpgradeTowerButton>();
+    private TowerSO[] towerSOs;
+    private BattleUpgradeConfigsPack upgradeConfigsPack;
+    private BattleUpgradeStorage battleUpgradeStorage;
+
+    [Inject] private SharedObjects sharedObjects;
+    [Inject] private TowersManager towersManager;
 
     public override PanelType Type => PanelType.CastleUpgrades;
 
     public override void Init()
     {
-        for (int i = 0; i < 10; i++)
+        upgradeConfigsPack = sharedObjects.GetScriptableObject<BattleUpgradeConfigsPack>(Constants.BATTLE_UPGRADE_CONFIG_PACK);
+        battleUpgradeStorage = new BattleUpgradeStorage(upgradeConfigsPack);
+
+        towerSOs = towersManager.GetTowerSOs();
+
+        for (int i = 0; i < towerSOs.Length; i++)
         {
             UpgradeTowerButton upgradeTowerButton = Instantiate(upgradeTowerButtonPrefab, upgradeTowerItemsContainer);
-            upgradeTowerButton.Init();
+            upgradeTowerButton.Init(towerSOs[i], towersManager);
             upgradeTowerButtons.Add(upgradeTowerButton);
         }
 
@@ -38,8 +49,19 @@ public class CastleUpgradesPanel : AbstractPanel
 
     private void UpdateInfo()
     {
-        // TODO: show tower datas info
-        critValueText.SetText($"{10}%");
+        foreach (var button in upgradeTowerButtons)
+            button.UpdateInfo();
+
+        float critValue = 0;
+        for (int i = 0; i < towerSOs.Length; i++)
+            critValue += CalculateCritDamage(towerSOs[i]);
+
+        critValueText.SetText($"{critValue}%");
+    }
+
+    private float CalculateCritDamage(TowerSO towerSO)
+    {
+        return towersManager.CalculateParam(towerSO.Id, towerSO.CritDamage, towerSO.CritDamageCoefficient);
     }
 
     #region Events
@@ -63,14 +85,21 @@ public class CastleUpgradesPanel : AbstractPanel
 
     private void OnTowerUpgradeButtonClicked(UpgradeTowerButton button)
     {
-        // TODO: implement tower data
-        object[] args = new object[] {button};
+        object[] args = new object[] 
+        {
+            button.TowerSO,
+            upgradeConfigsPack,
+            battleUpgradeStorage,
+            towersManager
+        };
+
         towerUpgradePopup.Init(args);
         towerUpgradePopup.ForceShow();
     }
 
     private void OnTowerUpgradePopupClosed()
     {
+        UpdateInfo();
         towerUpgradePopup.ForceHide();
     }
 

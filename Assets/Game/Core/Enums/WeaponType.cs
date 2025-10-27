@@ -1,4 +1,4 @@
 public enum WeaponType
 {
-	Crossbow, Catapult, Cauldron, Coil, HandThrowing
+	Crossbow, Catapult, Cauldron, Coil, HandThrowing, Axe, Gun
 }

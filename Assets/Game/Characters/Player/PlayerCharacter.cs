@@ -44,8 +44,8 @@ public class PlayerCharacter : AbstractPlayerUnit
         {
             new UnitPauseAction(this),
             new PlayerDieAction(this),
-            new PlayerAttackAction(this),
             new PlayerMoveAction(this),
+            new PlayerAttackAction(this),
             new UnitIdleAction(this),
         };
 

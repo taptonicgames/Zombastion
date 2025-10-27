@@ -39,7 +39,6 @@ public class ZombieArcherAttackAction : AbstractUnitAction
 
         if (FindTargetTr() || FindPlayer())
         {
-            StartAction();
             return true;
         }
 

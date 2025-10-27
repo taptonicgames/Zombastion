@@ -38,7 +38,7 @@ public class WalletView : MonoBehaviour
 
         string text = 
             Type == CurrencyType.Energy ?
-            $"{currencyManager.GetCurrencyAmount(Type)}/{currencyManager.GetMaxEnergyAmount()}" :
+            $"{currencyManager.GetCurrencyAmount(Type)}/{currencyManager.GetCurrencyAmount(CurrencyType.MaxEnergy)}" :
             $"{currencyManager.GetCurrencyAmount(Type)}";
 
         currencyText.SetText(text);
