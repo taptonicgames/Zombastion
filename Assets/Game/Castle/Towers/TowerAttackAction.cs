@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 public class TowerAttackAction : BasePlayerAttackAction
 {
@@ -10,7 +9,9 @@ public class TowerAttackAction : BasePlayerAttackAction
 
     protected override async UniTask WaitRotatingToTarget()
     {
-        await UniTask.WaitUntil(() => angleToEnemyVertical <= Constants.ALMOST_ZERO);
+        if (unit.Weapon.WeaponSOData.WeaponType == WeaponType.Crossbow)
+            await UniTask.WaitUntil(() => angleToEnemyVertical <= Constants.ALMOST_ZERO);
+
         await base.WaitRotatingToTarget();
     }
 
@@ -32,12 +33,12 @@ public class TowerAttackAction : BasePlayerAttackAction
             Constants.UNIT_ROTATION_SPEED
         );
 
-        angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
-            unit.Weapon.transform,
-            targetUnit.transform.position + Vector3.up * 1.5f,
-            -Constants.UNIT_ROTATION_SPEED,
-            Constants.UNIT_ROTATION_SPEED,
-            axis: RectTransform.Axis.Vertical
-        );
+        //angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
+        //    unit.Weapon.transform,
+        //    targetUnit.transform.position + Vector3.up * 1.5f,
+        //    -Constants.UNIT_ROTATION_SPEED,
+        //    Constants.UNIT_ROTATION_SPEED,
+        //    axis: RectTransform.Axis.Vertical
+        //);
     }
 }

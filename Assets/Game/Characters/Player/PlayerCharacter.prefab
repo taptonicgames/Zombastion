@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnable: 1
   <IsNeedSave>k__BackingField: 0
-  logUnitActionType: 1
+  logUnitActionType: 0
   characterType: 0
   SOData: {fileID: 11400000, guid: 9df3304209be0f84e83c296b82f3eb5a, type: 2}
   weapons:

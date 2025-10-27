@@ -453,15 +453,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1336369425427806405, guid: fa3aacc92bb79324a841dd46110d1aa2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4056266658866758051, guid: fa3aacc92bb79324a841dd46110d1aa2,
         type: 3}
       propertyPath: m_Name
       value: GameComponents
       objectReference: {fileID: 0}
+    - target: {fileID: 4142907184745955461, guid: fa3aacc92bb79324a841dd46110d1aa2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446694186247116440, guid: fa3aacc92bb79324a841dd46110d1aa2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5365227254853335266, guid: fa3aacc92bb79324a841dd46110d1aa2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.11
+      value: -6.54
       objectReference: {fileID: 0}
     - target: {fileID: 7996272614126095767, guid: fa3aacc92bb79324a841dd46110d1aa2,
         type: 3}

@@ -1,4 +1,4 @@
 ﻿public enum BulletType
 {
-	Bullet, BoneBullet, None
+	Bullet, BoneBullet, None, CatapultBullet
 }

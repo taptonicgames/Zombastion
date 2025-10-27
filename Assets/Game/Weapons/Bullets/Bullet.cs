@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         Reset();
     }
 
-    private void Reset()
+    protected virtual void Reset()
     {
         if (!isActive)
             return;
@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             transform.Translate(Vector3.forward * Time.deltaTime * SOData.BulletSpeed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         var damageReciever = other.GetComponentInParent<IDamageReciever>();
 

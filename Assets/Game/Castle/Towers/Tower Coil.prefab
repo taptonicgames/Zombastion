@@ -173,7 +173,7 @@ PrefabInstance:
         type: 3}
       propertyPath: SOData
       value: 
-      objectReference: {fileID: 11400000, guid: 336eba8611080b24ab42a9b58d5b27f2,
+      objectReference: {fileID: 11400000, guid: 2077b80f73a68e04eb0fc9138fd91635,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

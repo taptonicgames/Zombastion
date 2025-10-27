@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerCatapultSO
   m_EditorClassIdentifier: 
   speed: 0
-  shootDamage: 50
+  shootDamage: 100
   shootDelay: 1
   health: 100
   critDamage: 0
@@ -34,4 +34,3 @@ MonoBehaviour:
     <Description>k__BackingField: Description
     <Icon>k__BackingField: {fileID: 21300000, guid: 00afc9d3156a943adb743c340c8ce751,
       type: 3}
-    <DamageName>k__BackingField: Damage

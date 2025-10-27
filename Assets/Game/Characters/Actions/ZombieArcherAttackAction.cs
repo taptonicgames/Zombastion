@@ -1,6 +1,6 @@
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -175,11 +175,15 @@ public class ZombieArcherAttackAction : AbstractUnitAction
         }
     }
 
-	public override void SetAnimationPhase(int value)
-	{
-		base.SetAnimationPhase(value);
-		unit.Weapon.Fire(unit, targetUnit);
-	}
+    public override void SetAnimationPhase(int value)
+    {
+        base.SetAnimationPhase(value);
+
+        if (targetUnit)
+            unit.Weapon.Fire(unit, targetUnit);
+        else if (targetTr)
+            unit.Weapon.Fire(unit, targetTr);
+    }
 
     public override void OnFinish()
     {

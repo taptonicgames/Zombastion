@@ -20,6 +20,9 @@ MonoBehaviour:
     - id: BoneBullet
       gameObject: {fileID: 2858425435532295870, guid: 69507862d3091574a96d7b9f7424d00a,
         type: 3}
+    - id: CatapultBullet
+      gameObject: {fileID: 1077143465587837135, guid: 9a5e4ff0ec3bf59418f9d0e6670b4ee7,
+        type: 3}
     - id: SimpleZombie
       gameObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
         type: 3}
