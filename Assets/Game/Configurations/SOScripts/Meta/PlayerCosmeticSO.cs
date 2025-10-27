@@ -12,8 +12,8 @@ public class PlayerCosmeticSO : ScriptableObjectInstaller<PlayerCosmeticSO>
     private void OnValidate()
     {
         foreach (var data in Datas)
-            if (data.Id != $"{data.Tittle}-{data.SubTittle}")
-                data.Id = ($"{data.Tittle}-{data.SubTittle}");
+            if (data.id != $"{data.Tittle}-{data.SubTittle}")
+                data.id = ($"{data.Tittle}-{data.SubTittle}");
     }
 
     public override void InstallBindings()
@@ -24,7 +24,7 @@ public class PlayerCosmeticSO : ScriptableObjectInstaller<PlayerCosmeticSO>
     [Serializable]
     public class PlayerCosmeticData
     {
-        [ReadOnlyField] public string Id;
+        [ReadOnlyField] public string id;
         [field: SerializeField] public float FirstBustValue { get; private set; }
         [field: SerializeField] public float SecondBustValue { get; private set; }
 
