@@ -25,7 +25,7 @@ public struct GamePreferences
     public int pointsAmountToCompleteRoundLevel;
 
     [Space(10), Header("Opening the panel at level")]
-    public int OpenShopPanelAtLevel;
-    public int OpenPlayerUpgradePanelAtLevel;
-    public int OpenCastleUpgradePanelAtLevel;
+    public int openShopPanelAtLevel;
+    public int openPlayerUpgradePanelAtLevel;
+    public int openCastleUpgradePanelAtLevel;
 }
