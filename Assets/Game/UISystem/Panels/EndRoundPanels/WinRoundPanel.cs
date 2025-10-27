@@ -68,6 +68,7 @@ public class WinRoundPanel : AbstractPanel
 
     private void OnContinueButtonClicked()
     {
+
         //TODO: exit the round
         EventBus<OpenPanelEvnt>.Publish(
                         new OpenPanelEvnt() { type = PanelType.Start });

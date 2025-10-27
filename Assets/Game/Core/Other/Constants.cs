@@ -25,6 +25,20 @@ public static class Constants
     public const string BATTLE_UPGRADE_CONFIG_PACK = "BattleUpgradeConfigsPack";
     public const string UPGRADE_CARD = "UpgradeCard";
 
+    public const string TOWER_CONFIGS_PACK = "TowerConfigsPack";
+
+    //Global params
+    public const string GLOBAL_PLAYER_LEVEL = "GlobalPlayerLevel";
+    public const string ROUNDS_COMPLETED = "RoundsCompleted";
+    public const string ROUND_PICKED = "RoundPicked";
+
+    //UI
+    public const string STAT_HEALTH_NAME = "Health";
+    public const string STAT_DAMAGE_NAME = "Damage";
+    public const string STAT_SHOOT_DELAY_NAME = "Shoot delay";
+    public const string STAT_CRIT_DAMAGE_NAME = "Crit";
+    public const string STAT_CRIT_PROBALITY_NAME = "Crit probality";
+
     public const string LEVEL_REWARDS_SO = "LevelRewardsSO";
     public const string CURRENCY_SO = "CurrencySO";
 
