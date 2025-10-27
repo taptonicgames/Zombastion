@@ -91,26 +91,6 @@ public class MetaUIManager : AbstractUIManager
     }
     #endregion
 
-    #region Test
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetPanel(PanelType.Switcher).Hide();
-            LoseRoundPanel loseRoundPanel = GetPanel(PanelType.LoseRound) as LoseRoundPanel;
-            loseRoundPanel.Init(null);
-            GetPanel(PanelType.LoseRound).Show();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            GetPanel(PanelType.Switcher).Hide();
-            WinRoundPanel loseRoundPanel = GetPanel(PanelType.WinRound) as WinRoundPanel;
-            loseRoundPanel.Init(null);
-            GetPanel(PanelType.WinRound).Show();
-        }
-    }
-    #endregion
-
     private void OnDestroy()
     {
         Unsubscribe();

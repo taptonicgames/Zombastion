@@ -14,6 +14,9 @@ public class RewardsManager : IInitializable
 
     public LevelRewardData GetLevelRewardData(int level)
     {
+        if (levelRewardsSO == null)
+            levelRewardsSO = sharedObjects.GetScriptableObject<LevelRewardsSO>(Constants.LEVEL_REWARDS_SO);
+
         return levelRewardsSO.Datas[level];
     }
 }

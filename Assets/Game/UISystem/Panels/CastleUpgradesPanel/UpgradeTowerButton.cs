@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlasticGui.WorkspaceWindow.History;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ public class UpgradeTowerButton : MonoBehaviour
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private IndicatorAnimator upgradeIndicator;
 
+    private TowersManager towersManager;
+
+    public TowerSO TowerSO { get; private set; }
+
     public event Action<UpgradeTowerButton> ButtonClicked;
 
     private void Awake()
@@ -27,9 +32,22 @@ public class UpgradeTowerButton : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    public void Init()
+    public void Init(TowerSO towerSO, TowersManager towersManager)
     {
+        TowerSO = towerSO;
+        this.towersManager = towersManager;
 
+        UpdateInfo();
+    }
+
+    public void UpdateInfo()
+    {
+        tittleText.SetText($"{TowerSO.UIData.Name}");
+        levelText.SetText($"{towersManager.GetTowerLevel(TowerSO.Id)}");
+        unlockLevelText.SetText($"{1}");
+        icon.sprite = TowerSO.UIData.Icon;
+
+        lockStateView.gameObject.SetActive(false);
     }
 
     private void OnButtonClicked()

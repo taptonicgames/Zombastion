@@ -7,6 +7,7 @@
     Money = 2,
     Gems = 3,
     Energy = 4,
+    MaxEnergy = 5,
     #endregion
 
     #region Cloth
