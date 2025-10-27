@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class CurrencySavingData : AbstractSavingData
 {
     private int defaultMaxEnergy;
-    public Dictionary<CurrencyType, int> currencyPairs = new Dictionary<CurrencyType, int>();
+    [field: SerializeField] public bool IsIncreaseReward { get; set; }
+    [field: SerializeField] public Dictionary<CurrencyType, int> CurrencyPairs { get; set; } = new Dictionary<CurrencyType, int>();
 
     public override void ResetData(int flag = 0)
     {
+        IsIncreaseReward = false;
     }
 
     public void Init(int defaultMaxEnergy)
@@ -18,20 +19,31 @@ public class CurrencySavingData : AbstractSavingData
 
     public int GetCurrencyById(CurrencyType currencyType)
     {
-        if (currencyPairs.ContainsKey(currencyType) == false)
+        if (CurrencyPairs.ContainsKey(currencyType) == false)
         {
             int value = currencyType == CurrencyType.MaxEnergy ? defaultMaxEnergy : 0;
-            currencyPairs.Add(currencyType, value);
+            CurrencyPairs.Add(currencyType, value);
             SaveData(false);
         }
 
-        return currencyPairs[currencyType];
+        return CurrencyPairs[currencyType];
     }
 
     public void SetCurrencyById(CurrencyType currencyType, int value)
     {
-        currencyPairs[currencyType] = value;
+        CurrencyPairs[currencyType] = value;
         SaveData(false);
+    }
+
+    public void SetIncreaseReward(bool isIncrease)
+    {
+        IsIncreaseReward = isIncrease;
+        SaveData(false);
+    }
+
+    public bool HasIncreaseReward()
+    {
+        return IsIncreaseReward;
     }
 
     public override void SaveData(bool collectParams, bool isSave = true)

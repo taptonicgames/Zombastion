@@ -48,3 +48,6 @@ MonoBehaviour:
   panelPrefabs:
   - {fileID: 440991817972826698, guid: e4ae6dbe6f1ae794ca633961a2eee49b, type: 3}
   - {fileID: 3225344398744652723, guid: 4aba8531df27d9b4cb7b7efc87bbeffb, type: 3}
+  - {fileID: 5420490893112386998, guid: 61a27d944e9dfc645a903517eab34824, type: 3}
+  - {fileID: 4558266974781995284, guid: d1b1987d82b0deb4f988183f869a4dda, type: 3}
+  - {fileID: 5888375692831306346, guid: ed74a68bd9cd5574fb69ddfaa37ab133, type: 3}

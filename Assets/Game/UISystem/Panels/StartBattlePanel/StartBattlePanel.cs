@@ -22,7 +22,7 @@ public class StartBattlePanel : AbstractPanel
     [SerializeField] private float animateStepDuration = 0.5f;
 
     [Inject] private CurrencyManager currencyManager;
-    [Inject] private SavingManager savingsManager;
+    [Inject] private AbstractSavingManager savingsManager;
 
     private GeneralSavingData generalSavingData;
     private Sequence sequence;
@@ -88,7 +88,7 @@ public class StartBattlePanel : AbstractPanel
 
         if (currencyManager.HasPurchased(battlePriceType, START_BATTLE_PRICE))
         {
-            currencyManager.RemoveCurrency(battlePriceType, currentCurrency);
+            currencyManager.RemoveCurrency(battlePriceType, START_BATTLE_PRICE);
             generalSavingData.SetParamById(Constants.ROUND_PICKED, counter);
             sceneLoader.LoadScene(1);
         }

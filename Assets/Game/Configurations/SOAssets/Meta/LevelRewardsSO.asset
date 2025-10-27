@@ -33,5 +33,78 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 104
       <Value>k__BackingField: 1
   - Id: Level_2
-    <WinDatas>k__BackingField: []
-    <LoseDatas>k__BackingField: []
+    <WinDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 15
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 100
+    - <CurrencyType>k__BackingField: 101
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 105
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 304
+      <Value>k__BackingField: 1
+    <LoseDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 5
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 50
+    - <CurrencyType>k__BackingField: 104
+      <Value>k__BackingField: 1
+  - Id: Level_3
+    <WinDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 15
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 100
+    - <CurrencyType>k__BackingField: 101
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 105
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 304
+      <Value>k__BackingField: 1
+    <LoseDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 5
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 50
+    - <CurrencyType>k__BackingField: 104
+      <Value>k__BackingField: 1
+  - Id: Level_4
+    <WinDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 15
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 100
+    - <CurrencyType>k__BackingField: 101
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 105
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 304
+      <Value>k__BackingField: 1
+    <LoseDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 5
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 50
+    - <CurrencyType>k__BackingField: 104
+      <Value>k__BackingField: 1
+  - Id: Level_5
+    <WinDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 15
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 100
+    - <CurrencyType>k__BackingField: 101
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 105
+      <Value>k__BackingField: 1
+    - <CurrencyType>k__BackingField: 304
+      <Value>k__BackingField: 1
+    <LoseDatas>k__BackingField:
+    - <CurrencyType>k__BackingField: 1
+      <Value>k__BackingField: 5
+    - <CurrencyType>k__BackingField: 2
+      <Value>k__BackingField: 50
+    - <CurrencyType>k__BackingField: 104
+      <Value>k__BackingField: 1

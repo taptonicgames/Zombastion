@@ -7,7 +7,7 @@ public class TowersManager : IInitializable
     private TowersSavingData towersSavingData;
 
     [Inject] private SharedObjects sharedObjects;
-    [Inject] private SavingManager savingsManager;
+    [Inject] private AbstractSavingManager savingsManager;
 
     public void Initialize()
     {
