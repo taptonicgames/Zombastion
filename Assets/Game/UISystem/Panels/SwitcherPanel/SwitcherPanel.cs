@@ -74,13 +74,13 @@ public class SwitcherPanel : AbstractPanel
                 switch (button.Type)
                 {
                     case SwitcherButtonType.Shop:
-                        TryUnlockButton(lvl >= gamePreferences.OpenShopPanelAtLevel, button);
+                        TryUnlockButton(lvl >= gamePreferences.openShopPanelAtLevel, button);
                         break;
                     case SwitcherButtonType.PlayerUpgrade:
-                        TryUnlockButton(lvl >= gamePreferences.OpenPlayerUpgradePanelAtLevel, button);
+                        TryUnlockButton(lvl >= gamePreferences.openPlayerUpgradePanelAtLevel, button);
                         break;
                     case SwitcherButtonType.CastleUpgrade:
-                        TryUnlockButton(lvl >= gamePreferences.OpenCastleUpgradePanelAtLevel, button);
+                        TryUnlockButton(lvl >= gamePreferences.openCastleUpgradePanelAtLevel, button);
                         break;
                     case SwitcherButtonType.UnknowThree:
                         break;
