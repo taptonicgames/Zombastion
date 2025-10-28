@@ -19,7 +19,6 @@ public class BattleUIManager : AbstractUIManager
 
     public BattleUpgradeStorage BattleUpgradeStorage { get; private set; }
 
-    //public BattleUpgradeHandler BattleUpgradeHandler { get; private set; }
     public BattleUpgradeConfigsPack BattleUpgradeConfigsPack =>
         sharedObjects.GetScriptableObject<BattleUpgradeConfigsPack>(
             Constants.BATTLE_UPGRADE_CONFIG_PACK
@@ -32,7 +31,7 @@ public class BattleUIManager : AbstractUIManager
         HideAllPanels();
         ShowGamePanels();
         EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
-        EventBus<OpenPanelEvnt>.Subscribe(OnPanelOpenedEvnt);
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
     }
 
     private void InitPanels()
@@ -66,9 +65,9 @@ public class BattleUIManager : AbstractUIManager
         panel.Show();
     }
 
-    private void OnPanelOpenedEvnt(OpenPanelEvnt evnt)
+    private void OpenPanel(PanelType type)
     {
-        var panel = GetPanel(evnt.type);
+        var panel = GetPanel(type);
 
         if (!panel)
             return;
@@ -77,9 +76,18 @@ public class BattleUIManager : AbstractUIManager
         panel.Show();
     }
 
-    private void OnDestroy()
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
     {
-        EventBus<ExperienceReachedEvnt>.Unsubscribe(OnExperienceReachedEvnt);
-        EventBus<OpenPanelEvnt>.Unsubscribe(OnPanelOpenedEvnt);
+        switch (evnt.type)
+        {
+            case RoundCompleteType.Fail:
+                OpenPanel(PanelType.LoseRound);
+                break;
+            case RoundCompleteType.Win:
+                OpenPanel(PanelType.WinRound);
+                break;
+            default:
+                break;
+        }
     }
 }

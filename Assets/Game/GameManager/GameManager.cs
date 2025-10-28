@@ -29,7 +29,6 @@ public class GameManager : IInitializable, IDisposable
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
         playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
-        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
         EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
     }
 	private void CreateUIManager()
@@ -71,11 +70,6 @@ public class GameManager : IInitializable, IDisposable
         playerCharacterModel.ResetParameters();
     }
 
-    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
-    {
-        EventBus<OpenPanelEvnt>.Publish(new() { type = GetPanelType(evnt.type) });
-	}
-
 	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
 	{
         EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
@@ -85,15 +79,5 @@ public class GameManager : IInitializable, IDisposable
     {
         disposables.Dispose();
         EventBus<RoundCompleteEvnt>.Dispose();
-    }
-
-    private PanelType GetPanelType(RoundCompleteType type)
-    {
-        return type switch
-        {
-            RoundCompleteType.Fail => PanelType.LoseRound,
-            RoundCompleteType.Win => PanelType.WinRound,
-            _ => PanelType.None,
-        };
     }
 }
