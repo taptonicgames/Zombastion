@@ -29,10 +29,10 @@ public class ObjectParabolaJumpHelper
             centerPoint.y = targetPos.y + 2;
 
             if (centerPoint.y < startPos.y)
-                centerPoint.y = startPos.y;
+                centerPoint.y = startPos.y + 1;
 
             var bezierPointA = startPos;
-            bezierPointA.y = 1;
+            bezierPointA.y = startPos.y + 1;
             var bezierPointB = startPos + (centerPoint - startPos) / 2;
             bezierPointB.y = centerPoint.y;
             var bezierPointC = centerPoint + (targetPos - centerPoint) / 2;
@@ -48,6 +48,7 @@ public class ObjectParabolaJumpHelper
                 bezierPointC,
                 bezierPointD,
             };
+
             index++;
             int remain = data.list.Count - index;
 
