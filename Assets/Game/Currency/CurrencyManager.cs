@@ -6,7 +6,7 @@ using Zenject;
 public class CurrencyManager : IInitializable
 {
     [Inject] private SharedObjects sharedObjects;
-    [Inject] private SavingManager savingManager;
+    [Inject] private AbstractSavingManager savingManager;
     [Inject] private RewardsManager rewardsManager;
 
     private CurrencySO currencySO;
@@ -23,7 +23,7 @@ public class CurrencyManager : IInitializable
         LoadRewards();
     }
 
-    private void LoadRewards()
+    public void LoadRewards()
     {
         BattleSavingData battleSavingData = savingManager.GetSavingData<BattleSavingData>(SavingDataType.Battle);
         GeneralSavingData generalSavingData = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
@@ -31,13 +31,19 @@ public class CurrencyManager : IInitializable
         RewardData[] rewardDatas = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
 
         for (int i = 0; i < rewardDatas.Length; i++)
-            AddCurrency(rewardDatas[i].CurrencyType, rewardDatas[i].Value);
+        {
+            int reward = HasIncreaseReward() ? Mathf.RoundToInt(rewardDatas[i].Value * Constants.REWARD_MODIFIER) : rewardDatas[i].Value;
+            AddCurrency(rewardDatas[i].CurrencyType, reward);
+        }
 
-        battleSavingData.ResetData();
+        currencySavingData.ResetData();
     }
 
     public CurrencyData GetCurrencyData(CurrencyType currencyType)
     {
+        if (currencySO == null)
+            currencySO = sharedObjects.GetScriptableObject<CurrencySO>(Constants.CURRENCY_SO);
+
         return currencySO.Datas.FirstOrDefault(d => d.Type == currencyType);
     }
 
@@ -68,5 +74,18 @@ public class CurrencyManager : IInitializable
             throw new ArgumentException($"Currency {type} is below 0, need to check!");
 
         CurrencyChanged?.Invoke(type);
+    }
+
+    public void SetIncreaseReward(bool isIncrease)
+    {
+        if (currencySavingData == null)
+            currencySavingData = savingManager.GetSavingData<CurrencySavingData>(SavingDataType.Currency);
+
+        currencySavingData.SetIncreaseReward(isIncrease);
+    }
+
+    public bool HasIncreaseReward()
+    {
+        return currencySavingData.HasIncreaseReward();
     }
 }

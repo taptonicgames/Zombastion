@@ -1,7 +1,5 @@
 using System;
 using UniRx;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class GameManager : IInitializable, IDisposable
@@ -75,7 +73,7 @@ public class GameManager : IInitializable, IDisposable
 
     private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
     {
-        SceneManager.LoadSceneAsync(0);
+        EventBus<OpenPanelEvnt>.Publish(new() { type = GetPanelType(evnt.type) });
 	}
 
 	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
@@ -87,5 +85,15 @@ public class GameManager : IInitializable, IDisposable
     {
         disposables.Dispose();
         EventBus<RoundCompleteEvnt>.Dispose();
+    }
+
+    private PanelType GetPanelType(RoundCompleteType type)
+    {
+        return type switch
+        {
+            RoundCompleteType.Fail => PanelType.LoseRound,
+            RoundCompleteType.Win => PanelType.WinRound,
+            _ => PanelType.None,
+        };
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -20,6 +21,8 @@ public class LoseRoundPanel : AbstractPanel
     [SerializeField] private float animateDurationPerElement = 0.25f;
 
     [Inject] private RewardsManager rewardsManager;
+    [Inject] private AbstractSavingManager savingManager;
+    [Inject] private CurrencyManager currencyManager;
 
     public override PanelType Type => PanelType.LoseRound;
 
@@ -33,7 +36,8 @@ public class LoseRoundPanel : AbstractPanel
     {
         base.Init(arr);
 
-        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(0).LoseDatas);
+        int level = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General).GetParamById(Constants.ROUND_PICKED);
+        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(level).LoseDatas);
         statItemsContainer.Init();
     }
 
@@ -61,20 +65,19 @@ public class LoseRoundPanel : AbstractPanel
     private async UniTask AnimateElement(Transform transform)
     {
         bool isAnimate = true;
-        transform.DOScale(Vector3.one, animateDurationPerElement).SetEase(Ease.OutBack).OnComplete(() => isAnimate = false);
+        transform.DOScale(Vector3.one, animateDurationPerElement).SetEase(Ease.OutBack).SetUpdate(true).OnComplete(() => isAnimate = false);
         while (isAnimate)
             await UniTask.Yield();
     }
 
     private void OnContinueButtonClicked()
     {
-        //TODO: exit the round
-        EventBus<OpenPanelEvnt>.Publish(
-                        new OpenPanelEvnt() { type = PanelType.Start });
+        SceneManager.LoadSceneAsync(0);
     }
 
     private void OnDoubleRewardButtonClicked()
     {
+        currencyManager.SetIncreaseReward(true);
         doubleRewardButton.interactable = false;
         rewardCellsContainer.IncreaseReward(Constants.REWARD_MODIFIER);
     }

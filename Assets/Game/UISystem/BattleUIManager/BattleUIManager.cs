@@ -32,6 +32,7 @@ public class BattleUIManager : AbstractUIManager
         HideAllPanels();
         ShowGamePanels();
         EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+        EventBus<OpenPanelEvnt>.Subscribe(OnPanelOpenedEvnt);
     }
 
     private void InitPanels()
@@ -63,5 +64,22 @@ public class BattleUIManager : AbstractUIManager
         );
 
         panel.Show();
+    }
+
+    private void OnPanelOpenedEvnt(OpenPanelEvnt evnt)
+    {
+        var panel = GetPanel(evnt.type);
+
+        if (!panel)
+            return;
+
+        panel.Init(null);
+        panel.Show();
+    }
+
+    private void OnDestroy()
+    {
+        EventBus<ExperienceReachedEvnt>.Unsubscribe(OnExperienceReachedEvnt);
+        EventBus<OpenPanelEvnt>.Unsubscribe(OnPanelOpenedEvnt);
     }
 }

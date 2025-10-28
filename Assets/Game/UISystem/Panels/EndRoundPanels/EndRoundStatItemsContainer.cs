@@ -26,6 +26,7 @@ public class EndRoundStatItemsContainer : MonoBehaviour
 
         sequence.Kill();
         sequence = DOTween.Sequence();
+        sequence.SetUpdate(true);
 
         for (int i = 0; i < itemViews.Length; i++)
             sequence.Append(itemViews[i].transform.DOScale(Vector3.one, animateDurationPerItem).SetEase(Ease.OutBack));
