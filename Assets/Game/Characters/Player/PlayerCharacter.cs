@@ -1,7 +1,7 @@
+using StarterAssets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using StarterAssets;
 using UnityEngine;
 
 public class PlayerCharacter : AbstractPlayerUnit
@@ -74,9 +74,9 @@ public class PlayerCharacter : AbstractPlayerUnit
             UnitAction.Update();
     }
 
-	public virtual int HealthResurectionOnBase => SOData.HealthResurectionPerSecond;
+    public virtual int HealthResurectionOnBase => SOData.HealthResurectionPerSecond;
 
-	public override Type GetDamageRecieverType()
+    public override Type GetDamageRecieverType()
     {
         return typeof(PlayerCharacter);
     }

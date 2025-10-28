@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         isActive = true;
     }
 
-    private IEnumerator DestroyDelay()
+    protected virtual IEnumerator DestroyDelay()
     {
         yield return new WaitForSeconds(5);
         Reset();

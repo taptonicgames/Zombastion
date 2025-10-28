@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CatapultBullet : Bullet
@@ -11,4 +12,8 @@ public class CatapultBullet : Bullet
     protected override void Update() { }
 
     protected override void OnTriggerEnter(Collider other) { }
+	protected override IEnumerator DestroyDelay()
+	{
+        yield break;
+	}
 }

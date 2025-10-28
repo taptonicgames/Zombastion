@@ -9,13 +9,13 @@ public class ObjectPoolSystem : IInitializable
     [Inject]
     private readonly SharedObjects sharedObjects;
     private Dictionary<string, ObjectPool<GameObject>> pool = new();
-    private Transform folder;
+    public Transform Folder { get; private set; }
     public Action<GameObject> OnGameObjectGet,
         OnGameObjectRelease;
 
     public void Initialize()
     {
-        folder = new GameObject("ObjectPoolSystemFolder").transform;
+        Folder = new GameObject("ObjectPoolSystemFolder").transform;
     }
 
     public void Reserve(string gameObjectType, int count = 10)
@@ -119,7 +119,7 @@ public class ObjectPoolSystem : IInitializable
 
     private GameObject CreateGameObject(IDGameObjectData data)
     {
-        var newGameObject = UnityEngine.Object.Instantiate(data.gameObject, folder);
+        var newGameObject = UnityEngine.Object.Instantiate(data.gameObject, Folder);
         newGameObject.name = data.id;
         return newGameObject;
     }
