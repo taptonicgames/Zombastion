@@ -51,28 +51,24 @@ public class BattleUIManager : AbstractUIManager
 
     private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
     {
-        var panel = GetPanel(PanelType.BattleUpgrade);
+        var initObjects = new object[]
+        {
+            BattleUpgradeConfigsPack,
+            BattleUpgradeStorage,
+            cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
+        };
 
-        panel.Init(
-            new object[]
-            {
-                BattleUpgradeConfigsPack,
-                BattleUpgradeStorage,
-                cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
-            }
-        );
-
-        panel.Show();
+        OpenPanel(PanelType.BattleUpgrade, initObjects);
     }
 
-    private void OpenPanel(PanelType type)
+    private void OpenPanel(PanelType type, object[] initObjects = null)
     {
         var panel = GetPanel(type);
 
         if (!panel)
             return;
 
-        panel.Init(null);
+        panel.Init(initObjects);
         panel.Show();
     }
 
