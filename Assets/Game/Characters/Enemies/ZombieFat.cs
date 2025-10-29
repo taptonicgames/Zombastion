@@ -29,7 +29,7 @@ public class ZombieFat : AbstractEnemy
     public override void SetAnimationPhase(int value)
     {
         base.SetAnimationPhase(value);
-        sceneReferences.castle.SetDamage(SOData.Damage);
+        sceneReferences.castle.Gates.SetDamage(SOData.Damage);
         OnUnitDied();
     }
 

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e699bd9c330b52c4f824691148327397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 558810708747783215}
 --- !u!1001 &5219232524475915761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +144,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5741873148506526174, guid: da875c5af0c004b23a1e123a31c1530c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7f1f7baef4e6e27468f3a6468469a3b8, type: 2}
     - target: {fileID: 5776581752806860829, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
@@ -209,6 +215,12 @@ PrefabInstance:
 --- !u!4 &304313442664428444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5500956878436232813, guid: da875c5af0c004b23a1e123a31c1530c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5219232524475915761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &558810708747783215 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5741873148506526174, guid: da875c5af0c004b23a1e123a31c1530c,
     type: 3}
   m_PrefabInstance: {fileID: 5219232524475915761}
   m_PrefabAsset: {fileID: 0}

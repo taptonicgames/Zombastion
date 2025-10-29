@@ -30,12 +30,17 @@ public class SimpleEnemy : AbstractEnemy
     {
         if (other.gameObject.layer == Constants.GATES_LAYER)
         {
-            sceneReferences.castle.SetDamage(SOData.Damage);
+            sceneReferences.castle.Gates.SetDamage(SOData.Damage);
             OnUnitDied();
         }
     }
 
-    public override Type GetDamageRecieverType()
+	private void OnCollisionEnter(Collision collision)
+	{
+		
+	}
+
+	public override Type GetDamageRecieverType()
     {
         return typeof(SimpleEnemy);
     }

@@ -48,7 +48,7 @@ public class ZombieMoveAction : AbstractUnitAction
     private void FindTargetAndMove()
     {
         var target = sceneReferences.castle.Gates.gameObject.activeSelf
-            ? sceneReferences.castle.Gates
+            ? sceneReferences.castle.Gates.transform
             : sceneReferences.zombieTarget;
 
         unit.Agent.SetDestination(target.position);

@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e699bd9c330b52c4f824691148327397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &2368746356218511097
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,8 +296,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.6921687, y: 1, z: 0.90889215}
-  m_Center: {x: 0.047053576, y: 0.5, z: 0.045553923}
+  m_Size: {x: 5.6921687, y: 1, z: 2.7777653}
+  m_Center: {x: 0.047053576, y: 0.5, z: 0.9799905}
 --- !u!114 &3167767278595978363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,8 +487,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.8117285, y: 1, z: 0.90889215}
-  m_Center: {x: 0.04356575, y: 0.5, z: 0.045553923}
+  m_Size: {x: 5.8117285, y: 1, z: 1.6526022}
+  m_Center: {x: 0.04356575, y: 0.5, z: -0.3263011}
 --- !u!114 &7898658715537654644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SOData: {fileID: 11400000, guid: 70ccc5629ca898847a7c01e03b58d8d7, type: 2}
-  <Gates>k__BackingField: {fileID: 154456163354364236}
+  <Gates>k__BackingField: {fileID: 8264426564067392471}
 --- !u!1 &6044637794040328114
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +869,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2592658251259431293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8264426564067392471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5858018583107613354, guid: 58cb5d85decd8aa4090079bc94a362bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2592658251259431293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e699bd9c330b52c4f824691148327397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3773338144002592639
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Castle : MonoBehaviour, IColliderHelper
     private CastleSO SOData;
 
     [field: SerializeField]
-    public Transform Gates { get; private set; }
+    public Gates Gates { get; private set; }
 
     public int Health { get; private set; }
 
@@ -21,7 +21,7 @@ public class Castle : MonoBehaviour, IColliderHelper
     private void Awake()
     {
         Health = SOData.Health;
-        defaultGatesPos = Gates.position;
+        defaultGatesPos = Gates.transform.position;
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
         GetComponentsInChildren<AbstractPlayerUnit>(true).ToList().ForEach(a => a.Init());
     }
@@ -50,7 +50,7 @@ public class Castle : MonoBehaviour, IColliderHelper
     {
         if (collider.gameObject.layer == Constants.PLAYER_LAYER)
         {
-            Gates.DOMoveY(defaultGatesPos.y + 3, GATES_OPEN_DURATION);
+            Gates.OpenClose(Constants.OPEN, true);
         }
 
         inCollisionTr = sender;
@@ -64,9 +64,9 @@ public class Castle : MonoBehaviour, IColliderHelper
         {
             if (collider.gameObject.layer == Constants.PLAYER_LAYER)
             {
-                Gates.DOMoveY(defaultGatesPos.y, GATES_OPEN_DURATION);
+				Gates.OpenClose(Constants.OPEN, false);
 
-                if (sender.name == INNER_COLLIDER)
+				if (sender.name == INNER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
                         new() { type = PlayerFindingCastleType.Entered }
                     );
