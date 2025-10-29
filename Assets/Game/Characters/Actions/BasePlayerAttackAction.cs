@@ -56,6 +56,14 @@ public class BasePlayerAttackAction : AbstractUnitAction
 
         for (int i = 0; i < arr.Length; i++)
         {
+            if (
+                Vector3.Distance(arr[i].transform.position, unit.transform.position)
+                < unit.Weapon.WeaponSOData.MinAttackDistance
+            )
+            {
+                continue;
+            }
+
             var enemy = arr[i].GetComponent<AbstractUnit>();
 
             if (enemy && enemy.IsEnable)
@@ -95,12 +103,12 @@ public class BasePlayerAttackAction : AbstractUnitAction
         if (unit.Health == 0 || !targetUnit || actionType != unit.UnitActionType)
             return;
 
-		await UniTask.WaitUntil(
-				() => unit.Weapon.IsReady,
-				cancellationToken: unit.destroyCancellationToken
-			);
+        await UniTask.WaitUntil(
+            () => unit.Weapon.IsReady,
+            cancellationToken: unit.destroyCancellationToken
+        );
 
-		if (targetUnit)
+        if (targetUnit)
         {
             FireWeapon();
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2440465007525658673}
   - component: {fileID: 5858018583107613354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,27 +56,32 @@ PrefabInstance:
     - target: {fileID: 257442453156593902, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298381725811364126, guid: da875c5af0c004b23a1e123a31c1530c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4191113616347948534, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4580025231891843082, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4903479550093208177, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5251415043224293735, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5500956878436232813, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
@@ -131,22 +136,22 @@ PrefabInstance:
     - target: {fileID: 5586419662903732496, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5776581752806860829, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6486182030999705858, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6837360541755071439, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6837360541755071439, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
@@ -158,15 +163,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Castle_Gates_01-1_A
       objectReference: {fileID: 0}
+    - target: {fileID: 8135844798506394033, guid: da875c5af0c004b23a1e123a31c1530c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8180478813393142941, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8693885422363345552, guid: da875c5af0c004b23a1e123a31c1530c,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217668939454860907, guid: da875c5af0c004b23a1e123a31c1530c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

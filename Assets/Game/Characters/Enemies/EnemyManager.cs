@@ -70,7 +70,7 @@ public class EnemyManager : IInitializable, IFixedTickable
             {
                 enemies[i].name += $"_{enemies[i].GetID()}";
             }
-            
+            //stopCreateEnemy = true;
             if (stopCreateEnemy)
                 break;
 

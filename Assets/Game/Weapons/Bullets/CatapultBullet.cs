@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatapultBullet : Bullet
 {
-    public void CompleteAction(int obj)
+    public override void CompleteAction(int value)
     {
         var damageRadius = weapon.WeaponSOData.GetValueByTag<float>(Constants.BULLET_DAMAGE_RADIUS);
 

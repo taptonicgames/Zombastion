@@ -8,11 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4164398515285092468}
     m_Modifications:
-    - target: {fileID: 1958619225952209640, guid: 67c1a18404f931b40865568b7f1673da,
-        type: 3}
-      propertyPath: shootPoint
-      value: 
-      objectReference: {fileID: 8795138492000860037}
     - target: {fileID: 2328483509896414456, guid: 67c1a18404f931b40865568b7f1673da,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -106,12 +101,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1663532592218755857}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8795138492000860037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7861197836630140052, guid: 67c1a18404f931b40865568b7f1673da,
-    type: 3}
-  m_PrefabInstance: {fileID: 1663532592218755857}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4565892609965673907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 1727262317665089588, guid: 7049a37a3a48ed6459904ca92311d7e6,
         type: 3}
       propertyPath: logUnitActionType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CatapultWeapon : AbstractWeapon
+public class TowerWeapon : AbstractWeapon
 {
     [SerializeField]
     private Transform shootPoint;
@@ -9,7 +9,7 @@ public class CatapultWeapon : AbstractWeapon
     private Animator animator;
     private ObjectParabolaJumpHelper objectParabolaJumpHelper = new();
     private Timer reloadTimer = new Timer(TimerMode.counterFixedUpdate, false);
-    private CatapultBullet bullet;
+    private Bullet bullet;
 
     private void Start()
     {
@@ -18,7 +18,6 @@ public class CatapultWeapon : AbstractWeapon
         reloadTimer.OnTimerReached += () =>
         {
             CreateBullet();
-            //inFire = false;
             IsReady = true;
         };
     }
@@ -60,7 +59,7 @@ public class CatapultWeapon : AbstractWeapon
         if (bullet)
             return;
 
-        bullet = objectPoolSystem.GetPoolableObject<CatapultBullet>(
+        bullet = objectPoolSystem.GetPoolableObject<Bullet>(
             WeaponSOData.BulletType.ToString()
         );
 

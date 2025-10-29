@@ -66,4 +66,6 @@ public class Bullet : MonoBehaviour
 
         Reset();
     }
+
+    public virtual void CompleteAction(int value) { }
 }
