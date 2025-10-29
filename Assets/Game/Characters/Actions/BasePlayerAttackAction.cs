@@ -84,31 +84,34 @@ public class BasePlayerAttackAction : AbstractUnitAction
     }
 
     protected virtual async UniTask WaitRotatingToTarget()
-	{
+    {
+        await UniTask.WaitUntil(
+            () => angleToEnemy < Constants.ALMOST_ZERO,
+            cancellationToken: targetUnit.destroyCancellationToken
+        );
+
+        await UniTask.WaitForSeconds(0.2f, cancellationToken: targetUnit.destroyCancellationToken);
+
+        if (unit.Health == 0 || !targetUnit || actionType != unit.UnitActionType)
+            return;
+
 		await UniTask.WaitUntil(
-			() => angleToEnemy < Constants.ALMOST_ZERO,
-			cancellationToken: targetUnit.destroyCancellationToken
-		);
+				() => unit.Weapon.IsReady,
+				cancellationToken: unit.destroyCancellationToken
+			);
 
-		await UniTask.WaitForSeconds(0.2f, cancellationToken: targetUnit.destroyCancellationToken);
+		if (targetUnit)
+        {
+            FireWeapon();
+        }
+    }
 
-		if (unit.Health == 0 || !targetUnit || actionType != unit.UnitActionType)
-			return;
+    protected virtual void FireWeapon()
+    {
+        unit.Weapon.Fire(unit, targetUnit);
+    }
 
-		await UniTask.WaitUntil(
-			() => unit.Weapon.IsReady,
-			cancellationToken: targetUnit.destroyCancellationToken
-		);
-
-		FireWeapon();
-	}
-
-	protected virtual void FireWeapon()
-	{
-		unit.Weapon.Fire(unit, targetUnit);
-	}
-
-	public override void Update()
+    public override void Update()
     {
         RotateToTarget();
     }

@@ -6,7 +6,7 @@ public class CatapultWeapon : AbstractWeapon
     private Transform shootPoint;
 
     [SerializeField]
-    private Animation launchAnimation;
+    private Animator animator;
     private ObjectParabolaJumpHelper objectParabolaJumpHelper = new();
     private Timer reloadTimer = new Timer(TimerMode.counterFixedUpdate, false);
     private CatapultBullet bullet;
@@ -17,8 +17,9 @@ public class CatapultWeapon : AbstractWeapon
 
         reloadTimer.OnTimerReached += () =>
         {
-            IsReady = true;
             CreateBullet();
+            //inFire = false;
+            IsReady = true;
         };
     }
 
@@ -33,10 +34,9 @@ public class CatapultWeapon : AbstractWeapon
             return;
 
         base.Fire(shootingUnit, targetUnit);
-		bullet.Init(this, objectPoolSystem, CalculateDamage());
-		launchAnimation.Play();
+        bullet.Init(this, objectPoolSystem, CalculateDamage());
+        animator.SetTrigger(Constants.ATTACK);
         IsReady = false;
-        reloadTimer.StartTimer(CalculateReloadTime());
     }
 
     private void LaunchBullet()
@@ -52,10 +52,14 @@ public class CatapultWeapon : AbstractWeapon
             / WeaponSOData.BulletSpeed;
 
         objectParabolaJumpHelper.JumpObjects(jumpObjectData);
+        bullet = null;
     }
 
     private void CreateBullet()
     {
+        if (bullet)
+            return;
+
         bullet = objectPoolSystem.GetPoolableObject<CatapultBullet>(
             WeaponSOData.BulletType.ToString()
         );
@@ -71,8 +75,14 @@ public class CatapultWeapon : AbstractWeapon
 
     public override void SetAnimationPhase(int value)
     {
-        base.SetAnimationPhase(value);
-        bullet.transform.SetParent(objectPoolSystem.Folder);
-        LaunchBullet();
+        if (value == 0)
+        {
+            bullet.transform.SetParent(objectPoolSystem.Folder);
+            LaunchBullet();
+        }
+        else if (value == 1)
+        {
+            reloadTimer.StartTimer(CalculateReloadTime());
+        }
     }
 }

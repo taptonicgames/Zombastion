@@ -13,14 +13,15 @@ public class TowerAttackAction : BasePlayerAttackAction
     {
         if (CanRotateYAxe)
             await UniTask.WaitUntil(() => angleToEnemyVertical <= Constants.ALMOST_ZERO);
-
+        
         await base.WaitRotatingToTarget();
-    }
 
-    public override void Update()
-    {
-        base.Update();
-        CheckTargetUnit();
+		await UniTask.WaitUntil(
+				() => unit.Weapon.IsReady,
+				cancellationToken: unit.destroyCancellationToken
+			);
+
+        unit.SetActionTypeForced(UnitActionType.Idler);
     }
 
     protected override void RotateToTarget()
@@ -45,12 +46,5 @@ public class TowerAttackAction : BasePlayerAttackAction
                 axis: RectTransform.Axis.Vertical
             );
         }
-    }
-
-    public override void SetAnimationPhase(int value)
-    {
-        base.SetAnimationPhase(value);
-        unit.Weapon.SetAnimationPhase(value);
-        unit.SetActionTypeForced(UnitActionType.Idler);
     }
 }
