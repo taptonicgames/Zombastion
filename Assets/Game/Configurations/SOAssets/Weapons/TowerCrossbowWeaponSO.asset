@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponType>k__BackingField: 0
   shootDelay: 1
-  shootDamage: 1
-  bulletType: 0
+  shootDamage: 100
+  bulletType: 5
   bulletSpeed: 50
-  attackDistance: 10
+  attackDistance: 15
+  <MinAttackDistance>k__BackingField: 8
   <additionalParameters>k__BackingField: []

@@ -8,6 +8,9 @@ public abstract class AbstractWeapon : MonoBehaviour
 
     [SerializeField]
     private WeaponSO weaponSO;
+
+    [field: SerializeField]
+    public Transform ShootPoint { get; private set; }
     protected bool inFire,
         inReload;
     protected AbstractUnit shootingUnit;
@@ -67,5 +70,5 @@ public abstract class AbstractWeapon : MonoBehaviour
         return time;
     }
 
-	public virtual void SetAnimationPhase(int value) { }
+    public virtual void SetAnimationPhase(int value) { }
 }

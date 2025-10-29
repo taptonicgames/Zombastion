@@ -80,7 +80,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Catapult
+  m_Name: Crossbow
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -123,7 +123,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -1498010087492872569, guid: 6869d7ef9631144558a1518b7babd0e3,
+  m_Motion: {fileID: -1498010087492872569, guid: 18227e5ff638844a3b2055e2e8d62e7f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

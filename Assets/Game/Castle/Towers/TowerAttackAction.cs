@@ -40,7 +40,7 @@ public class TowerAttackAction : BasePlayerAttackAction
         {
             angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
                 unit.Weapon.transform,
-                targetUnit.transform.position + Vector3.up * 1.5f,
+                targetUnit.transform.position,
                 -Constants.UNIT_ROTATION_SPEED,
                 Constants.UNIT_ROTATION_SPEED,
                 axis: RectTransform.Axis.Vertical

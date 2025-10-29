@@ -18,6 +18,6 @@ public class HandWeapon : AbstractWeapon
 		base.Fire(shootingUnit, targetTr);
 
 		if (targetTr)
-			targetTr.GetComponent<IDamageReciever>().SetDamage(CalculateDamage());
+			targetTr.GetComponentInParent<IDamageReciever>().SetDamage(CalculateDamage());
 	}
 }

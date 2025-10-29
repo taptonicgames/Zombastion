@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerCoilSO
   m_EditorClassIdentifier: 
   speed: 0
-  shootDamage: 50
+  shootDamage: 1
   shootDelay: 1
   health: 100
   critDamage: 0

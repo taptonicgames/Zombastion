@@ -1,11 +1,8 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using System.Threading;
 
 public class Gun : AbstractWeapon
 {
-    [field: SerializeField]
-    public Transform ShootPoint { get; set; }
     private CancellationTokenSource cancellationToken;
 
     public override void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
