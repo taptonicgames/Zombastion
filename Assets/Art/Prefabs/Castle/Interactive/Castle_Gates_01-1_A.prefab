@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 16b6d92e4a5f2431fb5c7d30ad37b00e, type: 2}
+    - target: {fileID: -3060260898265733119, guid: e9ec410b883a94c2f982038076375982, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 16b6d92e4a5f2431fb5c7d30ad37b00e, type: 2}
     - target: {fileID: -315042385078180758, guid: e9ec410b883a94c2f982038076375982, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -93,6 +97,10 @@ PrefabInstance:
       value: Castle_Doors_01-1_A
       objectReference: {fileID: 0}
     - target: {fileID: 3826442311628031071, guid: e9ec410b883a94c2f982038076375982, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 16b6d92e4a5f2431fb5c7d30ad37b00e, type: 2}
+    - target: {fileID: 4429823299121529277, guid: e9ec410b883a94c2f982038076375982, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 16b6d92e4a5f2431fb5c7d30ad37b00e, type: 2}
