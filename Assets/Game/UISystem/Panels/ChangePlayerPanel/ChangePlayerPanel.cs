@@ -66,7 +66,7 @@ public class ChangePlayerPanel : AbstractPanel
     private void OnPlayerInfoButtonClicked(PlayerInfoButton button)
     {
         for (int i = 0; i < playerCosmeticSO.Datas.Length; i++)
-            if (button.Data.Id == playerCosmeticSO.Datas[i].Id)
+            if (button.Data.id == playerCosmeticSO.Datas[i].id)
                 counter = i;
 
         UpdateInfo();

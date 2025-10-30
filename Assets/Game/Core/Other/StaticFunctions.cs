@@ -37,8 +37,8 @@ public static class StaticFunctions
         alpha = Mathf.Clamp(alpha, clampMin, clampMax);
 
         if (rotate)
-		{
-			switch (axis)
+        {
+            switch (axis)
             {
                 case RectTransform.Axis.Horizontal:
                     transform.Rotate(0, alpha, 0);
@@ -49,9 +49,9 @@ public static class StaticFunctions
                 default:
                     break;
             }
-		}
+        }
 
-		return angle;
+        return angle;
     }
 
     public static void ObjectFinishTurning(Transform transform, Vector3 targetPos, float duration)
@@ -62,15 +62,5 @@ public static class StaticFunctions
         var alpha = Mathf.Atan2(A, B) * Mathf.Rad2Deg;
         var angle = new Vector3(0, alpha, 0);
         transform.DORotate(transform.eulerAngles + angle, duration);
-    }
-
-    public static async void InvokeActionDelay(
-        Action action,
-        float delay,
-        CancellationToken cancellationToken
-    )
-    {
-        await UniTask.WaitForSeconds(delay, cancellationToken: cancellationToken);
-        action?.Invoke();
     }
 }

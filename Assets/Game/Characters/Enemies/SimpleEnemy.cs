@@ -26,7 +26,7 @@ public class SimpleEnemy : AbstractEnemy
         SetActionTypeForced(UnitActionType.Move);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == Constants.GATES_LAYER)
         {

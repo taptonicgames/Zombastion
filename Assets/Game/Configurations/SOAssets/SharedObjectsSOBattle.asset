@@ -17,6 +17,9 @@ MonoBehaviour:
     - id: Bullet
       gameObject: {fileID: 1077143465587837135, guid: 58ecc8c3ce7ae8d40bb9777badd51ebe,
         type: 3}
+    - id: BoneBullet
+      gameObject: {fileID: 2858425435532295870, guid: 69507862d3091574a96d7b9f7424d00a,
+        type: 3}
     - id: SimpleZombie
       gameObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
         type: 3}
@@ -26,14 +29,11 @@ MonoBehaviour:
     - id: ArcherZombie
       gameObject: {fileID: 3653259963446982085, guid: 11c347651585b26439074912c598bc22,
         type: 3}
-    - id: MetaUIManager
-      gameObject: {fileID: 586827116499440533, guid: d8ce749cf6d1d3141a4405613956f796,
+    - id: ZombieAxe
+      gameObject: {fileID: 3653259963446982085, guid: b8d2fe4143de53446884f1f63cfd683f,
         type: 3}
     - id: BattleUIManager
       gameObject: {fileID: 586827116499440533, guid: dc54a1f6ff37abb4e917db30f7d916e8,
-        type: 3}
-    - id: RawPlayerView
-      gameObject: {fileID: 4517678756419641942, guid: b85e09c93f8c7e44cac7dda6898cb8be,
         type: 3}
     - id: UpgradeCard
       gameObject: {fileID: 8572638089914189796, guid: 25356c5d01d0db14a82398e496303022,

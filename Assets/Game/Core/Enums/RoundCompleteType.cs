@@ -1,4 +1,6 @@
 public enum RoundCompleteType
 {
-    Fail, Win
+    None,
+    Fail,
+    Win,
 }

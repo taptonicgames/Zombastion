@@ -18,3 +18,4 @@ MonoBehaviour:
   bulletType: 0
   bulletSpeed: 50
   attackDistance: 10
+  <additionalParameters>k__BackingField: []

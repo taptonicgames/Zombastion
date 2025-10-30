@@ -168,6 +168,11 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
         {
             item.SetAnimationPhase(value);
         }
+
+        foreach (var item in unitActionsList)
+        {
+            item.SetAnimationPhase(value);
+        }
     }
 
     public virtual ReactiveProperty<T> GetReactiveProperty<T>()

@@ -32,6 +32,10 @@ public class UnitPauseAction : AbstractUnitAction
             unit.Animator.SetFloat(Constants.SPEED, 0);
             unit.Weapon.StopFire();
         }
+        else
+        {
+            unit.Agent.isStopped = true;
+        }
     }
 
     public override void OnFinish()

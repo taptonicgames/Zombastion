@@ -22,9 +22,12 @@ public class PlayerMoveAction : AbstractUnitAction
         if (unitActionPermissionHandler.CheckPermission(actionType, unit.UnitActionType))
         {
             if (CheckMoving())
-                StartAction();
+			{
+				StartAction();
+                return true;
+			}
 
-            if (unit.UnitActionType != actionType)
+			if (unit.UnitActionType != actionType)
                 thirdPersonController.StopingAnimation();
         }
 

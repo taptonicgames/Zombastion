@@ -1,5 +1,7 @@
 using System;
 using UniRx;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class GameManager : IInitializable, IDisposable
@@ -18,16 +20,21 @@ public class GameManager : IInitializable, IDisposable
 
     [Inject]
     private readonly DiContainer diContainer;
+
+    [Inject]
+    private readonly CoroutineManager coroutineManager;
     private CompositeDisposable disposables = new();
 
     public void Initialize()
     {
         CreateUIManager();
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
+        playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
+        EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
     }
-
-    private void CreateUIManager()
+	private void CreateUIManager()
     {
         var prefab = sharedObjects.GetPrefab(Constants.BATTLE_UI_MANAGER);
 
@@ -49,11 +56,32 @@ public class GameManager : IInitializable, IDisposable
         }
     }
 
+    private void OnPlayerHealthChanged(int value)
+    {
+        if (value == 0)
+        {
+            coroutineManager.InvokeActionDelay(
+                () => EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail }),
+                2
+            );
+        }
+    }
+
     private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
     {
         EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
         playerCharacterModel.ResetParameters();
     }
+
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
+    {
+        SceneManager.LoadSceneAsync(0);
+	}
+
+	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
+	{
+        EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+	}
 
     public void Dispose()
     {

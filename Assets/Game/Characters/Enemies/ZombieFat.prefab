@@ -182,13 +182,19 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.83667415
       objectReference: {fileID: 0}
+    - target: {fileID: 6405132558941059502, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c20587761e862464cb35a40961cb7fd2, type: 2}
     - target: {fileID: 8324865469537984475, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
         type: 3}
       propertyPath: SOData
       value: 
       objectReference: {fileID: 11400000, guid: 5f71ea6272bc5d6439d9f1ab1bad4c97,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324865469537984475, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6674631705695544562, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860, type: 3}
     m_AddedGameObjects:
@@ -196,8 +202,35 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7797975379466663688}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3384620331167226177}
   m_SourcePrefab: {fileID: 100100000, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860, type: 3}
+--- !u!1 &3653259963446982085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
+    type: 3}
+  m_PrefabInstance: {fileID: 8127985165978002541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3384620331167226177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653259963446982085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a0fe2be52a58c478d0210aef802eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnable: 1
+  <IsNeedSave>k__BackingField: 0
+  logUnitActionType: 0
+  characterType: 4
+  SOData: {fileID: 11400000, guid: 5f71ea6272bc5d6439d9f1ab1bad4c97, type: 2}
 --- !u!4 &5725964722300933141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4592213539068391544, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,

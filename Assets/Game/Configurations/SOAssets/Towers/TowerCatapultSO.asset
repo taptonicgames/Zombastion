@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d60e33c4af160c4eac2f070ad0dfcd6, type: 3}
+  m_Script: {fileID: 11500000, guid: cda897e37fca71a4daba9c8a902b71dc, type: 3}
   m_Name: TowerCatapultSO
   m_EditorClassIdentifier: 
   speed: 0
@@ -20,3 +20,18 @@ MonoBehaviour:
   critProbability: 0
   <HealthResurectionPerSecond>k__BackingField: 0
   <additionalParameters>k__BackingField: []
+  <Id>k__BackingField: Tower-Catapult
+  <CharacterType>k__BackingField: 3
+  <WeaponType>k__BackingField: 1
+  <SpeedCoefficient>k__BackingField: 0
+  <ShootDamageCoefficient>k__BackingField: 1.1
+  <ShootDelayCoefficient>k__BackingField: 1.2
+  <HealthCoefficient>k__BackingField: 1.3
+  <CritDamageCoefficient>k__BackingField: 1.1
+  <CritProbabilityCoefficient>k__BackingField: 1.5
+  <UIData>k__BackingField:
+    <Name>k__BackingField: Catapult
+    <Description>k__BackingField: Description
+    <Icon>k__BackingField: {fileID: 21300000, guid: 00afc9d3156a943adb743c340c8ce751,
+      type: 3}
+    <DamageName>k__BackingField: Damage
