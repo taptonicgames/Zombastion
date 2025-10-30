@@ -2,24 +2,20 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using Coffee.UIExtensions;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private CardRareElmentsViewer _rareElmentsViewer;
-    [SerializeField] private Button _button;
-    [SerializeField] private TMP_Text _tittle;
-    [SerializeField] private TMP_Text _description;
-    [SerializeField] private TMP_Text _valueText;
-    [SerializeField] private Image _back;
-    [SerializeField] private Image _icon;
-    [SerializeField] private UIParticle _uIParticle;
-    [SerializeField] private UIGradient _cardGradient;
-    [SerializeField] private float _iconAnimationDuration = 1f; // Длительность анимации иконки
+    [SerializeField] private CardRareElmentsViewer rareElmentsViewer;
+    [SerializeField] private Button button;
+    [SerializeField] private TMP_Text tittle;
+    [SerializeField] private TMP_Text description;
+    [SerializeField] private Image back;
+    [SerializeField] private Image icon;
+    [SerializeField] private UIParticle uIParticle;
+    [SerializeField] private UIGradient cardGradient;
 
-    private CardAnimator _animator;
-    private Vector3 _originalIconPosition;
+    private CardAnimator animator;
 
     public BattleUpgradeConfig CurrentUpgrade { get; private set; }
 
@@ -27,60 +23,41 @@ public class Card : MonoBehaviour
 
     public void Init()
     {
-        _animator = new CardAnimator(this, _uIParticle);
+        animator = new CardAnimator(this, uIParticle);
 
-        _button.onClick.AddListener(OnButtonClicked);
-
-        _originalIconPosition = _icon.rectTransform.anchoredPosition;
+        button.onClick.AddListener(OnButtonClicked);
     }
 
     public void Show(BattleUpgradeConfig currentUpgrade, BattleUpgradeStorage battleUpgradeStorage, BattleUpgradeConfigsPack upgradeConfigsPack)
     {
         CurrentUpgrade = currentUpgrade;
 
-        _tittle.SetText(CurrentUpgrade.Tittle);
-        _description.SetText(CurrentUpgrade.Description);
+        tittle.SetText(CurrentUpgrade.Tittle);
+        string valueText = CurrentUpgrade.Value > 0 ? $"{CurrentUpgrade.Value}" : "";
+        string description = $"{CurrentUpgrade.Description} {CurrentUpgrade.Prefix}{valueText}{CurrentUpgrade.Postfix}";
+        this.description.SetText(description);
 
-        _valueText.SetText($"{CurrentUpgrade.Prefix}{CurrentUpgrade.Value}{CurrentUpgrade.Postfix}");
-        _valueText.gameObject.SetActive(CurrentUpgrade.Value > 0);
-        _icon.sprite = CurrentUpgrade.UpgradeIcon;
+        icon.sprite = CurrentUpgrade.UpgradeIcon;
 
-        _rareElmentsViewer?.ShowStarsIndicator(CurrentUpgrade, battleUpgradeStorage, upgradeConfigsPack);
-
-        AnimateIconPosition();
-    }
-
-    private void AnimateIconPosition()
-    {
-        // Устанавливаем начальную позицию иконки
-        Vector2 startPos = _originalIconPosition;
-        startPos.x = -100f;
-        _icon.rectTransform.anchoredPosition = startPos;
-
-        // Анимируем к конечной позиции
-        Vector2 endPos = _originalIconPosition;
-        endPos.x = -16f;
-        _icon.rectTransform.DOAnchorPosX(endPos.x, _iconAnimationDuration)
-            .SetEase(Ease.OutCubic)
-            .SetUpdate(true);
+        rareElmentsViewer?.ShowStarsIndicator(CurrentUpgrade, battleUpgradeStorage, upgradeConfigsPack);
     }
 
     public void SetInteractable(bool value)
     {
-        _button.interactable = value;
+        button.interactable = value;
     }
 
     public void OnCardPicked(Action callback, float delay = 0.0f)
     {
-        if (CurrentUpgrade.IsAccumulating)
-            _rareElmentsViewer.OnCardReached(() => PlayCardPickAnimation(callback, delay));
-        else
+        //if (CurrentUpgrade.IsAccumulating)
+        //    rareElmentsViewer.OnCardReached(() => PlayCardPickAnimation(callback, delay));
+        //else
             PlayCardPickAnimation(callback, delay);
     }
 
     private void PlayCardPickAnimation(Action callback, float delay = 0.0f)
     {
-        _animator.PlayPickAnimation(() => callback?.Invoke(), delay);
+        animator.PlayPickAnimation(() => callback?.Invoke(), delay);
     }
 
     private void OnButtonClicked()
@@ -90,6 +67,6 @@ public class Card : MonoBehaviour
 
     private void OnDestroy()
     {
-        _button.onClick.RemoveListener(OnButtonClicked);
+        button.onClick.RemoveListener(OnButtonClicked);
     }
 }
