@@ -11,6 +11,9 @@ public class PlayerProfileButton : MonoBehaviour
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text levelText;
 
+    private GeneralSavingData generalSavingData;
+    private CurrencyManager currencyManager;
+
     public event Action ProfileButtonClicked;
 
     private void Awake()
@@ -18,12 +21,19 @@ public class PlayerProfileButton : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    public void Init()
+    public void Init(GeneralSavingData generalSavingData, CurrencyManager currencyManager)
     {
-        //TODO: implement player profile params
+        this.generalSavingData = generalSavingData;
+        this.currencyManager = currencyManager;
+
+        UpdateInfo();
+    }
+
+    public void UpdateInfo()
+    {
         nameText.SetText($"profile name");
-        levelText.SetText($"{1}");
-        proggressFill.fillAmount = 0.66f;
+        levelText.SetText($"{generalSavingData.GetParamById(Constants.GLOBAL_PLAYER_LEVEL)}");
+        proggressFill.fillAmount = 0;
     }
 
     private void OnButtonClicked()

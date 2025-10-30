@@ -37,3 +37,9 @@ MonoBehaviour:
     - id: TowerConfigsPack
       scriptableObject: {fileID: 11400000, guid: 9185c64393126e34aa5e82dcf6fa8d3e,
         type: 2}
+    - id: UpgradesConfig
+      scriptableObject: {fileID: 11400000, guid: 8518ee1ab23d4d84197c895cb03b0cd6,
+        type: 2}
+    - id: ChestRewardsSO
+      scriptableObject: {fileID: 11400000, guid: 8c3e66789e4df724cb1edf35912e2aa9,
+        type: 2}

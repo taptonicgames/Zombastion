@@ -27,6 +27,8 @@ public class PlayerUpgradesPanel : AbstractPanel
     private Sequence sequence;
 
     [Inject] private EquipmentManager equipmentManager;
+    [Inject] private CurrencyManager currencyManager;
+    [Inject] private UpgradesManager upgradesManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
@@ -105,7 +107,13 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private void OnClothItemClicked(ClothItemView item)
     {
-        object[] objects = new object[] { item };
+        object[] objects = new object[]
+        {
+            item ,
+            currencyManager,
+            upgradesManager
+        };
+
         clothItemPopup.Init(objects);
         clothItemPopup.Show();
     }

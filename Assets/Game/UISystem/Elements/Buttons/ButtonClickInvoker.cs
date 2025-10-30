@@ -15,6 +15,11 @@ public class ButtonClickInvoker : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
+    public void ChangeButtonInteractableState(bool isEnable)
+    {
+        button.interactable = isEnable;
+    }
+
     private void OnButtonClicked()
     {
         ButtonClicked.Invoke(this);

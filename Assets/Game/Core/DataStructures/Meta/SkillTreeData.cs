@@ -8,6 +8,7 @@ public class SkillTreeData
     [ReadOnlyField] public string Id;
     [field: SerializeField] public float Value { get; private set; }
     [field: SerializeField] public int Price { get; private set; }
+    public CurrencyType CurrencyType { get; private set; } = CurrencyType.SkillTree;
 
     [field: Space(10), Header("UI")]
     [field: SerializeField] public string Tittle { get; private set; }

@@ -6,5 +6,5 @@ public class InsertSO : ScriptableObject
 {
     [field: SerializeField] public EquipmentType EquipmentType { get; private set; }
     [field: SerializeField] public EquipmentRarity Rarity { get; private set; }
-    [field: SerializeField] public string Discription { get; private set; }
+    [field: SerializeField] public string Description { get; private set; }
 }

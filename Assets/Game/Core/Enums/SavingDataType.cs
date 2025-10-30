@@ -5,5 +5,6 @@ public enum SavingDataType
 	Player,
 	Battle,
 	Towers,
-    Currency
+    Currency,
+	Chests
 }

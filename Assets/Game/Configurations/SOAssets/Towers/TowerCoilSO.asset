@@ -23,6 +23,7 @@ MonoBehaviour:
   <Id>k__BackingField: Tower-Coil
   <CharacterType>k__BackingField: 3
   <WeaponType>k__BackingField: 3
+  <UnlockLevel>k__BackingField: 2
   <SpeedCoefficient>k__BackingField: 0
   <ShootDamageCoefficient>k__BackingField: 1.1
   <ShootDelayCoefficient>k__BackingField: 1.2

@@ -27,6 +27,7 @@ public class PlayerCosmeticSO : ScriptableObjectInstaller<PlayerCosmeticSO>
         [ReadOnlyField] public string id;
         [field: SerializeField] public float FirstBustValue { get; private set; }
         [field: SerializeField] public float SecondBustValue { get; private set; }
+        [field: SerializeField] public CurrencyType CurrencyType { get; private set; }
 
         [field: Space(10), Header("UI")]
         [field: SerializeField] public string Tittle { get; private set; }

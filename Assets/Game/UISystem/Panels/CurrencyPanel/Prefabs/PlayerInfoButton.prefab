@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7331536434692770341}
   - component: {fileID: 8122884009955631802}
   m_Layer: 0
-  m_Name: PlayerInfoView
+  m_Name: PlayerInfoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

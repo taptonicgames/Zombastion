@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerInfoViewer : MonoBehaviour
 {
+    [SerializeField] private UpgradeButton UpgradeButton;
     [SerializeField] private Transform unlockStateObject;
     [SerializeField] private Transform lockStateObject;
 
@@ -19,7 +20,7 @@ public class PlayerInfoViewer : MonoBehaviour
     [SerializeField] private TMP_Text secondBustValue;
     [SerializeField] private Image skillIcon;
 
-    internal void UpdateInfo(PlayerCosmeticSO.PlayerCosmeticData data)
+    internal void UpdateInfo(PlayerCosmeticSO.PlayerCosmeticData data, CurrencyManager currencyManager, UpgradesManager upgradesManager)
     {
         tittleText.SetText(data.Tittle);
         subTittleText.SetText(data.SubTittle);
@@ -36,5 +37,11 @@ public class PlayerInfoViewer : MonoBehaviour
         //TODO: implement save lcok/unlock state
         unlockStateObject.gameObject.SetActive(data.Descriprion != "");
         lockStateObject.gameObject.SetActive(data.Descriprion == "");
+
+        if (data.CurrencyType != CurrencyType.None)
+        {
+            UpgradeButton.UpdateInfo(upgradesManager.GetUpgradeDataById($"{data.CurrencyType}"), currencyManager, upgradesManager, 1);
+            UpgradeButton.gameObject.SetActive(currencyManager.GetCurrencyAmount(data.CurrencyType) == 0);
+        }
     }
 }

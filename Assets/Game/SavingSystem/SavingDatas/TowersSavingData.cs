@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TowersSavingData : AbstractSavingData
 {
     private const int FIRST_LEVEL = 1;
-    public Dictionary<string, int> levelsTowers = new Dictionary<string, int>();
+    [field: SerializeField] public Dictionary<string, int> levelsTowers { get; set; } = new Dictionary<string, int>();
 
     public override void ResetData(int flag = 0) { }
 

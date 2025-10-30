@@ -16,7 +16,7 @@ MonoBehaviour:
   - Id: Exp
     <Type>k__BackingField: 1
     <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: 0e975ec7afa18429ba1597cce1e651af,
+      <Icon>k__BackingField: {fileID: 21300000, guid: 3c983ee95972a44b88fa3c00c3f542cc,
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: 2ce2c66aecb874b17b5a4fa5babe9209,
         type: 3}
@@ -47,6 +47,13 @@ MonoBehaviour:
       <Icon>k__BackingField: {fileID: 21300000, guid: 80a0fc9c93913457ca01a208704d2adc,
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: SkillTree
+    <Type>k__BackingField: 6
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: db618c4ee1674489baabc808d10ca8a7,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
         type: 3}
   - Id: Helmet
     <Type>k__BackingField: 101
@@ -115,6 +122,20 @@ MonoBehaviour:
     <Type>k__BackingField: 304
     <UIData>k__BackingField:
       <Icon>k__BackingField: {fileID: 21300000, guid: 3a4595c5305234fe8a99780908bf08ac,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CoilTower
+    <Type>k__BackingField: 304
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 3a4595c5305234fe8a99780908bf08ac,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: SecondHero
+    <Type>k__BackingField: 401
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: f802ceda35f5c4662a240c6ceef56a64,
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
         type: 3}

@@ -692,7 +692,7 @@ MonoBehaviour:
   unlockLevelText: {fileID: 9127396728890038833}
   icon: {fileID: 1044944690217728016}
   lockStateView: {fileID: 4142240172728344553}
-  ButtomView: {fileID: 6628226323925211374}
+  bottomView: {fileID: 6628226323925211374}
   progressBar: {fileID: 3161198858847700341}
   progressText: {fileID: 3704229502158576901}
   upgradeIndicator: {fileID: 7282080779522495632}
@@ -1236,12 +1236,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.15
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 5, y: 0, z: 5, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

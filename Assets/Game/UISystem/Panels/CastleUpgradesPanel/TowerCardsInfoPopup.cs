@@ -26,9 +26,14 @@ public class TowerCardsInfoPopup : AbstractPopup
 
         IEnumerable<BattleUpgradeConfig> configs = cardsUpgradeManager.GetUpgradeConfigsByType(upgradeType);
         var filterByWeaponType = configs.Where(i => i.WeaponType.Equals(weaponType));
-        
+
+        var SortRare = filterByWeaponType
+            .OrderByDescending(p => p.RareType == BattleUpgradeRareType.Common)
+            .ThenBy(p => p.RareType == BattleUpgradeRareType.Epic)
+            .Select(p => p);
+
         HideCards();
-        UpdateInfo(filterByWeaponType);
+        UpdateInfo(SortRare);
     }
 
     private void HideCards()

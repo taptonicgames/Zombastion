@@ -8,6 +8,7 @@
     Gems = 3,
     Energy = 4,
     MaxEnergy = 5,
+    SkillTree = 6,
     #endregion
 
     #region Cloth
@@ -24,9 +25,14 @@
     #endregion
 
     #region Towers
+    RandomTower = 300,
     CatapultTower = 301,
     CouldronTower = 302,
     CrossbowTower = 303,
     CoilTower = 304,
+    #endregion
+
+    #region Heroes
+    SecondHero = 401,
     #endregion
 }

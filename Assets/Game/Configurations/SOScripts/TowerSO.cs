@@ -7,6 +7,7 @@ public class TowerSO : PlayerSO
     [field: SerializeField] public string Id { get; private set; }
     [field: SerializeField] public CharacterType CharacterType { get; private set; }
     [field: SerializeField] public WeaponType WeaponType { get; private set; }
+    [field: SerializeField] public int UnlockLevel { get; private set; }
     [field: SerializeField] public float SpeedCoefficient { get; private set; }
     [field: SerializeField] public float ShootDamageCoefficient { get; private set; }
     [field: SerializeField] public float ShootDelayCoefficient { get; private set; }

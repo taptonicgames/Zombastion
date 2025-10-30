@@ -27,6 +27,8 @@ public class ClothItemPopup : AbstractPopup
     [SerializeField] private TMP_Text enchanceAttackText;
 
     private ClothItemView itemView;
+    private CurrencyManager currencyManager;
+    private UpgradesManager upgradesManager;
 
     public event Action<InsertData> InsertDataRemoved;
 
@@ -42,6 +44,9 @@ public class ClothItemPopup : AbstractPopup
     public override void Init(object[] args)
     {
         itemView = (ClothItemView)args[0];
+        currencyManager = (CurrencyManager)args[1];
+        upgradesManager = (UpgradesManager)args[2];
+
         UpdateInfo();
     }
 
@@ -105,7 +110,13 @@ public class ClothItemPopup : AbstractPopup
 
     private void OnEnhanceButtonClicked()
     {
-        object[] args = new object[] {itemView};
+        object[] args = new object[] 
+        {
+            itemView,
+            currencyManager,
+            upgradesManager
+        };
+
         enhancePopup.Init(args);
         enhancePopup.ForceShow();
     }
