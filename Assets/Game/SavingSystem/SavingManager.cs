@@ -2,6 +2,9 @@ using Zenject;
 
 public class SavingManager : AbstractSavingManager, IInitializable
 {
+    [Inject]
+    private readonly DiContainer diContainer;
+
     public SavingManager(bool dontSave)
         : base(dontSave) { }
 
@@ -12,7 +15,7 @@ public class SavingManager : AbstractSavingManager, IInitializable
 
     protected override void AddSavingDatasToList()
     {
-        savingDataPairs.Add(SavingDataType.Battle, new BattleSavingData());
+        savingDataPairs.Add(SavingDataType.Battle, diContainer.Instantiate<BattleSavingData>());
         savingDataPairs.Add(SavingDataType.Towers, new TowersSavingData());
         savingDataPairs.Add(SavingDataType.General, new GeneralSavingData());
         savingDataPairs.Add(SavingDataType.Currency, new CurrencySavingData());

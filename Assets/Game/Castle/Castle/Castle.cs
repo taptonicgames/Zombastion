@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Linq;
 using UnityEngine;
 
@@ -12,8 +11,6 @@ public class Castle : MonoBehaviour, IColliderHelper
 
     public int Health { get; private set; }
 
-    private Vector3 defaultGatesPos;
-    private const float GATES_OPEN_DURATION = 0.5f;
     private const string OUTER_COLLIDER = "OuterCollider";
     private const string INNER_COLLIDER = "InnerCollider";
     private Transform inCollisionTr;
@@ -21,15 +18,11 @@ public class Castle : MonoBehaviour, IColliderHelper
     private void Awake()
     {
         Health = SOData.Health;
-        defaultGatesPos = Gates.transform.position;
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
         GetComponentsInChildren<AbstractPlayerUnit>(true).ToList().ForEach(a => a.Init());
     }
 
-    private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt)
-    {
-
-    }
+    private void OnUpgradeChoosenEvnt(UpgradeChoosenEvnt evnt) { }
 
     public void SetDamage(int damage)
     {
@@ -64,9 +57,9 @@ public class Castle : MonoBehaviour, IColliderHelper
         {
             if (collider.gameObject.layer == Constants.PLAYER_LAYER)
             {
-				Gates.OpenClose(Constants.OPEN, false);
+                Gates.OpenClose(Constants.OPEN, false);
 
-				if (sender.name == INNER_COLLIDER)
+                if (sender.name == INNER_COLLIDER)
                     EventBus<PlayerFindingCastleEvnt>.Publish(
                         new() { type = PlayerFindingCastleType.Entered }
                     );
@@ -79,5 +72,10 @@ public class Castle : MonoBehaviour, IColliderHelper
                 inCollisionTr = null;
             }
         }
+    }
+
+    public int GetDefaultHealth()
+    {
+        return SOData.Health;
     }
 }
