@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02ddbb7ad8297d4dba5d3f6300d7dc9, type: 3}
-  m_Name: TowerCauldronConfig
+  m_Name: TowerCrossbow_DamageConfig
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Tower-Cauldron
-  <WeaponType>k__BackingField: 2
+  <Id>k__BackingField: Tower-Crossbow
+  <WeaponType>k__BackingField: 0
   <CharacterType>k__BackingField: 3
-  <UpgradeType>k__BackingField: 0
-  <RareType>k__BackingField: 3
-  <UpgradeIcon>k__BackingField: {fileID: 21300000, guid: 9981e739b327a4307812c90191cdf426,
+  <UpgradeType>k__BackingField: 1
+  <RareType>k__BackingField: 0
+  <UpgradeIcon>k__BackingField: {fileID: 21300000, guid: 56113d77198ca4e7db0a78aab2221a77,
     type: 3}
-  <Tittle>k__BackingField: Cauldron tower
-  <Description>k__BackingField: 
-  <Prefix>k__BackingField: 
-  <Postfix>k__BackingField: 
+  <Tittle>k__BackingField: Sharpened arrows
+  <Description>k__BackingField: Arrow Damage
+  <Prefix>k__BackingField: +
+  <Postfix>k__BackingField: '%'
   <IsAccumulating>k__BackingField: 0
   <MaxPickedCount>k__BackingField: 0
   <ChanceShowingPercentage>k__BackingField: 0
-  <Value>k__BackingField: 0
+  <Value>k__BackingField: 100
