@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33eaaf13c60ea64a9abfff05b03aa0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSO: {fileID: 11400000, guid: 1fac6989743e4ce4192f6edfc4b8305d, type: 2}
+  weaponSO: {fileID: 11400000, guid: 7c328b925ae549148b42acbf8e5ea539, type: 2}
+  <ShootPoint>k__BackingField: {fileID: 6169938314150456547}
 --- !u!1 &5740365048510908648
 GameObject:
   m_ObjectHideFlags: 0

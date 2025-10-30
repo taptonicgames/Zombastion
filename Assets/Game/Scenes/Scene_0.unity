@@ -458,10 +458,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameComponents
       objectReference: {fileID: 0}
+    - target: {fileID: 4142907184745955461, guid: fa3aacc92bb79324a841dd46110d1aa2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365227254853335266, guid: fa3aacc92bb79324a841dd46110d1aa2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.06
+      objectReference: {fileID: 0}
     - target: {fileID: 5365227254853335266, guid: fa3aacc92bb79324a841dd46110d1aa2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.11
+      value: -23.15
       objectReference: {fileID: 0}
     - target: {fileID: 7996272614126095767, guid: fa3aacc92bb79324a841dd46110d1aa2,
         type: 3}

@@ -20,6 +20,12 @@ MonoBehaviour:
     - id: BoneBullet
       gameObject: {fileID: 2858425435532295870, guid: 69507862d3091574a96d7b9f7424d00a,
         type: 3}
+    - id: CatapultBullet
+      gameObject: {fileID: 1077143465587837135, guid: 9a5e4ff0ec3bf59418f9d0e6670b4ee7,
+        type: 3}
+    - id: CrossbowBullet
+      gameObject: {fileID: 1077143465587837135, guid: 5aee90adba3037a4887e21dd04bf0a24,
+        type: 3}
     - id: SimpleZombie
       gameObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
         type: 3}
@@ -42,4 +48,10 @@ MonoBehaviour:
     idScriptableObjectDatasList:
     - id: BattleUpgradeConfigsPack
       scriptableObject: {fileID: 11400000, guid: f6eb19e054acbdb47b66705ee770444d,
+        type: 2}
+    - id: LevelRewardsSO
+      scriptableObject: {fileID: 11400000, guid: 9b9f36e34514730428351ba6102c801b,
+        type: 2}
+    - id: CurrencySO
+      scriptableObject: {fileID: 11400000, guid: be9384529c2e01f4f8dcfc49c89ecb67,
         type: 2}

@@ -8,12 +8,16 @@ public abstract class AbstractWeapon : MonoBehaviour
 
     [SerializeField]
     private WeaponSO weaponSO;
+
+    [field: SerializeField]
+    public Transform ShootPoint { get; private set; }
     protected bool inFire,
         inReload;
     protected AbstractUnit shootingUnit;
     protected float angleToTarget;
     protected AbstractUnit targetUnit;
     protected Transform targetTr;
+    public bool IsReady { get; protected set; } = true;
 
     public virtual void Fire(AbstractUnit shootingUnit, AbstractUnit targetUnit)
     {
@@ -65,4 +69,6 @@ public abstract class AbstractWeapon : MonoBehaviour
         var time = weaponSO.ShootDelay * shootingUnit.GetAttackSOParameters().ShootDelay;
         return time;
     }
+
+    public virtual void SetAnimationPhase(int value) { }
 }

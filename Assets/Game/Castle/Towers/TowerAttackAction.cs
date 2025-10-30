@@ -4,20 +4,24 @@ using UnityEngine;
 public class TowerAttackAction : BasePlayerAttackAction
 {
     private float angleToEnemyVertical = 360f;
+    private bool CanRotateYAxe => unit.Weapon.WeaponSOData.WeaponType == WeaponType.Crossbow;
 
     public TowerAttackAction(AbstractUnit unit)
         : base(unit) { }
 
     protected override async UniTask WaitRotatingToTarget()
     {
-        await UniTask.WaitUntil(() => angleToEnemyVertical <= Constants.ALMOST_ZERO);
+        if (CanRotateYAxe)
+            await UniTask.WaitUntil(() => angleToEnemyVertical <= Constants.ALMOST_ZERO);
+        
         await base.WaitRotatingToTarget();
-    }
 
-    public override void Update()
-    {
-        base.Update();
-        CheckTargetUnit();
+		await UniTask.WaitUntil(
+				() => unit.Weapon.IsReady,
+				cancellationToken: unit.destroyCancellationToken
+			);
+
+        unit.SetActionTypeForced(UnitActionType.Idler);
     }
 
     protected override void RotateToTarget()
@@ -32,12 +36,15 @@ public class TowerAttackAction : BasePlayerAttackAction
             Constants.UNIT_ROTATION_SPEED
         );
 
-        angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
-            unit.Weapon.transform,
-            targetUnit.transform.position + Vector3.up * 1.5f,
-            -Constants.UNIT_ROTATION_SPEED,
-            Constants.UNIT_ROTATION_SPEED,
-            axis: RectTransform.Axis.Vertical
-        );
+        if (CanRotateYAxe)
+        {
+            angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
+                unit.Weapon.transform,
+                targetUnit.transform.position,
+                -Constants.UNIT_ROTATION_SPEED,
+                Constants.UNIT_ROTATION_SPEED,
+                axis: RectTransform.Axis.Vertical
+            );
+        }
     }
 }

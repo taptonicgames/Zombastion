@@ -19,7 +19,6 @@ public class BattleUIManager : AbstractUIManager
 
     public BattleUpgradeStorage BattleUpgradeStorage { get; private set; }
 
-    //public BattleUpgradeHandler BattleUpgradeHandler { get; private set; }
     public BattleUpgradeConfigsPack BattleUpgradeConfigsPack =>
         sharedObjects.GetScriptableObject<BattleUpgradeConfigsPack>(
             Constants.BATTLE_UPGRADE_CONFIG_PACK
@@ -32,6 +31,7 @@ public class BattleUIManager : AbstractUIManager
         HideAllPanels();
         ShowGamePanels();
         EventBus<ExperienceReachedEvnt>.Subscribe(OnExperienceReachedEvnt);
+        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
     }
 
     private void InitPanels()
@@ -51,17 +51,39 @@ public class BattleUIManager : AbstractUIManager
 
     private void OnExperienceReachedEvnt(ExperienceReachedEvnt evnt)
     {
-        var panel = GetPanel(PanelType.BattleUpgrade);
+        var initObjects = new object[]
+        {
+            BattleUpgradeConfigsPack,
+            BattleUpgradeStorage,
+            cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
+        };
 
-        panel.Init(
-            new object[]
-            {
-                BattleUpgradeConfigsPack,
-                BattleUpgradeStorage,
-                cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
-            }
-        );
+        OpenPanel(PanelType.BattleUpgrade, initObjects);
+    }
 
+    private void OpenPanel(PanelType type, object[] initObjects = null)
+    {
+        var panel = GetPanel(type);
+
+        if (!panel)
+            return;
+
+        panel.Init(initObjects);
         panel.Show();
+    }
+
+    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
+    {
+        switch (evnt.type)
+        {
+            case RoundCompleteType.Fail:
+                OpenPanel(PanelType.LoseRound);
+                break;
+            case RoundCompleteType.Win:
+                OpenPanel(PanelType.WinRound);
+                break;
+            default:
+                break;
+        }
     }
 }

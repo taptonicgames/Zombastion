@@ -35,6 +35,7 @@ public class EndRoundRewardCellsContainer : MonoBehaviour
 
         sequence.Kill();
         sequence = DOTween.Sequence();
+        sequence.SetUpdate(true);
 
         for (int i = 0; i < cells.Length; i++)
         {

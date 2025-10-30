@@ -3,56 +3,73 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private AbstractWeapon weapon;
-    private WeaponSO SOData;
-    private ObjectPoolSystem objectPoolSystem;
-    private int damage;
-    private bool isActive;
+    protected AbstractWeapon weapon;
+    protected WeaponSO SOData;
+    protected ObjectPoolSystem objectPoolSystem;
+    protected int damage;
+    public bool IsActive { get; set; }
 
-    public virtual void Init(AbstractWeapon weapon, ObjectPoolSystem objectPoolSystem, int damage)
+    public virtual void Init(
+        AbstractWeapon weapon,
+        ObjectPoolSystem objectPoolSystem,
+        int damage,
+        bool isActive = true
+    )
     {
         this.weapon = weapon;
         SOData = weapon.WeaponSOData;
         this.objectPoolSystem = objectPoolSystem;
         this.damage = damage;
         StartCoroutine(DestroyDelay());
-        isActive = true;
+        IsActive = isActive;
     }
 
-    private IEnumerator DestroyDelay()
+    protected virtual IEnumerator DestroyDelay()
     {
         yield return new WaitForSeconds(5);
         Reset();
     }
 
-    private void Reset()
+    protected virtual void Reset()
     {
-        if (!isActive)
+        if (!IsActive)
             return;
-        isActive = false;
+        IsActive = false;
         objectPoolSystem.ReleasePoolableObject(SOData.BulletType.ToString(), gameObject);
         StopAllCoroutines();
     }
 
     protected virtual void Update()
     {
-        if (isActive)
+        if (IsActive)
             transform.Translate(Vector3.forward * Time.deltaTime * SOData.BulletSpeed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        var damageReciever = other.GetComponentInParent<IDamageReciever>();
+        FindRecieverAndDamage(other);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        FindRecieverAndDamage(collision.collider);
+    }
+
+    private void FindRecieverAndDamage(Collider collider)
+    {
+        var damageReciever = collider.GetComponentInParent<IDamageReciever>();
 
         if (damageReciever != null)
         {
             if (damageReciever is AbstractUnit)
             {
-                if (
-                    weapon.TargetUnit
-                    && damageReciever.GetDamageRecieverType() == weapon.TargetUnit.GetType()
-                )
-                    damageReciever.SetDamage(damage);
+                if (weapon.TargetUnit)
+                {
+                    if (damageReciever.GetDamageRecieverType() == weapon.TargetUnit.GetType())
+                        damageReciever.SetDamage(damage);
+                    else
+                        return;
+                }
             }
             else
                 damageReciever.SetDamage(damage);
@@ -66,4 +83,6 @@ public class Bullet : MonoBehaviour
 
         Reset();
     }
+
+    public virtual void CompleteAction(int value) { }
 }

@@ -4,14 +4,14 @@ public class PlayerHealAbility : AbstractUnitAbility
 {
     public PlayerFindingCastleType PlayerFindingCastleType { get; private set; } =
         PlayerFindingCastleType.Left;
-    private AbstractPlayerUnit abstractPlayerUnit;
+    private PlayerCharacter abstractPlayerUnit;
     private float ressurectHealth;
 
     public PlayerHealAbility(AbstractUnit unit)
         : base(unit)
     {
         EventBus<PlayerFindingCastleEvnt>.Subscribe(OnPlayerFindingCastleEvnt);
-        abstractPlayerUnit = (AbstractPlayerUnit)unit;
+        abstractPlayerUnit = (PlayerCharacter)unit;
     }
 
     private void OnPlayerFindingCastleEvnt(PlayerFindingCastleEvnt evnt)

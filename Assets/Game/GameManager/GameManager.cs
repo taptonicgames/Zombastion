@@ -1,7 +1,5 @@
 using System;
 using UniRx;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class GameManager : IInitializable, IDisposable
@@ -31,7 +29,6 @@ public class GameManager : IInitializable, IDisposable
         playerCharacterModel.Experience.Subscribe(OnPlayerExpChanged).AddTo(disposables);
         playerCharacterModel.Health.Subscribe(OnPlayerHealthChanged).AddTo(disposables);
         EventBus<UpgradeChoosenEvnt>.Subscribe(OnUpgradeChoosenEvnt);
-        EventBus<RoundCompleteEvnt>.Subscribe(OnRoundCompleteEvnt);
         EventBus<GatesFallenEvnt>.Subscribe(OnGatesFallenEvnt);
     }
 	private void CreateUIManager()
@@ -72,11 +69,6 @@ public class GameManager : IInitializable, IDisposable
         EventBus<SetGamePauseEvnt>.Publish(new() { paused = false });
         playerCharacterModel.ResetParameters();
     }
-
-    private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
-    {
-        SceneManager.LoadSceneAsync(0);
-	}
 
 	private void OnGatesFallenEvnt(GatesFallenEvnt evnt)
 	{

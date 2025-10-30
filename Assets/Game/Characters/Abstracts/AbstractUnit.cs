@@ -86,7 +86,8 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     protected virtual void OnSetGamePauseEvnt(SetGamePauseEvnt evnt)
     {
-        if (!gameObject.activeSelf) return;
+        if (!gameObject.activeSelf)
+            return;
         if (evnt.paused)
             StartCoroutine(SetPauseCoroutine());
         else
@@ -294,4 +295,9 @@ public abstract class AbstractUnit : MonoBehaviour, IDamageReciever
 
     public abstract IGetAttackSOParameters GetAttackSOParameters();
     public abstract Type GetDamageRecieverType();
+
+    public virtual IScriptableObjectData GetScriptableObjectData()
+    {
+        return null;
+    }
 }

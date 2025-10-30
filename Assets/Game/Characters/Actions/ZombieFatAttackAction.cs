@@ -34,7 +34,7 @@ public class ZombieFatAttackAction : AbstractUnitAction
             return false;
 
         if (
-            Vector3.Distance(unit.transform.position, sceneReferences.castle.Gates.position)
+            Vector3.Distance(unit.transform.position, sceneReferences.castle.Gates.transform.position)
             <= DISTANCE_TO_ATTACK
         )
         {

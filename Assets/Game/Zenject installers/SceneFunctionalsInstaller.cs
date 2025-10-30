@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 public class SceneFunctionalsInstaller : MonoInstaller
@@ -10,5 +11,7 @@ public class SceneFunctionalsInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
         Container.BindInterfacesAndSelfTo<ObjectPoolSystem>().AsSingle();
         Container.Bind<CardsUpgradeManager>().AsSingle();
+        Container.Bind<CurrencyManager>().AsSingle();
+        Container.Bind<RewardsManager>().AsSingle();
     }
 }

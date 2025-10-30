@@ -4,6 +4,8 @@ public static class Constants
     public const string SPEED = "Speed";
     public const string ATTACK = "Attack";
     public const string SHOOT = "Shoot";
+    public const string OPEN = "Open";
+	public const string DAMAGE = "Damage";
 
 	//Code
 	public const float ALMOST_ZERO = 0.1f;
@@ -17,14 +19,14 @@ public static class Constants
     //Tags
     public const string PLAYER_TAG = "Player";
 
-    //SharedObjects Ids
+    //Ids
     public const string CARDS_PANEL_BATTLE = "CardsPanelBattle";
     public const string BATTLE_UI_MANAGER = "BattleUIManager";
     public const string META_UI_MANAGER = "MetaUIManager";
     public const string RAW_PLAYER_VIEW = "RawPlayerView";
     public const string BATTLE_UPGRADE_CONFIG_PACK = "BattleUpgradeConfigsPack";
     public const string UPGRADE_CARD = "UpgradeCard";
-
+    public const string BULLET_DAMAGE_RADIUS = "BulletDamageRadius";
     public const string TOWER_CONFIGS_PACK = "TowerConfigsPack";
 
     //Global params

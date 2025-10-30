@@ -94,7 +94,7 @@ public class PlayerAttackAction : BasePlayerAttackAction
             return;
 
         angleToEnemy = StaticFunctions.ObjectFinishTurning(
-            ((Gun)unit.Weapon).ShootPoint,
+            unit.Weapon.ShootPoint,
             targetUnit.transform.position,
             -Constants.UNIT_ROTATION_SPEED,
             Constants.UNIT_ROTATION_SPEED,
@@ -104,7 +104,7 @@ public class PlayerAttackAction : BasePlayerAttackAction
         unit.transform.Rotate(0, angleToEnemy, 0);
 
         angleToEnemyVertical = StaticFunctions.ObjectFinishTurning(
-            ((Gun)unit.Weapon).ShootPoint,
+            unit.Weapon.ShootPoint,
             targetUnit.transform.position + Vector3.up * 1f,
             -Constants.UNIT_ROTATION_SPEED,
             Constants.UNIT_ROTATION_SPEED,

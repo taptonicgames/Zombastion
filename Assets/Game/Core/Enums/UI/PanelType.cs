@@ -19,4 +19,5 @@
 	PlayerExperience = 21,
 	WinRound = 22,
 	LoseRound = 23,
+    BattleDebugPanel = 24,
 }

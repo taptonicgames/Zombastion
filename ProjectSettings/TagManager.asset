@@ -16,7 +16,7 @@ TagManager:
   - IgnoreNavmesh
   - Enemy
   - Gates
-  - 
+  - PlayerEnterExitCollider
   - 
   - 
   - RawView

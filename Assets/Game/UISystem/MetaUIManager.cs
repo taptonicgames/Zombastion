@@ -4,6 +4,8 @@ using Zenject;
 
 public class MetaUIManager : AbstractUIManager
 {
+    [Inject] private AbstractSavingManager savingManager;
+
     public override void Init()
     {
         base.Init();
@@ -11,6 +13,12 @@ public class MetaUIManager : AbstractUIManager
         EnterStartBattlePanel();
 
         Subscribe();
+    }
+
+    private void Start()
+    {
+        savingManager.GetSavingData<BattleSavingData>(SavingDataType.Battle).ResetData();
+        savingManager.GetSavingData<BattleSavingData>(SavingDataType.Battle).SaveData(false);
     }
 
     #region Enters
