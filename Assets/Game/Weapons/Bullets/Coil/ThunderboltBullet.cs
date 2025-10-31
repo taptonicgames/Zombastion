@@ -10,16 +10,17 @@ public class ThunderboltBullet : Bullet
     [SerializeField]
     private LineRenderer lineRenderer;
 
-    private const float LIGHTNING_LIFETIME = 0.2f;
+    private const float LIGHTNING_LIFETIME = 0.1f;
 
     public override void Init(
         AbstractWeapon weapon,
         ObjectPoolSystem objectPoolSystem,
+        AbstractUnit targetUnit,
         int damage,
         bool isActive = true
     )
     {
-        base.Init(weapon, objectPoolSystem, damage, isActive);
+        base.Init(weapon, objectPoolSystem, targetUnit, damage, isActive);
 
         if (!coroutineManager)
             weapon.diContainer.Inject(this);
@@ -27,17 +28,18 @@ public class ThunderboltBullet : Bullet
 
     public override void SetActive()
     {
+        if (!targetUnit)
+        {
+            Reset();
+            return;
+        }
+
         base.SetActive();
         lineRenderer.enabled = true;
 
-        var positions = new[]
-        {
-            transform.position,
-            weapon.TargetUnit.transform.position + Vector3.up,
-        };
-
+        var positions = new[] { transform.position, targetUnit.transform.position + Vector3.up };
         lineRenderer.SetPositions(positions);
-        weapon.TargetUnit.SetDamage(damage);
+        targetUnit.SetDamage(damage);
         coroutineManager.InvokeActionDelay(Reset, LIGHTNING_LIFETIME);
     }
 

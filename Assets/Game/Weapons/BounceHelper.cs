@@ -1,15 +1,12 @@
-using Cysharp.Threading.Tasks;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public struct BounceHelper
 {
     private readonly AbstractWeapon weapon;
     private readonly int firstDamage;
-    private readonly AbstractUnit firstTargetUnit;
+    private AbstractUnit targetUnit;
     private readonly ObjectPoolSystem objectPoolSystem;
     private readonly int bounceCount;
     private const float BOUNCE_DELAY = 0.1f;
@@ -25,11 +22,17 @@ public struct BounceHelper
     {
         this.weapon = weapon;
         this.firstDamage = firstDamage;
-        this.firstTargetUnit = firstTargetUnit;
+        targetUnit = firstTargetUnit;
         this.objectPoolSystem = objectPoolSystem;
         this.bounceCount = bounceCount;
-        pos = firstTargetUnit.transform.position;
+        pos = Vector3.zero;
+        SetPosition(firstTargetUnit);
         StartBounces();
+    }
+
+    private void SetPosition(AbstractUnit firstTargetUnit)
+    {
+        pos = firstTargetUnit.transform.position + Vector3.up;
     }
 
     private async void StartBounces()
@@ -41,19 +44,33 @@ public struct BounceHelper
         {
             await UniTask.WaitForSeconds(BOUNCE_DELAY);
             var radius = weapon.WeaponSOData.GetValueByTag<float>(Constants.BOUNCE_RADIUS);
-            var target = StaticFunctions.OverlapSphere<AbstractUnit>(pos, radius, true).First();
-            pos = target.transform.position;
-            var coef = weapon.WeaponSOData.GetValueByTag<float>(Constants.BOUNCE_STRENGTH_DECREASE_PERCENT)/100f;
-            var damage = firstDamage * coef * (i + 1);
+            var currentTargetUnit = targetUnit;
+
+            targetUnit = StaticFunctions
+                .OverlapSphere<AbstractUnit>(pos, radius, true)
+                .Where(a => a.IsEnable && a != currentTargetUnit)
+                .FirstOrDefault();
+
+            if (!targetUnit)
+                return;
+
+            var coef =
+                weapon.WeaponSOData.GetValueByTag<float>(Constants.BOUNCE_STRENGTH_DECREASE_PERCENT)
+                / 100f;
+
+            var damage = firstDamage - firstDamage * (coef * (i + 1));
             CreateBullet(pos, (int)damage);
+            SetPosition(targetUnit);
         }
     }
 
-	private void CreateBullet(Vector3 pos, int damage)
-	{
-		var bullet = objectPoolSystem.GetPoolableObject<Bullet>(weapon.WeaponSOData.BulletType.ToString());
-		bullet.transform.position = pos;
-        bullet.Init(weapon, objectPoolSystem, damage);
+    private void CreateBullet(Vector3 pos, int damage)
+    {
+        var bullet = objectPoolSystem.GetPoolableObject<Bullet>(
+            weapon.WeaponSOData.BulletType.ToString()
+        );
+        bullet.transform.position = pos;
+        bullet.Init(weapon, objectPoolSystem, targetUnit, damage);
         bullet.SetActive();
-	}
+    }
 }

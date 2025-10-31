@@ -44,7 +44,7 @@ public class Gun : AbstractWeapon
 
             bullet.transform.position = ShootPoint.position;
             bullet.transform.rotation = ShootPoint.rotation;
-            bullet.Init(this, objectPoolSystem, CalculateDamage());
+            bullet.Init(this, objectPoolSystem, targetUnit, CalculateDamage());
             inReload = true;
             shootingUnit.Animator.SetTrigger(Constants.SHOOT);
 

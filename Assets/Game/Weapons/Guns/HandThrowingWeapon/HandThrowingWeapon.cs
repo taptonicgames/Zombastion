@@ -30,7 +30,7 @@ public class HandThrowingWeapon : AbstractWeapon
 
 		bullet.transform.position = throwingBoneTr.position;
 		StaticFunctions.ObjectFinishTurning(bullet.transform, GetTargetPos(), -360, 360);
-		bullet.Init(this, objectPoolSystem, CalculateDamage());
+		bullet.Init(this, objectPoolSystem, targetUnit, CalculateDamage());
 	}
 
 	private Vector3 GetTargetPos()

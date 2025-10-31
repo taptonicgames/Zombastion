@@ -36,7 +36,7 @@ public class TowerWeapon : AbstractWeapon
 
         base.Fire(shootingUnit, targetUnit);
         enemyPos = targetUnit.transform.position;
-        bullet.Init(this, objectPoolSystem, CalculateDamage(), LaunchOnParabola);
+        bullet.Init(this, objectPoolSystem, targetUnit, CalculateDamage(), LaunchOnParabola);
         animator.SetTrigger(Constants.ATTACK);
         IsReady = false;
     }
@@ -46,7 +46,7 @@ public class TowerWeapon : AbstractWeapon
         if (LaunchOnParabola)
         {
             ObjectParabolaJumpHelper.JumpObjectData jumpObjectData = default;
-            jumpObjectData.endTr = TargetUnit != null ? TargetUnit.transform : null;
+            jumpObjectData.endTr = targetUnit != null ? targetUnit.transform : null;
             jumpObjectData.startPos = bullet.transform.position;
             jumpObjectData.endPos = enemyPos;
             jumpObjectData.CompleteAction += bullet.CompleteAction;
@@ -61,6 +61,7 @@ public class TowerWeapon : AbstractWeapon
         else
         {
             bullet.SetActive();
+            //BounceHelper bounceHelper = new(this, CalculateDamage(), targetUnit, objectPoolSystem, 3);
         }
 
         bullet = null;

@@ -50,7 +50,7 @@ public abstract class AbstractWeapon : MonoBehaviour
     {
         get => inFire;
     }
-    public AbstractUnit TargetUnit => targetUnit;
+    //protected AbstractUnit TargetUnit => targetUnit;
 
     public AbstractUnit ShootingUnit
     {

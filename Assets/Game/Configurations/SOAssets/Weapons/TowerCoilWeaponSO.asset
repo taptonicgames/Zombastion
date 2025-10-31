@@ -21,6 +21,6 @@ MonoBehaviour:
   <MinAttackDistance>k__BackingField: 0
   <additionalParameters>k__BackingField:
   - paramName: BounceRadius
-    value: 5
+    value: 10
   - paramName: BounceStrengthDecreasePercent
-    value: 20
+    value: 0

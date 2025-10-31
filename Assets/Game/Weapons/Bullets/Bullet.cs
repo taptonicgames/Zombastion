@@ -7,12 +7,14 @@ public class Bullet : MonoBehaviour
     protected WeaponSO SOData;
     protected ObjectPoolSystem objectPoolSystem;
     protected int damage;
-    public bool IsActive { get; private set; }
+    protected AbstractUnit targetUnit;
+
+	public bool IsActive { get; private set; }
 
     public virtual void Init(
         AbstractWeapon weapon,
         ObjectPoolSystem objectPoolSystem,
-
+        AbstractUnit targetUnit,
         int damage,
         bool isActive = true
     )
@@ -21,6 +23,7 @@ public class Bullet : MonoBehaviour
         SOData = weapon.WeaponSOData;
         this.objectPoolSystem = objectPoolSystem;
         this.damage = damage;
+        this.targetUnit = targetUnit;
         StartCoroutine(DestroyDelay());
         IsActive = isActive;
     }
@@ -64,9 +67,9 @@ public class Bullet : MonoBehaviour
         {
             if (damageReciever is AbstractUnit)
             {
-                if (weapon.TargetUnit)
+                if (targetUnit)
                 {
-                    if (damageReciever.GetDamageRecieverType() == weapon.TargetUnit.GetType())
+                    if (damageReciever.GetDamageRecieverType() == targetUnit.GetType())
                         damageReciever.SetDamage(damage);
                     else
                         return;
