@@ -16,9 +16,10 @@ public static class Constants
     //Layers
     public const int GATES_LAYER = 9;
     public const int PLAYER_LAYER = 3;
+	public const int ENEMY_LAYER = 8;
 
-    //Tags
-    public const string PLAYER_TAG = "Player";
+	//Tags
+	public const string PLAYER_TAG = "Player";
 
     //Ids
     public const string CARDS_PANEL_BATTLE = "CardsPanelBattle";
@@ -31,6 +32,8 @@ public static class Constants
     public const string TOWER_CONFIGS_PACK = "TowerConfigsPack";
     public const string BOUNCE_RADIUS = "BounceRadius";
     public const string BOUNCE_STRENGTH_DECREASE_PERCENT = "BounceStrengthDecreasePercent";
+    public const string ENEMY_SPEED_DECREASE_PERCENT = "EnemySpeedDecreasePercent";
+    public const string PUDDLE_LIFETIME = "PuddleLifetime";
 
 	//Global params
 	public const string GLOBAL_PLAYER_LEVEL = "GlobalPlayerLevel";
