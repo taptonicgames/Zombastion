@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225ed199f435f7346bc554bc69c8cce7, type: 3}
   m_Name: 0.Starter_Boots_SO
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Common-Boots
+  <Id>k__BackingField: NoneBoots
   <Type>k__BackingField: 4
-  <Rarity>k__BackingField: 1
-  <Damage>k__BackingField: 5
+  <Rarity>k__BackingField: 0
+  <UpgradeCurrency>k__BackingField: 134
+  <InsertAvilableAmount>k__BackingField: 0
+  <Value>k__BackingField: 5
   <EnchanceLevels>k__BackingField: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   <UIData>k__BackingField:
     <Tittle>k__BackingField: Boots
     <Icon>k__BackingField: {fileID: 21300000, guid: 509f6258c730641ed8611f36650b568f,
+      type: 3}
+    <BG>k__BackingField: {fileID: 21300000, guid: 2ce2c66aecb874b17b5a4fa5babe9209,
       type: 3}

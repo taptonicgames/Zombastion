@@ -55,48 +55,6 @@ MonoBehaviour:
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
         type: 3}
-  - Id: Helmet
-    <Type>k__BackingField: 101
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
-  - Id: Torso
-    <Type>k__BackingField: 102
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
-  - Id: Weapon
-    <Type>k__BackingField: 103
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
-  - Id: Shield
-    <Type>k__BackingField: 104
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
-  - Id: Boots
-    <Type>k__BackingField: 105
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
-  - Id: Accessory
-    <Type>k__BackingField: 106
-    <UIData>k__BackingField:
-      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
-        type: 3}
-      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
-        type: 3}
   - Id: CatapultTower
     <Type>k__BackingField: 301
     <UIData>k__BackingField:
@@ -136,6 +94,468 @@ MonoBehaviour:
     <Type>k__BackingField: 401
     <UIData>k__BackingField:
       <Icon>k__BackingField: {fileID: 21300000, guid: f802ceda35f5c4662a240c6ceef56a64,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: LegendAccessory
+    <Type>k__BackingField: 130
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 2b951c8f036034eb9b1777dd2c74d97d,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: HelmetDrawing
+    <Type>k__BackingField: 131
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 6f5bd672daa8a49c889feb122ca5255e,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: ArmorDrawing
+    <Type>k__BackingField: 132
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: b606d852adc5044c8b2ef37a8eddf8ac,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: WeaponDrawing
+    <Type>k__BackingField: 133
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 265b64f419c62421c8ddf6370b040c87,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: ShieldDrawing
+    <Type>k__BackingField: 134
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: b49b23e4a3e9b4e5f88449ebcb9f7b3e,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: BootsDrawing
+    <Type>k__BackingField: 135
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7945862b5cfa3466ab7f68a85cb0d772,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: CommonHelmet
+    <Type>k__BackingField: 101
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UnommonHelmet
+    <Type>k__BackingField: 107
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareHelmet
+    <Type>k__BackingField: 113
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicHelmet
+    <Type>k__BackingField: 119
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendHelmet
+    <Type>k__BackingField: 125
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonArmor
+    <Type>k__BackingField: 102
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonArmor
+    <Type>k__BackingField: 108
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareArmor
+    <Type>k__BackingField: 114
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicArmor
+    <Type>k__BackingField: 120
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendArmor
+    <Type>k__BackingField: 126
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonWeapon
+    <Type>k__BackingField: 103
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonWeapon
+    <Type>k__BackingField: 109
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareWeapon
+    <Type>k__BackingField: 115
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicWeapon
+    <Type>k__BackingField: 121
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendWeapon
+    <Type>k__BackingField: 127
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonShield
+    <Type>k__BackingField: 104
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonShield
+    <Type>k__BackingField: 110
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareShield
+    <Type>k__BackingField: 116
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicShield
+    <Type>k__BackingField: 122
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendShield
+    <Type>k__BackingField: 128
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonBoots
+    <Type>k__BackingField: 105
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonBoots
+    <Type>k__BackingField: 111
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareBoots
+    <Type>k__BackingField: 117
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicBoots
+    <Type>k__BackingField: 123
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendBoots
+    <Type>k__BackingField: 129
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonAccessory
+    <Type>k__BackingField: 106
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonAccessory
+    <Type>k__BackingField: 112
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareAccessory
+    <Type>k__BackingField: 118
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicAccessory
+    <Type>k__BackingField: 124
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendAccessory
+    <Type>k__BackingField: 130
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonPrint
+    <Type>k__BackingField: 201
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: c84e4108c43924e508e367acefec17e3,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UnommonPrint
+    <Type>k__BackingField: 207
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: c84e4108c43924e508e367acefec17e3,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RarePrint
+    <Type>k__BackingField: 213
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: c84e4108c43924e508e367acefec17e3,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicPrint
+    <Type>k__BackingField: 219
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: c84e4108c43924e508e367acefec17e3,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendPrint
+    <Type>k__BackingField: 225
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: c84e4108c43924e508e367acefec17e3,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonGem
+    <Type>k__BackingField: 202
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonGem
+    <Type>k__BackingField: 208
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareGem
+    <Type>k__BackingField: 214
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicGem
+    <Type>k__BackingField: 220
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendGem
+    <Type>k__BackingField: 226
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonRune
+    <Type>k__BackingField: 203
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonRune
+    <Type>k__BackingField: 209
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareRune
+    <Type>k__BackingField: 215
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicRune
+    <Type>k__BackingField: 221
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendRune
+    <Type>k__BackingField: 227
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonFragment
+    <Type>k__BackingField: 204
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonFragment
+    <Type>k__BackingField: 210
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareFragment
+    <Type>k__BackingField: 216
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicFragment
+    <Type>k__BackingField: 222
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendFragment
+    <Type>k__BackingField: 228
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonTalisman
+    <Type>k__BackingField: 205
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonTalisman
+    <Type>k__BackingField: 211
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareTalisman
+    <Type>k__BackingField: 217
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicTalisman
+    <Type>k__BackingField: 223
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendTalisman
+    <Type>k__BackingField: 229
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+        type: 3}
+  - Id: CommonRuby
+    <Type>k__BackingField: 206
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+        type: 3}
+  - Id: UncommonRuby
+    <Type>k__BackingField: 212
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+        type: 3}
+  - Id: RareRuby
+    <Type>k__BackingField: 218
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+        type: 3}
+  - Id: EpicRuby
+    <Type>k__BackingField: 224
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
+        type: 3}
+      <BG>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+        type: 3}
+  - Id: LegendRuby
+    <Type>k__BackingField: 230
+    <UIData>k__BackingField:
+      <Icon>k__BackingField: {fileID: 21300000, guid: cbcdc9c743fa7462aa643d689ae96711,
         type: 3}
       <BG>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
         type: 3}
