@@ -7,6 +7,8 @@ public class TowerWeapon : AbstractWeapon
     private ObjectParabolaJumpHelper objectParabolaJumpHelper = new();
     private Timer reloadTimer = new Timer(TimerMode.counterFixedUpdate, false);
     private Bullet bullet;
+    private Vector3 enemyPos;
+
     private bool LaunchOnParabola =>
         WeaponSOData.WeaponType == WeaponType.Catapult
         || WeaponSOData.WeaponType == WeaponType.Cauldron;
@@ -33,6 +35,7 @@ public class TowerWeapon : AbstractWeapon
             return;
 
         base.Fire(shootingUnit, targetUnit);
+        enemyPos = targetUnit.transform.position;
         bullet.Init(this, objectPoolSystem, CalculateDamage(), LaunchOnParabola);
         animator.SetTrigger(Constants.ATTACK);
         IsReady = false;
@@ -43,8 +46,9 @@ public class TowerWeapon : AbstractWeapon
         if (LaunchOnParabola)
         {
             ObjectParabolaJumpHelper.JumpObjectData jumpObjectData = default;
-            jumpObjectData.endTr = TargetUnit.transform;
+            jumpObjectData.endTr = TargetUnit != null ? TargetUnit.transform : null;
             jumpObjectData.startPos = bullet.transform.position;
+            jumpObjectData.endPos = enemyPos;
             jumpObjectData.CompleteAction += bullet.CompleteAction;
             jumpObjectData.list = new() { bullet.transform };
 
@@ -56,7 +60,7 @@ public class TowerWeapon : AbstractWeapon
         }
         else
         {
-            bullet.IsActive = true;
+            bullet.SetActive();
         }
 
         bullet = null;

@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 6475660110587152187}
   - component: {fileID: 3167767278595978363}
   m_Layer: 10
-  m_Name: OuterCollider (1)
+  m_Name: OuterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 8136452321103481860}
   - component: {fileID: 7898658715537654644}
   m_Layer: 10
-  m_Name: InnerCollider (1)
+  m_Name: InnerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

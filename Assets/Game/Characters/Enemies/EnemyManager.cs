@@ -51,7 +51,7 @@ public class EnemyManager : IInitializable, IFixedTickable
         {
             CharacterType.SimpleZombie,
             CharacterType.ZombieFat,
-            CharacterType.ArcherZombie,
+            //CharacterType.ArcherZombie,
             CharacterType.ZombieAxe,
         };
 

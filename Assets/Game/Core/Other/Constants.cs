@@ -6,6 +6,7 @@ public static class Constants
     public const string SHOOT = "Shoot";
     public const string OPEN = "Open";
 	public const string DAMAGE = "Damage";
+    public const string RUN = "Run";
 
 	//Code
 	public const float ALMOST_ZERO = 0.1f;
@@ -28,9 +29,11 @@ public static class Constants
     public const string UPGRADE_CARD = "UpgradeCard";
     public const string BULLET_DAMAGE_RADIUS = "BulletDamageRadius";
     public const string TOWER_CONFIGS_PACK = "TowerConfigsPack";
+    public const string BOUNCE_RADIUS = "BounceRadius";
+    public const string BOUNCE_STRENGTH_DECREASE_PERCENT = "BounceStrengthDecreasePercent";
 
-    //Global params
-    public const string GLOBAL_PLAYER_LEVEL = "GlobalPlayerLevel";
+	//Global params
+	public const string GLOBAL_PLAYER_LEVEL = "GlobalPlayerLevel";
     public const string ROUNDS_COMPLETED = "RoundsCompleted";
     public const string ROUND_PICKED = "RoundPicked";
 

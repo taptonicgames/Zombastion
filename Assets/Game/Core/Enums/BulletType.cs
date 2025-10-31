@@ -6,4 +6,5 @@
     CatapultBullet,
     CauldronBullet,
     CrossbowBullet,
+    ThunderboltBullet
 }

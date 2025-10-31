@@ -1,11 +1,14 @@
-using StarterAssets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using StarterAssets;
 using UnityEngine;
 
 public class PlayerCharacter : AbstractPlayerUnit
 {
+    [SerializeField]
+    private Animator ponyAnimator;
+
     [SerializeField]
     private List<AbstractWeapon> weapons;
     private ThirdPersonController thirdPersonController;
@@ -38,6 +41,10 @@ public class PlayerCharacter : AbstractPlayerUnit
         abilitiesPair = new Dictionary<AbilityType, AbstractUnitAbility>
         {
             { AbilityType.Heal, new PlayerHealAbility(this) },
+            {
+                AbilityType.PonyMovement,
+                new PonyMovementAbility(this, thirdPersonController, ponyAnimator)
+            },
         };
 
         unitActionsList = new()
