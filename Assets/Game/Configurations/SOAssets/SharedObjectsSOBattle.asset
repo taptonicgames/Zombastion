@@ -26,6 +26,9 @@ MonoBehaviour:
     - id: CrossbowBullet
       gameObject: {fileID: 1077143465587837135, guid: 5aee90adba3037a4887e21dd04bf0a24,
         type: 3}
+    - id: ThunderboltBullet
+      gameObject: {fileID: 5599795700841801270, guid: 7cfa3abacb63ad043bd7a9b9e0aa83ec,
+        type: 3}
     - id: SimpleZombie
       gameObject: {fileID: 4791438463375937960, guid: 9ed1ef8af1bdfc0438e5ccf89d74d860,
         type: 3}

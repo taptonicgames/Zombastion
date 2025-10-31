@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class BattleSavingData : AbstractSavingData
 {
@@ -8,15 +9,20 @@ public class BattleSavingData : AbstractSavingData
     public RoundCompleteType RoundCompleteType { get; set; }
 
     [field: SerializeField]
-    public float castleHealthPercentage { get; set; }
+    public float CastleHealthRemainPercentage { get; set; }
 
     public override void ResetData(int flag = 0)
     {
         RoundCompleteType = RoundCompleteType.None;
     }
 
-    public BattleSavingData(SceneReferences sceneReferences)
+    public BattleSavingData(DiContainer diContainer)
     {
+        var sceneReferences = diContainer.TryResolve<SceneReferences>();
+
+        if (sceneReferences == null)
+            return;
+
         castle = sceneReferences.castle;
     }
 
@@ -29,7 +35,7 @@ public class BattleSavingData : AbstractSavingData
     private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
     {
         RoundCompleteType = evnt.type;
-        castleHealthPercentage = (float)castle.Health / (float)castle.GetDefaultHealth();
+        CastleHealthRemainPercentage = (float)castle.Health / (float)castle.GetDefaultHealth();
         SaveData(false);
     }
 

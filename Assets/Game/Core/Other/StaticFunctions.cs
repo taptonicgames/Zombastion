@@ -1,5 +1,5 @@
-using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -62,5 +62,23 @@ public static class StaticFunctions
         var alpha = Mathf.Atan2(A, B) * Mathf.Rad2Deg;
         var angle = new Vector3(0, alpha, 0);
         transform.DORotate(transform.eulerAngles + angle, duration);
+    }
+
+    public static IEnumerable<T> OverlapSphere<T>(Vector3 pos, float radius, bool sort = false)
+        where T : Component
+    {
+        IEnumerable<T> arr;
+
+        arr = Physics
+            .OverlapSphere(pos, radius)
+            .Where(a => a.GetComponent<T>())
+            .Select(a => a.GetComponent<T>());
+
+        if (sort)
+        {
+            arr = arr.OrderBy(a => Vector3.Distance(a.transform.position, pos));
+        }
+
+        return arr;
     }
 }

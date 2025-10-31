@@ -4,4 +4,5 @@ public enum AbilityType
 	Movement,
 	Attack,
 	Heal,
+	PonyMovement,
 }

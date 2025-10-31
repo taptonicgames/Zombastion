@@ -6,6 +6,9 @@ public abstract class AbstractWeapon : MonoBehaviour
     [Inject]
     protected ObjectPoolSystem objectPoolSystem;
 
+    [Inject]
+    public DiContainer diContainer { get; private set; }
+
     [SerializeField]
     private WeaponSO weaponSO;
 

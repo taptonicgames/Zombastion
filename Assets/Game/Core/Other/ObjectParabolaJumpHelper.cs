@@ -23,7 +23,7 @@ public class ObjectParabolaJumpHelper
         foreach (var item in data.list)
         {
             item.position = startPos;
-            var targetPos = data.endTr.position;
+            var targetPos = data.endTr ? data.endTr.position : data.endPos;
             targetPos.y += data.heightIncrement;
             Vector3 centerPoint = startPos + (targetPos - startPos) / 2;
             centerPoint.y = targetPos.y + 2;
@@ -91,7 +91,8 @@ public class ObjectParabolaJumpHelper
     public struct JumpObjectData
     {
         public List<Transform> list;
-        public Vector3 startPos;
+        public Vector3 startPos,
+            endPos;
         public Transform endTr;
         public bool randomRotation,
             destroyOnFinish,

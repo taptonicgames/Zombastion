@@ -287,6 +287,7 @@ MonoBehaviour:
   logUnitActionType: 0
   characterType: 0
   SOData: {fileID: 11400000, guid: 9df3304209be0f84e83c296b82f3eb5a, type: 2}
+  ponyAnimator: {fileID: 3348772468945747614}
   weapons:
   - {fileID: 6583603602857816929}
 --- !u!114 &6374809927204669568

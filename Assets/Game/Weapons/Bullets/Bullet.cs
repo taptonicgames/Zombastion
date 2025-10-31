@@ -7,11 +7,12 @@ public class Bullet : MonoBehaviour
     protected WeaponSO SOData;
     protected ObjectPoolSystem objectPoolSystem;
     protected int damage;
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
     public virtual void Init(
         AbstractWeapon weapon,
         ObjectPoolSystem objectPoolSystem,
+
         int damage,
         bool isActive = true
     )
@@ -84,5 +85,6 @@ public class Bullet : MonoBehaviour
         Reset();
     }
 
+    public virtual void SetActive() { IsActive = true; }
     public virtual void CompleteAction(int value) { }
 }
