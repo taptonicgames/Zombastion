@@ -1437,7 +1437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.999817}
+  m_AnchoredPosition: {x: 0, y: -24.999878}
   m_SizeDelta: {x: -20, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5750289088970933413
@@ -2345,6 +2345,7 @@ MonoBehaviour:
   - {fileID: 5638383211250456541}
   - {fileID: 6561245987329212279}
   statsContainer: {fileID: 2567620828607793697}
+  baseAttackDescription: {fileID: 6574795285512335524}
   baseAttackText: {fileID: 9212735224351785927}
   enchanceAttackText: {fileID: 2208569853817839328}
 --- !u!1 &8118403499649990462
@@ -2775,7 +2776,7 @@ PrefabInstance:
     - target: {fileID: 95655227928147786, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1755881501080100522, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
@@ -2921,7 +2922,7 @@ PrefabInstance:
     - target: {fileID: 95655227928147786, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1755881501080100522, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
@@ -3067,7 +3068,7 @@ PrefabInstance:
     - target: {fileID: 95655227928147786, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1755881501080100522, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
@@ -3469,7 +3470,7 @@ PrefabInstance:
     - target: {fileID: 95655227928147786, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1755881501080100522, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
@@ -3615,7 +3616,7 @@ PrefabInstance:
     - target: {fileID: 95655227928147786, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1755881501080100522, guid: 2cc03a71b85d8f14b97a5a4ecf4df87e,
         type: 3}

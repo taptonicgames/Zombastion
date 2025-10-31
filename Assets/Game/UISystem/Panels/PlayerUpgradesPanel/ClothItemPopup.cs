@@ -23,12 +23,14 @@ public class ClothItemPopup : AbstractPopup
 
     [Space(10), Header("Stats")]
     [SerializeField] private RectTransform statsContainer;
+    [SerializeField] private TMP_Text baseAttackDescription;
     [SerializeField] private TMP_Text baseAttackText;
     [SerializeField] private TMP_Text enchanceAttackText;
 
     private ClothItemView itemView;
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
+    private EquipmentManager equipmentManager;
 
     public event Action<InsertData> InsertDataRemoved;
 
@@ -46,6 +48,7 @@ public class ClothItemPopup : AbstractPopup
         itemView = (ClothItemView)args[0];
         currencyManager = (CurrencyManager)args[1];
         upgradesManager = (UpgradesManager)args[2];
+        equipmentManager = (EquipmentManager)args[3];
 
         UpdateInfo();
     }
@@ -63,14 +66,18 @@ public class ClothItemPopup : AbstractPopup
         rareText.SetText($"{itemView.EquipmentData.Rarity}");
         icon.sprite = itemView.EquipmentData.UIData.Icon;
 
-        baseAttackText.SetText($"{itemView.EquipmentData.AttackValue}");
+        baseAttackDescription.SetText($"{equipmentManager.GetStatName(itemView.EquipmentData.Type)}");
+        baseAttackText.SetText($"{itemView.EquipmentData.Value}");
         enchanceAttackText.SetText($"{itemView.EquipmentData.EnchanceLevels[itemView.EquipmentData.Level]}");
 
         if (insertStatsItems.Length != itemView.EquipmentData.InsertDatas.Length)
             throw new ArgumentException($"popup items not equal cloth stat items!");
 
         for (int i = 0; i < insertStatsItems.Length; i++)
+        {
             insertStatsItems[i].Init(itemView.EquipmentData.InsertDatas[i]);
+            insertStatsItems[i].gameObject.SetActive(i < itemView.EquipmentData.InsertAvilableAmount);
+        }
     }
 
     #region Events

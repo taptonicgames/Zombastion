@@ -26,9 +26,9 @@ public class BagInsertButton : MonoBehaviour
     {
         InsertData = insertData;
 
-        icon.sprite = InsertData.RarityUIData.Icon;
-        background.sprite = InsertData.RarityUIData.BG;
-        equipmentTypeIcon.sprite = InsertData.EquipUIData.Icon;
+        icon.sprite = InsertData.UIData.Icon;
+        background.sprite = InsertData.UIData.BG;
+        equipmentTypeIcon.sprite = InsertData.UIData.EquipmentIcon;
     }
 
     public void UpdateCount(int value)

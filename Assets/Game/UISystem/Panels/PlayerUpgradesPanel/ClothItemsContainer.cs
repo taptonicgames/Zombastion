@@ -35,6 +35,12 @@ public class ClothItemsContainer : MonoBehaviour
         }
     }
 
+    public void UpdateInfo()
+    {
+        for (int i = 0; i < items.Length; i++)
+            items[i].UpdateDatas();
+    }
+
     public ClothItemView GetClothItem(EquipmentType type)
     {
         return items.First(i => i.EquipmentData.Type == type);

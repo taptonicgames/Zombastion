@@ -9,12 +9,14 @@ public class BagClothPopup : AbstractPopup
     [SerializeField] private BagEquipmentButton currentEquipButton;
     [SerializeField] private TMP_Text currentEquipTittleText;
     [SerializeField] private TMP_Text currentEquipClothTypeText;
+    [SerializeField] private TMP_Text currentEquipStatDescription;
     [SerializeField] private TMP_Text currentEquipStatText;
 
     [Space(10), Header("Target cloth item")]
     [SerializeField] private BagEquipmentButton targetEquipButton;
     [SerializeField] private TMP_Text targetEquipTittleText;
     [SerializeField] private TMP_Text targetEquipClothTypeText;
+    [SerializeField] private TMP_Text targetEquipStatDescription;
     [SerializeField] private TMP_Text targetEquipStatText;
 
     [Space(10), Header("Buttons")]
@@ -24,6 +26,7 @@ public class BagClothPopup : AbstractPopup
 
     private EquipmentData currentData;
     private EquipmentData targetData;
+    private EquipmentManager equipmentManager;
 
     public event Action<EquipmentData> ClothReplaced;
 
@@ -39,6 +42,7 @@ public class BagClothPopup : AbstractPopup
     {
         currentData = (EquipmentData)args[0];
         targetData = (EquipmentData)args[1];
+        equipmentManager = (EquipmentManager)args[2];
 
         UpdateInfo();
     }
@@ -48,12 +52,14 @@ public class BagClothPopup : AbstractPopup
         currentEquipButton.Init(currentData);
         currentEquipTittleText.SetText($"{currentData.UIData.Tittle}");
         currentEquipClothTypeText.SetText($"{currentData.Type}");
-        currentEquipStatText.SetText($"{currentData.AttackValue}");
+        currentEquipStatDescription.SetText($"{equipmentManager.GetStatName(currentData.Type)}");
+        currentEquipStatText.SetText($"{currentData.Value}");
 
         targetEquipButton.Init(targetData);
         targetEquipTittleText.SetText($"{targetData.UIData.Tittle}");
         targetEquipClothTypeText.SetText($"{targetData.Type}");
-        targetEquipStatText.SetText($"{targetData.AttackValue}");
+        targetEquipStatDescription.SetText($"{equipmentManager.GetStatName(targetData.Type)}");
+        targetEquipStatText.SetText($"{targetData.Value}");
 
         buttonsView.gameObject.SetActive(currentData.Id != targetData.Id);
     }

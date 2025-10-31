@@ -49,8 +49,17 @@ public class PlayerItemsBag : MonoBehaviour
         foreach (var button in bagInsertButtons)
         {
             if (button.gameObject.activeSelf == false && button.InsertData.Id == insertData.Id)
+            {
                 button.gameObject.SetActive(true);
+                return;
+            }
         }
+
+        BagInsertButton insertButton = Instantiate(bagInsertButtonPrefab, insertsContainer);
+        insertButton.Init(insertData);
+        bagInsertButtons.Add(insertButton);
+        insertButton.ChangePickedState(false);
+        insertButton.ButtonClicked += OnInsertClicked;
     }
 
     private void InitClothes()
@@ -192,7 +201,13 @@ public class PlayerItemsBag : MonoBehaviour
         foreach (var item in bagEquipmentButtons)
             item.ChangePickedState(item == button);
 
-        object[] args = new object[] { equipmentManager.GetEquipmentDataByType(button.EquipmentData.Type) ,button.EquipmentData };
+        object[] args = new object[]
+        { 
+            equipmentManager.GetEquipmentDataByType(button.EquipmentData.Type),
+            button.EquipmentData,
+            equipmentManager
+        };
+
         bagClothPopup.Init(args);
         bagClothPopup.Show();
     }

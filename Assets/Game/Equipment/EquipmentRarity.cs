@@ -2,7 +2,8 @@
 {
     None = 0,
     Common = 1,
-    Rare = 2,
-    Epic = 3,
-    Legendary = 4
+    Uncommon = 2,
+    Rare = 3,
+    Epic = 4,
+    Legendary = 5
 }

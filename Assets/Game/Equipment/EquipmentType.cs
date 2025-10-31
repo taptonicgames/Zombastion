@@ -5,6 +5,6 @@ public enum EquipmentType
     Shield = 2,
     Weapon = 3,
     Boots = 4,
-    Torso = 5,
-    Core = 6
+    Armor = 5,
+    Accessory = 6
 }

@@ -21,7 +21,7 @@ public class CurrencySavingData : AbstractSavingData
     {
         if (CurrencyPairs.ContainsKey(currencyType) == false)
         {
-            int value = currencyType == CurrencyType.MaxEnergy ? defaultMaxEnergy : 0;
+            int value = (currencyType == CurrencyType.MaxEnergy || currencyType == CurrencyType.Energy) ? defaultMaxEnergy : 0;
             CurrencyPairs.Add(currencyType, value);
             SaveData(false);
         }

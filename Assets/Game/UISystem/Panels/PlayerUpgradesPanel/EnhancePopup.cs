@@ -101,7 +101,7 @@ public class EnhancePopup : AbstractPopup
         nextStatsText.SetText($"ATK +{currentData.EnchanceLevels[currentData.Level + 1]}");
 
         upgradeButton.UpdateInfo(
-            upgradesManager.GetUpgradeDataById($"{currentData.Type}"),
+            upgradesManager.GetUpgradeDataById($"{currentData.UpgradeCurrency}"),
             currencyManager,
             upgradesManager,
             currentData.Level + 1);

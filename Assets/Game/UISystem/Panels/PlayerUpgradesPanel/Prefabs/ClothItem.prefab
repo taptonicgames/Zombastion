@@ -412,6 +412,7 @@ MonoBehaviour:
   tittle: {fileID: 2518322986685712249}
   levelText: {fileID: 8124820510085661288}
   icon: {fileID: 8151455610267997360}
+  background: {fileID: 8580178900979582282}
   insertItems:
   - {fileID: 3081535421338358791}
   - {fileID: 7283007774677561017}

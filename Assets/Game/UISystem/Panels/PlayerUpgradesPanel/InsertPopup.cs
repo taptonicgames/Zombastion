@@ -38,7 +38,12 @@ public class InsertPopup : AbstractPopup
         tittleText.SetText($"{insertData.Type}-{insertData.Rarity}Insert");
 
         for (int i = 0; i < insertStatsItems.Length; i++)
+        {
             insertStatsItems[i].Init(equipmentData.InsertDatas[i]);
+            insertStatsItems[i].gameObject.SetActive(i < equipmentData.InsertAvilableAmount);
+        }
+
+        embedButton.interactable = equipmentData.HasEmptyInsert();
     }
 
     private void OnButtonClicked()

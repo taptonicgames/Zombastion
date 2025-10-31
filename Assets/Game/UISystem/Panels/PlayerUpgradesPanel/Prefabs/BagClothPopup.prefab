@@ -3544,10 +3544,12 @@ MonoBehaviour:
   currentEquipButton: {fileID: 5202492267911975428}
   currentEquipTittleText: {fileID: 3950126844460697121}
   currentEquipClothTypeText: {fileID: 7985110817005435751}
+  currentEquipStatDescription: {fileID: 6382544825472695138}
   currentEquipStatText: {fileID: 5188859720176906237}
   targetEquipButton: {fileID: 1101988949866119903}
   targetEquipTittleText: {fileID: 2814525698852382895}
   targetEquipClothTypeText: {fileID: 7908836553284360266}
+  targetEquipStatDescription: {fileID: 2249959785949561323}
   targetEquipStatText: {fileID: 8172350456160554929}
   buttonsView: {fileID: 7678483757069608547}
   decomposeButton: {fileID: 2943480663634410992}

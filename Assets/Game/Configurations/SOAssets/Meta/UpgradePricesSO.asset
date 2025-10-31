@@ -58,52 +58,52 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 303
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Helmet
+  - <Id>k__BackingField: HelmetDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 101
+    - <CurrencyType>k__BackingField: 130
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Torso
+  - <Id>k__BackingField: ArmorDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 102
+    - <CurrencyType>k__BackingField: 131
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Weapon
+  - <Id>k__BackingField: WeaponDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 103
+    - <CurrencyType>k__BackingField: 132
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Shield
+  - <Id>k__BackingField: ShieldDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 104
+    - <CurrencyType>k__BackingField: 133
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Boots
+  - <Id>k__BackingField: BootsDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 105
+    - <CurrencyType>k__BackingField: 134
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Core
+  - <Id>k__BackingField: AccessoryDrawing
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 106
+    - <CurrencyType>k__BackingField: 135
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: SecondHero

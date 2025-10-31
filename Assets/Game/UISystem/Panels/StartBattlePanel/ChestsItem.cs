@@ -42,6 +42,10 @@ public class ChestsItem : MonoBehaviour
                 chestButtons[i].Open();
                 progressBar.value = i * 0.5f;
             }
+            else if (HasOpen(i, chestButtons[i]))
+            {
+                chestButtons[i].ChangeVisualEnableState(true);
+            }
         }
     }
 
@@ -57,6 +61,9 @@ public class ChestsItem : MonoBehaviour
 
                 EventBus<ChestOpenedEvnt>.Publish(
                     new ChestOpenedEvnt() { roundIndex = currentStage, chestLevel = i + 1 });
+
+                if (i < chestButtons.Length - 1 && HasOpen(i + 1, chestButtons[i + 1]))
+                    chestButtons[i + 1].ChangeVisualEnableState(true);
             }
         }
     }

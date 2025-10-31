@@ -33,7 +33,7 @@ public class InsertItemView : MonoBehaviour
     public void SetInsertData(InsertData insertData)
     {
         InsertData = insertData;
-        activeIcon.sprite = InsertData.RarityUIData.Icon;
+        activeIcon.sprite = InsertData.UIData.Icon;
         activeIcon.transform.DOScale(Vector3.one, 0.25f).From(Vector3.zero).SetEase(Ease.OutBack);
         Activate();
     }
