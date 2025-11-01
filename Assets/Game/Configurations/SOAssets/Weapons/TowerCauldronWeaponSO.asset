@@ -15,10 +15,14 @@ MonoBehaviour:
   <WeaponType>k__BackingField: 2
   shootDelay: 1
   shootDamage: 100
-  bulletType: 3
+  bulletType: 4
   bulletSpeed: 30
   attackDistance: 15
   <MinAttackDistance>k__BackingField: 5
   <additionalParameters>k__BackingField:
   - paramName: BulletDamageRadius
-    value: 3
+    value: 2
+  - paramName: EnemySpeedDecreasePercent
+    value: 10
+  - paramName: PuddleLifetime
+    value: 5
