@@ -10,6 +10,7 @@ public class MetaInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<TowersManager>().AsSingle();
         Container.BindInterfacesAndSelfTo<CardsUpgradeManager>().AsSingle();
         Container.BindInterfacesAndSelfTo<UpgradesManager>().AsSingle();
+        Container.BindInterfacesAndSelfTo<SpritesManager>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<MetaSceneManager>().AsSingle();
     }

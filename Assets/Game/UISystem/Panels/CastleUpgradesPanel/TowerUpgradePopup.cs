@@ -33,6 +33,7 @@ public class TowerUpgradePopup : AbstractPopup
     private TowersManager towersManager;
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
+    private SpritesManager spritesManager;
 
     public event Action Upgraded;
 
@@ -55,6 +56,7 @@ public class TowerUpgradePopup : AbstractPopup
         towersManager = (TowersManager)args[3];
         currencyManager = (CurrencyManager)args[4];
         upgradesManager = (UpgradesManager)args[5];
+        spritesManager = (SpritesManager)args[6];
 
         UpdateInfo();
     }
@@ -65,7 +67,7 @@ public class TowerUpgradePopup : AbstractPopup
         tittleText.SetText($"{towerSO.UIData.Name} lv. {level}");
         towerDescription.SetText(towerSO.UIData.Description);
         towerIcon.sprite = towerSO.UIData.Icon;
-        upgradeButton.UpdateInfo(GetUpgradeSO(), currencyManager, upgradesManager, level);
+        upgradeButton.UpdateInfo(GetUpgradeSO(), currencyManager, upgradesManager, spritesManager, level);
 
         InitStats();
     }

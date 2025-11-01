@@ -29,6 +29,7 @@ public class PlayerUpgradesPanel : AbstractPanel
     [Inject] private EquipmentManager equipmentManager;
     [Inject] private CurrencyManager currencyManager;
     [Inject] private UpgradesManager upgradesManager;
+    [Inject] private SpritesManager spritesManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
@@ -113,7 +114,8 @@ public class PlayerUpgradesPanel : AbstractPanel
             item ,
             currencyManager,
             upgradesManager,
-            equipmentManager
+            equipmentManager,
+            spritesManager
         };
 
         clothItemPopup.Init(objects);

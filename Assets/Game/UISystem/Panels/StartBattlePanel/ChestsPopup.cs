@@ -17,6 +17,7 @@ public class ChestsPopup : AbstractPopup
     private GeneralSavingData generalSavingData;
     private RewardsManager rewardsManager;
     private CurrencyManager currencyManager;
+    private EquipmentManager equipmentManager;
     private ChestsSavingData chestsSavingData;
     private Tween tween;
 
@@ -25,7 +26,8 @@ public class ChestsPopup : AbstractPopup
         SavingManager savingManager = (SavingManager)args[0];
         rewardsManager = (RewardsManager)args[1];
         currencyManager = (CurrencyManager)args[2];
-        Color[] colors = (Color[])args[3];
+        equipmentManager = (EquipmentManager)args[3];
+        Color[] colors = (Color[])args[4];
 
         generalSavingData = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
         chestsSavingData = savingManager.GetSavingData<ChestsSavingData>(SavingDataType.Chests);
@@ -50,9 +52,9 @@ public class ChestsPopup : AbstractPopup
         {
             if (chestsItem == items[i])
             {
-                RewardData[] rewardDatas = rewardsManager.GetRewardDatas(rewardsManager.GetChestRewardData(i), chestIndex);
-                rewardCellsContainer.Init(rewardDatas);
-                ApplyRewards(rewardDatas);
+                RewardData rewardData = rewardsManager.GetRewardDatas(rewardsManager.GetChestRewardData(i), chestIndex);
+                rewardCellsContainer.Init(rewardData);
+                ApplyRewards(rewardData);
 
                 AnimateChest();
             }
@@ -76,10 +78,13 @@ public class ChestsPopup : AbstractPopup
 
     }
 
-    private void ApplyRewards(RewardData[] rewardDatas)
+    private void ApplyRewards(RewardData rewardData)
     {
-        for (int i = 0; i < rewardDatas.Length; i++)
-            currencyManager.AddCurrency(rewardDatas[i].CurrencyType, rewardDatas[i].Value);
+        foreach (var reward in rewardData.GetRewardDatas())
+        {
+            currencyManager.AddCurrency(reward);
+            equipmentManager.AddEquipment(reward);
+        }
     }
 
     private async UniTask AnimateElement(Transform element)

@@ -15,7 +15,7 @@ MonoBehaviour:
   <Id>k__BackingField: CommonWeapon
   <Type>k__BackingField: 3
   <Rarity>k__BackingField: 1
-  <UpgradeCurrency>k__BackingField: 132
+  <UpgradeCurrency>k__BackingField: 133
   <InsertAvilableAmount>k__BackingField: 1
   <Value>k__BackingField: 10
   <GrowFactor>k__BackingField: 0.05

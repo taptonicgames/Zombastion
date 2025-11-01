@@ -20,7 +20,10 @@ public class PlayerInfoViewer : MonoBehaviour
     [SerializeField] private TMP_Text secondBustValue;
     [SerializeField] private Image skillIcon;
 
-    internal void UpdateInfo(PlayerCosmeticSO.PlayerCosmeticData data, CurrencyManager currencyManager, UpgradesManager upgradesManager)
+    internal void UpdateInfo(PlayerCosmeticSO.PlayerCosmeticData data,
+        CurrencyManager currencyManager,
+        UpgradesManager upgradesManager,
+        SpritesManager spritesManager)
     {
         tittleText.SetText(data.Tittle);
         subTittleText.SetText(data.SubTittle);
@@ -40,7 +43,7 @@ public class PlayerInfoViewer : MonoBehaviour
 
         if (data.CurrencyType != CurrencyType.None)
         {
-            UpgradeButton.UpdateInfo(upgradesManager.GetUpgradeDataById($"{data.CurrencyType}"), currencyManager, upgradesManager, 1);
+            UpgradeButton.UpdateInfo(upgradesManager.GetUpgradeDataById($"{data.CurrencyType}"), currencyManager, upgradesManager, spritesManager, 1);
             UpgradeButton.gameObject.SetActive(currencyManager.GetCurrencyAmount(data.CurrencyType) == 0);
         }
     }

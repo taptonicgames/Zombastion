@@ -1,4 +1,4 @@
-﻿public enum EquipmentRarity
+﻿public enum RarityType
 {
     None = 0,
     Common = 1,

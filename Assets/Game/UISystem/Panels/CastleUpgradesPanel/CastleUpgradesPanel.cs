@@ -22,6 +22,7 @@ public class CastleUpgradesPanel : AbstractPanel
     [Inject] private CurrencyManager currencyManager;
     [Inject] private UpgradesManager upgradesManager;
     [Inject] private AbstractSavingManager savingManager;
+    [Inject] private SpritesManager spritesManager;
 
     public override PanelType Type => PanelType.CastleUpgrades;
 
@@ -97,7 +98,8 @@ public class CastleUpgradesPanel : AbstractPanel
             battleUpgradeStorage,
             towersManager,
             currencyManager,
-            upgradesManager
+            upgradesManager,
+            spritesManager
         };
 
         towerUpgradePopup.Init(args);

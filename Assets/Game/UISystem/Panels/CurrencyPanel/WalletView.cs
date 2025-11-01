@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +15,7 @@ public class WalletView : MonoBehaviour
     public CurrencyType Type { get; private set; }
 
     [Inject] private CurrencyManager currencyManager;
+    [Inject] private SpritesManager spritesManager;
 
     private void Awake()
     {
@@ -34,7 +32,7 @@ public class WalletView : MonoBehaviour
 
     private void UpdateInfo()
     {
-        currencyIcon.sprite = currencyManager.GetCurrencyData(Type).UIData.Icon;
+        currencyIcon.sprite = spritesManager.GetIconSprite(new CurrencySpritesData(Type));
 
         string text = 
             Type == CurrencyType.Energy ?

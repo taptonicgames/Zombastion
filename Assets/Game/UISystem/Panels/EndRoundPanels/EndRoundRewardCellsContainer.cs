@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -12,18 +13,21 @@ public class EndRoundRewardCellsContainer : MonoBehaviour
     private int amountShowCells;
     private Sequence sequence;
 
-    [Inject] private CurrencyManager currencyManager;
+    [Inject] private SpritesManager spritesManager;
 
-    public void Init(RewardData[] rewards)
+    public void Init(RewardData rewardsData)
     {
-        amountShowCells = rewards.Length;
+        List<AbstractRewardData> rewards = rewardsData.GetRewardDatas();
+        amountShowCells = rewards.Count;
 
         for (int i = 0; i < cells.Length; i++)
         {
-            if (i < rewards.Length)
+            if (i < rewards.Count)
             {
-                CurrencyData currencyData = currencyManager.GetCurrencyData(rewards[i].CurrencyType);
-                cells[i].Init(currencyData.UIData.Icon, currencyData.UIData.BG, rewards[i].Value);
+                Sprite icon = null;
+                Sprite bg = null;
+                spritesManager.UpdateSprites(rewards[i], ref icon, ref bg);
+                cells[i].Init(icon, bg, rewards[i].Value);
             }
             cells[i].View.localScale = Vector3.zero;
         }

@@ -10,6 +10,7 @@ public class CurrencyPanel : AbstractPanel
     [Inject] private AbstractSavingManager savingsManager;
     [Inject] private CurrencyManager currencyManager;
     [Inject] private UpgradesManager upgradesManager;
+    [Inject] private SpritesManager spritesManager;
 
     private GeneralSavingData generalSavingData;
 
@@ -39,7 +40,8 @@ public class CurrencyPanel : AbstractPanel
         {
             generalSavingData,
             currencyManager,
-            upgradesManager
+            upgradesManager,
+            spritesManager
         };
 
         playerInfoPopup.Init(args);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -41,8 +42,6 @@ public class EquipmentManager : IInitializable
         LoadEquip();
         LoadInserts();
         LoadRewards();
-
-        Debug.LogWarning(CalculateDamage(10));
     }
 
     private void LoadEquip()
@@ -113,32 +112,43 @@ public class EquipmentManager : IInitializable
         BattleSavingData battleSavingData = savingManager.GetSavingData<BattleSavingData>(SavingDataType.Battle);
         GeneralSavingData generalSavingData = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
         LevelRewardData levelRewardData = rewardsManager.GetLevelRewardData(generalSavingData.GetParamById(Constants.ROUND_PICKED));
-        RewardData[] rewardDatas = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
+        RewardData rewardData = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
 
-        for (int i = 0; i < rewardDatas.Length; i++)
-        {
-            int reward = HasIncreaseReward() ? Mathf.RoundToInt(rewardDatas[i].Value * Constants.REWARD_MODIFIER) : rewardDatas[i].Value;
+        if (rewardData == null)
+            return;
 
-            for (int j = 0; j < equipmentPackSO.Equipments.Length; j++)
-            {
-                if ($"{rewardDatas[i].CurrencyType}" == equipmentPackSO.Equipments[j].Id)
-                {
-                    EquipmentData data = new EquipmentData(equipmentPackSO.Equipments[j]);
-                    equipmentSavingData.AddClothData(data);
-                    clothDatas.Add(data);
-                }
-            }
+        int rewardApplyAmount = HasIncreaseReward() ? Constants.REWARD_APPLY_AMOUNT : 1;
 
-            for (int j = 0; j < equipmentPackSO.Inserts.Length; j++)
-            {
-                if ($"{rewardDatas[i].CurrencyType}" == equipmentPackSO.Inserts[j].Id)
-                {
-                    InsertData data = new InsertData(equipmentPackSO.Inserts[j]);
-                    equipmentSavingData.AddInsertAtBag(data);
-                    insertDatas.Add(data);
-                }
-            }
-        }
+        for (int i = 0; i < rewardApplyAmount; i++)
+            foreach (var reward in rewardData.GetRewardDatas())
+                AddEquipment(reward);
+
+        //RewardData[] rewardDatas = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
+
+        //for (int i = 0; i < rewardDatas.Length; i++)
+        //{
+        //    int reward = HasIncreaseReward() ? Mathf.RoundToInt(rewardDatas[i].Value * Constants.REWARD_MODIFIER) : rewardDatas[i].Value;
+
+        //    for (int j = 0; j < equipmentPackSO.Equipments.Length; j++)
+        //    {
+        //        if ($"{rewardDatas[i].CurrencyType}" == equipmentPackSO.Equipments[j].Id)
+        //        {
+        //            EquipmentData data = new EquipmentData(equipmentPackSO.Equipments[j]);
+        //            equipmentSavingData.AddClothData(data);
+        //            clothDatas.Add(data);
+        //        }
+        //    }
+
+        //    for (int j = 0; j < equipmentPackSO.Inserts.Length; j++)
+        //    {
+        //        if ($"{rewardDatas[i].CurrencyType}" == equipmentPackSO.Inserts[j].Id)
+        //        {
+        //            InsertData data = new InsertData(equipmentPackSO.Inserts[j]);
+        //            equipmentSavingData.AddInsertAtBag(data);
+        //            insertDatas.Add(data);
+        //        }
+        //    }
+        //}
     }
 
     public List<EquipmentData> GetEquipmentDatas()
@@ -204,9 +214,30 @@ public class EquipmentManager : IInitializable
         return currencySavingData.HasIncreaseReward();
     }
 
+    public void AddEquipment(AbstractRewardData abstractRewardData)
+    {
+        if (abstractRewardData is EquipmentRewardData equipment)
+        {
+            EquipmentData data = new EquipmentData(GetEquipmentSO(equipment.Id));
+            equipmentSavingData.AddClothData(data);
+            clothDatas.Add(data);
+        }
+        else if (abstractRewardData is InsertRewardData insert)
+        {
+            InsertData data = new InsertData(GetInsertSO(insert.Id));
+            equipmentSavingData.AddInsertAtBag(data);
+            insertDatas.Add(data);
+        }
+    }
+
     private EquipmentSO GetEquipmentSO(string id)
     {
         return equipmentPackSO.Equipments.FirstOrDefault(i => i.Id == id);
+    }
+
+    private InsertSO GetInsertSO(string id)
+    { 
+        return equipmentPackSO.Inserts.FirstOrDefault(i => i.Id == id);
     }
 
     private int CalculateParam(EquipmentType equipmentType, int defaultValue)
@@ -225,17 +256,14 @@ public class EquipmentManager : IInitializable
 
     private int GetModParam(int defaultValue, EquipmentData data)
     {
-        int result = 0;
+        float percentage = 0;
 
         for (int i = 0; i < data.InsertDatas.Length; i++)
         {
             if (data.InsertDatas[i] != null)
-            {
-                Debug.LogWarning($"{defaultValue} + {Mathf.RoundToInt(defaultValue * data.InsertDatas[i].PercentageBonus)} // {data.InsertDatas[i].PercentageBonus}");
-                result += defaultValue + Mathf.RoundToInt(defaultValue * data.InsertDatas[i].PercentageBonus);
-            }
+                percentage += data.InsertDatas[i].PercentageBonus;
         }
 
-        return result;
+        return (defaultValue + Mathf.RoundToInt(defaultValue * percentage));
     }
 }

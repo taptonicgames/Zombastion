@@ -30,6 +30,7 @@ public class ChangePlayerPanel : AbstractPanel
     [Inject] private PlayerCosmeticSO playerCosmeticSO;
     [Inject] private UpgradesManager upgradesManager;
     [Inject] private CurrencyManager currencyManager;
+    [Inject] private SpritesManager spritesManager;
 
     public override PanelType Type => PanelType.ChangePlayerCharacter;
 
@@ -103,7 +104,7 @@ public class ChangePlayerPanel : AbstractPanel
         foreach (PlayerInfoButton button in infoButtons)
             button.ChangePickedState(false);
 
-        playerInfoViewer.UpdateInfo(infoButtons[counter].Data, currencyManager, upgradesManager);
+        playerInfoViewer.UpdateInfo(infoButtons[counter].Data, currencyManager, upgradesManager, spritesManager);
         infoButtons[counter].ChangePickedState(true);
 
         rawPlayerView.ChangePlayerModel(counter);

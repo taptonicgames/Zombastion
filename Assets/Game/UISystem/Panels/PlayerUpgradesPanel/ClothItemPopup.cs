@@ -31,6 +31,7 @@ public class ClothItemPopup : AbstractPopup
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
     private EquipmentManager equipmentManager;
+    private SpritesManager spritesManager;
 
     public event Action<InsertData> InsertDataRemoved;
 
@@ -49,6 +50,7 @@ public class ClothItemPopup : AbstractPopup
         currencyManager = (CurrencyManager)args[1];
         upgradesManager = (UpgradesManager)args[2];
         equipmentManager = (EquipmentManager)args[3];
+        spritesManager = (SpritesManager)args[4];
 
         UpdateInfo();
     }
@@ -121,7 +123,8 @@ public class ClothItemPopup : AbstractPopup
         {
             itemView,
             currencyManager,
-            upgradesManager
+            upgradesManager,
+            spritesManager
         };
 
         enhancePopup.Init(args);

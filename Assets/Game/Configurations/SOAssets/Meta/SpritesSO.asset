@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfba48a9a2ad9424bb9a8511d252dcd0, type: 3}
+  m_Name: SpritesSO
+  m_EditorClassIdentifier: 
+  <CurrencyDatas>k__BackingField:
+  - <Id>k__BackingField: Exp
+    <Icon>k__BackingField: {fileID: 21300000, guid: 0e975ec7afa18429ba1597cce1e651af,
+      type: 3}
+    <Type>k__BackingField: 1
+  - <Id>k__BackingField: Money
+    <Icon>k__BackingField: {fileID: 21300000, guid: b2c956cfb47c640ea80fb559ed2f55f7,
+      type: 3}
+    <Type>k__BackingField: 2
+  - <Id>k__BackingField: Gems
+    <Icon>k__BackingField: {fileID: 21300000, guid: ff67fb01cc1b44f6aa65808b92ee758e,
+      type: 3}
+    <Type>k__BackingField: 3
+  - <Id>k__BackingField: Energy
+    <Icon>k__BackingField: {fileID: 21300000, guid: 85b4f0956ff764269b9dcb974286977e,
+      type: 3}
+    <Type>k__BackingField: 4
+  - <Id>k__BackingField: MaxEnergy
+    <Icon>k__BackingField: {fileID: 21300000, guid: 85b4f0956ff764269b9dcb974286977e,
+      type: 3}
+    <Type>k__BackingField: 5
+  - <Id>k__BackingField: SkillTree
+    <Icon>k__BackingField: {fileID: 21300000, guid: b1265a1c4d0a34856b618cabc868c43a,
+      type: 3}
+    <Type>k__BackingField: 6
+  - <Id>k__BackingField: HelmetDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: 2b951c8f036034eb9b1777dd2c74d97d,
+      type: 3}
+    <Type>k__BackingField: 131
+  - <Id>k__BackingField: ArmorDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: 6f5bd672daa8a49c889feb122ca5255e,
+      type: 3}
+    <Type>k__BackingField: 132
+  - <Id>k__BackingField: WeaponDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: b606d852adc5044c8b2ef37a8eddf8ac,
+      type: 3}
+    <Type>k__BackingField: 133
+  - <Id>k__BackingField: ShieldDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: 50612667a19fc40989d53a6d05e4f753,
+      type: 3}
+    <Type>k__BackingField: 134
+  - <Id>k__BackingField: BootsDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: b49b23e4a3e9b4e5f88449ebcb9f7b3e,
+      type: 3}
+    <Type>k__BackingField: 135
+  - <Id>k__BackingField: AccessoryDrawing
+    <Icon>k__BackingField: {fileID: 21300000, guid: 7945862b5cfa3466ab7f68a85cb0d772,
+      type: 3}
+    <Type>k__BackingField: 136
+  - <Id>k__BackingField: CatapultTower
+    <Icon>k__BackingField: {fileID: 21300000, guid: c02b54b922b294980963965089a13013,
+      type: 3}
+    <Type>k__BackingField: 301
+  - <Id>k__BackingField: CouldronTower
+    <Icon>k__BackingField: {fileID: 21300000, guid: 1842a28ac550f42458fe95e37220ca4e,
+      type: 3}
+    <Type>k__BackingField: 302
+  - <Id>k__BackingField: CrossbowTower
+    <Icon>k__BackingField: {fileID: 21300000, guid: 7c573c497f8734620b00f46f77056a7f,
+      type: 3}
+    <Type>k__BackingField: 303
+  - <Id>k__BackingField: CoilTower
+    <Icon>k__BackingField: {fileID: 21300000, guid: 8c5f1c6ad551e45a8b0f4bcd6c5184e5,
+      type: 3}
+    <Type>k__BackingField: 304
+  - <Id>k__BackingField: SecondHero
+    <Icon>k__BackingField: {fileID: 21300000, guid: f802ceda35f5c4662a240c6ceef56a64,
+      type: 3}
+    <Type>k__BackingField: 401
+  <EquipmentDatas>k__BackingField:
+  - <Id>k__BackingField: Helmet
+    <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+      type: 3}
+    <Type>k__BackingField: 1
+  - <Id>k__BackingField: Shield
+    <Icon>k__BackingField: {fileID: 21300000, guid: ba915e917a99e447c8d1ea04b829add4,
+      type: 3}
+    <Type>k__BackingField: 2
+  - <Id>k__BackingField: Weapon
+    <Icon>k__BackingField: {fileID: 21300000, guid: 67c81aea856014f1a978cc57d90eb022,
+      type: 3}
+    <Type>k__BackingField: 3
+  - <Id>k__BackingField: Boots
+    <Icon>k__BackingField: {fileID: 21300000, guid: ad9deda53655f4c20b1301a93c36e624,
+      type: 3}
+    <Type>k__BackingField: 4
+  - <Id>k__BackingField: Armor
+    <Icon>k__BackingField: {fileID: 21300000, guid: ca503b295709c4c23a90e8fdbd515735,
+      type: 3}
+    <Type>k__BackingField: 5
+  - <Id>k__BackingField: Accessory
+    <Icon>k__BackingField: {fileID: 21300000, guid: 275f7f172d9514849a05425c2eedc768,
+      type: 3}
+    <Type>k__BackingField: 6
+  <InsertDatas>k__BackingField:
+  - <Id>k__BackingField: Print
+    <Icon>k__BackingField: {fileID: 21300000, guid: 00cb17a67249447cbb78891dd9dacf65,
+      type: 3}
+    <Type>k__BackingField: 1
+  - <Id>k__BackingField: Gem
+    <Icon>k__BackingField: {fileID: 21300000, guid: ccc25e3b2f8d74af1bd1dc01f7e87c1f,
+      type: 3}
+    <Type>k__BackingField: 2
+  - <Id>k__BackingField: Rune
+    <Icon>k__BackingField: {fileID: 21300000, guid: 505e56999da8442869b5af93224c3e3f,
+      type: 3}
+    <Type>k__BackingField: 3
+  - <Id>k__BackingField: Fragment
+    <Icon>k__BackingField: {fileID: 21300000, guid: 7be7d1ceb72a74c639942b413ede5e47,
+      type: 3}
+    <Type>k__BackingField: 4
+  - <Id>k__BackingField: Talisman
+    <Icon>k__BackingField: {fileID: 21300000, guid: 824864350bf3741f7be2481540fd15d2,
+      type: 3}
+    <Type>k__BackingField: 5
+  - <Id>k__BackingField: Ruby
+    <Icon>k__BackingField: {fileID: 21300000, guid: 2479a8b1dbfa94fab8db589db6eb4c63,
+      type: 3}
+    <Type>k__BackingField: 6
+  <StartMaxEnergy>k__BackingField: 30
+  <RarityDatas>k__BackingField:
+  - <id>k__BackingField: Common
+    <Type>k__BackingField: 1
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
+      type: 3}
+  - <id>k__BackingField: Uncommon
+    <Type>k__BackingField: 2
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 1f1a6d58b41114e1f8f646f570691e18,
+      type: 3}
+  - <id>k__BackingField: Rare
+    <Type>k__BackingField: 3
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b,
+      type: 3}
+  - <id>k__BackingField: Epic
+    <Type>k__BackingField: 4
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 40199c574a2f64dc1873061e81af0c32,
+      type: 3}
+  - <id>k__BackingField: Legendary
+    <Type>k__BackingField: 5
+    <Sprite>k__BackingField: {fileID: 21300000, guid: ee2e1250beba7412fa227f43c95d1b37,
+      type: 3}

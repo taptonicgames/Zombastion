@@ -17,6 +17,7 @@ public class LevelSkillPopup : AbstractPopup
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
     private GeneralSavingData generalSavingData;
+    private SpritesManager spritesManager;
 
     public event Action<SkillTreeData, UpgradeData> SkillOpened;
 
@@ -34,6 +35,7 @@ public class LevelSkillPopup : AbstractPopup
         currencyManager = (CurrencyManager)args[2];
         upgradesManager = (UpgradesManager)args[3];
         generalSavingData = (GeneralSavingData)args[4];
+        spritesManager = (SpritesManager)args[5];
 
         tittle.SetText(data.Tittle);
         description.SetText(data.Description);
@@ -43,7 +45,8 @@ public class LevelSkillPopup : AbstractPopup
         upgradeButton.UpdateInfo(
             upgradesManager.GetUpgradeDataById($"{data.CurrencyType}"),
             currencyManager,
-            upgradesManager, 
+            upgradesManager,
+            spritesManager,
             generalSavingData.GetParamById(Constants.SKILL_TREE_LEVEL) + 1);
 
         buttonViewObject.gameObject.SetActive(isShowButton);

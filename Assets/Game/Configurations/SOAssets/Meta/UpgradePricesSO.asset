@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UpgradePricesSO
   m_EditorClassIdentifier: 
   <Datas>k__BackingField:
-  - <Id>k__BackingField: GlobalPlayerLevel
+  - <Id>k__BackingField: Exp
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
@@ -26,7 +26,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 6
       <StartPrice>k__BackingField: 15
       <PriceModifier>k__BackingField: 1
-  - <Id>k__BackingField: Tower-Catapult
+  - <Id>k__BackingField: CatapultTower
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
@@ -34,7 +34,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 301
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Tower-Cauldron
+  - <Id>k__BackingField: CauldronTower
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
@@ -42,7 +42,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 302
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Tower-Coil
+  - <Id>k__BackingField: CoilTower
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
@@ -50,7 +50,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 304
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
-  - <Id>k__BackingField: Tower-Crossbow
+  - <Id>k__BackingField: CrossbowTower
     <Datas>k__BackingField:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
@@ -63,7 +63,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 130
+    - <CurrencyType>k__BackingField: 131
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: ArmorDrawing
@@ -71,7 +71,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 131
+    - <CurrencyType>k__BackingField: 132
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: WeaponDrawing
@@ -79,7 +79,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 132
+    - <CurrencyType>k__BackingField: 133
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: ShieldDrawing
@@ -87,7 +87,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 133
+    - <CurrencyType>k__BackingField: 134
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: BootsDrawing
@@ -95,7 +95,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 134
+    - <CurrencyType>k__BackingField: 135
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: AccessoryDrawing
@@ -103,7 +103,7 @@ MonoBehaviour:
     - <CurrencyType>k__BackingField: 2
       <StartPrice>k__BackingField: 100
       <PriceModifier>k__BackingField: 1.5
-    - <CurrencyType>k__BackingField: 135
+    - <CurrencyType>k__BackingField: 136
       <StartPrice>k__BackingField: 10
       <PriceModifier>k__BackingField: 1.5
   - <Id>k__BackingField: SecondHero

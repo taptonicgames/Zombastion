@@ -14,158 +14,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Datas>k__BackingField:
   - Id: Level_1
-    <WinDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 15
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 100
-    - <Id>k__BackingField: CatapultTower
-      <CurrencyType>k__BackingField: 301
-      <Value>k__BackingField: 20
-    - <Id>k__BackingField: CouldronTower
-      <CurrencyType>k__BackingField: 302
-      <Value>k__BackingField: 10
-    - <Id>k__BackingField: CrossbowTower
-      <CurrencyType>k__BackingField: 303
-      <Value>k__BackingField: 30
-    - <Id>k__BackingField: CommonWeapon
-      <CurrencyType>k__BackingField: 103
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CommonPrint
-      <CurrencyType>k__BackingField: 201
-      <Value>k__BackingField: 1
-    <LoseDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 5
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 50
-    - <Id>k__BackingField: Gems
-      <CurrencyType>k__BackingField: 3
-      <Value>k__BackingField: 10
+    <WinData>k__BackingField:
+      <CurrencyDatas>k__BackingField:
+      - <Id>k__BackingField: Exp
+        <Value>k__BackingField: 10
+        <Type>k__BackingField: 1
+      - <Id>k__BackingField: Money
+        <Value>k__BackingField: 100
+        <Type>k__BackingField: 2
+      - <Id>k__BackingField: SkillTree
+        <Value>k__BackingField: 5
+        <Type>k__BackingField: 6
+      <EquipmentDatas>k__BackingField:
+      - <Id>k__BackingField: Helmet-Common
+        <Value>k__BackingField: 1
+        <Type>k__BackingField: 1
+        <Rarity>k__BackingField: 1
+      <InsertDatas>k__BackingField:
+      - <Id>k__BackingField: Rune-Epic
+        <Value>k__BackingField: 1
+        <Type>k__BackingField: 3
+        <Rarity>k__BackingField: 4
+    <LoseData>k__BackingField:
+      <CurrencyDatas>k__BackingField:
+      - <Id>k__BackingField: Money
+        <Value>k__BackingField: 50
+        <Type>k__BackingField: 2
+      - <Id>k__BackingField: MaxEnergy
+        <Value>k__BackingField: 2
+        <Type>k__BackingField: 5
+      - <Id>k__BackingField: SkillTree
+        <Value>k__BackingField: 1
+        <Type>k__BackingField: 6
+      <EquipmentDatas>k__BackingField:
+      - <Id>k__BackingField: Accessory-Common
+        <Value>k__BackingField: 1
+        <Type>k__BackingField: 6
+        <Rarity>k__BackingField: 1
+      <InsertDatas>k__BackingField:
+      - <Id>k__BackingField: Talisman-Common
+        <Value>k__BackingField: 0
+        <Type>k__BackingField: 5
+        <Rarity>k__BackingField: 1
   - Id: Level_2
-    <WinDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 15
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 100
-    - <Id>k__BackingField: RareArmor
-      <CurrencyType>k__BackingField: 114
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CommonBoots
-      <CurrencyType>k__BackingField: 105
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CoilTower
-      <CurrencyType>k__BackingField: 304
-      <Value>k__BackingField: 30
-    - <Id>k__BackingField: UncommonRune
-      <CurrencyType>k__BackingField: 209
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: EpicRune
-      <CurrencyType>k__BackingField: 221
-      <Value>k__BackingField: 1
-    <LoseDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 5
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 50
-    - <Id>k__BackingField: CommonShield
-      <CurrencyType>k__BackingField: 104
-      <Value>k__BackingField: 1
+    <WinData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
+    <LoseData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
   - Id: Level_3
-    <WinDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 15
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 100
-    - <Id>k__BackingField: RareArmor
-      <CurrencyType>k__BackingField: 114
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: RareAccessory
-      <CurrencyType>k__BackingField: 118
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CommonTalisman
-      <CurrencyType>k__BackingField: 205
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 10
-    <LoseDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 5
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 50
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 5
+    <WinData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
+    <LoseData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
   - Id: Level_4
-    <WinDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 15
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 100
-    - <Id>k__BackingField: RareArmor
-      <CurrencyType>k__BackingField: 114
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: RareAccessory
-      <CurrencyType>k__BackingField: 118
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CommonTalisman
-      <CurrencyType>k__BackingField: 205
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 10
-    <LoseDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 5
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 50
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 5
+    <WinData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
+    <LoseData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
   - Id: Level_5
-    <WinDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 15
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 100
-    - <Id>k__BackingField: RareArmor
-      <CurrencyType>k__BackingField: 114
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: RareAccessory
-      <CurrencyType>k__BackingField: 118
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: CommonTalisman
-      <CurrencyType>k__BackingField: 205
-      <Value>k__BackingField: 1
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 10
-    <LoseDatas>k__BackingField:
-    - <Id>k__BackingField: Exp
-      <CurrencyType>k__BackingField: 1
-      <Value>k__BackingField: 5
-    - <Id>k__BackingField: Money
-      <CurrencyType>k__BackingField: 2
-      <Value>k__BackingField: 50
-    - <Id>k__BackingField: Energy
-      <CurrencyType>k__BackingField: 4
-      <Value>k__BackingField: 5
+    <WinData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []
+    <LoseData>k__BackingField:
+      <CurrencyDatas>k__BackingField: []
+      <EquipmentDatas>k__BackingField: []
+      <InsertDatas>k__BackingField: []

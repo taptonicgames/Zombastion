@@ -33,6 +33,7 @@ public class EnhancePopup : AbstractPopup
     private EquipmentData currentData;
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
+    private SpritesManager spritesManager;
 
     private List<EquipmentButton> equipmentButtons = new List<EquipmentButton>();
 
@@ -53,6 +54,7 @@ public class EnhancePopup : AbstractPopup
         ClothItemView itemView = (ClothItemView)args[0];
         currencyManager = (CurrencyManager)args[1];
         upgradesManager = (UpgradesManager)args[2];
+        spritesManager = (SpritesManager)args[3];
 
         currentData = itemView.EquipmentData;
 
@@ -104,6 +106,7 @@ public class EnhancePopup : AbstractPopup
             upgradesManager.GetUpgradeDataById($"{currentData.UpgradeCurrency}"),
             currencyManager,
             upgradesManager,
+            spritesManager,
             currentData.Level + 1);
     }
 

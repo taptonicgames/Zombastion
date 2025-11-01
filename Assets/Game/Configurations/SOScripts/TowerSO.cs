@@ -18,7 +18,7 @@ public class TowerSO : PlayerSO
 
     private void OnValidate()
     {
-        if (Id != $"{CharacterType}-{WeaponType}")
-            Id = $"{CharacterType}-{WeaponType}";
+        if (Id != $"{WeaponType}{CharacterType}")
+            Id = $"{WeaponType}{CharacterType}";
     }
 }

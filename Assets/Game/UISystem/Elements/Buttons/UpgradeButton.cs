@@ -18,7 +18,12 @@ public class UpgradeButton : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    public void UpdateInfo(UpgradeData upgradeData, CurrencyManager currencyManager, UpgradesManager upgradesManager, int level)
+    public void UpdateInfo(
+        UpgradeData upgradeData,
+        CurrencyManager currencyManager,
+        UpgradesManager upgradesManager,
+        SpritesManager spritesManager,
+        int level)
     {
         this.upgradeData = upgradeData;
         this.upgradesManager = upgradesManager;
@@ -28,7 +33,13 @@ public class UpgradeButton : MonoBehaviour
             priceViews[i].gameObject.SetActive(i < upgradeData.Datas.Length);
 
             if (priceViews[i].gameObject.activeSelf)
-                priceViews[i].UpdateInfo(upgradeData.Datas[i], currencyManager, GetTargetCurrency(upgradeData.Datas[i], level) , level);
+            {
+                Sprite icon = spritesManager.GetIconSprite(new CurrencySpritesData(upgradeData.Datas[i].CurrencyType));
+                int currentCurrency = currencyManager.GetCurrencyAmount(upgradeData.Datas[i].CurrencyType);
+                int targetCurrency = GetTargetCurrency(upgradeData.Datas[i], level);
+
+                priceViews[i].UpdateInfo(icon, currentCurrency,  targetCurrency, level);
+            }
         }
         
         button.interactable = HasPurchased(currencyManager, upgradesManager, level);

@@ -13,5 +13,6 @@ public class SceneFunctionalsInstaller : MonoInstaller
         Container.Bind<CardsUpgradeManager>().AsSingle();
         Container.Bind<CurrencyManager>().AsSingle();
         Container.Bind<RewardsManager>().AsSingle();
+        Container.Bind<SpritesManager>().AsSingle();
     }
 }

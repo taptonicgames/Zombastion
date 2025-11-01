@@ -30,14 +30,14 @@ public class RewardsManager : IInitializable
         return chestRewardsSO.Datas[level];
     }
 
-    public RewardData[] GetRewardDatas(ChestRewardData rewardData, int index)
+    public RewardData GetRewardDatas(ChestRewardData rewardData, int index)
     {
         return index switch
         {
             0 => rewardData.CommonChestDatas,
             1 => rewardData.RareChestDatas,
             2 => rewardData.LegendChestDatas,
-            _ => new RewardData[0]
+            _ => new RewardData()
         };
     }
 }

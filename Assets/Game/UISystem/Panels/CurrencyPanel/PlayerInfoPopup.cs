@@ -10,6 +10,7 @@ public class PlayerInfoPopup : AbstractPopup
     private GeneralSavingData generalSavingData;
     private CurrencyManager currencyManager;
     private UpgradesManager upgradesManager;
+    private SpritesManager spritesManager;
 
     public event Action<UpgradeData> Upgraded;
 
@@ -25,6 +26,7 @@ public class PlayerInfoPopup : AbstractPopup
         generalSavingData = (GeneralSavingData)args[0];
         currencyManager = (CurrencyManager)args[1];
         upgradesManager = (UpgradesManager)args[2];
+        spritesManager = (SpritesManager)args[3];
 
         UpdateInfo();
     }
@@ -35,9 +37,10 @@ public class PlayerInfoPopup : AbstractPopup
         tittleText.SetText($"player level {level}");
 
         upgradeButton.UpdateInfo(
-            upgradesManager.GetUpgradeDataById(Constants.GLOBAL_PLAYER_LEVEL),
+            upgradesManager.GetUpgradeDataById($"{CurrencyType.Exp}"),
             currencyManager,
             upgradesManager,
+            spritesManager,
             level);
     }
 
