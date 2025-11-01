@@ -27,6 +27,9 @@ public class PlayerUpgradesPanel : AbstractPanel
     private Sequence sequence;
 
     [Inject] private EquipmentManager equipmentManager;
+    [Inject] private CurrencyManager currencyManager;
+    [Inject] private UpgradesManager upgradesManager;
+    [Inject] private SpritesManager spritesManager;
 
     public override PanelType Type => PanelType.PlayerUpgrades;
 
@@ -49,6 +52,7 @@ public class PlayerUpgradesPanel : AbstractPanel
         await UniTask.Yield();
 
         playerItemsBag.Show();
+        equipedClothItemsContainer.UpdateInfo();
     }
 
     public override async UniTask OnHide()
@@ -105,7 +109,15 @@ public class PlayerUpgradesPanel : AbstractPanel
 
     private void OnClothItemClicked(ClothItemView item)
     {
-        object[] objects = new object[] { item };
+        object[] objects = new object[]
+        {
+            item ,
+            currencyManager,
+            upgradesManager,
+            equipmentManager,
+            spritesManager
+        };
+
         clothItemPopup.Init(objects);
         clothItemPopup.Show();
     }
@@ -119,9 +131,10 @@ public class PlayerUpgradesPanel : AbstractPanel
     private void OnInsertEmbed(BagInsertButton button)
     {
         InsertItemView insertItemView = equipedClothItemsContainer.GetEmptyInsertSlot(button.InsertData.Type);
+        equipmentManager.EquipInsert(button.InsertData, button.InsertData.Type);
 
         insertIcon.gameObject.SetActive(true);
-        insertIcon.sprite = button.InsertData.RarityUIData.Icon;
+        insertIcon.sprite = button.InsertData.UIData.Icon;
         insertIcon.transform.SetParent(insertItemView.transform, false);
         insertIcon.transform.position = button.transform.position;
         AnimateMoving(insertIcon, () =>
@@ -136,6 +149,7 @@ public class PlayerUpgradesPanel : AbstractPanel
     private void OnClothReplaced(BagEquipmentButton button)
     {
         ClothItemView clothItem = equipedClothItemsContainer.GetClothItem(button.EquipmentData.Type);
+        equipmentManager.SetEquipment(button.EquipmentData);
 
         insertIcon.gameObject.SetActive(true);
         insertIcon.sprite = button.EquipmentData.UIData.Icon;
@@ -166,6 +180,7 @@ public class PlayerUpgradesPanel : AbstractPanel
     {
         playerItemsBag.ShowInsert(data);
         equipedClothItemsContainer.ClearInsertSlot(data);
+        equipmentManager.UnequipInsert(data);
     }
     #endregion
 

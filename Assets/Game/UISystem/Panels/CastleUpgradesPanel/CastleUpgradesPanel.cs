@@ -15,9 +15,14 @@ public class CastleUpgradesPanel : AbstractPanel
     private TowerSO[] towerSOs;
     private BattleUpgradeConfigsPack upgradeConfigsPack;
     private BattleUpgradeStorage battleUpgradeStorage;
+    private GeneralSavingData generalSavingData;
 
     [Inject] private SharedObjects sharedObjects;
     [Inject] private TowersManager towersManager;
+    [Inject] private CurrencyManager currencyManager;
+    [Inject] private UpgradesManager upgradesManager;
+    [Inject] private AbstractSavingManager savingManager;
+    [Inject] private SpritesManager spritesManager;
 
     public override PanelType Type => PanelType.CastleUpgrades;
 
@@ -25,13 +30,14 @@ public class CastleUpgradesPanel : AbstractPanel
     {
         upgradeConfigsPack = sharedObjects.GetScriptableObject<BattleUpgradeConfigsPack>(Constants.BATTLE_UPGRADE_CONFIG_PACK);
         battleUpgradeStorage = new BattleUpgradeStorage(upgradeConfigsPack);
+        generalSavingData = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
 
         towerSOs = towersManager.GetTowerSOs();
 
         for (int i = 0; i < towerSOs.Length; i++)
         {
             UpgradeTowerButton upgradeTowerButton = Instantiate(upgradeTowerButtonPrefab, upgradeTowerItemsContainer);
-            upgradeTowerButton.Init(towerSOs[i], towersManager);
+            upgradeTowerButton.Init(towerSOs[i], towersManager, currencyManager, upgradesManager, generalSavingData);
             upgradeTowerButtons.Add(upgradeTowerButton);
         }
 
@@ -90,7 +96,10 @@ public class CastleUpgradesPanel : AbstractPanel
             button.TowerSO,
             upgradeConfigsPack,
             battleUpgradeStorage,
-            towersManager
+            towersManager,
+            currencyManager,
+            upgradesManager,
+            spritesManager
         };
 
         towerUpgradePopup.Init(args);

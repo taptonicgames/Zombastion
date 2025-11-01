@@ -31,9 +31,15 @@ MonoBehaviour:
     - id: LevelRewardsSO
       scriptableObject: {fileID: 11400000, guid: 9b9f36e34514730428351ba6102c801b,
         type: 2}
-    - id: CurrencySO
-      scriptableObject: {fileID: 11400000, guid: be9384529c2e01f4f8dcfc49c89ecb67,
+    - id: SpritesSO
+      scriptableObject: {fileID: 11400000, guid: 550064c094ad01f489ba4e9836b57064,
         type: 2}
     - id: TowerConfigsPack
       scriptableObject: {fileID: 11400000, guid: 9185c64393126e34aa5e82dcf6fa8d3e,
+        type: 2}
+    - id: UpgradesConfig
+      scriptableObject: {fileID: 11400000, guid: 8518ee1ab23d4d84197c895cb03b0cd6,
+        type: 2}
+    - id: ChestRewardsSO
+      scriptableObject: {fileID: 11400000, guid: 8c3e66789e4df724cb1edf35912e2aa9,
         type: 2}

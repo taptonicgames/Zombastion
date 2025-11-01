@@ -11,6 +11,8 @@ public class BattleDebugPanel : AbstractPanel
             EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Win });
         else if (Input.GetKeyDown(KeyCode.LeftShift))
             EventBus<RoundCompleteEvnt>.Publish(new() { type = RoundCompleteType.Fail });
+        else if (Input.GetKeyDown(KeyCode.Z))
+            EventBus<ExperienceReachedEvnt>.Publish(new());
 #endif
     }
 }

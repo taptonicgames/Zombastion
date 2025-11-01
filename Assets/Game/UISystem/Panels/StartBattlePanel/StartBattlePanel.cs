@@ -7,7 +7,9 @@ using Zenject;
 public class StartBattlePanel : AbstractPanel
 {
     [SerializeField] private Button battleButton;
+    [SerializeField] private Button chestsButton;
     [SerializeField] private SceneLoader sceneLoader;
+    [SerializeField] private ChestsPopup chestsPopup;
 
     [SerializeField] private CurrencyType battlePriceType;
     [SerializeField] private Image battlePriceIcon;
@@ -23,6 +25,9 @@ public class StartBattlePanel : AbstractPanel
 
     [Inject] private CurrencyManager currencyManager;
     [Inject] private AbstractSavingManager savingsManager;
+    [Inject] private RewardsManager rewardsManager;
+    [Inject] private EquipmentManager equipmentManager;
+    [Inject] private SpritesManager spritesManager;
 
     private GeneralSavingData generalSavingData;
     private Sequence sequence;
@@ -35,14 +40,25 @@ public class StartBattlePanel : AbstractPanel
 
     public override void Init()
     {
-        CurrencyData currencyData = currencyManager.GetCurrencyData(battlePriceType);
-        battlePriceIcon.sprite = currencyData.UIData.Icon;
+        battlePriceIcon.sprite = spritesManager.GetIconSprite(new CurrencySpritesData(battlePriceType));
         generalSavingData = savingsManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
         levelIcon.color = colors[generalSavingData.GetParamById(Constants.ROUNDS_COMPLETED)];
         amountCompleteRounds = generalSavingData.GetParamById(Constants.ROUNDS_COMPLETED);
         counter = amountCompleteRounds;
 
         Subscrube();
+
+        object[] args = new object[]
+        {
+            savingsManager,
+            rewardsManager,
+            currencyManager,
+            equipmentManager,
+            colors
+        };
+
+        chestsPopup.Init(args);
+        chestsPopup.ForceHide();
 
         UpdateInfo(false);
     }
@@ -72,6 +88,8 @@ public class StartBattlePanel : AbstractPanel
         prevButton.onClick.AddListener(OnPrevButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         currencyManager.CurrencyChanged += OnCurrencyChanged;
+        chestsButton.onClick.AddListener(OnChestsButtonClicked);
+        chestsPopup.CloseButtonClicked += OnPopupClosed;
     }
 
     private void Unsubscribe()
@@ -80,6 +98,8 @@ public class StartBattlePanel : AbstractPanel
         prevButton.onClick.RemoveListener(OnPrevButtonClicked);
         nextButton.onClick.RemoveListener(OnNextButtonClicked);
         currencyManager.CurrencyChanged -= OnCurrencyChanged;
+        chestsButton.onClick.RemoveListener(OnChestsButtonClicked);
+        chestsPopup.CloseButtonClicked -= OnPopupClosed;
     }
 
     private void OnBattleButtonClicked()
@@ -110,6 +130,16 @@ public class StartBattlePanel : AbstractPanel
     {
         if (type == battlePriceType)
             UpdateInfo(false);
+    }
+
+    private void OnChestsButtonClicked()
+    {
+        chestsPopup.ForceShow();
+    }
+
+    private void OnPopupClosed()
+    {
+        chestsPopup.ForceHide();
     }
     #endregion
 

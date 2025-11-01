@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02ddbb7ad8297d4dba5d3f6300d7dc9, type: 3}
   m_Name: TowerCatapultConfig
   m_EditorClassIdentifier: 
-  <UpgradeType>k__BackingField: 0
+  <Id>k__BackingField: Tower-Catapult
   <WeaponType>k__BackingField: 1
-  <RareType>k__BackingField: 0
+  <CharacterType>k__BackingField: 3
+  <UpgradeType>k__BackingField: 0
+  <RareType>k__BackingField: 3
   <UpgradeIcon>k__BackingField: {fileID: 21300000, guid: 00afc9d3156a943adb743c340c8ce751,
     type: 3}
   <Tittle>k__BackingField: Catapult tower

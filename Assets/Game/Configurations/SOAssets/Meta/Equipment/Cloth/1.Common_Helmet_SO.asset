@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225ed199f435f7346bc554bc69c8cce7, type: 3}
   m_Name: 1.Common_Helmet_SO
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Common-Helmet
+  <Id>k__BackingField: CommonHelmet
   <Type>k__BackingField: 1
   <Rarity>k__BackingField: 1
-  <Damage>k__BackingField: 10
+  <UpgradeCurrency>k__BackingField: 131
+  <InsertAvilableAmount>k__BackingField: 1
+  <Value>k__BackingField: 10
+  <GrowFactor>k__BackingField: 0
   <EnchanceLevels>k__BackingField: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
   <UIData>k__BackingField:
     <Tittle>k__BackingField: Helmet
+    <Description>k__BackingField: 
     <Icon>k__BackingField: {fileID: 21300000, guid: cf18a6525f8fd4cdfbe87a4e7a1058c1,
+      type: 3}
+    <EquipmentIcon>k__BackingField: {fileID: 0}
+    <BG>k__BackingField: {fileID: 21300000, guid: 4a15aad8540d849e7a699a11e3f0913d,
       type: 3}

@@ -9,9 +9,8 @@ public class BagEquipmentButton : MonoBehaviour
     [SerializeField] private TMP_Text tittleText;
     [SerializeField] private TMP_Text countText;
     [SerializeField] private Image icon;
-    [SerializeField] private Sprite pickedSprite;
-    [SerializeField] private Sprite notPickedSprite;
     [SerializeField] private Image background;
+    [SerializeField] private Image pickedIcon;
 
     public EquipmentData EquipmentData { get; private set; }
     public int Count { get; private set; } = 1;
@@ -28,6 +27,8 @@ public class BagEquipmentButton : MonoBehaviour
         EquipmentData = data;
         tittleText.SetText($"{EquipmentData.UIData.Tittle}");
         icon.sprite = EquipmentData.UIData.Icon;
+        background.sprite = EquipmentData.UIData.BG;
+        pickedIcon.gameObject.SetActive(false);
     }
 
     public void UpdateCount(int value)
@@ -38,7 +39,7 @@ public class BagEquipmentButton : MonoBehaviour
 
     public void ChangePickedState(bool isPicked)
     {
-        background.sprite = isPicked ? pickedSprite : notPickedSprite;
+        pickedIcon.gameObject.SetActive(isPicked);
         button.interactable = !isPicked;
     }
 

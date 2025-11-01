@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +20,8 @@ public class TowerUpgradePopup : AbstractPopup
 
     [Space(10), Header("Upgrade view")]
     [SerializeField] private TMP_Text upgradeText;
-    [SerializeField] private Button upgradeButton;
-    [SerializeField] private TMP_Text priceText;
+    [SerializeField] private UpgradeButton upgradeButton;
+    [SerializeField] private UpgradesSO[] upgradeSOs;
 
     [Space(10), Header("Card info button")]
     [SerializeField] private TowerCardsInfoPopup cardInfoPopup;
@@ -30,6 +31,9 @@ public class TowerUpgradePopup : AbstractPopup
     private BattleUpgradeStorage battleUpgradeStorage;
     private BattleUpgradeConfigsPack upgradeConfigsPack;
     private TowersManager towersManager;
+    private CurrencyManager currencyManager;
+    private UpgradesManager upgradesManager;
+    private SpritesManager spritesManager;
 
     public event Action Upgraded;
 
@@ -37,7 +41,7 @@ public class TowerUpgradePopup : AbstractPopup
     {
         base.Awake();
 
-        upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+        upgradeButton.Upgraded += OnUpgradeButtonClicked;
         cardInfoButton.onClick.AddListener(OnCardInfoButtonClicked);
         cardInfoPopup.CloseButtonClicked += OnPopupClosed;
 
@@ -50,15 +54,20 @@ public class TowerUpgradePopup : AbstractPopup
         upgradeConfigsPack = (BattleUpgradeConfigsPack)args[1];
         battleUpgradeStorage = (BattleUpgradeStorage)args[2];
         towersManager = (TowersManager)args[3];
+        currencyManager = (CurrencyManager)args[4];
+        upgradesManager = (UpgradesManager)args[5];
+        spritesManager = (SpritesManager)args[6];
 
         UpdateInfo();
     }
 
     private void UpdateInfo()
     {
-        tittleText.SetText($"{towerSO.UIData.Name} lv. {towersManager.GetTowerLevel(towerSO.Id)}");
+        int level = towersManager.GetTowerLevel(towerSO.Id);
+        tittleText.SetText($"{towerSO.UIData.Name} lv. {level}");
         towerDescription.SetText(towerSO.UIData.Description);
         towerIcon.sprite = towerSO.UIData.Icon;
+        upgradeButton.UpdateInfo(GetUpgradeSO(), currencyManager, upgradesManager, spritesManager, level);
 
         InitStats();
     }
@@ -66,8 +75,8 @@ public class TowerUpgradePopup : AbstractPopup
     private void InitStats()
     {
         towerStatItemViews[0].Init($"{Constants.STAT_HEALTH_NAME}", $"{CalculateParam(towerSO.Health, towerSO.HealthCoefficient)}");
-        towerStatItemViews[2].Init($"{Constants.STAT_DAMAGE_NAME}", $"{CalculateParam(towerSO.Damage, towerSO.ShootDamageCoefficient)}");
-        towerStatItemViews[1].Init($"{Constants.STAT_SHOOT_DELAY_NAME}", $"{CalculateParam(towerSO.ShootDelay, towerSO.ShootDelayCoefficient)}");
+        towerStatItemViews[1].Init($"{Constants.STAT_DAMAGE_NAME}", $"{CalculateParam(towerSO.Damage, towerSO.ShootDamageCoefficient)}");
+        towerStatItemViews[2].Init($"{Constants.STAT_SHOOT_DELAY_NAME}", $"{CalculateParam(towerSO.ShootDelay, towerSO.ShootDelayCoefficient)}");
         towerStatItemViews[3].Init($"{Constants.STAT_CRIT_DAMAGE_NAME}", $"{CalculateParam(towerSO.CritDamage, towerSO.CritDamageCoefficient)}");
         towerStatItemViews[4].Init($"{Constants.STAT_CRIT_PROBALITY_NAME}", $"{CalculateParam(towerSO.CritProbability, towerSO.CritProbabilityCoefficient)}");
         towerStatItemViews[5].gameObject.SetActive(false);
@@ -78,8 +87,21 @@ public class TowerUpgradePopup : AbstractPopup
         return towersManager.CalculateParam(towerSO.Id, paramOne, paramTwo);
     }
 
-    private void OnUpgradeButtonClicked()
+    private UpgradeData GetUpgradeSO()
     {
+        return upgradesManager.GetUpgradeDataById(towerSO.Id);
+    }
+
+    private void OnUpgradeButtonClicked(UpgradeData upgradeData)
+    {
+        int level = towersManager.GetTowerLevel(towerSO.Id);
+
+        for (int i = 0; i < upgradeData.Datas.Length; i++)
+            currencyManager.RemoveCurrency(
+                upgradeData.Datas[i].CurrencyType,
+                upgradesManager.CalculatePrice(upgradeData.Datas[i],
+                level));
+
         towersManager.UpgradeTowerLevel(towerSO.Id);
 
         UpdateInfo();
@@ -87,9 +109,9 @@ public class TowerUpgradePopup : AbstractPopup
 
     private void OnCardInfoButtonClicked()
     {
-        object[] args = new object[] 
+        object[] args = new object[]
         {
-            BattleUpgradeType.None,
+            BattleUpgradeType.Stats,
             towerSO.WeaponType,
             $"{towerSO.UIData.Name} lv. {towersManager.GetTowerLevel(towerSO.Id)}",
             upgradeConfigsPack,
@@ -107,7 +129,7 @@ public class TowerUpgradePopup : AbstractPopup
 
     private void OnDestroy()
     {
-        upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
+        upgradeButton.Upgraded -= OnUpgradeButtonClicked;
         cardInfoButton.onClick.RemoveListener(OnCardInfoButtonClicked);
         cardInfoPopup.CloseButtonClicked -= OnPopupClosed;
     }

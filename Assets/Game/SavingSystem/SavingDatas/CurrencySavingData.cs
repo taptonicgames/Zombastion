@@ -4,6 +4,7 @@ using UnityEngine;
 public class CurrencySavingData : AbstractSavingData
 {
     private int defaultMaxEnergy;
+
     [field: SerializeField] public bool IsIncreaseReward { get; set; }
     [field: SerializeField] public Dictionary<CurrencyType, int> CurrencyPairs { get; set; } = new Dictionary<CurrencyType, int>();
 
@@ -21,7 +22,7 @@ public class CurrencySavingData : AbstractSavingData
     {
         if (CurrencyPairs.ContainsKey(currencyType) == false)
         {
-            int value = currencyType == CurrencyType.MaxEnergy ? defaultMaxEnergy : 0;
+            int value = (currencyType == CurrencyType.MaxEnergy || currencyType == CurrencyType.Energy) ? defaultMaxEnergy : 0;
             CurrencyPairs.Add(currencyType, value);
             SaveData(false);
         }

@@ -35,7 +35,7 @@ public class BattleSavingData : AbstractSavingData
     private void OnRoundCompleteEvnt(RoundCompleteEvnt evnt)
     {
         RoundCompleteType = evnt.type;
-        CastleHealthRemainPercentage = (float)castle.Health / (float)castle.GetDefaultHealth();
+        //CastleHealthRemainPercentage = (float)castle.Health / (float)castle.GetDefaultHealth();
         SaveData(false);
     }
 

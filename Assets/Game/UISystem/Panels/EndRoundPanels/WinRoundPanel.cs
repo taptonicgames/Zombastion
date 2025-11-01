@@ -37,7 +37,7 @@ public class WinRoundPanel : AbstractPanel
         base.Init(arr);
 
         int level = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General).GetParamById(Constants.ROUND_PICKED);
-        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(level).WinDatas);
+        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(level).WinData);
         statItemsContainer.Init();
     }
 
@@ -79,7 +79,7 @@ public class WinRoundPanel : AbstractPanel
     {
         currencyManager.SetIncreaseReward(true);
         doubleRewardButton.interactable = false;
-        rewardCellsContainer.IncreaseReward(Constants.REWARD_MODIFIER);
+        rewardCellsContainer.IncreaseReward(Constants.REWARD_APPLY_AMOUNT);
     }
 
     private void OnDestroy()

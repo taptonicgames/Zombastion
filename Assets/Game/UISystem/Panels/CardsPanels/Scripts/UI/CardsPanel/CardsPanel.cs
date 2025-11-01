@@ -26,6 +26,9 @@ public class CardsPanel : AbstractPanel
     [SerializeField]
     private Image _fadeImage;
 
+    [SerializeField]
+    private ComboCard[] comboCards;
+
     [Space(20)]
     [SerializeField]
     private GridLayoutGroup _gridLayoutGroup;
@@ -67,7 +70,6 @@ public class CardsPanel : AbstractPanel
                 container
             );
 
-            card.Init();
             card.Show(config, battleUpgradeStorage, upgradeConfigsPack);
             cards.Add(card);
         }
@@ -108,6 +110,7 @@ public class CardsPanel : AbstractPanel
         {
             if (i == cards.Count - 1)
             {
+                SetComboCard(cards[i]);
                 cards[i]
                     .OnCardPicked(
                         () =>
@@ -120,8 +123,10 @@ public class CardsPanel : AbstractPanel
             else
             {
                 cards[i].OnCardPicked(null, delay * (i + 1));
+                SetComboCard(cards[i]);
             }
         }
+
     }
 
     private void EndAnimation()
@@ -244,6 +249,23 @@ public class CardsPanel : AbstractPanel
             for (int i = 0; i < cards.Count; i++)
                 cards[i].SetInteractable(true);
         });
+    }
+
+    private async void SetComboCard(Card card)
+    {
+        for (int i = 0; i < comboCards.Length; i++)
+        {
+            if (comboCards[i].IsEmpty)
+            {
+                comboCards[i].Init(card.CurrentUpgrade);
+                return;
+            }
+            else if (card.CurrentUpgrade.Id == comboCards[i].Id)
+            {
+                await comboCards[i].LevelUp();
+                return;
+            }
+        }
     }
 
     private void OnDestroy()

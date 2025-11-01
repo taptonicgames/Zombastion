@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02ddbb7ad8297d4dba5d3f6300d7dc9, type: 3}
   m_Name: TowerCrossbowConfig
   m_EditorClassIdentifier: 
-  <UpgradeType>k__BackingField: 0
+  <Id>k__BackingField: Tower-Crossbow
   <WeaponType>k__BackingField: 0
-  <RareType>k__BackingField: 0
+  <CharacterType>k__BackingField: 3
+  <UpgradeType>k__BackingField: 0
+  <RareType>k__BackingField: 3
   <UpgradeIcon>k__BackingField: {fileID: 21300000, guid: 56113d77198ca4e7db0a78aab2221a77,
     type: 3}
   <Tittle>k__BackingField: Crossbow tower

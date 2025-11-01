@@ -19,6 +19,8 @@ public class SavingManager : AbstractSavingManager, IInitializable
         savingDataPairs.Add(SavingDataType.Towers, new TowersSavingData());
         savingDataPairs.Add(SavingDataType.General, new GeneralSavingData());
         savingDataPairs.Add(SavingDataType.Currency, new CurrencySavingData());
+        savingDataPairs.Add(SavingDataType.Chests, new ChestsSavingData());
+        savingDataPairs.Add(SavingDataType.Equipment, new EquipmentSavingData());
 
         foreach (var item in savingDataPairs.Values)
         {
@@ -33,6 +35,8 @@ public class SavingManager : AbstractSavingManager, IInitializable
         LoadES3Data(GetSavingData<TowersSavingData>(SavingDataType.Towers));
         LoadES3Data(GetSavingData<GeneralSavingData>(SavingDataType.General));
         LoadES3Data(GetSavingData<CurrencySavingData>(SavingDataType.Currency));
+        LoadES3Data(GetSavingData<ChestsSavingData>(SavingDataType.Chests));
+        LoadES3Data(GetSavingData<EquipmentSavingData>(SavingDataType.Equipment));
     }
 
     public void Initialize()

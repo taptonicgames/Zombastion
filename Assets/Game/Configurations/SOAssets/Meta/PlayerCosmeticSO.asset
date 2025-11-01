@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PlayerCosmeticSO
   m_EditorClassIdentifier: 
   <Datas>k__BackingField:
-  - Id: Standart-Hero
+  - id: Standart-Hero
     <FirstBustValue>k__BackingField: 0
     <SecondBustValue>k__BackingField: 0
+    <CurrencyType>k__BackingField: 0
     <Tittle>k__BackingField: Standart
     <SubTittle>k__BackingField: Hero
     <Descriprion>k__BackingField: Default hero in start game
@@ -24,9 +25,10 @@ MonoBehaviour:
     <PlayerIcon>k__BackingField: {fileID: 21300000, guid: 695bf1a0f9b004b57b57a6b3f78e4322,
       type: 3}
     <SkillIcon>k__BackingField: {fileID: 0}
-  - Id: Rare-Hero
+  - id: Rare-Hero
     <FirstBustValue>k__BackingField: 10
     <SecondBustValue>k__BackingField: 20
+    <CurrencyType>k__BackingField: 401
     <Tittle>k__BackingField: Rare
     <SubTittle>k__BackingField: Hero
     <Descriprion>k__BackingField: 
@@ -35,28 +37,4 @@ MonoBehaviour:
     <PlayerIcon>k__BackingField: {fileID: 21300000, guid: f802ceda35f5c4662a240c6ceef56a64,
       type: 3}
     <SkillIcon>k__BackingField: {fileID: 21300000, guid: 65f42b8e2924f4e26adf8ce8fb34fcdf,
-      type: 3}
-  - Id: Epic-Hero
-    <FirstBustValue>k__BackingField: 15
-    <SecondBustValue>k__BackingField: 25
-    <Tittle>k__BackingField: Epic
-    <SubTittle>k__BackingField: Hero
-    <Descriprion>k__BackingField: 
-    <FirstBustDescription>k__BackingField: '{Damage type} DMG'
-    <SecondBustDescription>k__BackingField: '{Tower type} final DMG'
-    <PlayerIcon>k__BackingField: {fileID: 21300000, guid: ee6c8f37bd0f143a89513cadc662c0b0,
-      type: 3}
-    <SkillIcon>k__BackingField: {fileID: 21300000, guid: c45f4e805a75b4de4a1c5bf3471587dc,
-      type: 3}
-  - Id: Legend-Hero
-    <FirstBustValue>k__BackingField: 20
-    <SecondBustValue>k__BackingField: 30
-    <Tittle>k__BackingField: Legend
-    <SubTittle>k__BackingField: Hero
-    <Descriprion>k__BackingField: 
-    <FirstBustDescription>k__BackingField: '{Damage type} DMG'
-    <SecondBustDescription>k__BackingField: '{Tower type} final DMG'
-    <PlayerIcon>k__BackingField: {fileID: 21300000, guid: 3f423f18bae754a7dbae893a08d00eef,
-      type: 3}
-    <SkillIcon>k__BackingField: {fileID: 21300000, guid: 2c03e8b5946584f6c9e65a94e14b5076,
       type: 3}

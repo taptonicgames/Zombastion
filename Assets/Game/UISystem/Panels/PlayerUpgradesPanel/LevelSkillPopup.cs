@@ -1,49 +1,53 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static SkillsTreeSO;
 
 public class LevelSkillPopup : AbstractPopup
 {
     [SerializeField] private TMP_Text tittle;
     [SerializeField] private TMP_Text description;
     [SerializeField] private TMP_Text valueText;
-    [SerializeField] private TMP_Text priceText;
     [SerializeField] private Image icon;
-    [SerializeField] private Button openButton;
+    [SerializeField] private UpgradeButton upgradeButton;
     [SerializeField] private Transform buttonViewObject;
     [SerializeField] private HorizontalLayoutGroup descriptionlayoutGroup;
 
     private SkillTreeData data;
+    private CurrencyManager currencyManager;
+    private UpgradesManager upgradesManager;
+    private GeneralSavingData generalSavingData;
+    private SpritesManager spritesManager;
 
-    public event Action<SkillTreeData> SkillOpened;
+    public event Action<SkillTreeData, UpgradeData> SkillOpened;
 
     protected override void Awake()
     {
         base.Awake();
 
-        openButton.onClick.AddListener(OnButtonClicked);
+        upgradeButton.Upgraded += OnButtonClicked;
     }
 
     public override void Init(object[] args)
     {
         data = (SkillTreeData)args[0];
         bool isShowButton = (bool)args[1];
+        currencyManager = (CurrencyManager)args[2];
+        upgradesManager = (UpgradesManager)args[3];
+        generalSavingData = (GeneralSavingData)args[4];
+        spritesManager = (SpritesManager)args[5];
 
         tittle.SetText(data.Tittle);
         description.SetText(data.Description);
         valueText.SetText($"{data.Prefix}{data.Value}{data.Postfix}");
 
-        //TODO: implement currency manager
-        bool isAvailable = 0 >= data.Price;
-
-        string color = isAvailable ? "green" : "red";
-        priceText.SetText($"<color={color}>{0}</color>/{data.Price}");
-
         icon.sprite = data.Icon;
-        openButton.interactable = isAvailable;
+        upgradeButton.UpdateInfo(
+            upgradesManager.GetUpgradeDataById($"{data.CurrencyType}"),
+            currencyManager,
+            upgradesManager,
+            spritesManager,
+            generalSavingData.GetParamById(Constants.SKILL_TREE_LEVEL) + 1);
 
         buttonViewObject.gameObject.SetActive(isShowButton);
     }
@@ -57,16 +61,16 @@ public class LevelSkillPopup : AbstractPopup
         });
     }
 
-    private void OnButtonClicked()
+    private void OnButtonClicked(UpgradeData upgradeData)
     {
         //TODO: implement remove currency
 
         buttonViewObject.gameObject.SetActive(false);
-        SkillOpened?.Invoke(data);
+        SkillOpened?.Invoke(data, upgradeData);
     }
 
     private void OnDestroy()
     {
-        openButton.onClick.RemoveListener(OnButtonClicked);
+        upgradeButton.Upgraded -= OnButtonClicked;
     }
 }

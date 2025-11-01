@@ -1,3 +1,4 @@
+using log4net.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,17 @@ public class EnhancePopup : AbstractPopup
     [SerializeField] private TMP_Text nextStatsText;
 
     [Space(10), Header("Buttons")]
-    [SerializeField] private Button enhanceButton;
+    [SerializeField] private UpgradeButton upgradeButton;
     [SerializeField] private Button enhanceAllButton;
-    [SerializeField] private TMP_Text priceText;
 
     [Space(10), Header("Equipment content")]
     [SerializeField] private EquipmentButton equipmentButtonPrefab;
     [SerializeField] private RectTransform buttonsContainer;
 
     private EquipmentData currentData;
+    private CurrencyManager currencyManager;
+    private UpgradesManager upgradesManager;
+    private SpritesManager spritesManager;
 
     private List<EquipmentButton> equipmentButtons = new List<EquipmentButton>();
 
@@ -40,7 +43,7 @@ public class EnhancePopup : AbstractPopup
     {
         base.Awake();
 
-        enhanceButton.onClick.AddListener(OnEnhanceButtonClicked);
+        upgradeButton.Upgraded += OnEnhanceButtonClicked;
         enhanceAllButton.onClick.AddListener(OnEnhanceAllButtonClicked);
 
         ForceHide();
@@ -49,12 +52,16 @@ public class EnhancePopup : AbstractPopup
     public override void Init(object[] args)
     {
         ClothItemView itemView = (ClothItemView)args[0];
+        currencyManager = (CurrencyManager)args[1];
+        upgradesManager = (UpgradesManager)args[2];
+        spritesManager = (SpritesManager)args[3];
+
         currentData = itemView.EquipmentData;
 
         if (equipmentButtons.Count == 0)
             CreateButtonsList();
 
-        UpdateInfo(); 
+        UpdateInfo();
     }
 
     private void CreateButtonsList()
@@ -94,10 +101,22 @@ public class EnhancePopup : AbstractPopup
 
         currentStatsText.SetText($"ATK +{currentData.EnchanceLevels[currentData.Level]}");
         nextStatsText.SetText($"ATK +{currentData.EnchanceLevels[currentData.Level + 1]}");
+
+        upgradeButton.UpdateInfo(
+            upgradesManager.GetUpgradeDataById($"{currentData.UpgradeCurrency}"),
+            currencyManager,
+            upgradesManager,
+            spritesManager,
+            currentData.Level + 1);
     }
 
-    private void OnEnhanceButtonClicked()
+    private void OnEnhanceButtonClicked(UpgradeData upgradeData)
     {
+        for (int i = 0; i < upgradeData.Datas.Length; i++)
+            currencyManager.RemoveCurrency(
+                upgradeData.Datas[i].CurrencyType,
+                upgradesManager.CalculatePrice(upgradeData.Datas[i], currentData.Level));
+
         currentData.UpgradeLevel();
 
         UpdateInfo();
@@ -115,7 +134,7 @@ public class EnhancePopup : AbstractPopup
 
     private void OnDestroy()
     {
-        enhanceButton.onClick.RemoveListener(OnEnhanceButtonClicked);
+        upgradeButton.Upgraded -= OnEnhanceButtonClicked;
         enhanceAllButton.onClick.RemoveListener(OnEnhanceAllButtonClicked);
     }
 }

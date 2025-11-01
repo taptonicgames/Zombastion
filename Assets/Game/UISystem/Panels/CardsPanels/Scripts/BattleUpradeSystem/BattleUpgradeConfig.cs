@@ -4,8 +4,10 @@ using UnityEngine;
 public class BattleUpgradeConfig : ScriptableObject
 {
     [field: Header("General")]
-    [field: SerializeField] public BattleUpgradeType UpgradeType { get; private set; }
+	[field: SerializeField] public string Id { get; private set; }
 	[field: SerializeField] public WeaponType WeaponType { get; private set; }
+	[field: SerializeField] public CharacterType CharacterType { get; private set; }
+    [field: SerializeField] public BattleUpgradeType UpgradeType { get; private set; }
 	[field: SerializeField] public BattleUpgradeRareType RareType { get; private set; }
 	[field: Space(10)]
     [field: Header("Card view option")]
@@ -27,4 +29,10 @@ public class BattleUpgradeConfig : ScriptableObject
     [field: Space(10)]
     [field: Header("Value")]
     [field: SerializeField] public float Value { get; private set; }
+
+    private void OnValidate()
+    {
+        if (Id != $"{CharacterType}-{WeaponType}")
+            Id = $"{CharacterType}-{WeaponType}";
+    }
 }

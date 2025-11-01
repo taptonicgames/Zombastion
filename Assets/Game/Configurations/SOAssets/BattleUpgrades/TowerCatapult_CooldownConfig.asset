@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02ddbb7ad8297d4dba5d3f6300d7dc9, type: 3}
+  m_Name: TowerCatapult_CooldownConfig
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: Tower-Catapult
+  <WeaponType>k__BackingField: 1
+  <CharacterType>k__BackingField: 3
+  <UpgradeType>k__BackingField: 1
+  <RareType>k__BackingField: 0
+  <UpgradeIcon>k__BackingField: {fileID: 21300000, guid: 00afc9d3156a943adb743c340c8ce751,
+    type: 3}
+  <Tittle>k__BackingField: iron levers
+  <Description>k__BackingField: Cooldown
+  <Prefix>k__BackingField: '-'
+  <Postfix>k__BackingField: '%'
+  <IsAccumulating>k__BackingField: 0
+  <MaxPickedCount>k__BackingField: 0
+  <ChanceShowingPercentage>k__BackingField: 0
+  <Value>k__BackingField: 30

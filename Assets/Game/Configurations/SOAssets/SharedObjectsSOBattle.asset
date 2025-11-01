@@ -58,6 +58,6 @@ MonoBehaviour:
     - id: LevelRewardsSO
       scriptableObject: {fileID: 11400000, guid: 9b9f36e34514730428351ba6102c801b,
         type: 2}
-    - id: CurrencySO
-      scriptableObject: {fileID: 11400000, guid: be9384529c2e01f4f8dcfc49c89ecb67,
+    - id: SpritesSO
+      scriptableObject: {fileID: 11400000, guid: 550064c094ad01f489ba4e9836b57064,
         type: 2}

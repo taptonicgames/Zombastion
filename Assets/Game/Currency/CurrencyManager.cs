@@ -1,24 +1,21 @@
 ﻿using System;
-using UnityEngine;
-using System.Linq;
 using Zenject;
 
 public class CurrencyManager : IInitializable
 {
-    [Inject] private SharedObjects sharedObjects;
     [Inject] private AbstractSavingManager savingManager;
     [Inject] private RewardsManager rewardsManager;
 
-    private CurrencySO currencySO;
     private CurrencySavingData currencySavingData;
+
+    private const int START_MAX_ENERGY = 30;
 
     public event Action<CurrencyType> CurrencyChanged;
 
     public void Initialize()
     {
-        currencySO = sharedObjects.GetScriptableObject<CurrencySO>(Constants.CURRENCY_SO);
         currencySavingData = savingManager.GetSavingData<CurrencySavingData>(SavingDataType.Currency);
-        currencySavingData.Init(currencySO.StartMaxEnergy);
+        currencySavingData.Init(START_MAX_ENERGY);
 
         LoadRewards();
     }
@@ -28,23 +25,18 @@ public class CurrencyManager : IInitializable
         BattleSavingData battleSavingData = savingManager.GetSavingData<BattleSavingData>(SavingDataType.Battle);
         GeneralSavingData generalSavingData = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General);
         LevelRewardData levelRewardData = rewardsManager.GetLevelRewardData(generalSavingData.GetParamById(Constants.ROUND_PICKED));
-        RewardData[] rewardDatas = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
+        RewardData rewardData = levelRewardData.GetRewardDatasByRoundCompleteType(battleSavingData.RoundCompleteType);
 
-        for (int i = 0; i < rewardDatas.Length; i++)
-        {
-            int reward = HasIncreaseReward() ? Mathf.RoundToInt(rewardDatas[i].Value * Constants.REWARD_MODIFIER) : rewardDatas[i].Value;
-            AddCurrency(rewardDatas[i].CurrencyType, reward);
-        }
+        if (rewardData == null)
+            return;
+
+        int rewardApplyAmount = HasIncreaseReward() ? Constants.REWARD_APPLY_AMOUNT : 1;
+
+        for (int i = 0; i < rewardApplyAmount; i++)
+            foreach (var reward in rewardData.GetRewardDatas())
+                AddCurrency(reward);
 
         currencySavingData.ResetData();
-    }
-
-    public CurrencyData GetCurrencyData(CurrencyType currencyType)
-    {
-        if (currencySO == null)
-            currencySO = sharedObjects.GetScriptableObject<CurrencySO>(Constants.CURRENCY_SO);
-
-        return currencySO.Datas.FirstOrDefault(d => d.Type == currencyType);
     }
 
     public int GetCurrencyAmount(CurrencyType currencyType)
@@ -58,6 +50,12 @@ public class CurrencyManager : IInitializable
         currencySavingData.SetCurrencyById(type, newValue);
 
         CurrencyChanged?.Invoke(type);
+    }
+
+    public void AddCurrency(AbstractRewardData rewardData)
+    {
+        if (rewardData is CurrencyRewardData currency)
+            AddCurrency(currency.Type, currency.Value);
     }
 
     public bool HasPurchased(CurrencyType type, int value)

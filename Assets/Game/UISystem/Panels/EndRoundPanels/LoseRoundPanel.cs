@@ -37,7 +37,7 @@ public class LoseRoundPanel : AbstractPanel
         base.Init(arr);
 
         int level = savingManager.GetSavingData<GeneralSavingData>(SavingDataType.General).GetParamById(Constants.ROUND_PICKED);
-        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(level).LoseDatas);
+        rewardCellsContainer.Init(rewardsManager.GetLevelRewardData(level).LoseData);
         statItemsContainer.Init();
     }
 
@@ -79,7 +79,7 @@ public class LoseRoundPanel : AbstractPanel
     {
         currencyManager.SetIncreaseReward(true);
         doubleRewardButton.interactable = false;
-        rewardCellsContainer.IncreaseReward(Constants.REWARD_MODIFIER);
+        rewardCellsContainer.IncreaseReward(Constants.REWARD_APPLY_AMOUNT);
     }
 
     private void OnDestroy()

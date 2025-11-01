@@ -17,11 +17,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e6ff7af04c2f14428e49b7959b0d7ba, type: 2}
   - {fileID: 11400000, guid: f0dcc2ad200ba8d43aac3a7fad1b43f9, type: 2}
   - {fileID: 11400000, guid: 686b40a0c14446f418c209cbd4eb90cc, type: 2}
-  <CommonGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <CommonGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <RareGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <RareGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <EpicGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <EpicGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <LegendGradientStartColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  <LegendGradientEndColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  - {fileID: 11400000, guid: 10b95fc78dc7cee42bb12600d3c95a97, type: 2}
+  - {fileID: 11400000, guid: 3872501382ef4cd41b6cccc7dfbdd058, type: 2}
+  - {fileID: 11400000, guid: 70d4480a43d25f7468a7781ce71d4d00, type: 2}
+  - {fileID: 11400000, guid: 057a422d8df6ca94ba0898bf83a6a7a1, type: 2}
+  - {fileID: 11400000, guid: 6ecb0ef38f0b1014fa6517d66f8910d3, type: 2}
+  - {fileID: 11400000, guid: ffe3539db0c98fc40b9a9236f807b9ba, type: 2}
+  - {fileID: 11400000, guid: 7aacf65034a5cb845817044b1aada2cd, type: 2}
+  - {fileID: 11400000, guid: 5c2490de14040554fbb74a6dda17cbae, type: 2}
+  - {fileID: 11400000, guid: ace1c69219aaa0941ac987c35ef2b788, type: 2}
+  - {fileID: 11400000, guid: 0b82894b9d2ed894ea255d6a7b1fda63, type: 2}
+  - {fileID: 11400000, guid: bc01b563a2d15ea41a7a2c4fcae30192, type: 2}
+  - {fileID: 11400000, guid: cd2a9159f74baad4eae1151f2ea020e1, type: 2}
+  - {fileID: 11400000, guid: 4e3d473a40547a447a6eed1e9b89a4d3, type: 2}
+  - {fileID: 11400000, guid: 2e01af01fa29c124c8beebe30f286ce7, type: 2}
+  - {fileID: 11400000, guid: 0009339e361274a4481484fc6271ba33, type: 2}
+  - {fileID: 11400000, guid: d61fd248dc5089342abac7de2f137cf7, type: 2}
+  <CommonGradientStartColor>k__BackingField: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  <CommonGradientEndColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+  <RareGradientStartColor>k__BackingField: {r: 0.011764706, g: 0.6156863, b: 0.8,
+    a: 1}
+  <RareGradientEndColor>k__BackingField: {r: 0, g: 0.05882353, b: 0.8117647, a: 1}
+  <EpicGradientStartColor>k__BackingField: {r: 0.73333335, g: 0.39215687, b: 1, a: 1}
+  <EpicGradientEndColor>k__BackingField: {r: 0.42745098, g: 0, b: 0.59607846, a: 1}
+  <LegendGradientStartColor>k__BackingField: {r: 1, g: 0.93333334, b: 0, a: 1}
+  <LegendGradientEndColor>k__BackingField: {r: 1, g: 0.64705884, b: 0, a: 1}

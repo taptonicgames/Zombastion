@@ -102,5 +102,7 @@ public class MetaUIManager : AbstractUIManager
     private void OnDestroy()
     {
         Unsubscribe();
+
+        EventBus<OpenPanelEvnt>.Dispose();
     }
 }

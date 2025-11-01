@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class ClothItemView : MonoBehaviour
 {
-    [field: SerializeField] public ClothType Type { get; private set; }
+    [field: SerializeField] public EquipmentType Type { get; private set; }
     [SerializeField] private Button button;
     [SerializeField] private Transform view;
     [SerializeField] private TMP_Text tittle;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private Image icon;
+    [SerializeField] private Image background;
     [SerializeField] private InsertItemView[] insertItems;
 
     public EquipmentData EquipmentData { get; private set; }
@@ -23,11 +24,15 @@ public class ClothItemView : MonoBehaviour
 
         tittle.SetText(EquipmentData.UIData.Tittle);
         icon.sprite = EquipmentData.UIData.Icon;
+        background.sprite = EquipmentData.UIData.BG;
 
         button.onClick.AddListener(OnButtonClicked);
 
         for (int i = 0; i < insertItems.Length; i++)
+        {
             insertItems[i].Deactivate();
+            insertItems[i].gameObject.SetActive(i < EquipmentData.InsertAvilableAmount);
+        }
     }
 
     public InsertItemView GetEmptyInsertSlot()
@@ -43,6 +48,8 @@ public class ClothItemView : MonoBehaviour
     {
         for (int i = 0; i < EquipmentData.InsertDatas.Length; i++)
         {
+            insertItems[i].gameObject.SetActive(i < EquipmentData.InsertAvilableAmount);
+
             insertItems[i].ClearData();
             
             if (EquipmentData.InsertDatas[i] != null)

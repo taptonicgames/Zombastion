@@ -1,20 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class InsertData : AbstractEquipment
+﻿public class InsertData : AbstractEquipment
 {
-    public DamageType DamageType { get; private set; }
-    public int Damage { get; private set; }
-    public InsertRarityUIData RarityUIData { get; private set; }
-    public InsertEquipUIData EquipUIData { get; internal set; }
+    public float PercentageBonus { get; private set; }
+    public InsertType InsertType { get; private set; }
+    public EquipmentUIData UIData { get; private set; }
 
-    public InsertData(InsertRarityUIData insertRarityUIData, EquipmentType equipmentType, EquipmentRarity rarity, InsertEquipUIData insertEquipUIData)
+    public InsertData(InsertSO insertSO)
     {
-        Type = equipmentType;
-        Rarity = rarity;
-        RarityUIData = insertRarityUIData;
-        EquipUIData = insertEquipUIData;
-
-        Id = $"{Type}-{Rarity}Insert";
+        Id = insertSO.Id;
+        PercentageBonus = insertSO.PercentageBonus;
+        Type = insertSO.EquipmentType;
+        InsertType = insertSO.Type;
+        Rarity = insertSO.Rarity;
+        UIData = insertSO.UIData;
     }
 }
