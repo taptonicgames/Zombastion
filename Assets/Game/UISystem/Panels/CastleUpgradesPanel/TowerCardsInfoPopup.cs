@@ -6,15 +6,21 @@ using Zenject;
 
 public class TowerCardsInfoPopup : AbstractPopup
 {
-    [SerializeField] private TMP_Text tittle;
-    [SerializeField] private Transform cardsContainer;
+    [SerializeField]
+    private TMP_Text tittle;
+
+    [SerializeField]
+    private Transform cardsContainer;
 
     private BattleUpgradeStorage battleUpgradeStorage;
     private BattleUpgradeConfigsPack upgradeConfigsPack;
     private List<Card> cards = new List<Card>();
 
-    [Inject] private CardsUpgradeManager cardsUpgradeManager;
-    [Inject] private SharedObjects sharedObjects;
+    [Inject]
+    private CardsUpgradeManager cardsUpgradeManager;
+
+    [Inject]
+    private SharedObjects sharedObjects;
 
     public override void Init(object[] args)
     {
@@ -24,7 +30,10 @@ public class TowerCardsInfoPopup : AbstractPopup
         upgradeConfigsPack = (BattleUpgradeConfigsPack)args[3];
         battleUpgradeStorage = (BattleUpgradeStorage)args[4];
 
-        IEnumerable<BattleUpgradeConfig> configs = cardsUpgradeManager.GetUpgradeConfigsByType(upgradeType);
+        IEnumerable<BattleUpgradeConfig> configs = cardsUpgradeManager.GetUpgradeConfigs(
+            new GetUpgradeConfigDTO(CharacterType.Tower, upgradeType: upgradeType)
+        );
+
         var filterByWeaponType = configs.Where(i => i.WeaponType.Equals(weaponType));
 
         var SortRare = filterByWeaponType
@@ -67,7 +76,9 @@ public class TowerCardsInfoPopup : AbstractPopup
     private Card CreateCard()
     {
         var card = sharedObjects.InstantiateAndGetObject<Card>(
-               Constants.UPGRADE_CARD, cardsContainer);
+            Constants.UPGRADE_CARD,
+            cardsContainer
+        );
 
         cards.Add(card);
         return card;

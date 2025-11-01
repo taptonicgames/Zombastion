@@ -35,4 +35,9 @@ public class BattleUpgradeConfig : ScriptableObject
         if (Id != $"{CharacterType}-{WeaponType}")
             Id = $"{CharacterType}-{WeaponType}";
     }
+
+    public virtual T GetParameterType<T>()
+    {
+        return default;
+    }
 }

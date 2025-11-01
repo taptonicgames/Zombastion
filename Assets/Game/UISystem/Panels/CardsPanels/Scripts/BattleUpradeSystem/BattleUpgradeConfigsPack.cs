@@ -43,13 +43,29 @@ public class BattleUpgradeConfigsPack : ScriptableObject
     [field: SerializeField]
     public Color LegendGradientEndColor { get; private set; } = Color.white;
 
-    public IEnumerable<BattleUpgradeConfig> GetConfigs(BattleUpgradeType type)
+    public IEnumerable<BattleUpgradeConfig> GetConfigs(GetUpgradeConfigDTO dto)
     {
-        var config = Configs.Where(a => a.UpgradeType == type);
+		var upgradeConfigs = Configs.Where(a =>
+			a.CharacterType == dto.characterType
+		);
 
-        if (config == null)
-            Debug.LogError($"{type} is not present in Configs");
+		if (dto.weaponType != WeaponType.None)
+		{
+			upgradeConfigs = upgradeConfigs.Where(a => a.WeaponType == dto.weaponType);
+		}
 
-        return config;
-    }
+		if (dto.upgradeType != BattleUpgradeType.None)
+		{
+			upgradeConfigs = upgradeConfigs.Where(a => a.UpgradeType == dto.upgradeType);
+		}
+
+		if (dto.parameterUpgradeType != ParameterUpgradeType.None)
+		{
+			upgradeConfigs = upgradeConfigs.Where(a =>
+				a.GetParameterType<ParameterUpgradeType>() == dto.parameterUpgradeType
+			);
+		}
+
+		return upgradeConfigs;
+	}
 }

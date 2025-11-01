@@ -7,5 +7,6 @@ public enum SavingDataType
 	Towers,
     Currency,
 	Chests,
-	Equipment
+	Equipment,
+	Upgrades
 }

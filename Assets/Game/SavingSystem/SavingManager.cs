@@ -21,6 +21,7 @@ public class SavingManager : AbstractSavingManager, IInitializable
         savingDataPairs.Add(SavingDataType.Currency, new CurrencySavingData());
         savingDataPairs.Add(SavingDataType.Chests, new ChestsSavingData());
         savingDataPairs.Add(SavingDataType.Equipment, new EquipmentSavingData());
+        savingDataPairs.Add(SavingDataType.Upgrades, new UpgradesSavingData());
 
         foreach (var item in savingDataPairs.Values)
         {

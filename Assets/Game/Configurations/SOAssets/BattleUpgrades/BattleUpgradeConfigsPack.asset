@@ -33,6 +33,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e01af01fa29c124c8beebe30f286ce7, type: 2}
   - {fileID: 11400000, guid: 0009339e361274a4481484fc6271ba33, type: 2}
   - {fileID: 11400000, guid: d61fd248dc5089342abac7de2f137cf7, type: 2}
+  - {fileID: 11400000, guid: 5d55eeff998da69459dc5f477efa4e34, type: 2}
+  - {fileID: 11400000, guid: 57ab52b82ed22c240bbb6fe7f19a677b, type: 2}
+  - {fileID: 11400000, guid: b6b4801da8b63f64e980bef206def915, type: 2}
+  - {fileID: 11400000, guid: bedd9e79d6e7e5544968b81f328415c3, type: 2}
+  - {fileID: 11400000, guid: a2f78e77c64a76b42b0ac31e89418960, type: 2}
   <CommonGradientStartColor>k__BackingField: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   <CommonGradientEndColor>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
   <RareGradientStartColor>k__BackingField: {r: 0.011764706, g: 0.6156863, b: 0.8,

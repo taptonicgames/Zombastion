@@ -55,7 +55,7 @@ public class BattleUIManager : AbstractUIManager
         {
             BattleUpgradeConfigsPack,
             BattleUpgradeStorage,
-            cardsUpgradeManager.GetUpgradeConfigs().ToArray(),
+            cardsUpgradeManager.GetAvailableUpgradeConfigs().ToArray(),
         };
 
         OpenPanel(PanelType.BattleUpgrade, initObjects);

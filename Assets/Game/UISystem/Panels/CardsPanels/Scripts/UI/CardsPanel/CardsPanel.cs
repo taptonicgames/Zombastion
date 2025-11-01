@@ -99,7 +99,11 @@ public class CardsPanel : AbstractPanel
         List<Card> cards = new List<Card>();
         cards.Add(card);
         AnimateCards(cards);
-    }
+
+		EventBus<UpgradeChoosenEvnt>.Publish(
+			new() { type = card.CurrentUpgrade.UpgradeType, config = card.CurrentUpgrade }
+		);
+	}
 
     private void AnimateCards(List<Card> cards, float delay = 0.0f)
     {
@@ -133,9 +137,7 @@ public class CardsPanel : AbstractPanel
     {
         PickCardsCompleted?.Invoke();
 
-        EventBus<UpgradeChoosenEvnt>.Publish(
-            new() { type = upgradeConfigs.First().UpgradeType, config = upgradeConfigs.First() }
-        );
+        
 
         for (int i = 0; i < cards.Count; i++)
             cards[i].gameObject.SetActive(false);
